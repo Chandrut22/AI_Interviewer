@@ -1,0 +1,187 @@
+(AI_Interviewer) > uv run python main.py --resume CV_Developer.pdf --jd jd.txt --minutes 30 
+postgresql://postgres:admin123@localhost:5432/ai_interviewer
+analysing job description and resume...
+                                      Interview plan                                      
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
+┃ Topic                                 ┃ Priority ┃ Budget ┃ Target depth ┃ Source      ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━┩
+│ Python Fundamentals & Git Basics      │ 5        │ 5:17   │ 2            │ jd_required │
+│ React.js and JavaScript Basics        │ 5        │ 5:17   │ 2            │ jd_required │
+│ Asynchronous Programming with FastAPI │ 5        │ 5:17   │ 4            │ gap (gap)   │
+│ Testing Frameworks and Debugging      │ 5        │ 5:17   │ 4            │ gap (gap)   │
+│ SQL and Relational Database Basics    │ 5        │ 5:17   │ 2            │ jd_required │
+└───────────────────────────────────────┴──────────┴────────┴──────────────┴─────────────┘
+
+╭───────────────────────────────────────── Topic 1/5: Python Fundamentals & Git Basics  |  new question  |  difficulty 2/5 ──────────────────────────────────────────╮
+│ Explain the purpose of the 'git commit' command and how it differs from 'git push'.                                                                                │
+╰───────────────────────────────────────────────────────── answer in 152s  ·  30m 0s left in the interview ──────────────────────────────────────────────────────────╯
+answer > git commit is used to save the code locally and git push save in remote
+evaluating...
+Deserializing unregistered type agent.state.Topic from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('agent.state', 'Topic')]
+Deserializing unregistered type agent.state.TopicRun from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('agent.state', 'TopicRun')]
+Deserializing unregistered type agent.state.Event from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('agent.state', 'Event')]
+Deserializing unregistered type agent.state.JDAnalysis from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('agent.state', 'JDAnalysis')]
+Deserializing unregistered type agent.state.ResumeAnalysis from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('agent.state', 'ResumeAnalysis')]
+Deserializing unregistered type agent.state.Question from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('agent.state', 'Question')]
+
+╭─────────────────────────────────────────── Topic 1/5: Python Fundamentals & Git Basics  |  follow-up  |  difficulty 2/5 ───────────────────────────────────────────╮
+│ When you run 'git commit', what information is stored in the commit object, and how does 'git push' handle the situation where the remote branch has new commits   │
+│ that you do not yet have locally?                                                                                                                                  │
+╰───────────────────────────────────────────────────────── answer in 180s  ·  28m 59s left in the interview ─────────────────────────────────────────────────────────╯
+answer > commit store the snapshot of the code and git push store the entire code in github repo
+evaluating...
+Deserializing unregistered type agent.state.Evaluation from checkpoint. This will be blocked in a future version. Set LANGGRAPH_STRICT_MSGPACK=true to block now, or add to allowed_msgpack_modules to allow explicitly: [('agent.state', 'Evaluation')]
+
+╭───────────────────────────────────────── Topic 1/5: Python Fundamentals & Git Basics  |  clarification  |  difficulty 1/5 ─────────────────────────────────────────╮
+│ What is the difference between 'git commit' and 'git push'?                                                                                                        │
+╰───────────────────────────────────────────────────────── answer in 156s  ·  27m 31s left in the interview ─────────────────────────────────────────────────────────╯
+answer > git push save the code in repo in github and git commit save the code in locally get the snapshot of the code
+evaluating...
+
+╭────────────────────────────────────────── Topic 2/5: React.js and JavaScript Basics  |  new question  |  difficulty 2/5 ───────────────────────────────────────────╮
+│ Explain what JSX is, why it is used in React, and how it is transformed during the build process.                                                                  │
+╰───────────────────────────────────────────────────────── answer in 152s  ·  26m 26s left in the interview ─────────────────────────────────────────────────────────╯
+answer > JSX is defined as JavaScript XML and react combine the HTML style like JS compile into js function calls
+evaluating...
+
+╭──────────────────────────────────────────── Topic 2/5: React.js and JavaScript Basics  |  follow-up  |  difficulty 2/5 ────────────────────────────────────────────╮
+│ When Babel transforms a simple JSX component that returns `<div>Hello</div>`, what is the exact JavaScript output, and under what circumstances would you prefer   │
+│ to write that output manually using `React.createElement` instead of using JSX syntax?                                                                             │
+╰───────────────────────────────────────────────────────── answer in 180s  ·  24m 52s left in the interview ─────────────────────────────────────────────────────────╯
+answer > babel transforms into jsx into react.createElement("div",null) usefull for dynamic manual element creation
+evaluating...
+
+╭────────────────────────────────────────── Topic 2/5: React.js and JavaScript Basics  |  clarification  |  difficulty 1/5 ──────────────────────────────────────────╮
+│ What does Babel produce when compiling a JSX expression like `<span>Hi</span>` into JavaScript?                                                                    │
+╰───────────────────────────────────────────────────────── answer in 118s  ·  23m 20s left in the interview ─────────────────────────────────────────────────────────╯
+answer > babel produces react.createelement("span",null,"hi") from JSX Expression
+evaluating...
+
+╭─────────────────────────────────────── Topic 3/5: Asynchronous Programming with FastAPI  |  new question  |  difficulty 1/5 ───────────────────────────────────────╮
+│ Explain the difference between a standard FastAPI endpoint function and an async endpoint function, and why you might choose one over the other.                   │
+╰───────────────────────────────────────────────────────── answer in 152s  ·  22m 11s left in the interview ─────────────────────────────────────────────────────────╯
+answer > std enpoint use the synchronous and async endpoint handle concurrent I/O with blocking execution
+evaluating...
+
+╭────────────────────────────────────── Topic 3/5: Asynchronous Programming with FastAPI  |  clarification  |  difficulty 1/5 ───────────────────────────────────────╮
+│ In FastAPI, how does defining an endpoint as async def versus a plain def affect the handling of blocking I/O operations, and what impact does that have on the    │
+│ event loop and overall request processing?                                                                                                                         │
+╰───────────────────────────────────────────────────────── answer in 180s  ·  20m 48s left in the interview ─────────────────────────────────────────────────────────╯
+answer > async enables non blocking I/O def run blocking opeartions separactly pervingin reponsively
+evaluating...
+
+╭──────────────────────────────────────── Topic 3/5: Asynchronous Programming with FastAPI  |  follow-up  |  difficulty 1/5 ─────────────────────────────────────────╮
+│ What is an event loop in async programming, and why does it matter for FastAPI endpoints?                                                                          │
+╰───────────────────────────────────────────────────────── answer in 132s  ·  19m 19s left in the interview ─────────────────────────────────────────────────────────╯
+answer > event looping managing the asynchronous tasks, allowing the Fastapi to handle concurrently I/O effeiciently
+evaluating...
+
+╭──────────────────────────────────────── Topic 3/5: Asynchronous Programming with FastAPI  |  follow-up  |  difficulty 1/5 ─────────────────────────────────────────╮
+│ Can you define what a coroutine is in FastAPI's event loop and explain how it differs from a regular function in terms of execution and scheduling?                │
+╰───────────────────────────────────────────────────────── answer in 45s  ·  17m 50s left in the interview ──────────────────────────────────────────────────────────╯
+answer > coroutine pauses the async code
+Time is up - submitting what you had.
+evaluating...
+╭──────────────────────────────────────────────────────────────── Traceback (most recent call last) ─────────────────────────────────────────────────────────────────╮
+│ C:\Genworx\AI_Interviewer\main.py:183 in run                                                                                                                       │
+│                                                                                                                                                                    │
+│   180 │   │   │   │   "(raise --minutes to include them)"                                                                                                          │
+│   181 │   │   │   )                                                                                                                                                │
+│   182 │   │                                                                                                                                                        │
+│ ❱ 183 │   │   result = _loop(graph, config, result)                                                                                                                │
+│   184 │   │   _finish(result, out, thread_id)                                                                                                                      │
+│   185                                                                                                                                                              │
+│   186                                                                                                                                                              │
+│                                                                                                                                                                    │
+│ C:\Genworx\AI_Interviewer\main.py:67 in _loop                                                                                                                      │
+│                                                                                                                                                                    │
+│    64 │   │   if answer.timed_out:                                                                                                                                 │
+│    65 │   │   │   console.print("[yellow]Time is up - submitting what you had.[/yellow]")                                                                          │
+│    66 │   │   console.print("[dim]evaluating...[/dim]")                                                                                                            │
+│ ❱  67 │   │   result = graph.invoke(                                                                                                                               │
+│    68 │   │   │   Command(                                                                                                                                         │
+│    69 │   │   │   │   resume={                                                                                                                                     │
+│    70 │   │   │   │   │   "answer": answer.text,                                                                                                                   │
+│                                                                                                                                                                    │
+│ C:\Genworx\AI_Interviewer\.venv\Lib\site-packages\langgraph\pregel\main.py:3913 in invoke                                                                          │
+│                                                                                                                                                                    │
+│   3910 │   │   │   │   │   chunks.append(chunk)                                                                                                                    │
+│   3911 │   │   else:                                                                                                                                               │
+│   3912 │   │   │   # v1: collect interrupts from updates stream                                                                                                    │
+│ ❱ 3913 │   │   │   for chunk in self.stream(                                                                                                                       │
+│   3914 │   │   │   │   input,                                                                                                                                      │
+│   3915 │   │   │   │   config,                                                                                                                                     │
+│   3916 │   │   │   │   context=context,                                                                                                                            │
+│                                                                                                                                                                    │
+│ C:\Genworx\AI_Interviewer\.venv\Lib\site-packages\langgraph\pregel\main.py:2967 in stream                                                                          │
+│                                                                                                                                                                    │
+│   2964 │   │   │   │   while loop.tick():                                                                                                                          │
+│   2965 │   │   │   │   │   for task in loop.match_cached_writes():                                                                                                 │
+│   2966 │   │   │   │   │   │   loop.output_writes(task.id, task.writes, cached=True)                                                                               │
+│ ❱ 2967 │   │   │   │   │   for _ in runner.tick(                                                                                                                   │
+│   2968 │   │   │   │   │   │   [t for t in loop.tasks.values() if not t.writes],                                                                                   │
+│   2969 │   │   │   │   │   │   timeout=self.step_timeout,                                                                                                          │
+│   2970 │   │   │   │   │   │   get_waiter=get_waiter,                                                                                                              │
+│                                                                                                                                                                    │
+│ C:\Genworx\AI_Interviewer\.venv\Lib\site-packages\langgraph\pregel\_runner.py:207 in tick                                                                          │
+│                                                                                                                                                                    │
+│   204 │   │   │   t = tasks[0]                                                                                                                                     │
+│   205 │   │   │   scheduled_error_handler = False                                                                                                                  │
+│   206 │   │   │   try:                                                                                                                                             │
+│ ❱ 207 │   │   │   │   run_with_retry(                                                                                                                              │
+│   208 │   │   │   │   │   t,                                                                                                                                       │
+│   209 │   │   │   │   │   retry_policy,                                                                                                                            │
+│   210 │   │   │   │   │   configurable={                                                                                                                           │
+│                                                                                                                                                                    │
+│ C:\Genworx\AI_Interviewer\.venv\Lib\site-packages\langgraph\pregel\_retry.py:617 in run_with_retry                                                                 │
+│                                                                                                                                                                    │
+│   614 │   │   │   # clear any writes from previous attempts                                                                                                        │
+│   615 │   │   │   task.writes.clear()                                                                                                                              │
+│   616 │   │   │   # run the task                                                                                                                                   │
+│ ❱ 617 │   │   │   return task.proc.invoke(task.input, config)                                                                                                      │
+│   618 │   │   except ParentCommand as exc:                                                                                                                         │
+│   619 │   │   │   ns: str = config[CONF][CONFIG_KEY_CHECKPOINT_NS]                                                                                                 │
+│   620 │   │   │   cmd = exc.args[0]                                                                                                                                │
+│                                                                                                                                                                    │
+│ C:\Genworx\AI_Interviewer\.venv\Lib\site-packages\langgraph\_internal\_runnable.py:707 in invoke                                                                   │
+│                                                                                                                                                                    │
+│   704 │   │   │   │   │   │   run = None                                                                                                                           │
+│   705 │   │   │   │   │   # run in context                                                                                                                         │
+│   706 │   │   │   │   │   with set_config_context(config, run) as context:                                                                                         │
+│ ❱ 707 │   │   │   │   │   │   input = context.run(step.invoke, input, config, **kwargs)                                                                            │
+│   708 │   │   │   │   else:                                                                                                                                        │
+│   709 │   │   │   │   │   input = step.invoke(input, config)                                                                                                       │
+│   710 │   │   # finish the root run                                                                                                                                │
+│                                                                                                                                                                    │
+│ C:\Genworx\AI_Interviewer\.venv\Lib\site-packages\langgraph\_internal\_runnable.py:447 in invoke                                                                   │
+│                                                                                                                                                                    │
+│   444 │   │   │   else:                                                                                                                                            │
+│   445 │   │   │   │   run_manager.on_chain_end(ret)                                                                                                                │
+│   446 │   │   else:                                                                                                                                                │
+│ ❱ 447 │   │   │   ret = self.func(*args, **kwargs)                                                                                                                 │
+│   448 │   │   if self.recurse and isinstance(ret, Runnable):                                                                                                       │
+│   449 │   │   │   return ret.invoke(input, config)                                                                                                                 │
+│   450 │   │   return ret                                                                                                                                           │
+│                                                                                                                                                                    │
+│ C:\Genworx\AI_Interviewer\agent\nodes.py:345 in evaluate_answer                                                                                                    │
+│                                                                                                                                                                    │
+│   342 │                                                                                                                                                            │
+│   343 │   if answer.strip():                                                                                                                                       │
+│   344 │   │   llm = chat_model(temperature=0.2)                                                                                                                    │
+│ ❱ 345 │   │   ev = structured(                                                                                                                                     │
+│   346 │   │   │   llm,                                                                                                                                             │
+│   347 │   │   │   Evaluation,                                                                                                                                      │
+│   348 │   │   │   system=(                                                                                                                                         │
+│                                                                                                                                                                    │
+│ C:\Genworx\AI_Interviewer\agent\llm.py:85 in structured                                                                                                            │
+│                                                                                                                                                                    │
+│   82 │   │   │   │   │   )                                                                                                                                         │
+│   83 │   │   │   │   )                                                                                                                                             │
+│   84 │   │   │   )                                                                                                                                                 │
+│ ❱ 85 │   raise ValueError(f"Model did not return valid {schema.__name__}: {last_error}")                                                                           │
+│   86                                                                                                                                                               │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+ValueError: Model did not return valid Evaluation: 1 validation error for Evaluation
+  Invalid JSON: EOF while parsing a value at line 1 column 0 [type=json_invalid, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.12/v/json_invalid
+[NOTE] During task with name 'evaluate_answer' and id 'f03a8463-f7fb-791a-cfb6-19e010a2dbea'

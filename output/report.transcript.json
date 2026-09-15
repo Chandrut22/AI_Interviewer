@@ -1,0 +1,1635 @@
+{
+  "role": {
+    "role_title": "Python Web Developer Intern",
+    "seniority": "intern",
+    "years_required": 0.0,
+    "must_have": [
+      "Basic to intermediate knowledge of Python 3",
+      "Understanding of FastAPI or any Python web framework",
+      "Basic knowledge of React.js and JavaScript",
+      "Understanding of REST APIs and HTTP methods",
+      "Basic knowledge of SQL and relational databases",
+      "Familiarity with Git and GitHub",
+      "Understanding of software development and testing concepts",
+      "Strong problem-solving and analytical skills",
+      "Willingness to learn and work with new technologies",
+      "Bachelor's degree in Computer Science, Information Technology, or related field"
+    ],
+    "nice_to_have": [
+      "Knowledge of Node.js",
+      "Familiarity with PostgreSQL or other relational databases",
+      "Basic understanding of Docker",
+      "Knowledge of asynchronous programming in Python",
+      "Familiarity with pytest or other testing frameworks",
+      "Basic understanding of application performance and debugging",
+      "Exposure to ClickHouse or other analytical databases",
+      "Experience with personal, academic, or open-source projects using Python and React"
+    ],
+    "domain": "Web Development",
+    "responsibilities": [
+      "Assist in developing and testing web applications using Python and FastAPI",
+      "Develop and maintain frontend components using React.js",
+      "Work with REST APIs and integrate frontend applications with backend services",
+      "Write clean, readable, and maintainable Python and JavaScript code",
+      "Assist in designing database models and writing database queries",
+      "Write unit tests and integration tests for application features",
+      "Generate and manage test data for development and testing",
+      "Debug application issues and assist in identifying and fixing bugs",
+      "Participate in code reviews and follow software development best practices",
+      "Work with the development team to understand requirements and implement features",
+      "Learn and contribute to performance improvements and application optimization",
+      "Participate in Agile development activities such as daily stand-ups, sprint planning, and retrospectives",
+      "Document technical solutions and development processes",
+      "Explore and learn technologies used in the project based on business requirements"
+    ]
+  },
+  "candidate": {
+    "name": "Chandru T",
+    "years_experience": 1.7,
+    "skills_claimed": [
+      "Java",
+      "SQL",
+      "Python",
+      "Git",
+      "GitHub",
+      "Postman",
+      "SpringBoot",
+      "FastAPI",
+      "Machine Learning",
+      "Deep Learning",
+      "Lang-graph"
+    ],
+    "projects": [
+      "Full Stack AIOCR Web Application",
+      "Microservices SEO Optimizer Platform",
+      "Smart Attendance System",
+      "Automated Daily Production Planning"
+    ],
+    "roles": [
+      "Data Scientist Intern",
+      "Software Developer Intern"
+    ],
+    "tools": [
+      "Git",
+      "GitHub",
+      "Postman",
+      "SpringBoot",
+      "FastAPI",
+      "PydanticAI",
+      "Google Translate API",
+      "Tailwind CSS",
+      "JWT",
+      "HttpOnly cookies",
+      "Google OAuth2"
+    ],
+    "domains": [
+      "Computer Vision",
+      "Deep Learning",
+      "Data Annotation",
+      "AI",
+      "Workflow Automation",
+      "Python",
+      "Web Development"
+    ]
+  },
+  "total_seconds": 1800,
+  "elapsed_s": 1548.9,
+  "completion_status": "completed",
+  "topics": [
+    {
+      "id": "python-fundamentals",
+      "name": "Python Fundamentals",
+      "priority": 5,
+      "source": "jd_required",
+      "rationale": "Assess basic to intermediate Python 3 knowledge essential for backend development",
+      "target_depth": 2,
+      "resume_evidence": [
+        "Python"
+      ],
+      "claimed_on_resume": true,
+      "is_gap": false,
+      "allocated_seconds": 317
+    },
+    {
+      "id": "fastapi-web-frameworks",
+      "name": "FastAPI and Web Frameworks",
+      "priority": 5,
+      "source": "jd_required",
+      "rationale": "Evaluate understanding of FastAPI or alternative Python web frameworks",
+      "target_depth": 2,
+      "resume_evidence": [
+        "FastAPI"
+      ],
+      "claimed_on_resume": true,
+      "is_gap": false,
+      "allocated_seconds": 317
+    },
+    {
+      "id": "rest-apis-http",
+      "name": "REST APIs and HTTP Methods",
+      "priority": 5,
+      "source": "jd_required",
+      "rationale": "Verify grasp of RESTful design, HTTP methods, status codes, and API integration",
+      "target_depth": 3,
+      "resume_evidence": [
+        "Postman"
+      ],
+      "claimed_on_resume": true,
+      "is_gap": false,
+      "allocated_seconds": 317
+    },
+    {
+      "id": "sql-databases",
+      "name": "SQL and Relational Databases",
+      "priority": 5,
+      "source": "jd_required",
+      "rationale": "Confirm basic SQL skills and database model design for backend persistence",
+      "target_depth": 2,
+      "resume_evidence": [
+        "SQL"
+      ],
+      "claimed_on_resume": true,
+      "is_gap": false,
+      "allocated_seconds": 317
+    },
+    {
+      "id": "react-js-basics",
+      "name": "React.js Basics",
+      "priority": 5,
+      "source": "jd_required",
+      "rationale": "Assess familiarity with React.js and JavaScript for frontend component development",
+      "target_depth": 2,
+      "resume_evidence": [],
+      "claimed_on_resume": false,
+      "is_gap": true,
+      "allocated_seconds": 317
+    }
+  ],
+  "topic_runs": {
+    "python-fundamentals": {
+      "status": "covered",
+      "elapsed_s": 291.4,
+      "questions_asked": 4,
+      "followups_used": 2,
+      "clarifications_used": 1,
+      "depth_reached": 2,
+      "difficulty": 2,
+      "scores": [
+        2.2,
+        4.4,
+        1.2,
+        4.4
+      ],
+      "mean_score": 3.05
+    },
+    "fastapi-web-frameworks": {
+      "status": "covered",
+      "elapsed_s": 178.2,
+      "questions_asked": 2,
+      "followups_used": 1,
+      "clarifications_used": 0,
+      "depth_reached": 2,
+      "difficulty": 2,
+      "scores": [
+        2.6,
+        2.8
+      ],
+      "mean_score": 2.7
+    },
+    "rest-apis-http": {
+      "status": "covered",
+      "elapsed_s": 373.4,
+      "questions_asked": 5,
+      "followups_used": 2,
+      "clarifications_used": 1,
+      "depth_reached": 2,
+      "difficulty": 1,
+      "scores": [
+        2.6,
+        2.8,
+        2.0,
+        1.4,
+        1.0
+      ],
+      "mean_score": 1.96
+    },
+    "sql-databases": {
+      "status": "covered",
+      "elapsed_s": 363.8,
+      "questions_asked": 5,
+      "followups_used": 2,
+      "clarifications_used": 0,
+      "depth_reached": 2,
+      "difficulty": 1,
+      "scores": [
+        2.4,
+        2.6,
+        2.4,
+        1.0,
+        2.6
+      ],
+      "mean_score": 2.2
+    },
+    "react-js-basics": {
+      "status": "covered",
+      "elapsed_s": 342.1,
+      "questions_asked": 5,
+      "followups_used": 2,
+      "clarifications_used": 1,
+      "depth_reached": 1,
+      "difficulty": 1,
+      "scores": [
+        2.4,
+        2.4,
+        2.0,
+        2.8,
+        1.6
+      ],
+      "mean_score": 2.24
+    }
+  },
+  "dropped_topics": [],
+  "events": [
+    {
+      "kind": "interview_start",
+      "t_offset_s": 0.0,
+      "timestamp": "2026-09-15T17:00:27",
+      "topic_id": "",
+      "question_id": "",
+      "text": "Python Web Developer Intern (intern) - 30 minute budget",
+      "meta": {
+        "topics": {
+          "python-fundamentals": 317,
+          "fastapi-web-frameworks": 317,
+          "rest-apis-http": 317,
+          "sql-databases": 317,
+          "react-js-basics": 317
+        },
+        "dropped_for_time": [],
+        "baseline_difficulty": 1
+      }
+    },
+    {
+      "kind": "topic_start",
+      "t_offset_s": 0.0,
+      "timestamp": "2026-09-15T17:00:27",
+      "topic_id": "python-fundamentals",
+      "question_id": "",
+      "text": "Python Fundamentals",
+      "meta": {
+        "priority": 5,
+        "allocated_s": 317,
+        "target_depth": 2,
+        "difficulty": 2,
+        "is_gap": false
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 0.0,
+      "timestamp": "2026-09-15T17:00:43",
+      "topic_id": "python-fundamentals",
+      "question_id": "q1",
+      "text": "Explain what a list comprehension is in Python and give an example that creates a list of squares for numbers 1 through 5.",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 2,
+        "time_limit_s": 152,
+        "looking_for": "A clear definition of list comprehensions, explanation of syntax, and a correct example producing [1, 4, 9, 16, 25]."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 94.9,
+      "timestamp": "2026-09-15T17:02:06",
+      "topic_id": "python-fundamentals",
+      "question_id": "q1",
+      "text": "ans = [ i for i in range(1,6)]",
+      "meta": {
+        "answer_s": 82.9,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 94.9,
+      "timestamp": "2026-09-15T17:02:23",
+      "topic_id": "python-fundamentals",
+      "question_id": "q1",
+      "text": "Answer lacks definition and correct example; does not meet basic expectations for a list comprehension explanation.",
+      "meta": {
+        "overall": 2.2,
+        "depth_reached": 0,
+        "next_mode": "followup"
+      }
+    },
+    {
+      "kind": "difficulty_change",
+      "t_offset_s": 94.9,
+      "timestamp": "2026-09-15T17:02:23",
+      "topic_id": "python-fundamentals",
+      "question_id": "",
+      "text": "Difficulty down: 2 -> 1",
+      "meta": {
+        "from": 2,
+        "to": 1
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 94.9,
+      "timestamp": "2026-09-15T17:02:46",
+      "topic_id": "python-fundamentals",
+      "question_id": "q2",
+      "text": "How would you write a list comprehension that generates the squares of the numbers 1 through 5?",
+      "meta": {
+        "mode": "followup",
+        "difficulty": 1,
+        "time_limit_s": 180,
+        "looking_for": "Correct list comprehension syntax that produces [1, 4, 9, 16, 25] and explanation of the components."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 147.9,
+      "timestamp": "2026-09-15T17:03:27",
+      "topic_id": "python-fundamentals",
+      "question_id": "q2",
+      "text": "ans = [i**2 for i in range(1,6)]",
+      "meta": {
+        "answer_s": 41.0,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 147.9,
+      "timestamp": "2026-09-15T17:03:44",
+      "topic_id": "python-fundamentals",
+      "question_id": "q2",
+      "text": "Answer correctly uses list comprehension to generate squares of 1 through 5.",
+      "meta": {
+        "overall": 4.4,
+        "depth_reached": 1,
+        "next_mode": "followup"
+      }
+    },
+    {
+      "kind": "difficulty_change",
+      "t_offset_s": 147.9,
+      "timestamp": "2026-09-15T17:03:44",
+      "topic_id": "python-fundamentals",
+      "question_id": "",
+      "text": "Difficulty up: 1 -> 2",
+      "meta": {
+        "from": 1,
+        "to": 2
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 147.9,
+      "timestamp": "2026-09-15T17:03:58",
+      "topic_id": "python-fundamentals",
+      "question_id": "q3",
+      "text": "When generating a very large sequence of numbers in a web service, how would you decide between using a list comprehension and a generator expression, and what are the trade\u2011offs in terms of memory usage and execution time?",
+      "meta": {
+        "mode": "followup",
+        "difficulty": 2,
+        "time_limit_s": 157,
+        "looking_for": "A clear explanation of when a list comprehension is appropriate versus a generator expression, including concrete examples, memory consumption differences, execution time considerations, and typical scenarios in a web service context."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 197.8,
+      "timestamp": "2026-09-15T17:04:36",
+      "topic_id": "python-fundamentals",
+      "question_id": "q3",
+      "text": "using the async and threading concept",
+      "meta": {
+        "answer_s": 37.9,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 197.8,
+      "timestamp": "2026-09-15T17:04:44",
+      "topic_id": "python-fundamentals",
+      "question_id": "q3",
+      "text": "Answer does not address the question about list comprehensions vs generator expressions.",
+      "meta": {
+        "overall": 1.2,
+        "depth_reached": 1,
+        "next_mode": "clarification"
+      }
+    },
+    {
+      "kind": "difficulty_change",
+      "t_offset_s": 197.8,
+      "timestamp": "2026-09-15T17:04:44",
+      "topic_id": "python-fundamentals",
+      "question_id": "",
+      "text": "Difficulty down: 2 -> 1",
+      "meta": {
+        "from": 2,
+        "to": 1
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 197.8,
+      "timestamp": "2026-09-15T17:05:06",
+      "topic_id": "python-fundamentals",
+      "question_id": "q4",
+      "text": "How does a generator expression differ from a list comprehension in terms of memory consumption when creating a large sequence?",
+      "meta": {
+        "mode": "clarification",
+        "difficulty": 1,
+        "time_limit_s": 107,
+        "looking_for": "Clear explanation that a generator produces items lazily, using constant memory, whereas a list comprehension builds the entire list in memory."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 291.4,
+      "timestamp": "2026-09-15T17:06:28",
+      "topic_id": "python-fundamentals",
+      "question_id": "q4",
+      "text": "generators stream data lazily list comprehensions loads everything in memory",
+      "meta": {
+        "answer_s": 81.6,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 291.4,
+      "timestamp": "2026-09-15T17:06:40",
+      "topic_id": "python-fundamentals",
+      "question_id": "q4",
+      "text": "Answer correctly explains memory difference between generator and list comprehension.",
+      "meta": {
+        "overall": 4.4,
+        "depth_reached": 2,
+        "next_mode": "opening"
+      }
+    },
+    {
+      "kind": "difficulty_change",
+      "t_offset_s": 291.4,
+      "timestamp": "2026-09-15T17:06:40",
+      "topic_id": "python-fundamentals",
+      "question_id": "",
+      "text": "Difficulty up: 1 -> 2",
+      "meta": {
+        "from": 1,
+        "to": 2
+      }
+    },
+    {
+      "kind": "topic_end",
+      "t_offset_s": 291.4,
+      "timestamp": "2026-09-15T17:06:40",
+      "topic_id": "python-fundamentals",
+      "question_id": "",
+      "text": "Target depth 2 reached.",
+      "meta": {
+        "depth_reached": 2,
+        "mean_score": 3.05
+      }
+    },
+    {
+      "kind": "topic_start",
+      "t_offset_s": 291.4,
+      "timestamp": "2026-09-15T17:06:40",
+      "topic_id": "fastapi-web-frameworks",
+      "question_id": "",
+      "text": "FastAPI and Web Frameworks",
+      "meta": {
+        "priority": 5,
+        "allocated_s": 317,
+        "target_depth": 2,
+        "difficulty": 2,
+        "is_gap": false
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 291.4,
+      "timestamp": "2026-09-15T17:07:01",
+      "topic_id": "fastapi-web-frameworks",
+      "question_id": "q5",
+      "text": "In FastAPI, how do you define an endpoint that accepts a POST request with a JSON body containing a list of items, and what are the key components you need to include in the function signature to handle this request?",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 2,
+        "time_limit_s": 152,
+        "looking_for": "Answer should mention defining a path operation with @app.post, using Pydantic models or typing.List for request body, async function, and accessing the list via the function parameter."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 395.7,
+      "timestamp": "2026-09-15T17:08:34",
+      "topic_id": "fastapi-web-frameworks",
+      "question_id": "q5",
+      "text": "use the @app.post decorders and type-hint parameter with list[model]",
+      "meta": {
+        "answer_s": 92.3,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 395.7,
+      "timestamp": "2026-09-15T17:08:41",
+      "topic_id": "fastapi-web-frameworks",
+      "question_id": "q5",
+      "text": "Answer covers basics but lacks depth and concrete example.",
+      "meta": {
+        "overall": 2.6,
+        "depth_reached": 1,
+        "next_mode": "followup"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 395.7,
+      "timestamp": "2026-09-15T17:08:46",
+      "topic_id": "fastapi-web-frameworks",
+      "question_id": "q6",
+      "text": "How does FastAPI use Pydantic models to validate incoming JSON data in a POST endpoint, and what response does it generate when the payload does not match the expected schema?",
+      "meta": {
+        "mode": "followup",
+        "difficulty": 2,
+        "time_limit_s": 180,
+        "looking_for": "Description of Pydantic validation, error response format, HTTP status code, and how FastAPI communicates validation errors to the client."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 469.6,
+      "timestamp": "2026-09-15T17:09:48",
+      "topic_id": "fastapi-web-frameworks",
+      "question_id": "q6",
+      "text": "pydantic validate fields automatically if schema is mismatch it occurs 422 error",
+      "meta": {
+        "answer_s": 61.9,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 469.6,
+      "timestamp": "2026-09-15T17:09:57",
+      "topic_id": "fastapi-web-frameworks",
+      "question_id": "q6",
+      "text": "Answer is too brief and lacks detail; not sufficient for hiring.",
+      "meta": {
+        "overall": 2.8,
+        "depth_reached": 2,
+        "next_mode": "followup"
+      }
+    },
+    {
+      "kind": "topic_end",
+      "t_offset_s": 469.6,
+      "timestamp": "2026-09-15T17:09:57",
+      "topic_id": "fastapi-web-frameworks",
+      "question_id": "",
+      "text": "Target depth 2 reached.",
+      "meta": {
+        "depth_reached": 2,
+        "mean_score": 2.7
+      }
+    },
+    {
+      "kind": "topic_start",
+      "t_offset_s": 469.6,
+      "timestamp": "2026-09-15T17:09:57",
+      "topic_id": "rest-apis-http",
+      "question_id": "",
+      "text": "REST APIs and HTTP Methods",
+      "meta": {
+        "priority": 5,
+        "allocated_s": 317,
+        "target_depth": 3,
+        "difficulty": 2,
+        "is_gap": false
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 469.6,
+      "timestamp": "2026-09-15T17:10:05",
+      "topic_id": "rest-apis-http",
+      "question_id": "q7",
+      "text": "Describe how you would use Postman to verify that a DELETE request to /items/{id} correctly returns a 204 No Content status when the item exists, and a 404 Not Found when it does not. What steps would you take and what observations would confirm each scenario?",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 2,
+        "time_limit_s": 152,
+        "looking_for": "Clear explanation of using Postman to test DELETE, checking status codes, verifying response body or lack thereof, handling different scenarios, and interpreting results."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 543.9,
+      "timestamp": "2026-09-15T17:11:07",
+      "topic_id": "rest-apis-http",
+      "question_id": "q7",
+      "text": "send the DELETE requests verify 204 for existing and 404 for missing",
+      "meta": {
+        "answer_s": 62.3,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 543.9,
+      "timestamp": "2026-09-15T17:11:20",
+      "topic_id": "rest-apis-http",
+      "question_id": "q7",
+      "text": "Answer is too brief and lacks actionable steps; needs improvement.",
+      "meta": {
+        "overall": 2.6,
+        "depth_reached": 1,
+        "next_mode": "followup"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 543.9,
+      "timestamp": "2026-09-15T17:11:32",
+      "topic_id": "rest-apis-http",
+      "question_id": "q8",
+      "text": "In Postman, how would you verify that the response body is truly empty for a successful DELETE, and what settings or scripts might you use to flag if any content is returned?",
+      "meta": {
+        "mode": "followup",
+        "difficulty": 2,
+        "time_limit_s": 180,
+        "looking_for": "Candidate explains checking the response body length, using Postman\u2019s Tests tab to assert body is empty, possibly using pm.response.text() or pm.response.body, and how to configure or script to flag non-empty responses."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 635.3,
+      "timestamp": "2026-09-15T17:12:52",
+      "topic_id": "rest-apis-http",
+      "question_id": "q8",
+      "text": "check the character length zero using JS test script",
+      "meta": {
+        "answer_s": 79.4,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 635.3,
+      "timestamp": "2026-09-15T17:13:02",
+      "topic_id": "rest-apis-http",
+      "question_id": "q8",
+      "text": "Answer is technically correct but lacks detail and specificity.",
+      "meta": {
+        "overall": 2.8,
+        "depth_reached": 2,
+        "next_mode": "followup"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 635.3,
+      "timestamp": "2026-09-15T17:13:21",
+      "topic_id": "rest-apis-http",
+      "question_id": "q9",
+      "text": "In a Postman test script, how would you assert that the response body length is zero, and how would you handle a scenario where a server mistakenly returns a non-empty body with a 204 status?",
+      "meta": {
+        "mode": "followup",
+        "difficulty": 2,
+        "time_limit_s": 139,
+        "looking_for": "Exact test script using pm.response.text().length or JSON.parse, explanation of handling unexpected content, discussion of trade-offs between strict validation and practical API quirks."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 699.0,
+      "timestamp": "2026-09-15T17:14:12",
+      "topic_id": "rest-apis-http",
+      "question_id": "q9",
+      "text": "assert body length is zero fails the test if populated",
+      "meta": {
+        "answer_s": 51.7,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 699.0,
+      "timestamp": "2026-09-15T17:14:23",
+      "topic_id": "rest-apis-http",
+      "question_id": "q9",
+      "text": "Answer lacks concrete script and explanation, insufficient for role.",
+      "meta": {
+        "overall": 2.0,
+        "depth_reached": 2,
+        "next_mode": "clarification"
+      }
+    },
+    {
+      "kind": "difficulty_change",
+      "t_offset_s": 699.0,
+      "timestamp": "2026-09-15T17:14:23",
+      "topic_id": "rest-apis-http",
+      "question_id": "",
+      "text": "Difficulty down: 2 -> 1",
+      "meta": {
+        "from": 2,
+        "to": 1
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 699.0,
+      "timestamp": "2026-09-15T17:14:37",
+      "topic_id": "rest-apis-http",
+      "question_id": "q10",
+      "text": "Write a Postman test script that asserts the response body length is zero for a 204 response, and logs an error if any content is returned.",
+      "meta": {
+        "mode": "clarification",
+        "difficulty": 1,
+        "time_limit_s": 75,
+        "looking_for": "Correct script using pm.test, pm.response.text, length check, and error logging."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 786.0,
+      "timestamp": "2026-09-15T17:15:52",
+      "topic_id": "rest-apis-http",
+      "question_id": "q10",
+      "text": "pm.test(\"status code is 204, function (){ pm.response.to.have.status(204);}",
+      "meta": {
+        "answer_s": 75.0,
+        "timed_out": true
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 786.0,
+      "timestamp": "2026-09-15T17:16:00",
+      "topic_id": "rest-apis-http",
+      "question_id": "q10",
+      "text": "Answer does not include body length check or error logging, missing key requirements.",
+      "meta": {
+        "overall": 1.4,
+        "depth_reached": 2,
+        "next_mode": "opening"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 786.0,
+      "timestamp": "2026-09-15T17:16:05",
+      "topic_id": "rest-apis-http",
+      "question_id": "q11",
+      "text": "In Postman, what does a 204 No Content status code signify in a RESTful API, and how would you confirm that the response body is empty?",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 1,
+        "time_limit_s": 45,
+        "looking_for": "Candidate explains that 204 indicates successful operation with no content, and describes checking the response body length or using a test script to assert an empty body."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 843.0,
+      "timestamp": "2026-09-15T17:16:50",
+      "topic_id": "rest-apis-http",
+      "question_id": "q11",
+      "text": ")pm.expect(pm.response.text().length).toe",
+      "meta": {
+        "answer_s": 45.0,
+        "timed_out": true
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 843.0,
+      "timestamp": "2026-09-15T17:16:56",
+      "topic_id": "rest-apis-http",
+      "question_id": "q11",
+      "text": "Answer does not address the question.",
+      "meta": {
+        "overall": 1.0,
+        "depth_reached": 2,
+        "next_mode": "opening"
+      }
+    },
+    {
+      "kind": "topic_end",
+      "t_offset_s": 843.0,
+      "timestamp": "2026-09-15T17:16:56",
+      "topic_id": "rest-apis-http",
+      "question_id": "",
+      "text": "Topic time budget spent.",
+      "meta": {
+        "depth_reached": 2,
+        "mean_score": 1.96
+      }
+    },
+    {
+      "kind": "topic_start",
+      "t_offset_s": 843.0,
+      "timestamp": "2026-09-15T17:16:56",
+      "topic_id": "sql-databases",
+      "question_id": "",
+      "text": "SQL and Relational Databases",
+      "meta": {
+        "priority": 5,
+        "allocated_s": 317,
+        "target_depth": 2,
+        "difficulty": 2,
+        "is_gap": false
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 843.0,
+      "timestamp": "2026-09-15T17:17:22",
+      "topic_id": "sql-databases",
+      "question_id": "q12",
+      "text": "Describe how you would design a relational schema for a simple e-commerce platform that includes users, products, orders, and order items, including key choices and relationships.",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 2,
+        "time_limit_s": 152,
+        "looking_for": "A clear explanation of tables, primary keys, foreign keys, normalization, and indexing considerations."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 915.8,
+      "timestamp": "2026-09-15T17:18:23",
+      "topic_id": "sql-databases",
+      "question_id": "q12",
+      "text": "link tables using the foregin key and split the orders into orders item",
+      "meta": {
+        "answer_s": 60.8,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 915.8,
+      "timestamp": "2026-09-15T17:18:27",
+      "topic_id": "sql-databases",
+      "question_id": "q12",
+      "text": "Answer is too brief and lacks detail for a solid schema design.",
+      "meta": {
+        "overall": 2.4,
+        "depth_reached": 0,
+        "next_mode": "followup"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 915.8,
+      "timestamp": "2026-09-15T17:18:54",
+      "topic_id": "sql-databases",
+      "question_id": "q13",
+      "text": "What is the primary key you would choose for the order_items table, and how would you enforce that each order_item references an existing order while handling deletions of orders?",
+      "meta": {
+        "mode": "followup",
+        "difficulty": 2,
+        "time_limit_s": 180,
+        "looking_for": "Explanation of PK choice (e.g., composite key or surrogate), foreign key constraints, cascading behavior, and handling of orphaned order_items."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 997.8,
+      "timestamp": "2026-09-15T17:20:04",
+      "topic_id": "sql-databases",
+      "question_id": "q13",
+      "text": "use composite primary key encourse via ON DELETE CASCADE constraint",
+      "meta": {
+        "answer_s": 70.0,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 997.8,
+      "timestamp": "2026-09-15T17:20:13",
+      "topic_id": "sql-databases",
+      "question_id": "q13",
+      "text": "Answer is too brief and lacks detail; not sufficient for hiring.",
+      "meta": {
+        "overall": 2.6,
+        "depth_reached": 1,
+        "next_mode": "followup"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 997.8,
+      "timestamp": "2026-09-15T17:20:25",
+      "topic_id": "sql-databases",
+      "question_id": "q14",
+      "text": "You mentioned using a composite primary key and ON DELETE CASCADE for order_items. Can you detail which columns constitute that composite key, how you would index them for efficient lookups on order_id and product_id, and what trade\u2011offs or potential issues arise from using cascading deletes in this context?",
+      "meta": {
+        "mode": "followup",
+        "difficulty": 2,
+        "time_limit_s": 150,
+        "looking_for": "Candidate explains the composite PK columns, indexing strategy, and discusses trade\u2011offs or failure scenarios of ON DELETE CASCADE."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 1100.1,
+      "timestamp": "2026-09-15T17:21:56",
+      "topic_id": "sql-databases",
+      "question_id": "q14",
+      "text": "columns are order_id and product_id; casading deletes finiancial audit trails",
+      "meta": {
+        "answer_s": 90.3,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 1100.1,
+      "timestamp": "2026-09-15T17:22:04",
+      "topic_id": "sql-databases",
+      "question_id": "q14",
+      "text": "Answer is incomplete; lacks detail on indexing and trade\u2011offs, so it does not fully satisfy the question.",
+      "meta": {
+        "overall": 2.4,
+        "depth_reached": 1,
+        "next_mode": "opening"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 1100.1,
+      "timestamp": "2026-09-15T17:22:33",
+      "topic_id": "sql-databases",
+      "question_id": "q15",
+      "text": "Explain how you would enforce referential integrity between the orders and order_items tables in a PostgreSQL database, including the choice of foreign key constraints and any considerations for performance.",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 2,
+        "time_limit_s": 45,
+        "looking_for": "A clear explanation of using FOREIGN KEY constraints, choice of ON DELETE action (RESTRICT, CASCADE, SET NULL), the impact on data integrity, and how indexes on the foreign key columns improve join/query performance, plus any trade\u2011offs such as cascading deletes affecting audit trails or performance."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 1157.1,
+      "timestamp": "2026-09-15T17:23:18",
+      "topic_id": "sql-databases",
+      "question_id": "q15",
+      "text": "",
+      "meta": {
+        "answer_s": 45.0,
+        "timed_out": true
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 1157.1,
+      "timestamp": "2026-09-15T17:23:18",
+      "topic_id": "sql-databases",
+      "question_id": "q15",
+      "text": "No answer given within the time limit.",
+      "meta": {
+        "overall": 1.0,
+        "depth_reached": 1,
+        "next_mode": "opening"
+      }
+    },
+    {
+      "kind": "difficulty_change",
+      "t_offset_s": 1157.1,
+      "timestamp": "2026-09-15T17:23:18",
+      "topic_id": "sql-databases",
+      "question_id": "",
+      "text": "Difficulty down: 2 -> 1",
+      "meta": {
+        "from": 2,
+        "to": 1
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 1157.1,
+      "timestamp": "2026-09-15T17:23:30",
+      "topic_id": "sql-databases",
+      "question_id": "q16",
+      "text": "What is a primary key and why is it important in a relational database?",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 1,
+        "time_limit_s": 45,
+        "looking_for": "A clear definition of a primary key, its uniqueness and not null constraints, and an explanation of its role in ensuring data integrity and supporting efficient queries."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 1206.8,
+      "timestamp": "2026-09-15T17:24:08",
+      "topic_id": "sql-databases",
+      "question_id": "q16",
+      "text": "unique row identify",
+      "meta": {
+        "answer_s": 37.7,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 1206.8,
+      "timestamp": "2026-09-15T17:24:18",
+      "topic_id": "sql-databases",
+      "question_id": "q16",
+      "text": "Answer is too brief; lacks depth and specificity.",
+      "meta": {
+        "overall": 2.6,
+        "depth_reached": 2,
+        "next_mode": "opening"
+      }
+    },
+    {
+      "kind": "topic_end",
+      "t_offset_s": 1206.8,
+      "timestamp": "2026-09-15T17:24:18",
+      "topic_id": "sql-databases",
+      "question_id": "",
+      "text": "Topic time budget spent.",
+      "meta": {
+        "depth_reached": 2,
+        "mean_score": 2.2
+      }
+    },
+    {
+      "kind": "topic_start",
+      "t_offset_s": 1206.8,
+      "timestamp": "2026-09-15T17:24:18",
+      "topic_id": "react-js-basics",
+      "question_id": "",
+      "text": "React.js Basics",
+      "meta": {
+        "priority": 5,
+        "allocated_s": 317,
+        "target_depth": 2,
+        "difficulty": 1,
+        "is_gap": true
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 1206.8,
+      "timestamp": "2026-09-15T17:24:45",
+      "topic_id": "react-js-basics",
+      "question_id": "q17",
+      "text": "Define a React component and explain the key differences between functional components and class components.",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 1,
+        "time_limit_s": 152,
+        "looking_for": "The answer should describe a component as a reusable piece of UI that renders JSX, mention that functional components are plain functions that return JSX and can use hooks, while class components are ES6 classes extending React.Component with a render method and lifecycle methods. It should note differences in state handling, lifecycle, syntax, and performance considerations."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 1298.7,
+      "timestamp": "2026-09-15T17:26:05",
+      "topic_id": "react-js-basics",
+      "question_id": "q17",
+      "text": "UI building block; functional hooks; class use render menthods ;",
+      "meta": {
+        "answer_s": 79.9,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 1298.7,
+      "timestamp": "2026-09-15T17:26:08",
+      "topic_id": "react-js-basics",
+      "question_id": "q17",
+      "text": "Answer is too brief and lacks depth; needs more detail.",
+      "meta": {
+        "overall": 2.4,
+        "depth_reached": 0,
+        "next_mode": "followup"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 1298.7,
+      "timestamp": "2026-09-15T17:26:23",
+      "topic_id": "react-js-basics",
+      "question_id": "q18",
+      "text": "When would you prefer using a functional component over a class component in a React application, and what potential pitfalls should you avoid?",
+      "meta": {
+        "mode": "followup",
+        "difficulty": 1,
+        "time_limit_s": 180,
+        "looking_for": "A specific scenario where functional components are chosen, explanation of benefits (hooks, simpler syntax), trade\u2011offs (state/ lifecycle handling), and mention of pitfalls like stale closures or missing lifecycle methods."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 1361.2,
+      "timestamp": "2026-09-15T17:27:14",
+      "topic_id": "react-js-basics",
+      "question_id": "q18",
+      "text": "prefers function always aviod stale closures and infinte loop render",
+      "meta": {
+        "answer_s": 50.5,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 1361.2,
+      "timestamp": "2026-09-15T17:27:27",
+      "topic_id": "react-js-basics",
+      "question_id": "q18",
+      "text": "Answer is too brief and lacks concrete examples; not sufficient for hiring.",
+      "meta": {
+        "overall": 2.4,
+        "depth_reached": 0,
+        "next_mode": "followup"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 1361.2,
+      "timestamp": "2026-09-15T17:27:47",
+      "topic_id": "react-js-basics",
+      "question_id": "q19",
+      "text": "Can you describe a specific scenario where a stale closure causes a bug in a functional component, and explain how you would fix it?",
+      "meta": {
+        "mode": "followup",
+        "difficulty": 1,
+        "time_limit_s": 150,
+        "looking_for": "A concrete example of a stale closure (e.g., a useEffect that references a state variable), the bug it causes (such as outdated values being used in a callback or interval), and a fix (like using useRef, useCallback, or adding the variable to the dependency array)."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 1431.4,
+      "timestamp": "2026-09-15T17:28:45",
+      "topic_id": "react-js-basics",
+      "question_id": "q19",
+      "text": "timer capture old state fix using functional state updates",
+      "meta": {
+        "answer_s": 58.2,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 1431.4,
+      "timestamp": "2026-09-15T17:28:47",
+      "topic_id": "react-js-basics",
+      "question_id": "q19",
+      "text": "Answer is too brief and lacks a concrete example, bug description, and detailed fix, making it insufficient for evaluation.",
+      "meta": {
+        "overall": 2.0,
+        "depth_reached": 0,
+        "next_mode": "clarification"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 1431.4,
+      "timestamp": "2026-09-15T17:29:01",
+      "topic_id": "react-js-basics",
+      "question_id": "q20",
+      "text": "Can you explain how \u062a\u0631\u06a9\u06cc\u0628 a functional component that uses the useState hook to manage a counter might lead to an infinite render loop if not implemented correctly?",
+      "meta": {
+        "mode": "clarification",
+        "difficulty": 1,
+        "time_limit_s": 80,
+        "looking_for": "Candidate demonstrates understanding of useState, identifies condition that causes re-render loop, explains how to fix it (e.g., using functional updates or proper dependency array)."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 1499.0,
+      "timestamp": "2026-09-15T17:29:57",
+      "topic_id": "react-js-basics",
+      "question_id": "q20",
+      "text": "updating the state directly in render body triggers endless re renders",
+      "meta": {
+        "answer_s": 55.6,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 1499.0,
+      "timestamp": "2026-09-15T17:30:07",
+      "topic_id": "react-js-basics",
+      "question_id": "q20",
+      "text": "Answer is brief and lacks depth; candidate shows basic understanding but needs more detail.",
+      "meta": {
+        "overall": 2.8,
+        "depth_reached": 1,
+        "next_mode": "opening"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 1499.0,
+      "timestamp": "2026-09-15T17:30:09",
+      "topic_id": "react-js-basics",
+      "question_id": "q21",
+      "text": "What is JSX and how does it relate to React components?",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 1,
+        "time_limit_s": 45,
+        "looking_for": "Explanation that JSX is a syntax extension for JavaScript that allows writing HTML-like tags in React, which are transpiled into React.createElement calls, and describing its role in defining component structure."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 1548.9,
+      "timestamp": "2026-09-15T17:30:47",
+      "topic_id": "react-js-basics",
+      "question_id": "q21",
+      "text": "JSX is the javascript XML file that contains JS + HTML",
+      "meta": {
+        "answer_s": 37.9,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 1548.9,
+      "timestamp": "2026-09-15T17:30:54",
+      "topic_id": "react-js-basics",
+      "question_id": "q21",
+      "text": "Answer is too brief and lacks depth; it does not explain JSX\u2019s role in component structure.",
+      "meta": {
+        "overall": 1.6,
+        "depth_reached": 1,
+        "next_mode": "opening"
+      }
+    },
+    {
+      "kind": "topic_end",
+      "t_offset_s": 1548.9,
+      "timestamp": "2026-09-15T17:30:54",
+      "topic_id": "react-js-basics",
+      "question_id": "",
+      "text": "Topic time budget spent.",
+      "meta": {}
+    }
+  ],
+  "evaluations": [
+    {
+      "question_id": "q1",
+      "topic_id": "python-fundamentals",
+      "relevance": 5,
+      "depth": 2,
+      "specificity": 1,
+      "correctness": 1,
+      "communication": 2,
+      "verdict": "Answer lacks definition and correct example; does not meet basic expectations for a list comprehension explanation.",
+      "strength_note": "None",
+      "gap_note": "Missing definition, syntax explanation, and correct square example.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": true,
+      "overall": 2.2
+    },
+    {
+      "question_id": "q2",
+      "topic_id": "python-fundamentals",
+      "relevance": 5,
+      "depth": 3,
+      "specificity": 5,
+      "correctness": 5,
+      "communication": 4,
+      "verdict": "Answer correctly uses list comprehension to generate squares of 1 through 5.",
+      "strength_note": "Accurate syntax and correct output.",
+      "gap_note": "",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 4.4
+    },
+    {
+      "question_id": "q3",
+      "topic_id": "python-fundamentals",
+      "relevance": 1,
+      "depth": 1,
+      "specificity": 1,
+      "correctness": 1,
+      "communication": 2,
+      "verdict": "Answer does not address the question about list comprehensions vs generator expressions.",
+      "strength_note": "",
+      "gap_note": "No discussion of memory usage, execution time, or concrete examples.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 1.2
+    },
+    {
+      "question_id": "q4",
+      "topic_id": "python-fundamentals",
+      "relevance": 5,
+      "depth": 4,
+      "specificity": 4,
+      "correctness": 5,
+      "communication": 4,
+      "verdict": "Answer correctly explains memory difference between generator and list comprehension.",
+      "strength_note": "Clear explanation of lazy evaluation vs eager loading.",
+      "gap_note": "Could include a concrete example for illustration.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 4.4
+    },
+    {
+      "question_id": "q5",
+      "topic_id": "fastapi-web-frameworks",
+      "relevance": 3,
+      "depth": 2,
+      "specificity": 2,
+      "correctness": 3,
+      "communication": 3,
+      "verdict": "Answer covers basics but lacks depth and concrete example.",
+      "strength_note": "Mentions @app.post and type-hinting list[model].",
+      "gap_note": "Missing async keyword, Pydantic model definition, request body handling details, and example usage.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 2.6
+    },
+    {
+      "question_id": "q6",
+      "topic_id": "fastapi-web-frameworks",
+      "relevance": 4,
+      "depth": 2,
+      "specificity": 2,
+      "correctness": 4,
+      "communication": 2,
+      "verdict": "Answer is too brief and lacks detail; not sufficient for hiring.",
+      "strength_note": "Correctly identifies 422 error.",
+      "gap_note": "Lacks explanation of validation process, error format, and response details.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": true,
+      "overall": 2.8
+    },
+    {
+      "question_id": "q7",
+      "topic_id": "rest-apis-http",
+      "relevance": 3,
+      "depth": 2,
+      "specificity": 2,
+      "correctness": 4,
+      "communication": 2,
+      "verdict": "Answer is too brief and lacks actionable steps; needs improvement.",
+      "strength_note": "",
+      "gap_note": "Answer lacks step\u2011by\u2011step Postman usage and observation details.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": true,
+      "overall": 2.6
+    },
+    {
+      "question_id": "q8",
+      "topic_id": "rest-apis-http",
+      "relevance": 4,
+      "depth": 2,
+      "specificity": 2,
+      "correctness": 4,
+      "communication": 2,
+      "verdict": "Answer is technically correct but lacks detail and specificity.",
+      "strength_note": "Briefly mentions checking length zero, which is a valid approach.",
+      "gap_note": "Does not cover Postman Tests tab, pm.response.text(), or how to flag non-empty responses.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 2.8
+    },
+    {
+      "question_id": "q9",
+      "topic_id": "rest-apis-http",
+      "relevance": 2,
+      "depth": 2,
+      "specificity": 1,
+      "correctness": 3,
+      "communication": 2,
+      "verdict": "Answer lacks concrete script and explanation, insufficient for role.",
+      "strength_note": "Correctly identifies that a non-empty body with 204 should fail the test.",
+      "gap_note": "No test script or handling strategy provided.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 2.0
+    },
+    {
+      "question_id": "q10",
+      "topic_id": "rest-apis-http",
+      "relevance": 2,
+      "depth": 1,
+      "specificity": 1,
+      "correctness": 1,
+      "communication": 2,
+      "verdict": "Answer does not include body length check or error logging, missing key requirements.",
+      "strength_note": "Includes correct status code assertion.",
+      "gap_note": "Missing pm.response.text length check and error logging.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": true,
+      "overall": 1.4
+    },
+    {
+      "question_id": "q11",
+      "topic_id": "rest-apis-http",
+      "relevance": 1,
+      "depth": 1,
+      "specificity": 1,
+      "correctness": 1,
+      "communication": 1,
+      "verdict": "Answer does not address the question.",
+      "strength_note": "",
+      "gap_note": "Answer is incomplete and missing key explanation.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 1.0
+    },
+    {
+      "question_id": "q12",
+      "topic_id": "sql-databases",
+      "relevance": 3,
+      "depth": 2,
+      "specificity": 2,
+      "correctness": 3,
+      "communication": 2,
+      "verdict": "Answer is too brief and lacks detail for a solid schema design.",
+      "strength_note": "Acknowledges foreign keys and splitting orders.",
+      "gap_note": "Missing tables, keys, relationships, normalization, indexing.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 2.4
+    },
+    {
+      "question_id": "q13",
+      "topic_id": "sql-databases",
+      "relevance": 4,
+      "depth": 2,
+      "specificity": 2,
+      "correctness": 3,
+      "communication": 2,
+      "verdict": "Answer is too brief and lacks detail; not sufficient for hiring.",
+      "strength_note": "",
+      "gap_note": "",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": true,
+      "overall": 2.6
+    },
+    {
+      "question_id": "q14",
+      "topic_id": "sql-databases",
+      "relevance": 3,
+      "depth": 2,
+      "specificity": 2,
+      "correctness": 3,
+      "communication": 2,
+      "verdict": "Answer is incomplete; lacks detail on indexing and trade\u2011offs, so it does not fully satisfy the question.",
+      "strength_note": "Correctly identifies the composite key columns.",
+      "gap_note": "Missing indexing strategy and discussion of cascading delete trade\u2011offs.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": true,
+      "overall": 2.4
+    },
+    {
+      "question_id": "q15",
+      "topic_id": "sql-databases",
+      "relevance": 1,
+      "depth": 1,
+      "specificity": 1,
+      "correctness": 1,
+      "communication": 1,
+      "verdict": "No answer given within the time limit.",
+      "strength_note": "",
+      "gap_note": "No response on SQL and Relational Databases.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": true,
+      "overall": 1.0
+    },
+    {
+      "question_id": "q16",
+      "topic_id": "sql-databases",
+      "relevance": 3,
+      "depth": 2,
+      "specificity": 2,
+      "correctness": 4,
+      "communication": 2,
+      "verdict": "Answer is too brief; lacks depth and specificity.",
+      "strength_note": "Defines uniqueness of rows.",
+      "gap_note": "Missing not\u2011null constraint, data integrity, and query efficiency explanation.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 2.6
+    },
+    {
+      "question_id": "q17",
+      "topic_id": "react-js-basics",
+      "relevance": 3,
+      "depth": 2,
+      "specificity": 2,
+      "correctness": 3,
+      "communication": 2,
+      "verdict": "Answer is too brief and lacks depth; needs more detail.",
+      "strength_note": "",
+      "gap_note": "",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": true,
+      "overall": 2.4
+    },
+    {
+      "question_id": "q18",
+      "topic_id": "react-js-basics",
+      "relevance": 3,
+      "depth": 2,
+      "specificity": 2,
+      "correctness": 3,
+      "communication": 2,
+      "verdict": "Answer is too brief and lacks concrete examples; not sufficient for hiring.",
+      "strength_note": "",
+      "gap_note": "Missing scenario, benefits, trade\u2011offs, and clear explanation of pitfalls.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 2.4
+    },
+    {
+      "question_id": "q19",
+      "topic_id": "react-js-basics",
+      "relevance": 2,
+      "depth": 2,
+      "specificity": 1,
+      "correctness": 3,
+      "communication": 2,
+      "verdict": "Answer is too brief and lacks a concrete example, bug description, and detailed fix, making it insufficient for evaluation.",
+      "strength_note": "",
+      "gap_note": "",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": true,
+      "overall": 2.0
+    },
+    {
+      "question_id": "q20",
+      "topic_id": "react-js-basics",
+      "relevance": 4,
+      "depth": 2,
+      "specificity": 2,
+      "correctness": 4,
+      "communication": 2,
+      "verdict": "Answer is brief and lacks depth; candidate shows basic understanding but needs more detail.",
+      "strength_note": "Correct concept identified.",
+      "gap_note": "Lacks example and depth.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 2.8
+    },
+    {
+      "question_id": "q21",
+      "topic_id": "react-js-basics",
+      "relevance": 2,
+      "depth": 1,
+      "specificity": 1,
+      "correctness": 2,
+      "communication": 2,
+      "verdict": "Answer is too brief and lacks depth; it does not explain JSX\u2019s role in component structure.",
+      "strength_note": "",
+      "gap_note": "Missing explanation of transpilation to React.createElement and component structure.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 1.6
+    }
+  ],
+  "discrepancies": []
+}

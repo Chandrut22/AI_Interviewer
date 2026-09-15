@@ -1,0 +1,87 @@
+# Python Web Developer Intern
+
+## About the Role
+
+We are looking for a motivated **Python Web Developer Intern** who is interested in building web applications using **Python, FastAPI, and React.js**. This internship provides an opportunity to work on real-world software projects and gain hands-on experience across backend and frontend development.
+
+The ideal candidate should have a strong interest in software development, good problem-solving skills, and a willingness to learn new technologies in a fast-paced environment.
+
+## Key Responsibilities
+
+* Assist in developing and testing web applications using **Python and FastAPI**.
+* Develop and maintain frontend components using **React.js**.
+* Work with REST APIs and integrate frontend applications with backend services.
+* Write clean, readable, and maintainable Python and JavaScript code.
+* Assist in designing database models and writing database queries.
+* Write unit tests and integration tests for application features.
+* Generate and manage test data for development and testing.
+* Debug application issues and assist in identifying and fixing bugs.
+* Participate in code reviews and follow software development best practices.
+* Work with the development team to understand requirements and implement features.
+* Learn and contribute to performance improvements and application optimization.
+* Participate in Agile development activities such as daily stand-ups, sprint planning, and retrospectives.
+* Document technical solutions and development processes.
+* Explore and learn technologies used in the project based on business requirements.
+
+## Required Skills
+
+* Basic to intermediate knowledge of **Python 3**.
+* Understanding of **FastAPI** or any Python web framework.
+* Basic knowledge of **React.js** and JavaScript.
+* Understanding of **REST APIs** and HTTP methods.
+* Basic knowledge of **SQL and relational databases**.
+* Familiarity with **Git and GitHub**.
+* Understanding of software development and testing concepts.
+* Strong problem-solving and analytical skills.
+* Willingness to learn and work with new technologies.
+
+## Good to Have
+
+* Knowledge of **Node.js**.
+* Familiarity with **PostgreSQL** or other relational databases.
+* Basic understanding of **Docker**.
+* Knowledge of asynchronous programming in Python.
+* Familiarity with **pytest** or other testing frameworks.
+* Basic understanding of application performance and debugging.
+* Exposure to **ClickHouse** or other analytical databases.
+* Experience with personal, academic, or open-source projects using Python and React.
+
+## What You Will Learn
+
+During the internship, you will gain practical experience in:
+
+* Backend development with **Python and FastAPI**.
+* Frontend development with **React.js**.
+* Building and consuming **REST APIs**.
+* Database design and integration.
+* Authentication and authorization.
+* Unit and integration testing.
+* Debugging and troubleshooting.
+* Git-based development workflows.
+* Agile software development.
+* Performance optimization and production-oriented development practices.
+* Working with modern full-stack development technologies.
+
+## Candidate Profile
+
+* Currently pursuing or recently completed a **Bachelor's degree** in Computer Science, Information Technology, or a related field.
+* Strong interest in web and software development.
+* Good communication and teamwork skills.
+* Strong logical and problem-solving abilities.
+* Ability to learn new technologies quickly.
+* Ability to work independently as well as collaboratively.
+* Adaptable to a fast-paced development environment.
+* Candidates with academic projects, personal projects, or GitHub projects using **Python, FastAPI, or React** are encouraged to apply.
+
+## Internship Details
+
+* **Role:** Python Web Developer Intern
+* **Location:** Chennai
+* **Work Mode:** Work from Office
+* **Working Days:** 5 days per week
+* **Selection Process:** Coding Assessment + Technical/Face-to-Face Interview
+* **Technology Stack:** Python, FastAPI, React.js, SQL, Git
+
+## Core Skills
+
+**Python | FastAPI | React.js | REST APIs | SQL | Git**
