@@ -3,8 +3,10 @@ from langchain.chat_models import init_chat_model
 from langchain.messages import SystemMessage, HumanMessage
 from pydantic import ValidationError
 import re
-import json 
+import json
 from dotenv import load_dotenv
+
+from agent.prompts import JSON_REPLY_CONTRACT, json_retry_instruction
 
 load_dotenv()
 
@@ -57,34 +59,38 @@ def _extract_json(text: str) -> str:
 
 def structured(llm, schema , system: str, user: str, retries: int = 5):
 
-    contract = (
-        "Reply with a single JSON object only. No prose, no markdown fences, no "
-        "trailing commentary. It must validate against this JSON schema:\n"
-        + json.dumps(schema.model_json_schema(), indent=2)
+    contract = JSON_REPLY_CONTRACT.format(
+        schema=json.dumps(schema.model_json_schema(), indent=2)
     )
-    messages = [
+    base = [
         SystemMessage(content=f"{system}\n\n{contract}"),
         HumanMessage(content=user),
     ]
+    messages = list(base)
 
     last_error = ""
     for attempt in range(retries + 1):
         raw = llm.invoke(messages).content
         if isinstance(raw, list):  # some providers return content blocks
             raw = "".join(b.get("text", "") for b in raw if isinstance(b, dict))
-        try:
-            return schema.model_validate_json(_extract_json(raw))
-        except (ValidationError, ValueError) as exc:
-            last_error = str(exc)[:800]
-            if attempt == retries:
-                break
-            messages.append(HumanMessage(content=raw if isinstance(raw, str) else ""))
-            messages.append(
-                HumanMessage(
-                    content=(
-                        f"That did not validate: {last_error}\n"
-                        "Return corrected JSON only."
-                    )
-                )
-            )
+        if not isinstance(raw, str):
+            raw = ""
+
+        if raw.strip():
+            try:
+                return schema.model_validate_json(_extract_json(raw))
+            except (ValidationError, ValueError) as exc:
+                last_error = str(exc)[:800]
+        else:
+            # gpt-oss on OpenRouter intermittently returns empty content;
+            # retrying on the original prompt recovers, a poisoned one does not.
+            last_error = "model returned an empty response"
+
+        if attempt == retries:
+            break
+
+        messages = list(base)
+        messages.append(
+            HumanMessage(content=json_retry_instruction(last_error))
+        )
     raise ValueError(f"Model did not return valid {schema.__name__}: {last_error}")

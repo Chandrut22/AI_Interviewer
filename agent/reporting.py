@@ -1,6 +1,7 @@
 
 from agent.state import InterviewState
 from agent.llm import chat_model
+from agent.prompts import REPORT_NARRATIVE_SYSTEM
 from agent.utils import coverage_ratio
 
 
@@ -44,18 +45,8 @@ def build_report(state: InterviewState) -> dict:
 
     llm = chat_model(temperature=0.3)
     narrative = llm.invoke(
-        "Write the judgement sections of an interview report in markdown, for a "
-        "hiring panel. Use exactly these headings and nothing else:\n"
-        "'### Recommendation' - one of Advance / Borderline / Do not advance, then "
-        "two sentences of justification.\n"
-        "'### Strengths' - up to three bullets, each naming the topic and what the "
-        "answer demonstrated.\n"
-        "'### Gaps and concerns' - up to three bullets.\n"
-        "'### Overall observations' - two or three sentences on how the candidate "
-        "handled pressure, structure, and unfamiliar ground.\n"
-        "Cite only what the evaluations below support. Do not mention scores as "
-        "raw numbers in prose. No other sections.\n\n"
-        f"Role: {jd.seniority} {jd.role_title}\n"
+        REPORT_NARRATIVE_SYSTEM
+        + f"Role: {jd.seniority} {jd.role_title}\n"
         f"Candidate: {resume.name} ({resume.years_experience:g} yrs claimed)\n"
         f"Coverage: {len(covered)}/{len(topics)} topics, "
         f"{len(at_depth)} reached target depth\n"

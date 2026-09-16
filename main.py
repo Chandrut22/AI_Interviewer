@@ -3,6 +3,7 @@ import os
 import uuid
 from pathlib import Path
 from typing import Optional
+os.environ["LANGGRAPH_STRICT_MSGPACK"] = "true"
 
 import typer
 from langgraph.checkpoint.postgres import PostgresSaver
@@ -19,6 +20,8 @@ import sys
 from dotenv import load_dotenv
 
 load_dotenv()
+
+from agent.langfuse import langfuse_handler
 
 app = typer.Typer(
     add_completion=False, help="AI interviewer: topic-driven, time-boxed screens."
@@ -128,7 +131,6 @@ def run(
 
 
     db = os.getenv("POSTGRES_CONNSTR")
-    print(db)
     if not db:
         console.print("[red]Error:[/red] POSTGRES_CONNSTR environment variable is not set. Specify a valid PostgreSQL URI before running 'python main.py'.")
         sys.exit(1)
@@ -146,7 +148,7 @@ def run(
             sys.exit(1)
 
         graph = build_graph(checkpointer)
-        config = {"configurable": {"thread_id": thread_id}}
+        config = {"configurable": {"thread_id": thread_id},"callbacks":[langfuse_handler],"metadata": { "langfuse_session_id": thread_id,"langfuse_tags": ["ai-interviewer"]}}
         console.print("[dim]analysing job description and resume...[/dim]")
         result = graph.invoke(
             {

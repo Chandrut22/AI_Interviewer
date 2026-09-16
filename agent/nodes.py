@@ -1,4 +1,12 @@
 from agent.llm import chat_model, structured
+from agent.prompts import (
+    EVALUATE_ANSWER_SYSTEM,
+    GENERATE_QUESTION_SYSTEM,
+    JD_ANALYSIS_SYSTEM,
+    PLAN_TOPICS_SYSTEM,
+    QUESTION_MODE_BRIEF,
+    RESUME_ANALYSIS_SYSTEM,
+)
 from agent.state import InterviewState, JDAnalysis, ResumeAnalysis, TopicPlan, TopicRun, Event, Question, Evaluation, Discrepancy
 from agent.utils import allocate_time, pace, question_time_limit, QUESTION_OVERHEAD_S 
 from agent.conditions import baseline_difficulty, topic_difficulty, depth_credit, next_mode, adjust_difficulty
@@ -22,12 +30,7 @@ def analyze_jd(state: InterviewState) -> dict:
     jd = structured(
         llm,
         JDAnalysis,
-        system=(
-            "Extract structured requirements from a job description. `seniority` "
-            "must be one of: intern, junior, mid, senior, lead, staff, principal. "
-            "`must_have` are hard requirements, `nice_to_have` are preferences. "
-            "Do not invent requirements the text does not state."
-        ),
+        system=JD_ANALYSIS_SYSTEM,
         user=state["jd_text"],
     )
     return {"jd_analysis": jd}
@@ -37,12 +40,7 @@ def analyze_resume(state: InterviewState) -> dict:
     resume = structured(
         llm,
         ResumeAnalysis,
-        system=(
-            "Extract what this resume claims: skills, tools, projects, roles, "
-            "domains, total years of experience. Record claims verbatim in spirit; "
-            "never infer a skill that is not written down. These are claims to be "
-            "validated in interview, not established facts."
-        ),
+        system=RESUME_ANALYSIS_SYSTEM,
         user=state["resume_text"],
     )
     return {"resume_analysis": resume}
@@ -57,19 +55,8 @@ def plan_topics(state: InterviewState) -> dict:
     plan = structured(
         llm,
         TopicPlan,
-        system=(
-            f"Choose about {suggested} interview topics for a "
-            f"{jd.seniority} {jd.role_title} screen, ordered as they should be "
-            "asked: an accessible topic first, hardest topics in the middle, never "
-            "a gap topic first. Rules for each topic: `priority` 5 for a must-have "
-            "the role fails without, 1 for peripheral. `source` is jd_required, "
-            "jd_preferred, resume_claim, gap, or domain. Mark `is_gap` when the JD "
-            "requires it and the resume shows no evidence. Mark "
-            "`claimed_on_resume` when the resume evidences it, and put the "
-            "specific resume lines in `resume_evidence` so questions can cite "
-            "them. `target_depth` 1-5 is how deep this topic needs to go for this "
-            "seniority. Cover every must-have of priority 4 or 5; ids are short "
-            "slugs like 'postgres-transactions'."
+        system=PLAN_TOPICS_SYSTEM.format(
+            suggested=suggested, seniority=jd.seniority, role_title=jd.role_title
         ),
         user=(
             f"JOB REQUIREMENTS:\n{jd.model_dump_json(indent=2)}\n\n"
@@ -216,34 +203,14 @@ def generate_question(state: InterviewState) -> dict:
         if e.topic_id == topic.id and e.kind in {"question", "answer"}
     )[-3000:]
 
-    mode_brief = {
-        "opening": (
-            "Ask a NEW question on this topic. If the resume evidences it, anchor "
-            "the question in that specific project or claim."
-        ),
-        "followup": (
-            "Ask ONE probing follow-up to the last answer: push for the concrete "
-            "detail, trade-off, or failure case it skipped. Do not repeat the "
-            "original question."
-        ),
-        "clarification": (
-            "The last answer missed the question. Politely restate what you are "
-            "asking, more narrowly and concretely. Do not penalise or lecture."
-        ),
-    }[mode]
+    mode_brief = QUESTION_MODE_BRIEF[mode]
 
     llm = chat_model(temperature=0.6)
     question = structured(
         llm,
         Question,
-        system=(
-            "You are a working engineer conducting a live interview. Output one "
-            f"question at difficulty {run.difficulty}/5 (1 = definitions, "
-            "3 = practical application with trade-offs, 5 = ambiguous design or "
-            f"deep internals). {mode_brief} Constraints: one question only, no "
-            "multi-part questions, answerable out loud in the time limit, never "
-            "answerable with yes or no, no preamble or pleasantries. "
-            "`looking_for` is a short note on what a strong answer contains."
+        system=GENERATE_QUESTION_SYSTEM.format(
+            difficulty=run.difficulty, mode_brief=mode_brief
         ),
         user=(
             f"ROLE: {state['jd_analysis'].seniority} "
@@ -342,33 +309,32 @@ def evaluate_answer(state: InterviewState) -> dict:
 
     if answer.strip():
         llm = chat_model(temperature=0.2)
-        ev = structured(
-            llm,
-            Evaluation,
-            system=(
-                "Score one interview answer on five 1-5 dimensions: relevance, "
-                "depth, specificity, correctness, communication. Calibrate to the "
-                "question's difficulty - a level-2 answer to a level-5 question is "
-                "not a 5. Generic answers with no concrete example score 2 or below "
-                "on specificity. `verdict` is one sentence a hiring manager would "
-                "read. Set `contradicts_resume` only when the answer is materially "
-                "weaker or inconsistent with the resume claim shown, and explain in "
-                "`discrepancy_note`. Set `needs_validation` when a later round "
-                "should re-test this. Keep any quotation from the answer under ten "
-                "words."
-            ),
-            user=(
-                f"TOPIC: {topic.name}\n"
-                f"RESUME CLAIM ON THIS TOPIC: {topic.resume_evidence or 'none'}\n"
-                f"QUESTION (difficulty {question.difficulty}/5, "
-                f"mode {question.mode}): {question.text}\n"
-                f"STRONG ANSWER CONTAINS: {question.looking_for}\n"
-                f"ANSWER: {answer}\n"
-                f"TIME: used {answer_event.meta.get('answer_s')}s of "
-                f"{question.time_limit_s}s"
-                f"{'; ran out of time, may be cut off' if timed_out else ''}"
-            ),
-        )
+        try:
+            ev = structured(
+                llm,
+                Evaluation,
+                system=EVALUATE_ANSWER_SYSTEM,
+                user=(
+                    f"TOPIC: {topic.name}\n"
+                    f"RESUME CLAIM ON THIS TOPIC: {topic.resume_evidence or 'none'}\n"
+                    f"QUESTION (difficulty {question.difficulty}/5, "
+                    f"mode {question.mode}): {question.text}\n"
+                    f"STRONG ANSWER CONTAINS: {question.looking_for}\n"
+                    f"ANSWER: {answer}\n"
+                    f"TIME: used {answer_event.meta.get('answer_s')}s of "
+                    f"{question.time_limit_s}s"
+                    f"{'; ran out of time, may be cut off' if timed_out else ''}"
+                ),
+            )
+        except ValueError:
+            # A dead scoring call must not end the interview: park the answer
+            # for human review instead of crashing the run.
+            ev = Evaluation(
+                relevance=3, depth=3, specificity=3, correctness=3, communication=3,
+                verdict="Answer could not be scored automatically; needs human review.",
+                gap_note=f"Scoring failed on {topic.name}; see transcript.",
+                needs_validation=True,
+            )
     else:
         ev = Evaluation(
             relevance=1, depth=1, specificity=1, correctness=1, communication=1,
