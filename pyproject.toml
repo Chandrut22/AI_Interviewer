@@ -9,6 +9,7 @@ authors = [
 requires-python = ">=3.13"
 dependencies = [
     "langchain>=1.4.0",
+    "langchain-ollama>=1.1.0",
     "langchain-openrouter>=0.2.8",
     "langfuse>=4.15.3",
     "langgraph>=1.2.11",

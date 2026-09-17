@@ -1,5 +1,5 @@
-from agent.llm import chat_model, structured
-from agent.prompts import (
+from prev.llm import chat_model, structured
+from prev.prompts import (
     EVALUATE_ANSWER_SYSTEM,
     GENERATE_QUESTION_SYSTEM,
     JD_ANALYSIS_SYSTEM,
@@ -7,9 +7,9 @@ from agent.prompts import (
     QUESTION_MODE_BRIEF,
     RESUME_ANALYSIS_SYSTEM,
 )
-from agent.state import InterviewState, JDAnalysis, ResumeAnalysis, TopicPlan, TopicRun, Event, Question, Evaluation, Discrepancy
-from agent.utils import allocate_time, pace, question_time_limit, QUESTION_OVERHEAD_S 
-from agent.conditions import baseline_difficulty, topic_difficulty, depth_credit, next_mode, adjust_difficulty
+from prev.state import InterviewState, JDAnalysis, ResumeAnalysis, TopicPlan, TopicRun, Event, Question, Evaluation, Discrepancy
+from prev.utils import allocate_time, pace, question_time_limit, QUESTION_OVERHEAD_S 
+from prev.conditions import baseline_difficulty, topic_difficulty, depth_credit, next_mode, adjust_difficulty
 
 
 from datetime import datetime

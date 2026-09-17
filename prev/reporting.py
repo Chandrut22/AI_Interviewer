@@ -1,7 +1,7 @@
 
 from agent.state import InterviewState
 from agent.llm import chat_model
-from agent.prompt import REPORT_NARRATIVE_SYSTEM
+from agent.prompts import REPORT_NARRATIVE_SYSTEM
 from agent.utils import coverage_ratio
 
 

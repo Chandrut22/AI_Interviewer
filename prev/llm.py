@@ -6,13 +6,13 @@ import re
 import json
 from dotenv import load_dotenv
 
-from agent.prompt import JSON_REPLY_CONTRACT, json_retry_instruction
+from agent.prompts import JSON_REPLY_CONTRACT, json_retry_instruction
 
 load_dotenv()
 
 
 DEFAULT_MODEL = os.getenv("OPENROUTER_MODEL", "openai/gpt-oss-20b")
-
+BASE_URL = "https://openrouter.ai/api/v1"
 
 def chat_model(model: str | None = None, temperature: float = 0.4):
 
@@ -24,22 +24,12 @@ def chat_model(model: str | None = None, temperature: float = 0.4):
             "or put it in a .env file next to the project."
         )
     name = model or DEFAULT_MODEL
-    if "gpt-oss" in name:
-        extra_params = {
-            "frequency_penalty": 0.3,
-            "repetition_penalty": 1.15,
-            "extra_body": {
-                "reasoning_effort": "low"  # Restricts the depth of the reasoning tokens
-            }
-        }
-
     return init_chat_model(
         model=name,
         model_provider="openrouter",
         api_key=api_key,
         temperature=temperature,
         max_retries=6,
-
     )
 
 
@@ -53,7 +43,7 @@ def _extract_json(text: str) -> str:
         return text[start : end + 1]
     return text
 
-# def structured(llm, schema, system: str, user: str, retries: int = 3):
+# def structured(llm, schema, system: str, user: str, retries: int = 2):
 #     structured_llm = llm.with_structured_output(schema)
 #     messages = [SystemMessage(content=system), HumanMessage(content=user)]
 

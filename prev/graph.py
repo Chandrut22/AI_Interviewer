@@ -1,10 +1,17 @@
+from langgraph.graph import START, END, StateGraph
 
-
-from langgraph.graph import END, START, StateGraph
-
-from agent.node import analyze_jd, analyze_resume, plan_topics, decide_next,generate_question, ask_question, evaluate_answer, route
-from agent.reporting import build_report
-from agent.state import InterviewState
+from prev.nodes import (
+    analyze_jd,
+    analyze_resume,
+    ask_question,
+    decide_next,
+    evaluate_answer,
+    generate_question,
+    plan_topics,
+    route,
+)
+from prev.reporting import build_report
+from prev.state import InterviewState
 
 
 def build_graph(checkpointer):
@@ -19,10 +26,9 @@ def build_graph(checkpointer):
     builder.add_node("build_report", build_report)
 
     builder.add_edge(START, "analyze_jd")
-    builder.add_edge(START, "analyze_resume")
+    builder.add_edge("analyze_jd", "analyze_resume")
     builder.add_edge("analyze_resume", "plan_topics")
-    builder.add_edge("analyze_jd","plan_topics")
-    builder.add_edge("plan_topics","decide_next")
+    builder.add_edge("plan_topics", "decide_next")
     builder.add_conditional_edges(
         "decide_next",
         route,
@@ -33,10 +39,10 @@ def build_graph(checkpointer):
     builder.add_edge("evaluate_answer", "decide_next")
     builder.add_edge("build_report", END)
 
-    graph = builder.compile(checkpointer=checkpointer)
+    # graph = builder.compile(checkpointer=checkpointer)
 
-    png_data = graph.get_graph().draw_mermaid_png()
-    with open("langgraph_workflow.png", "wb") as f:
-        f.write(png_data)
+    # png_data = graph.get_graph().draw_mermaid_png()
+    # with open("langgraph_workflow.png", "wb") as f:
+    #     f.write(png_data)
 
     return builder.compile(checkpointer=checkpointer)

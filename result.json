@@ -1,0 +1,299 @@
+{
+  "resume_text": "CHANDRU T\nFresher\n/g\u2640bechandru22.vercel.app\n/ne8220788376\n Namakkal\n chandrutd22@gmail.com\n/gtbgithub.com/Chandrut22\n /in/chandrut22\nOBJECTIVE\nDedicated software professional equipped with practical\nexperience. Looking to apply analytical thinking and\ntechnical proficiency in Java, Python, and modern web\nframeworks to solve real-world problems and drive\norganizational success.\nSKILLS\nLanguages:Java, SQL, Python\nT echnologies:Git, GitHub, Postman, SpringBoot, FastAPI,\nMachine Learning, Deep Learning, Lang-\ngraph\nEDUCATION\n2021 - 2025B.T ech Artificial Intelligence & Data Science7.9 C.G.P.A\nKnowledge Institute Of T echnology\n2020 - 2021H.S.C - Computer Science 85 %\nSri Vinayaga Matric Hr . Sec. School\nINTERNSHIP\n01/2024 \u2013 03/2025Data Scientist Intern Punchbiz\n\u2022Smart Attendance System:Designed and developed an AI-powered attendance tracking system using\nComputer Vision and Deep Learning, enhancing process accuracy and automation efficiency.\n\u2022Data Annotation and Model Training:Performed high-quality data annotation for deep learning models\nand contributed to the training of object detection models, ensuring robust and accurate performance.\nComputer Vision/Deep Learning/Data Annotation/AI\n07/2023 \u2013 08/2024Software Developer Intern JSW\n\u2022Automated Daily Production Planning:Developed an automated scheduling system at JSW Blooming\nMill, optimizing production efficiency and ensuring on-time operations through streamlined workflow pro-\ncesses.\n\u2022Resource Allocation Optimization:Implemented data-driven solutions to enhance resource utilization,\nsignificantly improving workflow efficiency and reducing operational bottlenecks.\nWorkflow Automation/Python/Web Developement\nPROJECTS\nFull Stack AIOCR Web Application GitHub Link\n\u2022Developed a Django-based OCR Web Application using PydanticAI to extract text from uploaded images,\nfeaturing secure user authentication, email verification, and server-side image management.\n\u2022Integrated Google Translate API for multilingual translation and T extBlob for spell checking, delivering a\nresponsive front-end using HTML, CSS, and JavaScript.\nDjango/PydanticAI/Google Translate API/JavaScript\nMicroservicesSEO Optimizer Platform GitHub Link\n\u2022Built a full-stack SEO platform using Spring Boot, FastAPI, React (Vite), and T ailwind CSS with JWT au-\nthentication, HttpOnly cookies, Google OAuth2, and password verification flows.\n\u2022Designed a two-backend architecture where a Spring Boot service handles authentication and issues\ntokens verified by a FastAPI AI service for secure keyword analysis and SEO audits.\nSpring Boot/FastAPI/React/Tailwind CSS\nACHIEVEMENTS\n2024Appreciation Award \u2013 Best Consultant ProjectKnowledge Institute Of T echnology\nHonored for developing an automated production schedule system for JSW.\n2024Winner , National 24-Hour AI/ML HackathonBannari Amman Institute of T echnology\nWon 1st prize at the National AI/ML Hackathon (BIT V-Prayukti) for developing innovative integration so-\nlutions for visually impaired and deaf/mute individuals.\n2023Best Make a Product ProjectKnowledge Institute Of T echnology\nReceived 1 st prize in the department-level\u201cMake a Product Expo\u201dfor a collaborative project on Result\nAnalysis and Visualization.",
+  "jd_text": "# Python Web Developer Intern\n## About the Role\nWe are looking for a motivated **Python Web Developer Intern** who is interested in building web applications using **Python, FastAPI, and React.js**. This internship provides an opportunity to work on real-world software projects and gain hands-on experience across backend and frontend development.\nThe ideal candidate should have a strong interest in software development, good problem-solving skills, and a willingness to learn new technologies in a fast-paced environment.\n## Key Responsibilities\n* Assist in developing and testing web applications using **Python and FastAPI**.\n* Develop and maintain frontend components using **React.js**.\n* Work with REST APIs and integrate frontend applications with backend services.\n* Write clean, readable, and maintainable Python and JavaScript code.\n* Assist in designing database models and writing database queries.\n* Write unit tests and integration tests for application features.\n* Generate and manage test data for development and testing.\n* Debug application issues and assist in identifying and fixing bugs.\n* Participate in code reviews and follow software development best practices.\n* Work with the development team to understand requirements and implement features.\n* Learn and contribute to performance improvements and application optimization.\n* Participate in Agile development activities such as daily stand-ups, sprint planning, and retrospectives.\n* Document technical solutions and development processes.\n* Explore and learn technologies used in the project based on business requirements.\n## Required Skills\n* Basic to intermediate knowledge of **Python 3**.\n* Understanding of **FastAPI** or any Python web framework.\n* Basic knowledge of **React.js** and JavaScript.\n* Understanding of **REST APIs** and HTTP methods.\n* Basic knowledge of **SQL and relational databases**.\n* Familiarity with **Git and GitHub**.\n* Understanding of software development and testing concepts.\n* Strong problem-solving and analytical skills.\n* Willingness to learn and work with new technologies.\n## Good to Have\n* Knowledge of **Node.js**.\n* Familiarity with **PostgreSQL** or other relational databases.\n* Basic understanding of **Docker**.\n* Knowledge of asynchronous programming in Python.\n* Familiarity with **pytest** or other testing frameworks.\n* Basic understanding of application performance and debugging.\n* Exposure to **ClickHouse** or other analytical databases.\n* Experience with personal, academic, or open-source projects using Python and React.\n## What You Will Learn\nDuring the internship, you will gain practical experience in:\n* Backend development with **Python and FastAPI**.\n* Frontend development with **React.js**.\n* Building and consuming **REST APIs**.\n* Database design and integration.\n* Authentication and authorization.\n* Unit and integration testing.\n* Debugging and troubleshooting.\n* Git-based development workflows.\n* Agile software development.\n* Performance optimization and production-oriented development practices.\n* Working with modern full-stack development technologies.\n## Candidate Profile\n* Currently pursuing or recently completed a **Bachelor's degree** in Computer Science, Information Technology, or a related field.\n* Strong interest in web and software development.\n* Good communication and teamwork skills.\n* Strong logical and problem-solving abilities.\n* Ability to learn new technologies quickly.\n* Ability to work independently as well as collaboratively.\n* Adaptable to a fast-paced development environment.\n* Candidates with academic projects, personal projects, or GitHub projects using **Python, FastAPI, or React** are encouraged to apply.\n## Internship Details\n* **Role:** Python Web Developer Intern\n* **Location:** Chennai\n* **Work Mode:** Work from Office\n* **Working Days:** 5 days per week\n* **Selection Process:** Coding Assessment + Technical/Face-to-Face Interview\n* **Technology Stack:** Python, FastAPI, React.js, SQL, Git\n## Core Skills\n**Python | FastAPI | React.js | REST APIs | SQL | Git**",
+  "total_seconds": 1800,
+  "jd_analysis": {
+    "role_title": "Python Web Developer Intern",
+    "seniority": "intern",
+    "years_required": 0.0,
+    "must_have": [
+      "Python 3",
+      "FastAPI",
+      "React.js",
+      "JavaScript",
+      "REST APIs",
+      "SQL",
+      "relational databases",
+      "Git",
+      "GitHub",
+      "software development concepts",
+      "testing concepts",
+      "problem-solving",
+      "analytical skills",
+      "willingness to learn new technologies"
+    ],
+    "nice_to_have": [
+      "Node.js",
+      "PostgreSQL",
+      "Docker",
+      "asynchronous programming in Python",
+      "pytest",
+      "application performance and debugging",
+      "ClickHouse",
+      "personal/academic/open-source projects using Python and React"
+    ],
+    "domain": "web development",
+    "responsibilities": [
+      "assist in developing and testing web applications using Python and FastAPI",
+      "develop and maintain frontend components using React.js",
+      "work with REST APIs and integrate frontend applications with backend services",
+      "write clean, readable, and maintainable Python and JavaScript code",
+      "assist in designing database models and writing database queries",
+      "write unit tests and integration tests for application features",
+      "generate and manage test data for development and testing",
+      "debug application issues and assist in identifying and fixing bugs",
+      "participate in code reviews and follow software development best practices",
+      "work with the development team to understand requirements and implement features",
+      "learn and contribute to performance improvements and application optimization",
+      "participate in Agile development activities such as daily stand-ups, sprint planning, and retrospectives",
+      "document technical solutions and development processes",
+      "explore and learn technologies used in the project based on business requirements"
+    ]
+  },
+  "resume_analysis": {
+    "name": "CHANDRU T",
+    "years_experience": 0.0,
+    "skills_claimed": [
+      "Java",
+      "SQL",
+      "Python",
+      "Git",
+      "GitHub",
+      "Postman",
+      "SpringBoot",
+      "FastAPI",
+      "Machine Learning",
+      "Deep Learning",
+      "Lang-graph"
+    ],
+    "projects": [
+      "Full Stack AIOCR Web Application \u2013 Django, PydanticAI, Google Translate API, JavaScript",
+      "Microservices SEO Optimizer Platform \u2013 Spring Boot, FastAPI, React, Tailwind CSS"
+    ],
+    "roles": [
+      "Data Scientist Intern \u2013 Punchbiz (01/2024 \u2013 03/2025)",
+      "Software Developer Intern \u2013 JSW (07/2023 \u2013 08/2024)"
+    ],
+    "tools": [
+      "Git",
+      "GitHub",
+      "Postman",
+      "SpringBoot",
+      "FastAPI",
+      "PydanticAI",
+      "Google Translate API",
+      "TextBlob",
+      "Django",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "JWT",
+      "HttpOnly cookies",
+      "Google OAuth2"
+    ],
+    "domains": [
+      "Artificial Intelligence",
+      "Software Development",
+      "Web Development",
+      "SEO"
+    ]
+  },
+  "topics": [
+    {
+      "id": "jwt",
+      "name": "JSON Web Tokens (JWT)",
+      "priority": 5,
+      "source": "resume_claim",
+      "rationale": "Authentication mechanism required for secure API access.",
+      "target_depth": 2,
+      "resume_evidence": [
+        "JWT"
+      ],
+      "claimed_on_resume": true,
+      "is_gap": false,
+      "allocated_seconds": 450
+    },
+    {
+      "id": "oauth",
+      "name": "OAuth 2.0",
+      "priority": 5,
+      "source": "resume_claim",
+      "rationale": "Standard authorization protocol used in many web apps.",
+      "target_depth": 2,
+      "resume_evidence": [
+        "Google OAuth2"
+      ],
+      "claimed_on_resume": true,
+      "is_gap": false,
+      "allocated_seconds": 450
+    },
+    {
+      "id": "middleware",
+      "name": "FastAPI Middleware",
+      "priority": 4,
+      "source": "domain",
+      "rationale": "Middleware handles request/response processing in FastAPI.",
+      "target_depth": 2,
+      "resume_evidence": [],
+      "claimed_on_resume": false,
+      "is_gap": true,
+      "allocated_seconds": 360
+    },
+    {
+      "id": "tanstack-router",
+      "name": "TanStack Router",
+      "priority": 3,
+      "source": "domain",
+      "rationale": "Modern routing library for React applications.",
+      "target_depth": 3,
+      "resume_evidence": [],
+      "claimed_on_resume": false,
+      "is_gap": true,
+      "allocated_seconds": 270
+    },
+    {
+      "id": "tanstack-query",
+      "name": "TanStack Query",
+      "priority": 3,
+      "source": "domain",
+      "rationale": "Data fetching and state management for React.",
+      "target_depth": 3,
+      "resume_evidence": [],
+      "claimed_on_resume": false,
+      "is_gap": true,
+      "allocated_seconds": 270
+    }
+  ],
+  "dropped_topics": [],
+  "topic_runs": {
+    "jwt": {
+      "status": "active",
+      "elapsed_s": 0.0,
+      "questions_asked": 0,
+      "followups_used": 0,
+      "clarifications_used": 0,
+      "depth_reached": 0,
+      "difficulty": 2,
+      "scores": []
+    },
+    "oauth": {
+      "status": "pending",
+      "elapsed_s": 0.0,
+      "questions_asked": 0,
+      "followups_used": 0,
+      "clarifications_used": 0,
+      "depth_reached": 0,
+      "difficulty": 2,
+      "scores": []
+    },
+    "middleware": {
+      "status": "pending",
+      "elapsed_s": 0.0,
+      "questions_asked": 0,
+      "followups_used": 0,
+      "clarifications_used": 0,
+      "depth_reached": 0,
+      "difficulty": 1,
+      "scores": []
+    },
+    "tanstack-router": {
+      "status": "pending",
+      "elapsed_s": 0.0,
+      "questions_asked": 0,
+      "followups_used": 0,
+      "clarifications_used": 0,
+      "depth_reached": 0,
+      "difficulty": 1,
+      "scores": []
+    },
+    "tanstack-query": {
+      "status": "pending",
+      "elapsed_s": 0.0,
+      "questions_asked": 0,
+      "followups_used": 0,
+      "clarifications_used": 0,
+      "depth_reached": 0,
+      "difficulty": 1,
+      "scores": []
+    }
+  },
+  "topic_order": [
+    "jwt",
+    "oauth",
+    "middleware",
+    "tanstack-router",
+    "tanstack-query"
+  ],
+  "current_topic_id": "jwt",
+  "pending_question": {
+    "id": "q1",
+    "topic_id": "jwt",
+    "text": "Describe the standard structure of a JSON Web Token and explain how each part is used to authenticate a request to a secure API endpoint.",
+    "mode": "opening",
+    "difficulty": 2,
+    "time_limit_s": 90,
+    "looking_for": "An explanation of the JWT header, payload, and signature, including the role of claims and how the token is validated during API authentication."
+  },
+  "next_mode": "opening",
+  "next_action": "ask",
+  "pacing_note": "Topic not yet opened.",
+  "elapsed_s": 0.0,
+  "question_counter": 1,
+  "transcript": [
+    {
+      "kind": "interview_start",
+      "t_offset_s": 0.0,
+      "timestamp": "2026-09-17T13:55:38",
+      "topic_id": "",
+      "question_id": "",
+      "text": "Python Web Developer Intern (intern) - 30 minute budget",
+      "meta": {
+        "topics": {
+          "jwt": 450,
+          "oauth": 450,
+          "middleware": 360,
+          "tanstack-router": 270,
+          "tanstack-query": 270
+        },
+        "dropped_for_time": [],
+        "baseline_difficulty": 1
+      }
+    },
+    {
+      "kind": "topic_start",
+      "t_offset_s": 0.0,
+      "timestamp": "2026-09-17T13:55:38",
+      "topic_id": "jwt",
+      "question_id": "",
+      "text": "JSON Web Tokens (JWT)",
+      "meta": {
+        "priority": 5,
+        "allocated_s": 450,
+        "target_depth": 2,
+        "difficulty": 2,
+        "is_gap": false
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 0.0,
+      "timestamp": "2026-09-17T13:56:32",
+      "topic_id": "jwt",
+      "question_id": "q1",
+      "text": "Describe the standard structure of a JSON Web Token and explain how each part is used to authenticate a request to a secure API endpoint.",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 2,
+        "time_limit_s": 90,
+        "looking_for": "An explanation of the JWT header, payload, and signature, including the role of claims and how the token is validated during API authentication."
+      }
+    }
+  ],
+  "evaluations": [],
+  "discrepancies": [],
+  "completion_status": "in_progress",
+  "__interrupt__": [
+    

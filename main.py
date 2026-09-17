@@ -125,8 +125,6 @@ def run(
     thread: Optional[str] = typer.Option(None, "--thread"),
 ) -> None:
     """Run a fresh interview."""
-    if model:
-        os.environ["OPENROUTER_MODEL"] = model
 
 
 
