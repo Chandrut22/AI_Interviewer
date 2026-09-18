@@ -2,9 +2,9 @@
 
 
 from agent.llm import chat_model, structured
-from agent.prompt import JD_ANALYSIS_SYSTEM, PLAN_TOPICS_SYSTEM, RESUME_ANALYSIS_SYSTEM, QUESTION_MODE_BRIEF, GENERATE_QUESTION_SYSTEM, EVALUATE_ANSWER_SYSTEM
+from agent.prompt import JD_ANALYSIS_SYSTEM, PLAN_TOPICS_SYSTEM, RESUME_ANALYSIS_SYSTEM, QUESTION_MODE_BRIEF, GENERATE_QUESTION_SYSTEM, EVALUATE_ANSWER_SYSTEM, CLASSIFY_RESPONSE_SYSTEM
 from datetime import datetime
-from agent.state import InterviewState, JDAnalysis, ResumeAnalysis, TopicPlan, TopicRun, Event, Question, Evaluation, Discrepancy
+from agent.state import InterviewState, JDAnalysis, ResumeAnalysis, TopicPlan, TopicRun, Event, Question, Evaluation, Discrepancy, ResponseClassification
 from agent.utils import baseline_difficulty, allocate_time, topic_difficulty, pace, question_time_limit, depth_credit, adjust_difficulty, next_mode
 from dotenv import load_dotenv
 from langgraph.types import interrupt
@@ -13,6 +13,7 @@ import os
 
 load_dotenv()
 MAX_QUESTIONS_IN_TOPIC = int(os.getenv("MAX_QUESTIONS_IN_TOPIC", 4))
+DOUBT_THRESHOLD = int(os.getenv("DOUBT_THRESHOLD", 2))
 
 def analyze_jd(state: InterviewState) -> dict:
     llm = chat_model(temperature=0.1)
@@ -94,6 +95,7 @@ def plan_topics(state: InterviewState) -> dict:
             "next_mode": "opening",
             "elapsed_s": 0.0,
             "question_counter": 0,
+            "doubt_count": 0,
             "completion_status": "in_progress",
             "transcript": [start],
         }
@@ -107,7 +109,7 @@ def _event(kind: str, state: InterviewState, **kwargs) -> Event:
     )
 
 def decide_next(state: InterviewState) -> dict:
-    
+
     order = state["topic_order"]
     runs = {tid: run.model_copy() for tid, run in state["topic_runs"].items()}
     topics = {t.id: t for t in state["topics"]}
@@ -116,6 +118,32 @@ def decide_next(state: InterviewState) -> dict:
 
     if current is None:
         return {"next_action": "wrap_up", "pacing_note": "No topics to cover."}
+
+    if state.get("last_response_type") == "doubt":
+        current_doubts = state.get("doubt_count", 0)
+        if current_doubts < DOUBT_THRESHOLD:
+            return {
+                "doubt_count": current_doubts + 1,
+                "next_action": "ask",
+                "next_mode": "clarification",
+                "pacing_note": f"Clarifying doubt ({current_doubts + 1}/{DOUBT_THRESHOLD})",
+                
+            }
+        else:
+          
+            events.append(
+                _event("evaluation", state, topic_id=current,
+                       text="Doubt threshold reached; moving on from this question.",
+                       meta={"outcome": "doubt_threshold_exceeded"})
+            )
+            
+            return {
+                "last_response_type": "answer",
+                "transcript": events,
+                "next_action": "ask",
+                "next_mode": "opening",
+                "pacing_note": "Doubt threshold reached; asking a new question.",
+            }
 
     remaining_after_current = [
         tid for tid in order if runs[tid].status == "pending" and tid != current
@@ -146,6 +174,7 @@ def decide_next(state: InterviewState) -> dict:
             "next_action": "wrap_up",
             "pacing_note": decision.reason,
             "transcript": events,
+            "last_response_type": None, # Always clear on wrap up
         }
 
     if decision.action == "next_topic":
@@ -181,6 +210,7 @@ def decide_next(state: InterviewState) -> dict:
         "next_action": "ask",
         "pacing_note": decision.reason,
         "transcript": events,
+        "last_response_type": None, 
     }
 
 
@@ -204,6 +234,15 @@ def generate_question(state: InterviewState) -> dict:
         if e.topic_id == topic.id and e.kind in {"question", "answer"}
     )[-3000:]
 
+    doubt_context = ""
+    if state.get("last_response_type") == "doubt":
+        doubt_event = next(
+            (e for e in reversed(state.get("transcript", [])) if e.kind == "answer"),
+            None
+        )
+        if doubt_event:
+            doubt_context = f"\n\nCANDIDATE'S DOUBT:\n{doubt_event.text}\n"
+
     mode_brief = QUESTION_MODE_BRIEF[mode]
 
     llm = chat_model(temperature=0.6)
@@ -221,6 +260,7 @@ def generate_question(state: InterviewState) -> dict:
             f"IS IDENTIFIED GAP: {topic.is_gap}\n"
             f"TIME LIMIT: {limit}s\n"
             f"THIS TOPIC SO FAR:\n{history or '(nothing yet)'}"
+            f"{doubt_context}"
         ),
     )
     question.id = f"q{counter}"
@@ -232,6 +272,7 @@ def generate_question(state: InterviewState) -> dict:
     return {
         "pending_question": question,
         "question_counter": counter,
+        "last_response_type": None, 
         "transcript": [
             _event("question", state, topic_id=topic.id, question_id=question.id,
                    text=question.text,
@@ -250,6 +291,7 @@ def ask_question(state: InterviewState) -> dict:
         {
             "question_id": question.id,
             "text": question.text,
+            "clarification": question.clarification,
             "mode": question.mode,
             "difficulty": question.difficulty,
             "time_limit_s": question.time_limit_s,
@@ -257,7 +299,11 @@ def ask_question(state: InterviewState) -> dict:
             "topic_id": topic.id,
             "topic_index": state["topic_order"].index(topic.id) + 1,
             "topic_total": len(state["topic_order"]),
-            "questions_in_topic": run.questions_asked + 1,
+            "questions_asked": run.questions_asked + 1,
+            "questions_remaining": max(0, MAX_QUESTIONS_IN_TOPIC - (run.questions_asked + 1)),
+            "clarifications_used": run.clarifications_used,
+            "doubt_count": state.get("doubt_count", 0),
+            "doubts_remaining": max(0, DOUBT_THRESHOLD - state.get("doubt_count", 0)),
             "elapsed_s": round(state.get("elapsed_s", 0.0)),
             "total_seconds": state["total_seconds"],
             "pacing_note": state.get("pacing_note", ""),
@@ -307,38 +353,65 @@ def evaluate_answer(state: InterviewState) -> dict:
     runs = {tid: r.model_copy() for tid, r in state["topic_runs"].items()}
     run = runs[topic.id]
 
-    if answer.strip():
-        llm = chat_model(temperature=0.2)
-        try:
-            ev = structured(
-                llm,
-                Evaluation,
-                system=EVALUATE_ANSWER_SYSTEM,
-                user=(
-                    f"TOPIC: {topic.name}\n"
-                    f"RESUME CLAIM ON THIS TOPIC: {topic.resume_evidence or 'none'}\n"
-                    f"QUESTION (difficulty {question.difficulty}/5, "
-                    f"mode {question.mode}): {question.text}\n"
-                    f"STRONG ANSWER CONTAINS: {question.looking_for}\n"
-                    f"ANSWER: {answer}\n"
-                    f"TIME: used {answer_event.meta.get('answer_s')}s of "
-                    f"{question.time_limit_s}s"
-                    f"{'; ran out of time, may be cut off' if timed_out else ''}"
-                ),
-            )
-        except ValueError:
-
-            ev = Evaluation(
-                relevance=3, depth=3, specificity=3, correctness=3, communication=3,
-                verdict="Answer could not be scored automatically; needs human review.",
-                gap_note=f"Scoring failed on {topic.name}; see transcript.",
-                needs_validation=True,
-            )
-    else:
+    if not answer.strip():
         ev = Evaluation(
             relevance=1, depth=1, specificity=1, correctness=1, communication=1,
             verdict="No answer given within the time limit.",
             gap_note=f"No response on {topic.name}.",
+            needs_validation=True,
+        )
+        ev.question_id = question.id
+        ev.topic_id = topic.id
+        return {
+            "topic_runs": runs,
+            "evaluations": [ev],
+            "next_mode": "opening",
+            "last_response_type": "answer",
+            "transcript": [_event("evaluation", state, topic_id=topic.id, question_id=question.id,
+                                   text=ev.verdict, meta={"overall": ev.overall, "next_mode": "opening"})],
+        }
+
+    llm = chat_model(temperature=0.1)
+
+    classification = structured(
+        llm,
+        ResponseClassification,
+        system=CLASSIFY_RESPONSE_SYSTEM,
+        user=f"QUESTION: {question.text}\nANSWER: {answer}",
+    )
+
+    if classification.classification == "doubt":
+        return {
+            "last_response_type": "doubt",
+            "transcript": [
+                _event("evaluation", state, topic_id=topic.id, question_id=question.id,
+                       text=f"Candidate raised a doubt: {classification.reasoning}",
+                       meta={"classification": "doubt"})
+            ],
+        }
+
+    try:
+        ev = structured(
+            llm,
+            Evaluation,
+            system=EVALUATE_ANSWER_SYSTEM,
+            user=(
+                f"TOPIC: {topic.name}\n"
+                f"RESUME CLAIM ON THIS TOPIC: {topic.resume_evidence or 'none'}\n"
+                f"QUESTION (difficulty {question.difficulty}/5, "
+                f"mode {question.mode}): {question.text}\n"
+                f"STRONG ANSWER CONTAINS: {question.looking_for}\n"
+                f"ANSWER: {answer}\n"
+                f"TIME: used {answer_event.meta.get('answer_s')}s of "
+                f"{question.time_limit_s}s"
+                f"{'; ran out of time, may be cut off' if timed_out else ''}"
+            ),
+        )
+    except ValueError:
+        ev = Evaluation(
+            relevance=3, depth=3, specificity=3, correctness=3, communication=3,
+            verdict="Answer could not be scored automatically; needs human review.",
+            gap_note=f"Scoring failed on {topic.name}; see transcript.",
             needs_validation=True,
         )
     ev.question_id = question.id
@@ -384,6 +457,7 @@ def evaluate_answer(state: InterviewState) -> dict:
         "topic_runs": runs,
         "evaluations": [ev],
         "next_mode": mode,
+        "last_response_type": "answer",
         "transcript": events,
     }
     if ev.contradicts_resume:

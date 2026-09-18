@@ -27,7 +27,7 @@ The AI Interviewer is a topic-driven, time-boxed screening system built as a Fin
 The `agent/` directory contains the core intelligence engine:
 - `graph.py`: Defines the LangGraph state machine, nodes, and transitions.
 - `state.py`: Manages `InterviewState` (a `TypedDict` persisted across nodes) and Pydantic models for topics and evaluations.
-- `node.py`: Implements the business logic for each graph step (Analysis, Planning, Questioning, Evaluation).
+- `node.py`: Implements the business logic for each graph step, including response classification (Answer vs. Doubt).
 - `llm.py`: A structured LLM wrapper that enforces Pydantic schemas via a validation-feedback loop.
 - `utils.py`: The "Math Engine" that calculates time budgets and pacing to ensure topic coverage within the global time limit.
 - `reporting.py`: Synthesizes the collected evaluations and transcript into a final Markdown/JSON report.
@@ -38,8 +38,13 @@ The `agent/` directory contains the core intelligence engine:
 1. **Analysis**: Simultaneously analyzes the JD and Resume to identify core competencies.
 2. **Planning**: Generates a syllabus with priority-weighted time budgets for each topic.
 3. **Execution Loop**:
-   - `decide_next`: Selects the next critical topic based on remaining time and priority.
-   - `generate_question`: Creates a targeted question using the LLM.
+   - `decide_next`: Selects the next critical topic or handles doubt-based routing.
+   - `generate_question`: Creates a targeted question. If the candidate previously raised a doubt, it first provides a clarification.
    - `ask_question`: Pauses execution (LangGraph interrupt) to capture timed user input via the CLI.
-   - `evaluate_answer`: Scores the response and updates the state's depth/difficulty.
+   - `evaluate_answer`: Classifies the response as an **Answer** (proceeds to scoring) or a **Doubt** (triggers clarification loop).
 4. **Reporting**: Produces a final comprehensive evaluation of the candidate.
+
+### Doubt Clarification Loop
+When `evaluate_answer` identifies a "doubt", the system enters a clarification loop:
+- `evaluate_answer` (marks as doubt) $\rightarrow$ `decide_next` (routes to clarification) $\rightarrow$ `generate_question` (clarifies + asks) $\rightarrow$ `ask_question`.
+- This loop is limited by `DOUBT_THRESHOLD` in `agent/state.py` to prevent infinite loops.

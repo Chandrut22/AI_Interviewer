@@ -1,3 +1,40 @@
+CLASSIFY_RESPONSE_SYSTEM = (
+    "ROLE\n"
+    "You are a technical interviewer monitoring a candidate's response.\n"
+    "\n"
+    "TASK\n"
+    "Classify if the user's response is an ANSWER to the question or a DOUBT (a question, a request for clarification, or an expression of confusion about the question).\n"
+    "\n"
+    "RULES\n"
+    "1. `classification`: 'answer' if they are attempting to solve the problem or explain a concept; 'doubt' if they are asking you for more information, clarifying the prompt, or saying they don't understand the question.\n"
+    "2. `reasoning`: a brief explanation of why this was classified as such.\n"
+    "\n"
+    "EXAMPLE\n"
+    "User: \"I'm not sure I understand, do you mean distributed systems in the context of CAP theorem or just general networking?\"\n"
+    "Output: {\"classification\": \"doubt\", \"reasoning\": \"User is asking for clarification on the terminology used in the question.\"}\n"
+    "\n"
+    "User: \"I would use a Redis cache to handle the session state because...\"\n"
+    "Output: {\"classification\": \"answer\", \"reasoning\": \"User is providing a technical solution to the question.\"}\n"
+)
+
+JSON_REPLY_CONTRACT = (
+    "OUTPUT\n"
+    "Return one JSON object and nothing else: no prose before or after it, "
+    "no markdown fences, no comments, no trailing commas. It must validate "
+    "against this JSON Schema:\n"
+    "{schema}\n"
+    "For any field you cannot determine from the input, omit it rather than "
+    "inventing a value. Never return text outside the JSON object."
+)
+
+def json_retry_instruction(last_error: str) -> str:
+    """Nudge sent after a reply that was empty or failed schema validation."""
+    return (
+        f"Your previous reply could not be used: {last_error}\n"
+        "Return one corrected JSON object only, valid against the schema "
+        "above. Do not apologise, explain, or wrap it in markdown fences."
+    )
+
 JD_ANALYSIS_SYSTEM = (
     "ROLE\n"
     "You are a senior technical recruiter who turns job descriptions into precise, hiring-ready requirement breakdowns.\n"
@@ -93,7 +130,7 @@ PLAN_TOPICS_SYSTEM = (
     "You are screening a {seniority} {role_title}. The user message gives you the extracted JOB REQUIREMENTS and the candidate's RESUME CLAIMS as JSON.\n"
     "\n"
     "TASK\n"
-    "Choose about {suggested} interview topics and order them as they "
+    "Choose about only {suggested} interview topics and order them as they "
     "should be asked: an accessible topic first, hardest topics in the "
     "middle, never a gap topic first.\n"
     "\n"
@@ -136,6 +173,9 @@ GENERATE_QUESTION_SYSTEM = (
     "TASK\n"
     "Output exactly one interview question for the topic data in the user "
     "message.\n"
+    "\n"
+    "DOUBT CLARIFICATION\n"
+    "If the user has raised a doubt about the previous question, you MUST first provide a concise, helpful clarification that resolves their confusion, and then re-state or refine the question so they can answer it.\n"
     "\n"
     "DIFFICULTY\n"
     "Write at difficulty {difficulty}/5: 1 = recall definitions, "

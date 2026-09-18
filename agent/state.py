@@ -16,6 +16,9 @@ class JDAnalysis(BaseModel):
     domain: str = ""
     responsibilities: list[str] = Field(default_factory=list)
 
+class ResponseClassification(BaseModel):
+    classification: Literal["answer", "doubt"]
+    reasoning: str
 
 class ResumeAnalysis(BaseModel):
     name: str = "Candidate"
@@ -73,6 +76,7 @@ class Question(BaseModel):
     id: str = ""
     topic_id: str = ""
     text: str = ""
+    clarification: Optional[str] = None
     mode: Mode = "opening"
     difficulty: int = Field(default=3, ge=1, le=5)
     time_limit_s: int = 120
@@ -128,9 +132,11 @@ class InterviewState(TypedDict, total=False):
     pending_question: Optional[Question]
     next_mode: Mode
     next_action: Literal["ask", "wrap_up"]
+    last_response_type: Literal["answer", "doubt", None] = None
     pacing_note: str
     elapsed_s: float
     question_counter: int
+    doubt_count: int
     # records
     transcript: Annotated[list[Event], operator.add]
     evaluations: Annotated[list[Evaluation], operator.add]

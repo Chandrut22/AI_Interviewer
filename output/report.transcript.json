@@ -4,48 +4,47 @@
     "seniority": "intern",
     "years_required": 0.0,
     "must_have": [
-      "Basic to intermediate knowledge of Python 3",
-      "Understanding of FastAPI or any Python web framework",
-      "Basic knowledge of React.js and JavaScript",
-      "Understanding of REST APIs and HTTP methods",
-      "Basic knowledge of SQL and relational databases",
-      "Familiarity with Git and GitHub",
-      "Understanding of software development and testing concepts",
-      "Strong problem-solving and analytical skills",
-      "Willingness to learn and work with new technologies",
-      "Bachelor's degree in Computer Science, Information Technology, or related field"
+      "Python 3",
+      "FastAPI",
+      "React.js",
+      "JavaScript",
+      "REST APIs",
+      "SQL",
+      "Git",
+      "GitHub",
+      "software development and testing concepts"
     ],
     "nice_to_have": [
-      "Knowledge of Node.js",
-      "Familiarity with PostgreSQL or other relational databases",
-      "Basic understanding of Docker",
-      "Knowledge of asynchronous programming in Python",
-      "Familiarity with pytest or other testing frameworks",
-      "Basic understanding of application performance and debugging",
-      "Exposure to ClickHouse or other analytical databases",
-      "Experience with personal, academic, or open-source projects using Python and React"
+      "Node.js",
+      "PostgreSQL",
+      "Docker",
+      "asynchronous programming in Python",
+      "pytest",
+      "application performance and debugging",
+      "ClickHouse",
+      "personal or academic projects using Python and React"
     ],
-    "domain": "Web Development",
+    "domain": "web development",
     "responsibilities": [
-      "Assist in developing and testing web applications using Python and FastAPI",
-      "Develop and maintain frontend components using React.js",
-      "Work with REST APIs and integrate frontend applications with backend services",
-      "Write clean, readable, and maintainable Python and JavaScript code",
-      "Assist in designing database models and writing database queries",
-      "Write unit tests and integration tests for application features",
-      "Generate and manage test data for development and testing",
-      "Debug application issues and assist in identifying and fixing bugs",
-      "Participate in code reviews and follow software development best practices",
-      "Work with the development team to understand requirements and implement features",
-      "Learn and contribute to performance improvements and application optimization",
-      "Participate in Agile development activities such as daily stand-ups, sprint planning, and retrospectives",
-      "Document technical solutions and development processes",
-      "Explore and learn technologies used in the project based on business requirements"
+      "assist in developing and testing web applications using Python and FastAPI",
+      "develop and maintain frontend components using React.js",
+      "work with REST APIs and integrate frontend applications with backend services",
+      "write clean, readable, and maintainable Python and JavaScript code",
+      "assist in designing database models and writing database queries",
+      "write unit tests and integration tests for application features",
+      "generate and manage test data for development and testing",
+      "debug application issues and assist in identifying and fixing bugs",
+      "participate in code reviews and follow software development best practices",
+      "work with the development team to understand requirements and implement features",
+      "learn and contribute to performance improvements and application optimization",
+      "participate in Agile development activities such as daily stand-ups, sprint planning, and retrospectives",
+      "document technical solutions and development processes",
+      "explore and learn technologies used in the project based on business requirements"
     ]
   },
   "candidate": {
-    "name": "Chandru T",
-    "years_experience": 1.7,
+    "name": "CHANDRU T",
+    "years_experience": 0.0,
     "skills_claimed": [
       "Java",
       "SQL",
@@ -60,14 +59,12 @@
       "Lang-graph"
     ],
     "projects": [
-      "Full Stack AIOCR Web Application",
-      "Microservices SEO Optimizer Platform",
-      "Smart Attendance System",
-      "Automated Daily Production Planning"
+      "Full Stack AIOCR Web Application (Django, PydanticAI, Google Translate API, TextBlob, HTML, CSS, JavaScript)",
+      "Microservices SEO Optimizer Platform (SpringBoot, FastAPI, React (Vite), Tailwind CSS, JWT, Google OAuth2)"
     ],
     "roles": [
-      "Data Scientist Intern",
-      "Software Developer Intern"
+      "Data Scientist Intern \u2013 Punchbiz (01/2024 \u2013 03/2025)",
+      "Software Developer Intern \u2013 JSW (07/2023 \u2013 08/2024)"
     ],
     "tools": [
       "Git",
@@ -75,177 +72,172 @@
       "Postman",
       "SpringBoot",
       "FastAPI",
+      "Django",
       "PydanticAI",
       "Google Translate API",
+      "TextBlob",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React (Vite)",
       "Tailwind CSS",
       "JWT",
       "HttpOnly cookies",
       "Google OAuth2"
     ],
     "domains": [
-      "Computer Vision",
-      "Deep Learning",
-      "Data Annotation",
-      "AI",
-      "Workflow Automation",
-      "Python",
-      "Web Development"
+      "Artificial Intelligence",
+      "Data Science",
+      "Software Development",
+      "Web Development",
+      "SEO",
+      "Manufacturing"
     ]
   },
   "total_seconds": 1800,
-  "elapsed_s": 1548.9,
+  "elapsed_s": 855.6,
   "completion_status": "completed",
   "topics": [
     {
-      "id": "python-fundamentals",
-      "name": "Python Fundamentals",
-      "priority": 5,
-      "source": "jd_required",
-      "rationale": "Assess basic to intermediate Python 3 knowledge essential for backend development",
+      "id": "jwt",
+      "name": "JSON Web Tokens (JWT)",
+      "priority": 3,
+      "source": "resume_claim",
+      "rationale": "Assess understanding of token\u2011based authentication",
       "target_depth": 2,
       "resume_evidence": [
-        "Python"
+        "JWT"
       ],
       "claimed_on_resume": true,
       "is_gap": false,
-      "allocated_seconds": 317
+      "allocated_seconds": 360
     },
     {
-      "id": "fastapi-web-frameworks",
-      "name": "FastAPI and Web Frameworks",
-      "priority": 5,
-      "source": "jd_required",
-      "rationale": "Evaluate understanding of FastAPI or alternative Python web frameworks",
+      "id": "oauth",
+      "name": "OAuth 2.0",
+      "priority": 3,
+      "source": "resume_claim",
+      "rationale": "Evaluate experience with third\u2011party auth flows",
       "target_depth": 2,
       "resume_evidence": [
-        "FastAPI"
+        "Google OAuth2"
       ],
       "claimed_on_resume": true,
       "is_gap": false,
-      "allocated_seconds": 317
+      "allocated_seconds": 360
     },
     {
-      "id": "rest-apis-http",
-      "name": "REST APIs and HTTP Methods",
-      "priority": 5,
-      "source": "jd_required",
-      "rationale": "Verify grasp of RESTful design, HTTP methods, status codes, and API integration",
-      "target_depth": 3,
-      "resume_evidence": [
-        "Postman"
-      ],
-      "claimed_on_resume": true,
-      "is_gap": false,
-      "allocated_seconds": 317
-    },
-    {
-      "id": "sql-databases",
-      "name": "SQL and Relational Databases",
-      "priority": 5,
-      "source": "jd_required",
-      "rationale": "Confirm basic SQL skills and database model design for backend persistence",
-      "target_depth": 2,
-      "resume_evidence": [
-        "SQL"
-      ],
-      "claimed_on_resume": true,
-      "is_gap": false,
-      "allocated_seconds": 317
-    },
-    {
-      "id": "react-js-basics",
-      "name": "React.js Basics",
-      "priority": 5,
-      "source": "jd_required",
-      "rationale": "Assess familiarity with React.js and JavaScript for frontend component development",
+      "id": "middleware",
+      "name": "FastAPI Middleware",
+      "priority": 3,
+      "source": "gap",
+      "rationale": "Check ability to implement request/response processing",
       "target_depth": 2,
       "resume_evidence": [],
       "claimed_on_resume": false,
       "is_gap": true,
-      "allocated_seconds": 317
+      "allocated_seconds": 360
+    },
+    {
+      "id": "tanstack-router",
+      "name": "TanStack Router",
+      "priority": 3,
+      "source": "gap",
+      "rationale": "Determine familiarity with advanced client\u2011side routing",
+      "target_depth": 2,
+      "resume_evidence": [],
+      "claimed_on_resume": false,
+      "is_gap": true,
+      "allocated_seconds": 360
+    },
+    {
+      "id": "tanstack-query",
+      "name": "TanStack Query",
+      "priority": 3,
+      "source": "gap",
+      "rationale": "Assess state management and data fetching skills in React",
+      "target_depth": 2,
+      "resume_evidence": [],
+      "claimed_on_resume": false,
+      "is_gap": true,
+      "allocated_seconds": 360
     }
   ],
   "topic_runs": {
-    "python-fundamentals": {
+    "jwt": {
       "status": "covered",
-      "elapsed_s": 291.4,
-      "questions_asked": 4,
-      "followups_used": 2,
+      "elapsed_s": 156.5,
+      "questions_asked": 3,
+      "followups_used": 1,
       "clarifications_used": 1,
       "depth_reached": 2,
       "difficulty": 2,
       "scores": [
-        2.2,
-        4.4,
-        1.2,
-        4.4
+        3.8,
+        3.4
       ],
-      "mean_score": 3.05
+      "mean_score": 3.6
     },
-    "fastapi-web-frameworks": {
+    "oauth": {
       "status": "covered",
-      "elapsed_s": 178.2,
+      "elapsed_s": 85.9,
       "questions_asked": 2,
       "followups_used": 1,
       "clarifications_used": 0,
       "depth_reached": 2,
       "difficulty": 2,
       "scores": [
-        2.6,
-        2.8
-      ],
-      "mean_score": 2.7
-    },
-    "rest-apis-http": {
-      "status": "covered",
-      "elapsed_s": 373.4,
-      "questions_asked": 5,
-      "followups_used": 2,
-      "clarifications_used": 1,
-      "depth_reached": 2,
-      "difficulty": 1,
-      "scores": [
-        2.6,
         2.8,
-        2.0,
-        1.4,
-        1.0
+        4.0
       ],
-      "mean_score": 1.96
+      "mean_score": 3.4
     },
-    "sql-databases": {
+    "middleware": {
       "status": "covered",
-      "elapsed_s": 363.8,
-      "questions_asked": 5,
-      "followups_used": 2,
+      "elapsed_s": 77.1,
+      "questions_asked": 2,
+      "followups_used": 1,
       "clarifications_used": 0,
       "depth_reached": 2,
       "difficulty": 1,
       "scores": [
-        2.4,
-        2.6,
-        2.4,
-        1.0,
-        2.6
+        3.2,
+        3.0
       ],
-      "mean_score": 2.2
+      "mean_score": 3.1
     },
-    "react-js-basics": {
+    "tanstack-router": {
       "status": "covered",
-      "elapsed_s": 342.1,
+      "elapsed_s": 156.29999999999998,
       "questions_asked": 5,
       "followups_used": 2,
       "clarifications_used": 1,
-      "depth_reached": 1,
+      "depth_reached": 0,
       "difficulty": 1,
       "scores": [
-        2.4,
-        2.4,
-        2.0,
-        2.8,
-        1.6
+        1.0,
+        1.0,
+        1.0
       ],
-      "mean_score": 2.24
+      "mean_score": 1.0
+    },
+    "tanstack-query": {
+      "status": "covered",
+      "elapsed_s": 379.8,
+      "questions_asked": 8,
+      "followups_used": 2,
+      "clarifications_used": 0,
+      "depth_reached": 5,
+      "difficulty": 1,
+      "scores": [
+        3.2,
+        3.6,
+        3.0,
+        2.6,
+        3.0,
+        2.6
+      ],
+      "mean_score": 3.0
     }
   },
   "dropped_topics": [],
@@ -253,17 +245,17 @@
     {
       "kind": "interview_start",
       "t_offset_s": 0.0,
-      "timestamp": "2026-09-15T17:00:27",
+      "timestamp": "2026-09-17T17:00:28",
       "topic_id": "",
       "question_id": "",
       "text": "Python Web Developer Intern (intern) - 30 minute budget",
       "meta": {
         "topics": {
-          "python-fundamentals": 317,
-          "fastapi-web-frameworks": 317,
-          "rest-apis-http": 317,
-          "sql-databases": 317,
-          "react-js-basics": 317
+          "jwt": 360,
+          "oauth": 360,
+          "middleware": 360,
+          "tanstack-router": 360,
+          "tanstack-query": 360
         },
         "dropped_for_time": [],
         "baseline_difficulty": 1
@@ -272,13 +264,13 @@
     {
       "kind": "topic_start",
       "t_offset_s": 0.0,
-      "timestamp": "2026-09-15T17:00:27",
-      "topic_id": "python-fundamentals",
+      "timestamp": "2026-09-17T17:00:28",
+      "topic_id": "jwt",
       "question_id": "",
-      "text": "Python Fundamentals",
+      "text": "JSON Web Tokens (JWT)",
       "meta": {
-        "priority": 5,
-        "allocated_s": 317,
+        "priority": 3,
+        "allocated_s": 360,
         "target_depth": 2,
         "difficulty": 2,
         "is_gap": false
@@ -287,229 +279,140 @@
     {
       "kind": "question",
       "t_offset_s": 0.0,
-      "timestamp": "2026-09-15T17:00:43",
-      "topic_id": "python-fundamentals",
+      "timestamp": "2026-09-17T17:00:33",
+      "topic_id": "jwt",
       "question_id": "q1",
-      "text": "Explain what a list comprehension is in Python and give an example that creates a list of squares for numbers 1 through 5.",
+      "text": "Describe the three parts of a JWT and explain how each part is used when a server validates a token during an authentication request.",
       "meta": {
         "mode": "opening",
         "difficulty": 2,
-        "time_limit_s": 152,
-        "looking_for": "A clear definition of list comprehensions, explanation of syntax, and a correct example producing [1, 4, 9, 16, 25]."
+        "time_limit_s": 72,
+        "looking_for": "Clear explanation of the JWT header, payload, and signature and their roles in authentication."
       }
     },
     {
       "kind": "answer",
-      "t_offset_s": 94.9,
-      "timestamp": "2026-09-15T17:02:06",
-      "topic_id": "python-fundamentals",
+      "t_offset_s": 58.2,
+      "timestamp": "2026-09-17T17:01:31",
+      "topic_id": "jwt",
       "question_id": "q1",
-      "text": "ans = [ i for i in range(1,6)]",
+      "text": "Header identifies algorithm; payload stores claims; signature verifies integrity and authenticity securely.",
       "meta": {
-        "answer_s": 82.9,
+        "answer_s": 58.2,
         "timed_out": false
       }
     },
     {
       "kind": "evaluation",
-      "t_offset_s": 94.9,
-      "timestamp": "2026-09-15T17:02:23",
-      "topic_id": "python-fundamentals",
+      "t_offset_s": 58.2,
+      "timestamp": "2026-09-17T17:01:50",
+      "topic_id": "jwt",
       "question_id": "q1",
-      "text": "Answer lacks definition and correct example; does not meet basic expectations for a list comprehension explanation.",
+      "text": "Answer covers the basics but lacks depth and specificity.",
       "meta": {
-        "overall": 2.2,
-        "depth_reached": 0,
-        "next_mode": "followup"
-      }
-    },
-    {
-      "kind": "difficulty_change",
-      "t_offset_s": 94.9,
-      "timestamp": "2026-09-15T17:02:23",
-      "topic_id": "python-fundamentals",
-      "question_id": "",
-      "text": "Difficulty down: 2 -> 1",
-      "meta": {
-        "from": 2,
-        "to": 1
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 94.9,
-      "timestamp": "2026-09-15T17:02:46",
-      "topic_id": "python-fundamentals",
-      "question_id": "q2",
-      "text": "How would you write a list comprehension that generates the squares of the numbers 1 through 5?",
-      "meta": {
-        "mode": "followup",
-        "difficulty": 1,
-        "time_limit_s": 180,
-        "looking_for": "Correct list comprehension syntax that produces [1, 4, 9, 16, 25] and explanation of the components."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 147.9,
-      "timestamp": "2026-09-15T17:03:27",
-      "topic_id": "python-fundamentals",
-      "question_id": "q2",
-      "text": "ans = [i**2 for i in range(1,6)]",
-      "meta": {
-        "answer_s": 41.0,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 147.9,
-      "timestamp": "2026-09-15T17:03:44",
-      "topic_id": "python-fundamentals",
-      "question_id": "q2",
-      "text": "Answer correctly uses list comprehension to generate squares of 1 through 5.",
-      "meta": {
-        "overall": 4.4,
+        "overall": 3.8,
         "depth_reached": 1,
         "next_mode": "followup"
       }
     },
     {
-      "kind": "difficulty_change",
-      "t_offset_s": 147.9,
-      "timestamp": "2026-09-15T17:03:44",
-      "topic_id": "python-fundamentals",
-      "question_id": "",
-      "text": "Difficulty up: 1 -> 2",
-      "meta": {
-        "from": 1,
-        "to": 2
-      }
-    },
-    {
       "kind": "question",
-      "t_offset_s": 147.9,
-      "timestamp": "2026-09-15T17:03:58",
-      "topic_id": "python-fundamentals",
-      "question_id": "q3",
-      "text": "When generating a very large sequence of numbers in a web service, how would you decide between using a list comprehension and a generator expression, and what are the trade\u2011offs in terms of memory usage and execution time?",
+      "t_offset_s": 58.2,
+      "timestamp": "2026-09-17T17:01:58",
+      "topic_id": "jwt",
+      "question_id": "q2",
+      "text": "After decoding a JWT, what exact cryptographic operation does the server perform with the header's 'alg' and the payload to confirm the signature?",
       "meta": {
         "mode": "followup",
         "difficulty": 2,
-        "time_limit_s": 157,
-        "looking_for": "A clear explanation of when a list comprehension is appropriate versus a generator expression, including concrete examples, memory consumption differences, execution time considerations, and typical scenarios in a web service context."
+        "time_limit_s": 75,
+        "looking_for": "A step\u2011by\u2011step description of how the server uses the algorithm indicated in the header to verify the signature against the payload and secret/public key."
       }
     },
     {
       "kind": "answer",
-      "t_offset_s": 197.8,
-      "timestamp": "2026-09-15T17:04:36",
-      "topic_id": "python-fundamentals",
-      "question_id": "q3",
-      "text": "using the async and threading concept",
+      "t_offset_s": 80.3,
+      "timestamp": "2026-09-17T17:02:21",
+      "topic_id": "jwt",
+      "question_id": "q2",
+      "text": "do u mean alg is algorthim ?",
       "meta": {
-        "answer_s": 37.9,
+        "answer_s": 22.1,
         "timed_out": false
       }
     },
     {
       "kind": "evaluation",
-      "t_offset_s": 197.8,
-      "timestamp": "2026-09-15T17:04:44",
-      "topic_id": "python-fundamentals",
-      "question_id": "q3",
-      "text": "Answer does not address the question about list comprehensions vs generator expressions.",
+      "t_offset_s": 80.3,
+      "timestamp": "2026-09-17T17:02:25",
+      "topic_id": "jwt",
+      "question_id": "q2",
+      "text": "Candidate raised a doubt: User is asking for clarification about the meaning of 'alg' rather than providing an answer.",
       "meta": {
-        "overall": 1.2,
-        "depth_reached": 1,
-        "next_mode": "clarification"
-      }
-    },
-    {
-      "kind": "difficulty_change",
-      "t_offset_s": 197.8,
-      "timestamp": "2026-09-15T17:04:44",
-      "topic_id": "python-fundamentals",
-      "question_id": "",
-      "text": "Difficulty down: 2 -> 1",
-      "meta": {
-        "from": 2,
-        "to": 1
+        "classification": "doubt"
       }
     },
     {
       "kind": "question",
-      "t_offset_s": 197.8,
-      "timestamp": "2026-09-15T17:05:06",
-      "topic_id": "python-fundamentals",
-      "question_id": "q4",
-      "text": "How does a generator expression differ from a list comprehension in terms of memory consumption when creating a large sequence?",
+      "t_offset_s": 80.3,
+      "timestamp": "2026-09-17T17:02:34",
+      "topic_id": "jwt",
+      "question_id": "q3",
+      "text": "Explain the cryptographic steps a server performs to verify a JWT signature, including how the algorithm specified in the header is used with the header and payload.",
       "meta": {
         "mode": "clarification",
-        "difficulty": 1,
-        "time_limit_s": 107,
-        "looking_for": "Clear explanation that a generator produces items lazily, using constant memory, whereas a list comprehension builds the entire list in memory."
+        "difficulty": 2,
+        "time_limit_s": 93,
+        "looking_for": "A clear description of the signature verification process, mentioning the algorithm, hash/signing steps, and how the header and payload are used."
       }
     },
     {
       "kind": "answer",
-      "t_offset_s": 291.4,
-      "timestamp": "2026-09-15T17:06:28",
-      "topic_id": "python-fundamentals",
-      "question_id": "q4",
-      "text": "generators stream data lazily list comprehensions loads everything in memory",
+      "t_offset_s": 156.5,
+      "timestamp": "2026-09-17T17:03:50",
+      "topic_id": "jwt",
+      "question_id": "q3",
+      "text": "Server decodes header, selects algorithm, recomputes signature using header-payload, compares.",
       "meta": {
-        "answer_s": 81.6,
+        "answer_s": 76.2,
         "timed_out": false
       }
     },
     {
       "kind": "evaluation",
-      "t_offset_s": 291.4,
-      "timestamp": "2026-09-15T17:06:40",
-      "topic_id": "python-fundamentals",
-      "question_id": "q4",
-      "text": "Answer correctly explains memory difference between generator and list comprehension.",
+      "t_offset_s": 156.5,
+      "timestamp": "2026-09-17T17:04:10",
+      "topic_id": "jwt",
+      "question_id": "q3",
+      "text": "The answer is concise and relevant but lacks depth and specificity for a thorough JWT signature verification explanation.",
       "meta": {
-        "overall": 4.4,
+        "overall": 3.4,
         "depth_reached": 2,
-        "next_mode": "opening"
-      }
-    },
-    {
-      "kind": "difficulty_change",
-      "t_offset_s": 291.4,
-      "timestamp": "2026-09-15T17:06:40",
-      "topic_id": "python-fundamentals",
-      "question_id": "",
-      "text": "Difficulty up: 1 -> 2",
-      "meta": {
-        "from": 1,
-        "to": 2
+        "next_mode": "followup"
       }
     },
     {
       "kind": "topic_end",
-      "t_offset_s": 291.4,
-      "timestamp": "2026-09-15T17:06:40",
-      "topic_id": "python-fundamentals",
+      "t_offset_s": 156.5,
+      "timestamp": "2026-09-17T17:04:10",
+      "topic_id": "jwt",
       "question_id": "",
       "text": "Target depth 2 reached.",
       "meta": {
         "depth_reached": 2,
-        "mean_score": 3.05
+        "mean_score": 3.6
       }
     },
     {
       "kind": "topic_start",
-      "t_offset_s": 291.4,
-      "timestamp": "2026-09-15T17:06:40",
-      "topic_id": "fastapi-web-frameworks",
+      "t_offset_s": 156.5,
+      "timestamp": "2026-09-17T17:04:10",
+      "topic_id": "oauth",
       "question_id": "",
-      "text": "FastAPI and Web Frameworks",
+      "text": "OAuth 2.0",
       "meta": {
-        "priority": 5,
-        "allocated_s": 317,
+        "priority": 3,
+        "allocated_s": 360,
         "target_depth": 2,
         "difficulty": 2,
         "is_gap": false
@@ -517,480 +420,745 @@
     },
     {
       "kind": "question",
-      "t_offset_s": 291.4,
-      "timestamp": "2026-09-15T17:07:01",
-      "topic_id": "fastapi-web-frameworks",
-      "question_id": "q5",
-      "text": "In FastAPI, how do you define an endpoint that accepts a POST request with a JSON body containing a list of items, and what are the key components you need to include in the function signature to handle this request?",
+      "t_offset_s": 156.5,
+      "timestamp": "2026-09-17T17:04:28",
+      "topic_id": "oauth",
+      "question_id": "q4",
+      "text": "What are the main components of the OAuth 2.0 flow you used with Google, and why is the authorization code grant considered more secure than the implicit grant?",
       "meta": {
         "mode": "opening",
         "difficulty": 2,
-        "time_limit_s": 152,
-        "looking_for": "Answer should mention defining a path operation with @app.post, using Pydantic models or typing.List for request body, async function, and accessing the list via the function parameter."
+        "time_limit_s": 72,
+        "looking_for": "Explanation of OAuth 2.0 components and a concise comparison of authorization code vs implicit grant security."
       }
     },
     {
       "kind": "answer",
-      "t_offset_s": 395.7,
-      "timestamp": "2026-09-15T17:08:34",
-      "topic_id": "fastapi-web-frameworks",
-      "question_id": "q5",
-      "text": "use the @app.post decorders and type-hint parameter with list[model]",
+      "t_offset_s": 204.9,
+      "timestamp": "2026-09-17T17:05:17",
+      "topic_id": "oauth",
+      "question_id": "q4",
+      "text": "OAuth uses authorization server, client, resource server, and user; code grant protects tokens better.",
       "meta": {
-        "answer_s": 92.3,
+        "answer_s": 48.4,
         "timed_out": false
       }
     },
     {
       "kind": "evaluation",
-      "t_offset_s": 395.7,
-      "timestamp": "2026-09-15T17:08:41",
-      "topic_id": "fastapi-web-frameworks",
-      "question_id": "q5",
-      "text": "Answer covers basics but lacks depth and concrete example.",
+      "t_offset_s": 204.9,
+      "timestamp": "2026-09-17T17:05:31",
+      "topic_id": "oauth",
+      "question_id": "q4",
+      "text": "Answer is on topic but lacks depth and detail, missing key security rationale for the authorization code grant.",
       "meta": {
-        "overall": 2.6,
+        "overall": 2.8,
         "depth_reached": 1,
         "next_mode": "followup"
       }
     },
     {
       "kind": "question",
-      "t_offset_s": 395.7,
-      "timestamp": "2026-09-15T17:08:46",
-      "topic_id": "fastapi-web-frameworks",
-      "question_id": "q6",
-      "text": "How does FastAPI use Pydantic models to validate incoming JSON data in a POST endpoint, and what response does it generate when the payload does not match the expected schema?",
+      "t_offset_s": 204.9,
+      "timestamp": "2026-09-17T17:05:36",
+      "topic_id": "oauth",
+      "question_id": "q5",
+      "text": "Explain how you used the state parameter in the OAuth 2.0 authorization code flow to guard against CSRF attacks, and describe what would happen if you omitted it.",
       "meta": {
         "mode": "followup",
         "difficulty": 2,
-        "time_limit_s": 180,
-        "looking_for": "Description of Pydantic validation, error response format, HTTP status code, and how FastAPI communicates validation errors to the client."
+        "time_limit_s": 77,
+        "looking_for": "Explanation of state usage and its role in preventing CSRF attacks."
       }
     },
     {
       "kind": "answer",
-      "t_offset_s": 469.6,
-      "timestamp": "2026-09-15T17:09:48",
-      "topic_id": "fastapi-web-frameworks",
-      "question_id": "q6",
-      "text": "pydantic validate fields automatically if schema is mismatch it occurs 422 error",
+      "t_offset_s": 242.4,
+      "timestamp": "2026-09-17T17:06:14",
+      "topic_id": "oauth",
+      "question_id": "q5",
+      "text": "State links request to session, preventing CSRF; without it, attackers could inject authorization codes.",
       "meta": {
-        "answer_s": 61.9,
+        "answer_s": 37.5,
         "timed_out": false
       }
     },
     {
       "kind": "evaluation",
-      "t_offset_s": 469.6,
-      "timestamp": "2026-09-15T17:09:57",
-      "topic_id": "fastapi-web-frameworks",
-      "question_id": "q6",
-      "text": "Answer is too brief and lacks detail; not sufficient for hiring.",
+      "t_offset_s": 242.4,
+      "timestamp": "2026-09-17T17:06:19",
+      "topic_id": "oauth",
+      "question_id": "q5",
+      "text": "Answer correctly identifies the role of state but lacks depth and concrete detail.",
       "meta": {
-        "overall": 2.8,
+        "overall": 4.0,
         "depth_reached": 2,
         "next_mode": "followup"
       }
     },
     {
       "kind": "topic_end",
-      "t_offset_s": 469.6,
-      "timestamp": "2026-09-15T17:09:57",
-      "topic_id": "fastapi-web-frameworks",
+      "t_offset_s": 242.4,
+      "timestamp": "2026-09-17T17:06:19",
+      "topic_id": "oauth",
       "question_id": "",
       "text": "Target depth 2 reached.",
       "meta": {
         "depth_reached": 2,
-        "mean_score": 2.7
+        "mean_score": 3.4
       }
     },
     {
       "kind": "topic_start",
-      "t_offset_s": 469.6,
-      "timestamp": "2026-09-15T17:09:57",
-      "topic_id": "rest-apis-http",
+      "t_offset_s": 242.4,
+      "timestamp": "2026-09-17T17:06:19",
+      "topic_id": "middleware",
       "question_id": "",
-      "text": "REST APIs and HTTP Methods",
+      "text": "FastAPI Middleware",
       "meta": {
-        "priority": 5,
-        "allocated_s": 317,
-        "target_depth": 3,
-        "difficulty": 2,
-        "is_gap": false
+        "priority": 3,
+        "allocated_s": 360,
+        "target_depth": 2,
+        "difficulty": 1,
+        "is_gap": true
       }
     },
     {
       "kind": "question",
-      "t_offset_s": 469.6,
-      "timestamp": "2026-09-15T17:10:05",
-      "topic_id": "rest-apis-http",
-      "question_id": "q7",
-      "text": "Describe how you would use Postman to verify that a DELETE request to /items/{id} correctly returns a 204 No Content status when the item exists, and a 404 Not Found when it does not. What steps would you take and what observations would confirm each scenario?",
+      "t_offset_s": 242.4,
+      "timestamp": "2026-09-17T17:06:24",
+      "topic_id": "middleware",
+      "question_id": "q6",
+      "text": "How would you implement a FastAPI middleware that logs the request method, path, and response status code, and what considerations would you have for asynchronous operation and error handling?",
       "meta": {
         "mode": "opening",
-        "difficulty": 2,
-        "time_limit_s": 152,
-        "looking_for": "Clear explanation of using Postman to test DELETE, checking status codes, verifying response body or lack thereof, handling different scenarios, and interpreting results."
+        "difficulty": 1,
+        "time_limit_s": 72,
+        "looking_for": "Explain how to create middleware, capture request and response, handle async, and manage errors."
       }
     },
     {
       "kind": "answer",
-      "t_offset_s": 543.9,
-      "timestamp": "2026-09-15T17:11:07",
-      "topic_id": "rest-apis-http",
-      "question_id": "q7",
-      "text": "send the DELETE requests verify 204 for existing and 404 for missing",
+      "t_offset_s": 280.5,
+      "timestamp": "2026-09-17T17:07:02",
+      "topic_id": "middleware",
+      "question_id": "q6",
+      "text": "Use `@app.middleware(\"http\")`, await `call_next`, log status, and handle exceptions safely.",
       "meta": {
-        "answer_s": 62.3,
+        "answer_s": 38.1,
         "timed_out": false
       }
     },
     {
       "kind": "evaluation",
-      "t_offset_s": 543.9,
-      "timestamp": "2026-09-15T17:11:20",
-      "topic_id": "rest-apis-http",
-      "question_id": "q7",
-      "text": "Answer is too brief and lacks actionable steps; needs improvement.",
+      "t_offset_s": 280.5,
+      "timestamp": "2026-09-17T17:07:11",
+      "topic_id": "middleware",
+      "question_id": "q6",
+      "text": "Answer covers the basics but lacks depth and detail.",
       "meta": {
-        "overall": 2.6,
+        "overall": 3.2,
         "depth_reached": 1,
         "next_mode": "followup"
       }
     },
     {
       "kind": "question",
-      "t_offset_s": 543.9,
-      "timestamp": "2026-09-15T17:11:32",
-      "topic_id": "rest-apis-http",
-      "question_id": "q8",
-      "text": "In Postman, how would you verify that the response body is truly empty for a successful DELETE, and what settings or scripts might you use to flag if any content is returned?",
+      "t_offset_s": 280.5,
+      "timestamp": "2026-09-17T17:07:18",
+      "topic_id": "middleware",
+      "question_id": "q7",
+      "text": "When handling a streaming response in FastAPI, how would you modify your middleware to log the response status code without consuming the response body, and what pitfalls should you avoid?",
       "meta": {
         "mode": "followup",
-        "difficulty": 2,
-        "time_limit_s": 180,
-        "looking_for": "Candidate explains checking the response body length, using Postman\u2019s Tests tab to assert body is empty, possibly using pm.response.text() or pm.response.body, and how to configure or script to flag non-empty responses."
+        "difficulty": 1,
+        "time_limit_s": 80,
+        "looking_for": "A concrete explanation of handling streaming responses in middleware, including how to access status without reading the body and the risks of consuming the stream."
       }
     },
     {
       "kind": "answer",
-      "t_offset_s": 635.3,
-      "timestamp": "2026-09-15T17:12:52",
-      "topic_id": "rest-apis-http",
-      "question_id": "q8",
-      "text": "check the character length zero using JS test script",
+      "t_offset_s": 319.5,
+      "timestamp": "2026-09-17T17:07:57",
+      "topic_id": "middleware",
+      "question_id": "q7",
+      "text": "Wrap streaming body without consuming it; log status immediately, avoiding buffering, delays, and memory issues.",
       "meta": {
-        "answer_s": 79.4,
+        "answer_s": 39.0,
         "timed_out": false
       }
     },
     {
       "kind": "evaluation",
-      "t_offset_s": 635.3,
-      "timestamp": "2026-09-15T17:13:02",
-      "topic_id": "rest-apis-http",
-      "question_id": "q8",
-      "text": "Answer is technically correct but lacks detail and specificity.",
+      "t_offset_s": 319.5,
+      "timestamp": "2026-09-17T17:08:14",
+      "topic_id": "middleware",
+      "question_id": "q7",
+      "text": "Answer is brief and lacks concrete implementation details, missing key pitfalls.",
       "meta": {
-        "overall": 2.8,
+        "overall": 3.0,
         "depth_reached": 2,
         "next_mode": "followup"
       }
     },
     {
-      "kind": "question",
-      "t_offset_s": 635.3,
-      "timestamp": "2026-09-15T17:13:21",
-      "topic_id": "rest-apis-http",
-      "question_id": "q9",
-      "text": "In a Postman test script, how would you assert that the response body length is zero, and how would you handle a scenario where a server mistakenly returns a non-empty body with a 204 status?",
+      "kind": "topic_end",
+      "t_offset_s": 319.5,
+      "timestamp": "2026-09-17T17:08:14",
+      "topic_id": "middleware",
+      "question_id": "",
+      "text": "Target depth 2 reached.",
       "meta": {
-        "mode": "followup",
-        "difficulty": 2,
-        "time_limit_s": 139,
-        "looking_for": "Exact test script using pm.response.text().length or JSON.parse, explanation of handling unexpected content, discussion of trade-offs between strict validation and practical API quirks."
+        "depth_reached": 2,
+        "mean_score": 3.1
+      }
+    },
+    {
+      "kind": "topic_start",
+      "t_offset_s": 319.5,
+      "timestamp": "2026-09-17T17:08:14",
+      "topic_id": "tanstack-router",
+      "question_id": "",
+      "text": "TanStack Router",
+      "meta": {
+        "priority": 3,
+        "allocated_s": 360,
+        "target_depth": 2,
+        "difficulty": 1,
+        "is_gap": true
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 319.5,
+      "timestamp": "2026-09-17T17:08:21",
+      "topic_id": "tanstack-router",
+      "question_id": "q8",
+      "text": "Explain how you would set up nested routes in TanStack Router and handle data loading for a child route, including how to manage loading states and errors.",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 1,
+        "time_limit_s": 72,
+        "looking_for": "An explanation of nested routes, data loading, and state/error handling in TanStack Router."
       }
     },
     {
       "kind": "answer",
-      "t_offset_s": 699.0,
-      "timestamp": "2026-09-15T17:14:12",
-      "topic_id": "rest-apis-http",
-      "question_id": "q9",
-      "text": "assert body length is zero fails the test if populated",
+      "t_offset_s": 346.5,
+      "timestamp": "2026-09-17T17:08:48",
+      "topic_id": "tanstack-router",
+      "question_id": "q8",
+      "text": "do u mean tanstack router handing ?",
       "meta": {
-        "answer_s": 51.7,
+        "answer_s": 27.0,
         "timed_out": false
       }
     },
     {
       "kind": "evaluation",
-      "t_offset_s": 699.0,
-      "timestamp": "2026-09-15T17:14:23",
-      "topic_id": "rest-apis-http",
-      "question_id": "q9",
-      "text": "Answer lacks concrete script and explanation, insufficient for role.",
+      "t_offset_s": 346.5,
+      "timestamp": "2026-09-17T17:08:52",
+      "topic_id": "tanstack-router",
+      "question_id": "q8",
+      "text": "Candidate raised a doubt: The user is asking for clarification about the question, not providing an answer.",
       "meta": {
-        "overall": 2.0,
-        "depth_reached": 2,
-        "next_mode": "clarification"
-      }
-    },
-    {
-      "kind": "difficulty_change",
-      "t_offset_s": 699.0,
-      "timestamp": "2026-09-15T17:14:23",
-      "topic_id": "rest-apis-http",
-      "question_id": "",
-      "text": "Difficulty down: 2 -> 1",
-      "meta": {
-        "from": 2,
-        "to": 1
+        "classification": "doubt"
       }
     },
     {
       "kind": "question",
-      "t_offset_s": 699.0,
-      "timestamp": "2026-09-15T17:14:37",
-      "topic_id": "rest-apis-http",
-      "question_id": "q10",
-      "text": "Write a Postman test script that asserts the response body length is zero for a 204 response, and logs an error if any content is returned.",
+      "t_offset_s": 346.5,
+      "timestamp": "2026-09-17T17:08:57",
+      "topic_id": "tanstack-router",
+      "question_id": "q9",
+      "text": "Describe how you would configure nested routes in TanStack Router, load data for a child route, and manage the loading and error states for that route.",
       "meta": {
         "mode": "clarification",
         "difficulty": 1,
-        "time_limit_s": 75,
-        "looking_for": "Correct script using pm.test, pm.response.text, length check, and error logging."
+        "time_limit_s": 83,
+        "looking_for": "Explanation of nested route setup, data loader usage, and strategies for displaying loading and error states."
       }
     },
     {
       "kind": "answer",
-      "t_offset_s": 786.0,
-      "timestamp": "2026-09-15T17:15:52",
-      "topic_id": "rest-apis-http",
-      "question_id": "q10",
-      "text": "pm.test(\"status code is 204, function (){ pm.response.to.have.status(204);}",
+      "t_offset_s": 373.4,
+      "timestamp": "2026-09-17T17:09:24",
+      "topic_id": "tanstack-router",
+      "question_id": "q9",
+      "text": "i think using the usemutation and usequery",
       "meta": {
-        "answer_s": 75.0,
-        "timed_out": true
+        "answer_s": 26.9,
+        "timed_out": false
       }
     },
     {
       "kind": "evaluation",
-      "t_offset_s": 786.0,
-      "timestamp": "2026-09-15T17:16:00",
-      "topic_id": "rest-apis-http",
-      "question_id": "q10",
-      "text": "Answer does not include body length check or error logging, missing key requirements.",
-      "meta": {
-        "overall": 1.4,
-        "depth_reached": 2,
-        "next_mode": "opening"
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 786.0,
-      "timestamp": "2026-09-15T17:16:05",
-      "topic_id": "rest-apis-http",
-      "question_id": "q11",
-      "text": "In Postman, what does a 204 No Content status code signify in a RESTful API, and how would you confirm that the response body is empty?",
-      "meta": {
-        "mode": "opening",
-        "difficulty": 1,
-        "time_limit_s": 45,
-        "looking_for": "Candidate explains that 204 indicates successful operation with no content, and describes checking the response body length or using a test script to assert an empty body."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 843.0,
-      "timestamp": "2026-09-15T17:16:50",
-      "topic_id": "rest-apis-http",
-      "question_id": "q11",
-      "text": ")pm.expect(pm.response.text().length).toe",
-      "meta": {
-        "answer_s": 45.0,
-        "timed_out": true
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 843.0,
-      "timestamp": "2026-09-15T17:16:56",
-      "topic_id": "rest-apis-http",
-      "question_id": "q11",
+      "t_offset_s": 373.4,
+      "timestamp": "2026-09-17T17:09:32",
+      "topic_id": "tanstack-router",
+      "question_id": "q9",
       "text": "Answer does not address the question.",
       "meta": {
         "overall": 1.0,
-        "depth_reached": 2,
-        "next_mode": "opening"
-      }
-    },
-    {
-      "kind": "topic_end",
-      "t_offset_s": 843.0,
-      "timestamp": "2026-09-15T17:16:56",
-      "topic_id": "rest-apis-http",
-      "question_id": "",
-      "text": "Topic time budget spent.",
-      "meta": {
-        "depth_reached": 2,
-        "mean_score": 1.96
-      }
-    },
-    {
-      "kind": "topic_start",
-      "t_offset_s": 843.0,
-      "timestamp": "2026-09-15T17:16:56",
-      "topic_id": "sql-databases",
-      "question_id": "",
-      "text": "SQL and Relational Databases",
-      "meta": {
-        "priority": 5,
-        "allocated_s": 317,
-        "target_depth": 2,
-        "difficulty": 2,
-        "is_gap": false
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 843.0,
-      "timestamp": "2026-09-15T17:17:22",
-      "topic_id": "sql-databases",
-      "question_id": "q12",
-      "text": "Describe how you would design a relational schema for a simple e-commerce platform that includes users, products, orders, and order items, including key choices and relationships.",
-      "meta": {
-        "mode": "opening",
-        "difficulty": 2,
-        "time_limit_s": 152,
-        "looking_for": "A clear explanation of tables, primary keys, foreign keys, normalization, and indexing considerations."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 915.8,
-      "timestamp": "2026-09-15T17:18:23",
-      "topic_id": "sql-databases",
-      "question_id": "q12",
-      "text": "link tables using the foregin key and split the orders into orders item",
-      "meta": {
-        "answer_s": 60.8,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 915.8,
-      "timestamp": "2026-09-15T17:18:27",
-      "topic_id": "sql-databases",
-      "question_id": "q12",
-      "text": "Answer is too brief and lacks detail for a solid schema design.",
-      "meta": {
-        "overall": 2.4,
         "depth_reached": 0,
         "next_mode": "followup"
       }
     },
     {
       "kind": "question",
-      "t_offset_s": 915.8,
-      "timestamp": "2026-09-15T17:18:54",
-      "topic_id": "sql-databases",
-      "question_id": "q13",
-      "text": "What is the primary key you would choose for the order_items table, and how would you enforce that each order_item references an existing order while handling deletions of orders?",
+      "t_offset_s": 373.4,
+      "timestamp": "2026-09-17T17:09:36",
+      "topic_id": "tanstack-router",
+      "question_id": "q10",
+      "text": "When leveraging TanStack Router\u2019s loader functions for nested routes, how would you implement request cancellation to prevent race conditions or stale data from affecting the UI, and what trade\u2011offs does this approach introduce compared to ignoring cancellation?",
       "meta": {
         "mode": "followup",
-        "difficulty": 2,
-        "time_limit_s": 180,
-        "looking_for": "Explanation of PK choice (e.g., composite key or surrogate), foreign key constraints, cascading behavior, and handling of orphaned order_items."
+        "difficulty": 1,
+        "time_limit_s": 102,
+        "looking_for": "Explanation of cancellation strategy (e.g., AbortController), handling of stale responses, and discussion of performance or complexity trade\u2011offs."
       }
     },
     {
       "kind": "answer",
-      "t_offset_s": 997.8,
-      "timestamp": "2026-09-15T17:20:04",
-      "topic_id": "sql-databases",
-      "question_id": "q13",
-      "text": "use composite primary key encourse via ON DELETE CASCADE constraint",
+      "t_offset_s": 406.8,
+      "timestamp": "2026-09-17T17:10:10",
+      "topic_id": "tanstack-router",
+      "question_id": "q10",
+      "text": "using the rate limiter in redis",
       "meta": {
-        "answer_s": 70.0,
+        "answer_s": 33.4,
         "timed_out": false
       }
     },
     {
       "kind": "evaluation",
-      "t_offset_s": 997.8,
-      "timestamp": "2026-09-15T17:20:13",
-      "topic_id": "sql-databases",
-      "question_id": "q13",
-      "text": "Answer is too brief and lacks detail; not sufficient for hiring.",
+      "t_offset_s": 406.8,
+      "timestamp": "2026-09-17T17:10:35",
+      "topic_id": "tanstack-router",
+      "question_id": "q10",
+      "text": "Answer does not address the question.",
       "meta": {
-        "overall": 2.6,
+        "overall": 1.0,
+        "depth_reached": 0,
+        "next_mode": "followup"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 406.8,
+      "timestamp": "2026-09-17T17:10:51",
+      "topic_id": "tanstack-router",
+      "question_id": "q11",
+      "text": "How would you cancel an in\u2011flight loader request in TanStack Router when a user navigates away from a nested route, and what specific hooks or utilities would you use to avoid race conditions between the cancelled request and a new one?",
+      "meta": {
+        "mode": "followup",
+        "difficulty": 1,
+        "time_limit_s": 136,
+        "looking_for": "A detailed explanation of the cancellation strategy, including hooks used, race\u2011condition handling, and trade\u2011offs."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 446.2,
+      "timestamp": "2026-09-17T17:11:30",
+      "topic_id": "tanstack-router",
+      "question_id": "q11",
+      "text": "do you mean about the inflight loader request working in tansstack ?",
+      "meta": {
+        "answer_s": 39.4,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 446.2,
+      "timestamp": "2026-09-17T17:11:33",
+      "topic_id": "tanstack-router",
+      "question_id": "q11",
+      "text": "Candidate raised a doubt: The user is asking for clarification about the question, not providing an answer.",
+      "meta": {
+        "classification": "doubt"
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 446.2,
+      "timestamp": "2026-09-17T17:11:33",
+      "topic_id": "tanstack-router",
+      "question_id": "",
+      "text": "Doubt threshold reached; moving on from this question.",
+      "meta": {
+        "outcome": "doubt_threshold_exceeded"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 446.2,
+      "timestamp": "2026-09-17T17:11:45",
+      "topic_id": "tanstack-router",
+      "question_id": "q12",
+      "text": "In a TanStack Router setup with nested routes, how would you design the loader for a child route that depends on a parameter from its parent route, ensuring that the loader re\u2011fetches data only when that parameter changes, and how would you handle caching and stale data scenarios?",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 1,
+        "time_limit_s": 180,
+        "looking_for": "A clear explanation of how to pass parent params to a child loader, how to use a unique key or query function that triggers on param change, and how to leverage caching options (e.g., staleTime, cacheTime) or cancellation to avoid stale data."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 475.8,
+      "timestamp": "2026-09-17T17:12:15",
+      "topic_id": "tanstack-router",
+      "question_id": "q12",
+      "text": "using the props drilling",
+      "meta": {
+        "answer_s": 29.6,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 475.8,
+      "timestamp": "2026-09-17T17:12:31",
+      "topic_id": "tanstack-router",
+      "question_id": "q12",
+      "text": "Answer does not address the question.",
+      "meta": {
+        "overall": 1.0,
+        "depth_reached": 0,
+        "next_mode": "opening"
+      }
+    },
+    {
+      "kind": "topic_end",
+      "t_offset_s": 475.8,
+      "timestamp": "2026-09-17T17:12:31",
+      "topic_id": "tanstack-router",
+      "question_id": "",
+      "text": "Question cap for this topic reached.",
+      "meta": {
+        "depth_reached": 0,
+        "mean_score": 1.0
+      }
+    },
+    {
+      "kind": "topic_start",
+      "t_offset_s": 475.8,
+      "timestamp": "2026-09-17T17:12:31",
+      "topic_id": "tanstack-query",
+      "question_id": "",
+      "text": "TanStack Query",
+      "meta": {
+        "priority": 3,
+        "allocated_s": 360,
+        "target_depth": 2,
+        "difficulty": 1,
+        "is_gap": true
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 475.8,
+      "timestamp": "2026-09-17T17:12:53",
+      "topic_id": "tanstack-query",
+      "question_id": "q13",
+      "text": "Describe how you would use TanStack Query to implement infinite scrolling for a paginated API, including how you handle loading state, errors, and caching strategy.",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 1,
+        "time_limit_s": 72,
+        "looking_for": "Explanation of useInfiniteQuery, fetchNextPage, getNextPageParam, loading and error states, and cache configuration."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 518.4,
+      "timestamp": "2026-09-17T17:13:36",
+      "topic_id": "tanstack-query",
+      "question_id": "q13",
+      "text": "Use `useInfiniteQuery`, track page cursors, show loading/error states, and cache each page.",
+      "meta": {
+        "answer_s": 42.6,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 518.4,
+      "timestamp": "2026-09-17T17:13:49",
+      "topic_id": "tanstack-query",
+      "question_id": "q13",
+      "text": "Answer is correct but lacks depth and specificity.",
+      "meta": {
+        "overall": 3.2,
         "depth_reached": 1,
         "next_mode": "followup"
       }
     },
     {
       "kind": "question",
-      "t_offset_s": 997.8,
-      "timestamp": "2026-09-15T17:20:25",
-      "topic_id": "sql-databases",
+      "t_offset_s": 518.4,
+      "timestamp": "2026-09-17T17:13:59",
+      "topic_id": "tanstack-query",
       "question_id": "q14",
-      "text": "You mentioned using a composite primary key and ON DELETE CASCADE for order_items. Can you detail which columns constitute that composite key, how you would index them for efficient lookups on order_id and product_id, and what trade\u2011offs or potential issues arise from using cascading deletes in this context?",
+      "text": "How would you configure TanStack Query to retry a failed page load, including the retry count, backoff strategy, and when to stop retrying, and why did you choose those values?",
       "meta": {
         "mode": "followup",
-        "difficulty": 2,
-        "time_limit_s": 150,
-        "looking_for": "Candidate explains the composite PK columns, indexing strategy, and discusses trade\u2011offs or failure scenarios of ON DELETE CASCADE."
+        "difficulty": 1,
+        "time_limit_s": 79,
+        "looking_for": "An answer that explains retry configuration, trade-offs, and justification for chosen values."
       }
     },
     {
       "kind": "answer",
-      "t_offset_s": 1100.1,
-      "timestamp": "2026-09-15T17:21:56",
-      "topic_id": "sql-databases",
+      "t_offset_s": 552.1,
+      "timestamp": "2026-09-17T17:14:32",
+      "topic_id": "tanstack-query",
       "question_id": "q14",
-      "text": "columns are order_id and product_id; casading deletes finiancial audit trails",
+      "text": "Use three retries, exponential backoff, stop on permanent errors; balances reliability and latency.",
       "meta": {
-        "answer_s": 90.3,
+        "answer_s": 33.7,
         "timed_out": false
       }
     },
     {
       "kind": "evaluation",
-      "t_offset_s": 1100.1,
-      "timestamp": "2026-09-15T17:22:04",
-      "topic_id": "sql-databases",
+      "t_offset_s": 552.1,
+      "timestamp": "2026-09-17T17:14:43",
+      "topic_id": "tanstack-query",
       "question_id": "q14",
-      "text": "Answer is incomplete; lacks detail on indexing and trade\u2011offs, so it does not fully satisfy the question.",
+      "text": "Answer is concise but lacks depth; provides basic config but no justification details.",
       "meta": {
-        "overall": 2.4,
-        "depth_reached": 1,
+        "overall": 3.6,
+        "depth_reached": 2,
         "next_mode": "opening"
       }
     },
     {
       "kind": "question",
-      "t_offset_s": 1100.1,
-      "timestamp": "2026-09-15T17:22:33",
-      "topic_id": "sql-databases",
+      "t_offset_s": 552.1,
+      "timestamp": "2026-09-17T17:14:52",
+      "topic_id": "tanstack-query",
       "question_id": "q15",
-      "text": "Explain how you would enforce referential integrity between the orders and order_items tables in a PostgreSQL database, including the choice of foreign key constraints and any considerations for performance.",
+      "text": "Suppose you have a paginated list of items fetched with TanStack Query's `useInfiniteQuery`. After a user performs a mutation that adds a new item to the list, how would you ensure the UI reflects this change without refetching the entire list, and what considerations would you make regarding cache updates and query invalidation?",
       "meta": {
         "mode": "opening",
-        "difficulty": 2,
-        "time_limit_s": 45,
-        "looking_for": "A clear explanation of using FOREIGN KEY constraints, choice of ON DELETE action (RESTRICT, CASCADE, SET NULL), the impact on data integrity, and how indexes on the foreign key columns improve join/query performance, plus any trade\u2011offs such as cascading deletes affecting audit trails or performance."
+        "difficulty": 1,
+        "time_limit_s": 94,
+        "looking_for": "Use of queryClient methods to update or invalidate the cache, explanation of why to choose one over the other, and awareness of pagination key structure."
       }
     },
     {
       "kind": "answer",
-      "t_offset_s": 1157.1,
-      "timestamp": "2026-09-15T17:23:18",
-      "topic_id": "sql-databases",
+      "t_offset_s": 596.4,
+      "timestamp": "2026-09-17T17:15:36",
+      "topic_id": "tanstack-query",
       "question_id": "q15",
+      "text": "Update cached pages directly with `setQueryData`; invalidate afterward only when server consistency requires.",
+      "meta": {
+        "answer_s": 44.3,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 596.4,
+      "timestamp": "2026-09-17T17:15:47",
+      "topic_id": "tanstack-query",
+      "question_id": "q15",
+      "text": "Answer addresses the core idea but lacks detail on pagination handling and cache strategy.",
+      "meta": {
+        "overall": 3.0,
+        "depth_reached": 3,
+        "next_mode": "followup"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 596.4,
+      "timestamp": "2026-09-17T17:15:54",
+      "topic_id": "tanstack-query",
+      "question_id": "q16",
+      "text": "When you use setQueryData to insert a new item into an infinite query cache, what steps would you take to update the pagination metadata\u2014such as the next page cursor\u2014to avoid stale or duplicate data, and how would you verify that this update works correctly in a test scenario?",
+      "meta": {
+        "mode": "followup",
+        "difficulty": 1,
+        "time_limit_s": 119,
+        "looking_for": "Detailed explanation of cache update logic, handling pagination metadata, and testing approach."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 649.6,
+      "timestamp": "2026-09-17T17:16:47",
+      "topic_id": "tanstack-query",
+      "question_id": "q16",
+      "text": "Update `pages`, recompute cursors, remove duplicates, then test cache and pagination metadata.",
+      "meta": {
+        "answer_s": 53.2,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 649.6,
+      "timestamp": "2026-09-17T17:16:56",
+      "topic_id": "tanstack-query",
+      "question_id": "q16",
+      "text": "Answer is on topic but lacks depth and detail.",
+      "meta": {
+        "overall": 2.6,
+        "depth_reached": 4,
+        "next_mode": "opening"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 649.6,
+      "timestamp": "2026-09-17T17:17:05",
+      "topic_id": "tanstack-query",
+      "question_id": "q17",
+      "text": "How would you configure TanStack Query so that multiple components can consume the same paginated data without triggering duplicate network requests, while still ensuring each component\u2019s UI updates correctly when new data arrives? Discuss the role of shared query keys, staleTime, and any cache update strategies you would employ.",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 1,
+        "time_limit_s": 180,
+        "looking_for": "A description of using a shared query key, setting staleTime to control refetch behavior, leveraging query deduplication, and explaining how to update the cache (e.g., setQueryData) so that all subscribed components receive the latest data without redundant fetches."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 696.2,
+      "timestamp": "2026-09-17T17:17:52",
+      "topic_id": "tanstack-query",
+      "question_id": "q17",
+      "text": "Use shared query keys, suitable `staleTime`, cached data, and targeted invalidation for synchronized updates.",
+      "meta": {
+        "answer_s": 46.6,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 696.2,
+      "timestamp": "2026-09-17T17:18:02",
+      "topic_id": "tanstack-query",
+      "question_id": "q17",
+      "text": "Answer is relevant but too brief and lacks the detail needed to fully address the question.",
+      "meta": {
+        "overall": 3.0,
+        "depth_reached": 5,
+        "next_mode": "opening"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 696.2,
+      "timestamp": "2026-09-17T17:18:20",
+      "topic_id": "tanstack-query",
+      "question_id": "q18",
+      "text": "If the API provides a total item count along with each page, how would you integrate that into TanStack Query so the UI can show the total count and still support infinite scrolling without refetching? Discuss how you would store the count, update it on mutations, and what query options you would set to keep the count fresh.",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 1,
+        "time_limit_s": 139,
+        "looking_for": "Explanation of using a shared query or global state to hold the total count, updating it via setQueryData on mutations, and setting staleTime or refetchOnWindowFocus to keep the count fresh while avoiding unnecessary refetches."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 731.9,
+      "timestamp": "2026-09-17T17:18:56",
+      "topic_id": "tanstack-query",
+      "question_id": "q18",
+      "text": "Store total count in query metadata; update mutations, use staleTime.",
+      "meta": {
+        "answer_s": 35.7,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 731.9,
+      "timestamp": "2026-09-17T17:19:05",
+      "topic_id": "tanstack-query",
+      "question_id": "q18",
+      "text": "Answer is partially correct but lacks depth and detail.",
+      "meta": {
+        "overall": 2.6,
+        "depth_reached": 5,
+        "next_mode": "opening"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 731.9,
+      "timestamp": "2026-09-17T17:19:12",
+      "topic_id": "tanstack-query",
+      "question_id": "q19",
+      "text": "When using `useInfiniteQuery` to fetch a cursor\u2011based paginated list, how would you implement a 'refresh' button that re\u2011fetches only the first page while preserving the rest of the cached pages, and what query client methods would you use to achieve that?",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 1,
+        "time_limit_s": 103,
+        "looking_for": "Demonstration of using `queryClient.setQueryData` or `queryClient.invalidateQueries` with page filters to refresh only the first page of an infinite query while keeping other pages cached."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 810.6,
+      "timestamp": "2026-09-17T17:20:31",
+      "topic_id": "tanstack-query",
+      "question_id": "q19",
+      "text": "what u mean useInfinitequery ?",
+      "meta": {
+        "answer_s": 78.7,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 810.6,
+      "timestamp": "2026-09-17T17:20:34",
+      "topic_id": "tanstack-query",
+      "question_id": "q19",
+      "text": "Candidate raised a doubt: User is asking for clarification about the useInfiniteQuery concept, indicating confusion rather than providing an answer.",
+      "meta": {
+        "classification": "doubt"
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 810.6,
+      "timestamp": "2026-09-17T17:20:34",
+      "topic_id": "tanstack-query",
+      "question_id": "",
+      "text": "Doubt threshold reached; moving on from this question.",
+      "meta": {
+        "outcome": "doubt_threshold_exceeded"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 810.6,
+      "timestamp": "2026-09-17T17:20:45",
+      "topic_id": "tanstack-query",
+      "question_id": "q20",
+      "text": "When using `useInfiniteQuery` for cursor\u2011based pagination, how would you implement optimistic updates for a delete mutation that removes an item from the cached list, ensuring the UI immediately reflects the removal while maintaining consistency with the server, and what query client methods would you use to revert the optimistic change if the mutation fails?",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 1,
+        "time_limit_s": 45,
+        "looking_for": "A clear explanation of how to use `queryClient.setQueryData` for the optimistic update, how to track the previous state for rollback, and how to handle failure by invalidating or resetting the cache."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 855.6,
+      "timestamp": "2026-09-17T17:21:30",
+      "topic_id": "tanstack-query",
+      "question_id": "q20",
       "text": "",
       "meta": {
         "answer_s": 45.0,
@@ -999,295 +1167,21 @@
     },
     {
       "kind": "evaluation",
-      "t_offset_s": 1157.1,
-      "timestamp": "2026-09-15T17:23:18",
-      "topic_id": "sql-databases",
-      "question_id": "q15",
+      "t_offset_s": 855.6,
+      "timestamp": "2026-09-17T17:21:30",
+      "topic_id": "tanstack-query",
+      "question_id": "q20",
       "text": "No answer given within the time limit.",
       "meta": {
         "overall": 1.0,
-        "depth_reached": 1,
-        "next_mode": "opening"
-      }
-    },
-    {
-      "kind": "difficulty_change",
-      "t_offset_s": 1157.1,
-      "timestamp": "2026-09-15T17:23:18",
-      "topic_id": "sql-databases",
-      "question_id": "",
-      "text": "Difficulty down: 2 -> 1",
-      "meta": {
-        "from": 2,
-        "to": 1
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 1157.1,
-      "timestamp": "2026-09-15T17:23:30",
-      "topic_id": "sql-databases",
-      "question_id": "q16",
-      "text": "What is a primary key and why is it important in a relational database?",
-      "meta": {
-        "mode": "opening",
-        "difficulty": 1,
-        "time_limit_s": 45,
-        "looking_for": "A clear definition of a primary key, its uniqueness and not null constraints, and an explanation of its role in ensuring data integrity and supporting efficient queries."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 1206.8,
-      "timestamp": "2026-09-15T17:24:08",
-      "topic_id": "sql-databases",
-      "question_id": "q16",
-      "text": "unique row identify",
-      "meta": {
-        "answer_s": 37.7,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 1206.8,
-      "timestamp": "2026-09-15T17:24:18",
-      "topic_id": "sql-databases",
-      "question_id": "q16",
-      "text": "Answer is too brief; lacks depth and specificity.",
-      "meta": {
-        "overall": 2.6,
-        "depth_reached": 2,
         "next_mode": "opening"
       }
     },
     {
       "kind": "topic_end",
-      "t_offset_s": 1206.8,
-      "timestamp": "2026-09-15T17:24:18",
-      "topic_id": "sql-databases",
-      "question_id": "",
-      "text": "Topic time budget spent.",
-      "meta": {
-        "depth_reached": 2,
-        "mean_score": 2.2
-      }
-    },
-    {
-      "kind": "topic_start",
-      "t_offset_s": 1206.8,
-      "timestamp": "2026-09-15T17:24:18",
-      "topic_id": "react-js-basics",
-      "question_id": "",
-      "text": "React.js Basics",
-      "meta": {
-        "priority": 5,
-        "allocated_s": 317,
-        "target_depth": 2,
-        "difficulty": 1,
-        "is_gap": true
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 1206.8,
-      "timestamp": "2026-09-15T17:24:45",
-      "topic_id": "react-js-basics",
-      "question_id": "q17",
-      "text": "Define a React component and explain the key differences between functional components and class components.",
-      "meta": {
-        "mode": "opening",
-        "difficulty": 1,
-        "time_limit_s": 152,
-        "looking_for": "The answer should describe a component as a reusable piece of UI that renders JSX, mention that functional components are plain functions that return JSX and can use hooks, while class components are ES6 classes extending React.Component with a render method and lifecycle methods. It should note differences in state handling, lifecycle, syntax, and performance considerations."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 1298.7,
-      "timestamp": "2026-09-15T17:26:05",
-      "topic_id": "react-js-basics",
-      "question_id": "q17",
-      "text": "UI building block; functional hooks; class use render menthods ;",
-      "meta": {
-        "answer_s": 79.9,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 1298.7,
-      "timestamp": "2026-09-15T17:26:08",
-      "topic_id": "react-js-basics",
-      "question_id": "q17",
-      "text": "Answer is too brief and lacks depth; needs more detail.",
-      "meta": {
-        "overall": 2.4,
-        "depth_reached": 0,
-        "next_mode": "followup"
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 1298.7,
-      "timestamp": "2026-09-15T17:26:23",
-      "topic_id": "react-js-basics",
-      "question_id": "q18",
-      "text": "When would you prefer using a functional component over a class component in a React application, and what potential pitfalls should you avoid?",
-      "meta": {
-        "mode": "followup",
-        "difficulty": 1,
-        "time_limit_s": 180,
-        "looking_for": "A specific scenario where functional components are chosen, explanation of benefits (hooks, simpler syntax), trade\u2011offs (state/ lifecycle handling), and mention of pitfalls like stale closures or missing lifecycle methods."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 1361.2,
-      "timestamp": "2026-09-15T17:27:14",
-      "topic_id": "react-js-basics",
-      "question_id": "q18",
-      "text": "prefers function always aviod stale closures and infinte loop render",
-      "meta": {
-        "answer_s": 50.5,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 1361.2,
-      "timestamp": "2026-09-15T17:27:27",
-      "topic_id": "react-js-basics",
-      "question_id": "q18",
-      "text": "Answer is too brief and lacks concrete examples; not sufficient for hiring.",
-      "meta": {
-        "overall": 2.4,
-        "depth_reached": 0,
-        "next_mode": "followup"
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 1361.2,
-      "timestamp": "2026-09-15T17:27:47",
-      "topic_id": "react-js-basics",
-      "question_id": "q19",
-      "text": "Can you describe a specific scenario where a stale closure causes a bug in a functional component, and explain how you would fix it?",
-      "meta": {
-        "mode": "followup",
-        "difficulty": 1,
-        "time_limit_s": 150,
-        "looking_for": "A concrete example of a stale closure (e.g., a useEffect that references a state variable), the bug it causes (such as outdated values being used in a callback or interval), and a fix (like using useRef, useCallback, or adding the variable to the dependency array)."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 1431.4,
-      "timestamp": "2026-09-15T17:28:45",
-      "topic_id": "react-js-basics",
-      "question_id": "q19",
-      "text": "timer capture old state fix using functional state updates",
-      "meta": {
-        "answer_s": 58.2,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 1431.4,
-      "timestamp": "2026-09-15T17:28:47",
-      "topic_id": "react-js-basics",
-      "question_id": "q19",
-      "text": "Answer is too brief and lacks a concrete example, bug description, and detailed fix, making it insufficient for evaluation.",
-      "meta": {
-        "overall": 2.0,
-        "depth_reached": 0,
-        "next_mode": "clarification"
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 1431.4,
-      "timestamp": "2026-09-15T17:29:01",
-      "topic_id": "react-js-basics",
-      "question_id": "q20",
-      "text": "Can you explain how \u062a\u0631\u06a9\u06cc\u0628 a functional component that uses the useState hook to manage a counter might lead to an infinite render loop if not implemented correctly?",
-      "meta": {
-        "mode": "clarification",
-        "difficulty": 1,
-        "time_limit_s": 80,
-        "looking_for": "Candidate demonstrates understanding of useState, identifies condition that causes re-render loop, explains how to fix it (e.g., using functional updates or proper dependency array)."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 1499.0,
-      "timestamp": "2026-09-15T17:29:57",
-      "topic_id": "react-js-basics",
-      "question_id": "q20",
-      "text": "updating the state directly in render body triggers endless re renders",
-      "meta": {
-        "answer_s": 55.6,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 1499.0,
-      "timestamp": "2026-09-15T17:30:07",
-      "topic_id": "react-js-basics",
-      "question_id": "q20",
-      "text": "Answer is brief and lacks depth; candidate shows basic understanding but needs more detail.",
-      "meta": {
-        "overall": 2.8,
-        "depth_reached": 1,
-        "next_mode": "opening"
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 1499.0,
-      "timestamp": "2026-09-15T17:30:09",
-      "topic_id": "react-js-basics",
-      "question_id": "q21",
-      "text": "What is JSX and how does it relate to React components?",
-      "meta": {
-        "mode": "opening",
-        "difficulty": 1,
-        "time_limit_s": 45,
-        "looking_for": "Explanation that JSX is a syntax extension for JavaScript that allows writing HTML-like tags in React, which are transpiled into React.createElement calls, and describing its role in defining component structure."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 1548.9,
-      "timestamp": "2026-09-15T17:30:47",
-      "topic_id": "react-js-basics",
-      "question_id": "q21",
-      "text": "JSX is the javascript XML file that contains JS + HTML",
-      "meta": {
-        "answer_s": 37.9,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 1548.9,
-      "timestamp": "2026-09-15T17:30:54",
-      "topic_id": "react-js-basics",
-      "question_id": "q21",
-      "text": "Answer is too brief and lacks depth; it does not explain JSX\u2019s role in component structure.",
-      "meta": {
-        "overall": 1.6,
-        "depth_reached": 1,
-        "next_mode": "opening"
-      }
-    },
-    {
-      "kind": "topic_end",
-      "t_offset_s": 1548.9,
-      "timestamp": "2026-09-15T17:30:54",
-      "topic_id": "react-js-basics",
+      "t_offset_s": 855.6,
+      "timestamp": "2026-09-17T17:21:30",
+      "topic_id": "tanstack-query",
       "question_id": "",
       "text": "Topic time budget spent.",
       "meta": {}
@@ -1296,167 +1190,103 @@
   "evaluations": [
     {
       "question_id": "q1",
-      "topic_id": "python-fundamentals",
-      "relevance": 5,
-      "depth": 2,
-      "specificity": 1,
-      "correctness": 1,
-      "communication": 2,
-      "verdict": "Answer lacks definition and correct example; does not meet basic expectations for a list comprehension explanation.",
-      "strength_note": "None",
-      "gap_note": "Missing definition, syntax explanation, and correct square example.",
-      "contradicts_resume": false,
-      "discrepancy_note": "",
-      "needs_validation": true,
-      "overall": 2.2
-    },
-    {
-      "question_id": "q2",
-      "topic_id": "python-fundamentals",
+      "topic_id": "jwt",
       "relevance": 5,
       "depth": 3,
-      "specificity": 5,
+      "specificity": 2,
       "correctness": 5,
       "communication": 4,
-      "verdict": "Answer correctly uses list comprehension to generate squares of 1 through 5.",
-      "strength_note": "Accurate syntax and correct output.",
-      "gap_note": "",
+      "verdict": "Answer covers the basics but lacks depth and specificity.",
+      "strength_note": "Correctly identifies roles of header, payload, signature.",
+      "gap_note": "Lacks explanation of validation process.",
       "contradicts_resume": false,
       "discrepancy_note": "",
       "needs_validation": false,
-      "overall": 4.4
+      "overall": 3.8
     },
     {
       "question_id": "q3",
-      "topic_id": "python-fundamentals",
-      "relevance": 1,
-      "depth": 1,
-      "specificity": 1,
-      "correctness": 1,
-      "communication": 2,
-      "verdict": "Answer does not address the question about list comprehensions vs generator expressions.",
-      "strength_note": "",
-      "gap_note": "No discussion of memory usage, execution time, or concrete examples.",
+      "topic_id": "jwt",
+      "relevance": 5,
+      "depth": 2,
+      "specificity": 2,
+      "correctness": 4,
+      "communication": 4,
+      "verdict": "The answer is concise and relevant but lacks depth and specificity for a thorough JWT signature verification explanation.",
+      "strength_note": "Clear, concise description of the verification flow.",
+      "gap_note": "Missing details on algorithm application, key usage, and signing input construction.",
       "contradicts_resume": false,
       "discrepancy_note": "",
       "needs_validation": false,
-      "overall": 1.2
+      "overall": 3.4
     },
     {
       "question_id": "q4",
-      "topic_id": "python-fundamentals",
-      "relevance": 5,
-      "depth": 4,
-      "specificity": 4,
-      "correctness": 5,
-      "communication": 4,
-      "verdict": "Answer correctly explains memory difference between generator and list comprehension.",
-      "strength_note": "Clear explanation of lazy evaluation vs eager loading.",
-      "gap_note": "Could include a concrete example for illustration.",
-      "contradicts_resume": false,
-      "discrepancy_note": "",
-      "needs_validation": false,
-      "overall": 4.4
-    },
-    {
-      "question_id": "q5",
-      "topic_id": "fastapi-web-frameworks",
-      "relevance": 3,
+      "topic_id": "oauth",
+      "relevance": 4,
       "depth": 2,
       "specificity": 2,
       "correctness": 3,
       "communication": 3,
-      "verdict": "Answer covers basics but lacks depth and concrete example.",
-      "strength_note": "Mentions @app.post and type-hinting list[model].",
-      "gap_note": "Missing async keyword, Pydantic model definition, request body handling details, and example usage.",
+      "verdict": "Answer is on topic but lacks depth and detail, missing key security rationale for the authorization code grant.",
+      "strength_note": "Identified core OAuth components.",
+      "gap_note": "Did not explain why the code grant is more secure than implicit.",
       "contradicts_resume": false,
       "discrepancy_note": "",
       "needs_validation": false,
-      "overall": 2.6
+      "overall": 2.8
+    },
+    {
+      "question_id": "q5",
+      "topic_id": "oauth",
+      "relevance": 5,
+      "depth": 3,
+      "specificity": 3,
+      "correctness": 5,
+      "communication": 4,
+      "verdict": "Answer correctly identifies the role of state but lacks depth and concrete detail.",
+      "strength_note": "Correct explanation of state preventing CSRF.",
+      "gap_note": "Lacks depth and concrete example.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 4.0
     },
     {
       "question_id": "q6",
-      "topic_id": "fastapi-web-frameworks",
-      "relevance": 4,
+      "topic_id": "middleware",
+      "relevance": 5,
       "depth": 2,
       "specificity": 2,
       "correctness": 4,
-      "communication": 2,
-      "verdict": "Answer is too brief and lacks detail; not sufficient for hiring.",
-      "strength_note": "Correctly identifies 422 error.",
-      "gap_note": "Lacks explanation of validation process, error format, and response details.",
+      "communication": 3,
+      "verdict": "Answer covers the basics but lacks depth and detail.",
+      "strength_note": "Correctly identifies middleware decorator and async call",
+      "gap_note": "Missing detailed implementation and error handling",
       "contradicts_resume": false,
       "discrepancy_note": "",
-      "needs_validation": true,
-      "overall": 2.8
+      "needs_validation": false,
+      "overall": 3.2
     },
     {
       "question_id": "q7",
-      "topic_id": "rest-apis-http",
-      "relevance": 3,
+      "topic_id": "middleware",
+      "relevance": 5,
       "depth": 2,
       "specificity": 2,
-      "correctness": 4,
-      "communication": 2,
-      "verdict": "Answer is too brief and lacks actionable steps; needs improvement.",
-      "strength_note": "",
-      "gap_note": "Answer lacks step\u2011by\u2011step Postman usage and observation details.",
+      "correctness": 3,
+      "communication": 3,
+      "verdict": "Answer is brief and lacks concrete implementation details, missing key pitfalls.",
+      "strength_note": "Acknowledges need to avoid buffering",
+      "gap_note": "Lacks concrete implementation and pitfalls",
       "contradicts_resume": false,
       "discrepancy_note": "",
       "needs_validation": true,
-      "overall": 2.6
-    },
-    {
-      "question_id": "q8",
-      "topic_id": "rest-apis-http",
-      "relevance": 4,
-      "depth": 2,
-      "specificity": 2,
-      "correctness": 4,
-      "communication": 2,
-      "verdict": "Answer is technically correct but lacks detail and specificity.",
-      "strength_note": "Briefly mentions checking length zero, which is a valid approach.",
-      "gap_note": "Does not cover Postman Tests tab, pm.response.text(), or how to flag non-empty responses.",
-      "contradicts_resume": false,
-      "discrepancy_note": "",
-      "needs_validation": false,
-      "overall": 2.8
+      "overall": 3.0
     },
     {
       "question_id": "q9",
-      "topic_id": "rest-apis-http",
-      "relevance": 2,
-      "depth": 2,
-      "specificity": 1,
-      "correctness": 3,
-      "communication": 2,
-      "verdict": "Answer lacks concrete script and explanation, insufficient for role.",
-      "strength_note": "Correctly identifies that a non-empty body with 204 should fail the test.",
-      "gap_note": "No test script or handling strategy provided.",
-      "contradicts_resume": false,
-      "discrepancy_note": "",
-      "needs_validation": false,
-      "overall": 2.0
-    },
-    {
-      "question_id": "q10",
-      "topic_id": "rest-apis-http",
-      "relevance": 2,
-      "depth": 1,
-      "specificity": 1,
-      "correctness": 1,
-      "communication": 2,
-      "verdict": "Answer does not include body length check or error logging, missing key requirements.",
-      "strength_note": "Includes correct status code assertion.",
-      "gap_note": "Missing pm.response.text length check and error logging.",
-      "contradicts_resume": false,
-      "discrepancy_note": "",
-      "needs_validation": true,
-      "overall": 1.4
-    },
-    {
-      "question_id": "q11",
-      "topic_id": "rest-apis-http",
+      "topic_id": "tanstack-router",
       "relevance": 1,
       "depth": 1,
       "specificity": 1,
@@ -1464,7 +1294,23 @@
       "communication": 1,
       "verdict": "Answer does not address the question.",
       "strength_note": "",
-      "gap_note": "Answer is incomplete and missing key explanation.",
+      "gap_note": "No explanation of nested routes, data loading, or loading/error states.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 1.0
+    },
+    {
+      "question_id": "q10",
+      "topic_id": "tanstack-router",
+      "relevance": 1,
+      "depth": 1,
+      "specificity": 1,
+      "correctness": 1,
+      "communication": 1,
+      "verdict": "Answer does not address the question.",
+      "strength_note": "",
+      "gap_note": "Answer does not discuss TanStack Router, cancellation, or trade\u2011offs.",
       "contradicts_resume": false,
       "discrepancy_note": "",
       "needs_validation": false,
@@ -1472,79 +1318,79 @@
     },
     {
       "question_id": "q12",
-      "topic_id": "sql-databases",
-      "relevance": 3,
-      "depth": 2,
-      "specificity": 2,
-      "correctness": 3,
-      "communication": 2,
-      "verdict": "Answer is too brief and lacks detail for a solid schema design.",
-      "strength_note": "Acknowledges foreign keys and splitting orders.",
-      "gap_note": "Missing tables, keys, relationships, normalization, indexing.",
-      "contradicts_resume": false,
-      "discrepancy_note": "",
-      "needs_validation": false,
-      "overall": 2.4
-    },
-    {
-      "question_id": "q13",
-      "topic_id": "sql-databases",
-      "relevance": 4,
-      "depth": 2,
-      "specificity": 2,
-      "correctness": 3,
-      "communication": 2,
-      "verdict": "Answer is too brief and lacks detail; not sufficient for hiring.",
-      "strength_note": "",
-      "gap_note": "",
-      "contradicts_resume": false,
-      "discrepancy_note": "",
-      "needs_validation": true,
-      "overall": 2.6
-    },
-    {
-      "question_id": "q14",
-      "topic_id": "sql-databases",
-      "relevance": 3,
-      "depth": 2,
-      "specificity": 2,
-      "correctness": 3,
-      "communication": 2,
-      "verdict": "Answer is incomplete; lacks detail on indexing and trade\u2011offs, so it does not fully satisfy the question.",
-      "strength_note": "Correctly identifies the composite key columns.",
-      "gap_note": "Missing indexing strategy and discussion of cascading delete trade\u2011offs.",
-      "contradicts_resume": false,
-      "discrepancy_note": "",
-      "needs_validation": true,
-      "overall": 2.4
-    },
-    {
-      "question_id": "q15",
-      "topic_id": "sql-databases",
+      "topic_id": "tanstack-router",
       "relevance": 1,
       "depth": 1,
       "specificity": 1,
       "correctness": 1,
       "communication": 1,
-      "verdict": "No answer given within the time limit.",
+      "verdict": "Answer does not address the question.",
       "strength_note": "",
-      "gap_note": "No response on SQL and Relational Databases.",
+      "gap_note": "Missing explanation of passing parent params, loader logic, caching, and stale data handling.",
       "contradicts_resume": false,
       "discrepancy_note": "",
-      "needs_validation": true,
+      "needs_validation": false,
       "overall": 1.0
     },
     {
-      "question_id": "q16",
-      "topic_id": "sql-databases",
-      "relevance": 3,
+      "question_id": "q13",
+      "topic_id": "tanstack-query",
+      "relevance": 5,
       "depth": 2,
       "specificity": 2,
       "correctness": 4,
+      "communication": 3,
+      "verdict": "Answer is correct but lacks depth and specificity.",
+      "strength_note": "Correctly identifies useInfiniteQuery.",
+      "gap_note": "Missing details on fetchNextPage, getNextPageParam, loading/error handling, caching strategy.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 3.2
+    },
+    {
+      "question_id": "q14",
+      "topic_id": "tanstack-query",
+      "relevance": 5,
+      "depth": 2,
+      "specificity": 3,
+      "correctness": 4,
+      "communication": 4,
+      "verdict": "Answer is concise but lacks depth; provides basic config but no justification details.",
+      "strength_note": "Clear mention of retry count, backoff, stop condition",
+      "gap_note": "Missing justification and trade-offs",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 3.6
+    },
+    {
+      "question_id": "q15",
+      "topic_id": "tanstack-query",
+      "relevance": 5,
+      "depth": 2,
+      "specificity": 2,
+      "correctness": 3,
+      "communication": 3,
+      "verdict": "Answer addresses the core idea but lacks detail on pagination handling and cache strategy.",
+      "strength_note": "Mentions setQueryData for cache update",
+      "gap_note": "Does not explain pagination key or when to invalidate",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 3.0
+    },
+    {
+      "question_id": "q16",
+      "topic_id": "tanstack-query",
+      "relevance": 4,
+      "depth": 2,
+      "specificity": 2,
+      "correctness": 3,
       "communication": 2,
-      "verdict": "Answer is too brief; lacks depth and specificity.",
-      "strength_note": "Defines uniqueness of rows.",
-      "gap_note": "Missing not\u2011null constraint, data integrity, and query efficiency explanation.",
+      "verdict": "Answer is on topic but lacks depth and detail.",
+      "strength_note": "Mentions key steps such as updating pages and recomputing cursors.",
+      "gap_note": "Fails to provide concrete implementation details or testing strategy.",
       "contradicts_resume": false,
       "discrepancy_note": "",
       "needs_validation": false,
@@ -1552,83 +1398,51 @@
     },
     {
       "question_id": "q17",
-      "topic_id": "react-js-basics",
-      "relevance": 3,
-      "depth": 2,
-      "specificity": 2,
-      "correctness": 3,
-      "communication": 2,
-      "verdict": "Answer is too brief and lacks depth; needs more detail.",
-      "strength_note": "",
-      "gap_note": "",
-      "contradicts_resume": false,
-      "discrepancy_note": "",
-      "needs_validation": true,
-      "overall": 2.4
-    },
-    {
-      "question_id": "q18",
-      "topic_id": "react-js-basics",
-      "relevance": 3,
-      "depth": 2,
-      "specificity": 2,
-      "correctness": 3,
-      "communication": 2,
-      "verdict": "Answer is too brief and lacks concrete examples; not sufficient for hiring.",
-      "strength_note": "",
-      "gap_note": "Missing scenario, benefits, trade\u2011offs, and clear explanation of pitfalls.",
-      "contradicts_resume": false,
-      "discrepancy_note": "",
-      "needs_validation": false,
-      "overall": 2.4
-    },
-    {
-      "question_id": "q19",
-      "topic_id": "react-js-basics",
-      "relevance": 2,
-      "depth": 2,
-      "specificity": 1,
-      "correctness": 3,
-      "communication": 2,
-      "verdict": "Answer is too brief and lacks a concrete example, bug description, and detailed fix, making it insufficient for evaluation.",
-      "strength_note": "",
-      "gap_note": "",
-      "contradicts_resume": false,
-      "discrepancy_note": "",
-      "needs_validation": true,
-      "overall": 2.0
-    },
-    {
-      "question_id": "q20",
-      "topic_id": "react-js-basics",
+      "topic_id": "tanstack-query",
       "relevance": 4,
       "depth": 2,
       "specificity": 2,
       "correctness": 4,
-      "communication": 2,
-      "verdict": "Answer is brief and lacks depth; candidate shows basic understanding but needs more detail.",
-      "strength_note": "Correct concept identified.",
-      "gap_note": "Lacks example and depth.",
+      "communication": 3,
+      "verdict": "Answer is relevant but too brief and lacks the detail needed to fully address the question.",
+      "strength_note": "Mentions shared query keys",
+      "gap_note": "Missing details on staleTime, deduplication, and cache update strategies",
       "contradicts_resume": false,
       "discrepancy_note": "",
-      "needs_validation": false,
-      "overall": 2.8
+      "needs_validation": true,
+      "overall": 3.0
     },
     {
-      "question_id": "q21",
-      "topic_id": "react-js-basics",
-      "relevance": 2,
-      "depth": 1,
-      "specificity": 1,
-      "correctness": 2,
+      "question_id": "q18",
+      "topic_id": "tanstack-query",
+      "relevance": 4,
+      "depth": 2,
+      "specificity": 2,
+      "correctness": 3,
       "communication": 2,
-      "verdict": "Answer is too brief and lacks depth; it does not explain JSX\u2019s role in component structure.",
-      "strength_note": "",
-      "gap_note": "Missing explanation of transpilation to React.createElement and component structure.",
+      "verdict": "Answer is partially correct but lacks depth and detail.",
+      "strength_note": "Mentions storing count in query metadata",
+      "gap_note": "Fails to explain mutation updates, staleTime usage, or keeping count fresh",
       "contradicts_resume": false,
       "discrepancy_note": "",
       "needs_validation": false,
-      "overall": 1.6
+      "overall": 2.6
+    },
+    {
+      "question_id": "q20",
+      "topic_id": "tanstack-query",
+      "relevance": 1,
+      "depth": 1,
+      "specificity": 1,
+      "correctness": 1,
+      "communication": 1,
+      "verdict": "No answer given within the time limit.",
+      "strength_note": "",
+      "gap_note": "No response on TanStack Query.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": true,
+      "overall": 1.0
     }
   ],
   "discrepancies": []

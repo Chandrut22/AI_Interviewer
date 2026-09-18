@@ -13,7 +13,7 @@ from rich.panel import Panel
 from rich.table import Table
 
 from agent.graph import build_graph
-from agent.loaders import load_text
+from agent.loader import load_text
 from agent.reporting import transcript_json, transcript_markdown
 from agent.timer import ask_timed
 import sys
@@ -38,6 +38,18 @@ MODE_LABEL = {
 def _render_question(payload: dict) -> None:
     left = max(0, payload["total_seconds"] - payload["elapsed_s"])
     console.print()
+
+    # Render Clarification if present
+    if payload.get("clarification"):
+        console.print(
+            Panel(
+                payload["clarification"],
+                title="Clarification",
+                border_style="yellow",
+            )
+        )
+        console.print()
+
     console.print(
         Panel(
             payload["text"],
@@ -49,7 +61,9 @@ def _render_question(payload: dict) -> None:
             ),
             subtitle=(
                 f"answer in {payload['time_limit_s']}s  ·  "
-                f"{left // 60}m {left % 60}s left in the interview"
+                f"{left // 60}m {left % 60}s left in the interview  ·  "
+                f"Qs left: {payload.get('questions_remaining', 'N/A')}  ·  "
+                f"Doubts left: {payload.get('doubts_remaining', 'N/A')}"
             ),
             border_style="cyan" if payload["mode"] == "opening" else "magenta",
         )
