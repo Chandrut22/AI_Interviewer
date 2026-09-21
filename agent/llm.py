@@ -7,13 +7,14 @@ import json
 from dotenv import load_dotenv
 import logging
 
-from agent.prompt import JSON_REPLY_CONTRACT, json_retry_instruction, PROMPT_MAPPING
-from agent.langfuse import get_prompt
+from agent.prompt import JSON_REPLY_CONTRACT, json_retry_instruction, PROMPT_MAPPING, render_prompt
+from agent.langfuse import langfuse
 
 load_dotenv()
 
 DEFAULT_MODEL = os.getenv("MODEL_NAME", "openai/gpt-oss-20b")
 MODEL_PROVIDER = os.getenv("MODEL_PROVIDER", "openrouter")
+_UNFILLED = re.compile(r"\{\{\s*(\w+)\s*\}\}")
 
 def chat_model(model: str | None = None, temperature: float = 0.4):
     api_key = os.getenv("API_KEY")
@@ -38,13 +39,20 @@ def chat_model(model: str | None = None, temperature: float = 0.4):
         # },
     )
 
-def get_system_prompt(key: str, fallback: str) -> str:
+def get_system_prompt(key: str, fallback: str, **vars) -> str:
+    """Langfuse prompt for `key` compiled with `vars`; the local copy if Langfuse fails."""
     slug = PROMPT_MAPPING.get(key)
     if slug:
-        remote_prompt = get_prompt(slug)
-        if remote_prompt:
-            return remote_prompt
-    return fallback
+        try:
+            compiled = langfuse.get_prompt(slug, label="dev").compile(**vars)
+            leftover = _UNFILLED.findall(compiled)
+            if not leftover:
+                return compiled
+            logging.warning("Langfuse prompt %s needs unset variables %s; using local copy", slug, leftover)
+        except Exception as e:
+            logging.warning("Langfuse fetch failed for %s: %s", slug, e)
+    return render_prompt(fallback, **vars)
+
 
 def _extract_json(text: str) -> str:
     text = text.strip()

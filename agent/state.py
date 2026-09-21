@@ -17,7 +17,7 @@ class JDAnalysis(BaseModel):
     responsibilities: list[str] = Field(default_factory=list)
 
 class ResponseClassification(BaseModel):
-    classification: Literal["answer", "doubt"]
+    classification: Literal["answer", "doubt", "skip_topic"]
     reasoning: str
 
 class ResumeAnalysis(BaseModel):
@@ -40,10 +40,24 @@ class Topic(BaseModel):
     claimed_on_resume: bool = False
     is_gap: bool = False
     allocated_seconds: int = 0
+    planned_questions: int = Field(default=0, ge=0, le=8)
+    seconds_per_question: int = Field(default=0, ge=0, le=300)
+    calculation: str = ""
+    time_rationale: str = ""
+
+
+class DroppedTopic(BaseModel):
+    id: str
+    name: str = ""
+    priority: int = Field(default=3, ge=1, le=5)
+    reason: str = ""
 
 
 class TopicPlan(BaseModel):
+    allocatable_seconds: int = 0
     topics: list[Topic] = Field(default_factory=list)
+    dropped: list[DroppedTopic] = Field(default_factory=list)
+    total_allocated_seconds: int = 0
 
 class TopicRun(BaseModel):
     """Mutable per-topic progress."""
@@ -56,6 +70,7 @@ class TopicRun(BaseModel):
     depth_reached: int = 0
     difficulty: int = 3
     scores: list[float] = Field(default_factory=list)
+    consecutive_low_depth_answers: int = 0
 
     @property
     def mean_score(self) -> float:

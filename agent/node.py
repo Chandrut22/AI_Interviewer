@@ -2,16 +2,16 @@ from agent.llm import chat_model, structured, get_system_prompt
 from agent.prompt import JD_ANALYSIS_SYSTEM, PLAN_TOPICS_SYSTEM, RESUME_ANALYSIS_SYSTEM, QUESTION_MODE_BRIEF, GENERATE_QUESTION_SYSTEM, EVALUATE_ANSWER_SYSTEM, CLASSIFY_RESPONSE_SYSTEM, DECIDE_NEXT_SYSTEM
 from datetime import datetime
 from agent.state import InterviewState, JDAnalysis, ResumeAnalysis, TopicPlan, TopicRun, Event, Question, Evaluation, Discrepancy, ResponseClassification, NextActionDecision
-from agent.utils import baseline_difficulty, topic_difficulty, question_time_limit, depth_credit, adjust_difficulty, next_mode
+from agent.utils import wrap_up_reserve, baseline_difficulty, topic_difficulty, question_time_limit, depth_credit, adjust_difficulty, next_mode, balance_topic_budgets
 from dotenv import load_dotenv
 from langgraph.types import interrupt
 import os
-from langchain.messages import HumanMessage, AIMessage, SystemMessage
 
 load_dotenv()
 MAX_QUESTIONS_IN_TOPIC = int(os.getenv("MAX_QUESTIONS_IN_TOPIC", 4))
 DOUBT_THRESHOLD = int(os.getenv("DOUBT_THRESHOLD", 2))
 MIN_TOPIC_SECONDS = int(os.getenv("MIN_TOPIC_SECONDS", 150))
+PLAN_FIX_ATTEMPTS = int(os.getenv("PLAN_FIX_ATTEMPTS", 2))
 
 def analyze_jd(state: InterviewState) -> dict:
     llm = chat_model(temperature=0.1)
@@ -34,35 +34,90 @@ def analyze_resume(state: InterviewState) -> dict:
     return {"resume_analysis": resume}
 
 
+def _suggested_topics() -> str:
+    raw = os.getenv("TOPICS_COVER_SUGGESTION", "").strip()
+    return "none" if raw.lower() in ("", "all", "none") else raw
+
+
+def _plan_errors(plan: TopicPlan, allocatable: int) -> list[str]:
+    """Exact checks the plan_topics prompt promises the model."""
+    errors: list[str] = []
+    topics = [t for t in plan.topics if t.id]
+    if not topics:
+        return ["`topics` is empty; keep at least one topic."]
+
+    ids = [t.id for t in topics]
+    if len(ids) != len(set(ids)):
+        errors.append("Topic ids must be unique.")
+    both = set(ids) & {d.id for d in plan.dropped}
+    if both:
+        errors.append(f"Topics listed in both `topics` and `dropped`: {', '.join(sorted(both))}.")
+
+    total = sum(t.allocated_seconds for t in topics)
+    if total != allocatable:
+        errors.append(f"allocated_seconds sums to {total}, but must equal exactly {allocatable}.")
+    if plan.total_allocated_seconds != total:
+        errors.append(f"`total_allocated_seconds` is {plan.total_allocated_seconds}, but the topics sum to {total}.")
+
+    for t in topics:
+        if t.allocated_seconds < MIN_TOPIC_SECONDS:
+            errors.append(f"'{t.id}' has {t.allocated_seconds}s, below the {MIN_TOPIC_SECONDS}s minimum; raise it or move it to `dropped`.")
+
+    for hi in topics:
+        for lo in topics:
+            if hi.priority > lo.priority and hi.allocated_seconds < lo.allocated_seconds and not hi.is_gap:
+                errors.append(f"'{hi.id}' (priority {hi.priority}) has less time than '{lo.id}' (priority {lo.priority}).")
+    return errors
+
+
 def plan_topics(state: InterviewState) -> dict:
-    """Single LLM call - selects topics AND allocates time in one shot. Runs once, checkpointed."""
+    """LLM selects topics AND calculates their timing; the arithmetic is checked here. Runs once, checkpointed."""
     llm = chat_model(temperature=0.5)
     jd, resume = state["jd_analysis"], state["resume_analysis"]
     total_seconds = state["total_seconds"]
-    suggested = os.getenv("TOPICS_COVER_SUGGESTION","")
+    reserve = wrap_up_reserve(total_seconds)
+    allocatable = total_seconds - reserve
+    max_topics = max(1, allocatable // MIN_TOPIC_SECONDS)
 
-    plan = structured(
-        llm,
-        TopicPlan,
-        system=get_system_prompt("PLAN_TOPICS_SYSTEM", PLAN_TOPICS_SYSTEM).format(
-            suggested=suggested, seniority=jd.seniority, role_title=jd.role_title,
-            total_seconds=total_seconds, total_minutes=total_seconds // 60,
-            min_topic_seconds=MIN_TOPIC_SECONDS,
-        ),
-        user=(
-            f"JOB REQUIREMENTS:\n{jd.model_dump_json(indent=2)}\n\n"
-            f"RESUME CLAIMS:\n{resume.model_dump_json(indent=2)}"
-        ),
+    system = get_system_prompt(
+        "PLAN_TOPICS_SYSTEM", PLAN_TOPICS_SYSTEM,
+        seniority=jd.seniority, role_title=jd.role_title,
+        total_seconds=total_seconds, total_minutes=total_seconds // 60,
+        reserve_seconds=reserve, allocatable_seconds=allocatable,
+        min_topic_seconds=MIN_TOPIC_SECONDS, max_topics=max_topics,
+    )
+    user = (
+        f"SUGGESTED TOPICS: {_suggested_topics()}\n\n"
+        f"JOB REQUIREMENTS:\n{jd.model_dump_json(indent=2)}\n\n"
+        f"RESUME CLAIMS:\n{resume.model_dump_json(indent=2)}"
     )
 
-    topics = [t for t in plan.topics if t.id]
-    if not topics:
-        raise ValueError("Topic planner returned no usable topics")
+    plan = structured(llm, TopicPlan, system=system, user=user)
+    errors = _plan_errors(plan, allocatable)
+    for _ in range(PLAN_FIX_ATTEMPTS):
+        if not errors:
+            break
+        plan = structured(
+            llm, TopicPlan, system=system,
+            user=(
+                f"{user}\n\nYOUR PREVIOUS PLAN:\n{plan.model_dump_json(indent=2)}\n\n"
+                "It failed these checks:\n- " + "\n- ".join(errors) +
+                "\n\nReturn the full corrected plan."
+            ),
+        )
+        errors = _plan_errors(plan, allocatable)
+    if errors:
+        # Human approval step can still override the allocation.
+        print("Warning: topic plan still fails checks:\n- " + "\n- ".join(errors))
 
-    kept = [t for t in topics if t.allocated_seconds > 0]
-    dropped = [t.id for t in topics if t.allocated_seconds <= 0]
+    kept = [t for t in plan.topics if t.id and t.allocated_seconds > 0]
     if not kept:
         raise ValueError("Topic planner did not allocate time to any topic")
+
+    kept.sort(key=lambda topic: topic.priority, reverse=True)
+    dropped = [d.id for d in plan.dropped] + [
+        t.id for t in plan.topics if t.id and t.allocated_seconds <= 0
+    ]
 
     return {"topics": kept, "dropped_topics": dropped}
 
@@ -154,115 +209,628 @@ def _event(kind: str, state: InterviewState, **kwargs) -> Event:
     )
 
 def decide_next(state: InterviewState) -> dict:
+    """Evaluate the latest response, rebalance topic time, and choose the next action."""
 
     order = state["topic_order"]
-    runs = {tid: run.model_copy() for tid, run in state["topic_runs"].items()}
-    topics = {t.id: t for t in state["topics"]}
+
+    runs = {
+        tid: run.model_copy(deep=True)
+        for tid, run in state["topic_runs"].items()
+    }
+
+    topics = [topic.model_copy(deep=True) for topic in state["topics"]]
+    topic_by_id = {topic.id: topic for topic in topics}
+
     current = state.get("current_topic_id")
+
     events: list[Event] = []
+    discrepancies = list(state.get("discrepancies", []))
 
-    if current is None:
-        return {"next_action": "wrap_up", "pacing_note": "No topics to cover."}
 
-    if state.get("last_response_type") == "doubt":
-        current_doubts = state.get("doubt_count", 0)
-        if current_doubts < DOUBT_THRESHOLD:
-            return {
-                "doubt_count": current_doubts + 1,
-                "next_action": "ask",
-                "next_mode": "clarification",
-                "pacing_note": f"Clarifying doubt ({current_doubts + 1}/{DOUBT_THRESHOLD})",
-                
-            }
-        else:
-          
-            events.append(
-                _event("evaluation", state, topic_id=current,
-                       text="Doubt threshold reached; moving on from this question.",
-                       meta={"outcome": "doubt_threshold_exceeded"})
-            )
-            
-            return {
-                "last_response_type": "answer",
-                "transcript": events,
-                "next_action": "ask",
-                "next_mode": "opening",
-                "pacing_note": "Doubt threshold reached; asking a new question.",
-            }
+    if current is None or current not in topic_by_id or current not in runs:
+        return {
+            "topics": topics,
+            "topic_runs": runs,
+            "next_action": "wrap_up",
+            "pacing_note": "No valid current topic to cover.",
+            "last_response_type": None,
+        }
 
-    remaining_after_current = [
-        tid for tid in order if runs[tid].status == "pending" and tid != current
-    ]
-    run, topic = runs[current], topics[current]
+    question = state.get("pending_question")
 
-    # LLM-driven Pacing Decision
-    llm = chat_model(temperature=0.1)
-    decision = structured(
-        llm,
-        NextActionDecision,
-        system=get_system_prompt("DECIDE_NEXT_SYSTEM", DECIDE_NEXT_SYSTEM),
-        user=(
-            f"GLOBAL BUDGET: {state.get('elapsed_s', 0.0)}s / {state['total_seconds']}s\n"
-            f"TOPIC METRICS: {topic.name} | Budget: {topic.allocated_seconds}s | "
-            f"Elapsed: {run.elapsed_s}s | Questions: {run.questions_asked} | "
-            f"Depth: {run.depth_reached}/{topic.target_depth}\n"
-            f"PERFORMANCE: Mean Score: {run.mean_score}\n"
-            f"PROGRESS: Topics remaining: {len(remaining_after_current)}"
-        )
+    answer_event = next(
+        (
+            event
+            for event in reversed(state.get("transcript", []))
+            if event.kind == "answer"
+        ),
+        None,
     )
-    action = decision.action
-    reason = decision.reasoning
+
+    response_type = None
+    selected_next_mode = state.get("next_mode", "opening")
+    evaluation = None
+
+
+    force_next_topic = False
+
+    if answer_event is not None and question is not None:
+        answer = answer_event.text or ""
+        timed_out = bool(answer_event.meta.get("timed_out"))
+
+        topic = topic_by_id[current]
+        run = runs[current]
+
+        if not answer.strip():
+            evaluation = Evaluation(
+                relevance=1,
+                depth=1,
+                specificity=1,
+                correctness=1,
+                communication=1,
+                verdict="No answer given within the time limit.",
+                gap_note=f"No response on {topic.name}.",
+                needs_validation=True,
+            )
+
+            selected_next_mode = "opening"
+
+        else:
+           
+            llm = chat_model(temperature=0.1)
+
+            classification = structured(
+                llm,
+                ResponseClassification,
+                system=get_system_prompt(
+                    "CLASSIFY_RESPONSE_SYSTEM",
+                    CLASSIFY_RESPONSE_SYSTEM,
+                ),
+                user=(
+                    f"QUESTION: {question.text}\n"
+                    f"ANSWER: {answer}"
+                ),
+            )
+
+
+            if classification.classification == "skip_topic":
+                force_next_topic = True
+                response_type = "skip_topic"
+                selected_next_mode = "opening"
+
+                events.append(
+                    _event(
+                        "evaluation",
+                        state,
+                        topic_id=current,
+                        question_id=question.id,
+                        text=(
+                            "Candidate requested to skip the current topic."
+                        ),
+                        meta={
+                            "outcome": "topic_skipped",
+                            "classification": "skip_topic",
+                        },
+                    )
+                )
+
+            elif classification.classification == "doubt":
+                doubt_count = state.get("doubt_count", 0)
+
+                if doubt_count < DOUBT_THRESHOLD:
+                    return {
+                        "topics": topics,
+                        "topic_runs": runs,
+                        "doubt_count": doubt_count + 1,
+                        "next_action": "ask",
+                        "next_mode": "clarification",
+                        "last_response_type": "doubt",
+                        "pacing_note": (
+                            f"Clarifying doubt ({doubt_count + 1}/"
+                            f"{DOUBT_THRESHOLD})"
+                        ),
+                    }
+
+                events.append(
+                    _event(
+                        "evaluation",
+                        state,
+                        topic_id=current,
+                        question_id=question.id,
+                        text=(
+                            "Doubt threshold reached; moving to a new question."
+                        ),
+                        meta={
+                            "outcome": "doubt_threshold_exceeded",
+                        },
+                    )
+                )
+
+                return {
+                    "topics": topics,
+                    "topic_runs": runs,
+                    "transcript": events,
+                    "next_action": "ask",
+                    "next_mode": "opening",
+                    "last_response_type": "doubt",
+                    "pacing_note": (
+                        "Doubt threshold reached; asking a new question."
+                    ),
+                }
+
+            else:
+                try:
+                    evaluation = structured(
+                        llm,
+                        Evaluation,
+                        system=get_system_prompt(
+                            "EVALUATE_ANSWER_SYSTEM",
+                            EVALUATE_ANSWER_SYSTEM,
+                        ),
+                        user=(
+                            f"TOPIC: {topic.name}\n"
+                            f"RESUME CLAIM ON THIS TOPIC: "
+                            f"{topic.resume_evidence or 'none'}\n"
+                            f"QUESTION (difficulty {question.difficulty}/5, "
+                            f"mode {question.mode}): {question.text}\n"
+                            f"STRONG ANSWER CONTAINS: {question.looking_for}\n"
+                            f"ANSWER: {answer}\n"
+                            f"TIME: used "
+                            f"{answer_event.meta.get('answer_s')}s of "
+                            f"{question.time_limit_s}s"
+                            f"{'; ran out of time, may be cut off' if timed_out else ''}"
+                        ),
+                    )
+
+                except ValueError:
+                    evaluation = Evaluation(
+                        relevance=3,
+                        depth=3,
+                        specificity=3,
+                        correctness=3,
+                        communication=3,
+                        verdict=(
+                            "Answer could not be scored automatically; "
+                            "needs human review."
+                        ),
+                        gap_note=(
+                            f"Scoring failed on {topic.name}; see transcript."
+                        ),
+                        needs_validation=True,
+                    )
+
+        if evaluation is not None:
+            evaluation.question_id = question.id
+            evaluation.topic_id = topic.id
+
+            if evaluation.depth <= 1:
+                run.consecutive_low_depth_answers += 1
+            else:
+                run.consecutive_low_depth_answers = 0
+
+            if not answer.strip():
+                run.scores.append(evaluation.overall)
+
+                events.append(
+                    _event(
+                        "evaluation",
+                        state,
+                        topic_id=topic.id,
+                        question_id=question.id,
+                        text=evaluation.verdict,
+                        meta={
+                            "overall": evaluation.overall,
+                            "next_mode": selected_next_mode,
+                        },
+                    )
+                )
+
+            else:
+                score = evaluation.overall
+
+                run.scores.append(score)
+
+                run.depth_reached = min(
+                    5,
+                    run.depth_reached
+                    + depth_credit(
+                        score,
+                        question.difficulty,
+                        timed_out,
+                    ),
+                )
+
+                previous_difficulty = run.difficulty
+
+                run.difficulty = adjust_difficulty(
+                    previous_difficulty,
+                    score,
+                    baseline_difficulty(
+                        state["jd_analysis"].seniority,
+                        state["jd_analysis"].years_required,
+                    ),
+                )
+
+                selected_next_mode = next_mode(
+                    answer_score=score,
+                    specificity=evaluation.specificity,
+                    relevance=evaluation.relevance,
+                    is_empty=not answer.strip(),
+                    timed_out=timed_out,
+                    clarifications_used=run.clarifications_used,
+                    followups_used=run.followups_used,
+                )
+
+                events.append(
+                    _event(
+                        "evaluation",
+                        state,
+                        topic_id=topic.id,
+                        question_id=question.id,
+                        text=evaluation.verdict,
+                        meta={
+                            "overall": score,
+                            "depth_reached": run.depth_reached,
+                            "next_mode": selected_next_mode,
+                        },
+                    )
+                )
+
+                # Record difficulty adjustment.
+                if run.difficulty != previous_difficulty:
+                    direction = (
+                        "up"
+                        if run.difficulty > previous_difficulty
+                        else "down"
+                    )
+
+                    events.append(
+                        _event(
+                            "difficulty_change",
+                            state,
+                            topic_id=topic.id,
+                            text=(
+                                f"Difficulty {direction}: "
+                                f"{previous_difficulty} "
+                                f"-> {run.difficulty}"
+                            ),
+                            meta={
+                                "from": previous_difficulty,
+                                "to": run.difficulty,
+                            },
+                        )
+                    )
+
+                if evaluation.contradicts_resume:
+                    discrepancies.append(
+                        Discrepancy(
+                            topic_id=topic.id,
+                            resume_claim="; ".join(
+                                topic.resume_evidence
+                            )[:300],
+                            answer_signal=evaluation.verdict,
+                            note=evaluation.discrepancy_note,
+                        )
+                    )
+
+            response_type = "answer"
+
+
+    if (
+        response_type == "answer"
+        and evaluation is not None
+        and evaluation.overall >= 4.0
+    ):
+        topic = topic_by_id[current]
+        run = runs[current]
+
+        allocated = topic.allocated_seconds
+
+        if allocated > 0 and run.elapsed_s >= 0.9 * allocated:
+            extension_s = 60
+
+            updated_topics, recovered_s = balance_topic_budgets(
+                current_topic_id=current,
+                extension_s=extension_s,
+                topics=topics,
+                topic_runs=runs,
+                min_seconds=MIN_TOPIC_SECONDS,
+            )
+
+
+            topics = updated_topics
+            topic_by_id = {
+                item.id: item
+                for item in topics
+            }
+
+            if recovered_s > 0:
+                events.append(
+                    _event(
+                        "time_adjustment",
+                        state,
+                        topic_id=current,
+                        text=(
+                            f"Dynamic extension: +{recovered_s}s allocated "
+                            f"to {topic_by_id[current].name}, recovered from "
+                            "eligible lower-priority pending topics."
+                        ),
+                        meta={
+                            "recovered_s": recovered_s,
+                        },
+                    )
+                )
+
+    remaining_topics = [
+        tid
+        for tid in order
+        if (
+            tid in runs
+            and runs[tid].status == "pending"
+            and tid != current
+        )
+    ]
+
+    current_topic = topic_by_id[current]
+    current_run = runs[current]
+
+    
+    # Condition 1: Current topic's allocated time is exhausted.
+    time_limit_reached = (
+        current_topic.allocated_seconds > 0
+        and current_run.elapsed_s >= current_topic.allocated_seconds
+    )
+
+    # Condition 2: Candidate reached the topic's target depth.
+    # For a 5/5 target, this triggers when depth_reached >= 5.
+    target_depth_reached = (
+        current_run.depth_reached >= current_topic.target_depth
+    )
+
+    # Condition 3: Two consecutive low-depth evaluations.
+    low_depth_reached = (
+        current_run.consecutive_low_depth_answers >= 2
+    )
+
+    # Explicit skip request has the highest priority.
+    if force_next_topic:
+        action = "next_topic"
+        reason = "Candidate requested to skip the current topic."
+
+    elif time_limit_reached:
+        action = "next_topic"
+        reason = (
+            f"Time limit reached for {current_topic.name} "
+            f"({current_run.elapsed_s:.0f}/"
+            f"{current_topic.allocated_seconds}s)."
+        )
+
+    elif target_depth_reached:
+        action = "next_topic"
+        reason = (
+            f"Target depth reached for {current_topic.name} "
+            f"({current_run.depth_reached}/"
+            f"{current_topic.target_depth})."
+        )
+
+    elif low_depth_reached:
+        action = "next_topic"
+        reason = (
+            f"Moving on from {current_topic.name}: "
+            "candidate received depth 1 on two consecutive answers."
+        )
+
+
+    else:
+        llm = chat_model(temperature=0.1)
+
+        decision = structured(
+            llm,
+            NextActionDecision,
+            system=get_system_prompt(
+                "DECIDE_NEXT_SYSTEM",
+                DECIDE_NEXT_SYSTEM,
+            ),
+            user=(
+                f"GLOBAL BUDGET: {state.get('elapsed_s', 0.0)}s / "
+                f"{state['total_seconds']}s\n"
+                f"TOPIC METRICS: {current_topic.name} | "
+                f"Budget: {current_topic.allocated_seconds}s | "
+                f"Elapsed: {current_run.elapsed_s}s | "
+                f"Questions: {current_run.questions_asked} | "
+                f"Depth: {current_run.depth_reached}/"
+                f"{current_topic.target_depth}\n"
+                f"PERFORMANCE: Mean Score: {current_run.mean_score}\n"
+                f"PROGRESS: Topics remaining: {len(remaining_topics)}"
+            ),
+        )
+
+        action = decision.action
+        reason = decision.reasoning
 
     if action == "wrap_up":
-        if run.status == "active":
-            run.status = "covered" if run.questions_asked else "skipped"
-            events.append(
-                _event("topic_end", state, topic_id=current, text=reason)
+        if current_run.status == "active":
+            current_run.status = (
+                "covered"
+                if current_run.questions_asked
+                else "skipped"
             )
-        for tid in remaining_after_current:
-            runs[tid].status = "skipped"
+
+            events.append(
+                _event(
+                    "topic_end",
+                    state,
+                    topic_id=current,
+                    text=reason,
+                )
+            )
+
+        # Mark all remaining pending topics as skipped.
+        for topic_id in remaining_topics:
+            runs[topic_id].status = "skipped"
+
         return {
+            "topics": topics,
             "topic_runs": runs,
+            "discrepancies": discrepancies,
             "next_action": "wrap_up",
             "pacing_note": reason,
             "transcript": events,
-            "last_response_type": None, # Always clear on wrap up
+            "last_response_type": None,
         }
 
+
     if action == "next_topic":
-        run.status = "covered" if run.questions_asked else "skipped"
-        events.append(
-            _event("topic_end", state, topic_id=current, text=reason,
-                   meta={"depth_reached": run.depth_reached,
-                         "mean_score": run.mean_score})
-        )
-        current = remaining_after_current[0]
-        run, topic = runs[current], topics[current]
+        # Transfer unused time to the next pending topic before closing this one.
+        # This preserves the total interview budget while rewarding early completion.
+        next_topic_id = remaining_topics[0] if remaining_topics else None
+        unused_seconds = 0
 
-    if run.status == "pending":
-        run.status = "active"
-        events.append(
-            _event("topic_start", state, topic_id=current,
-                   text=topic.name,
-                   meta={"priority": topic.priority,
-                         "allocated_s": topic.allocated_seconds,
-                         "target_depth": topic.target_depth,
-                         "difficulty": run.difficulty,
-                         "is_gap": topic.is_gap})
+        if next_topic_id is not None and current_topic.allocated_seconds > 0:
+            unused_seconds = max(
+                0,
+                int(current_topic.allocated_seconds - current_run.elapsed_s),
+            )
+
+            if unused_seconds > 0:
+                reduced_current_allocation = max(
+                    0,
+                    int(current_run.elapsed_s),
+                )
+                next_topic = topic_by_id[next_topic_id]
+
+                # Use model_copy so this works even with frozen Pydantic models.
+                updated_current_topic = current_topic.model_copy(
+                    update={"allocated_seconds": reduced_current_allocation}
+                )
+                updated_next_topic = next_topic.model_copy(
+                    update={
+                        "allocated_seconds": (
+                            next_topic.allocated_seconds + unused_seconds
+                        )
+                    }
+                )
+
+                topics = [
+                    updated_current_topic if item.id == current else
+                    updated_next_topic if item.id == next_topic_id else
+                    item
+                    for item in topics
+                ]
+                topic_by_id = {item.id: item for item in topics}
+                current_topic = topic_by_id[current]
+
+                events.append(
+                    _event(
+                        "time_adjustment",
+                        state,
+                        topic_id=next_topic_id,
+                        text=(
+                            f"Transferred {unused_seconds}s of unused time "
+                            f"from {current_topic.name} to "
+                            f"{topic_by_id[next_topic_id].name}."
+                        ),
+                        meta={
+                            "transfer_s": unused_seconds,
+                            "from_topic_id": current,
+                            "to_topic_id": next_topic_id,
+                        },
+                    )
+                )
+
+        # Explicit skips and repeated low-depth answers are recorded as skipped.
+        was_skipped = force_next_topic or low_depth_reached
+        current_run.status = (
+            "skipped"
+            if was_skipped
+            else "covered" if current_run.questions_asked else "skipped"
         )
 
-    mode = state.get("next_mode", "opening")
+        events.append(
+            _event(
+                "topic_end",
+                state,
+                topic_id=current,
+                text=reason,
+                meta={
+                    "depth_reached": current_run.depth_reached,
+                    "mean_score": current_run.mean_score,
+                    "outcome": (
+                        "candidate_requested_skip"
+                        if force_next_topic
+                        else "low_depth_skip"
+                        if low_depth_reached
+                        else "topic_completed"
+                    ),
+                },
+            )
+        )
+
+        # Select the next pending topic in the original plan order.
+        current = (
+            remaining_topics[0]
+            if remaining_topics
+            else None
+        )
+
+        # No topics remain, so wrap up.
+        if current is None:
+            return {
+                "topics": topics,
+                "topic_runs": runs,
+                "discrepancies": discrepancies,
+                "next_action": "wrap_up",
+                "pacing_note": "All topics covered.",
+                "transcript": events,
+                "last_response_type": None,
+            }
+
+        current_topic = topic_by_id[current]
+        current_run = runs[current]
+
+    # ---------------------------------------------------------
+    # PHASE F: Activate the selected topic.
+    # ---------------------------------------------------------
+
+    if current_run.status == "pending":
+        current_run.status = "active"
+
+        events.append(
+            _event(
+                "topic_start",
+                state,
+                topic_id=current,
+                text=current_topic.name,
+                meta={
+                    "priority": current_topic.priority,
+                    "allocated_s": current_topic.allocated_seconds,
+                    "target_depth": current_topic.target_depth,
+                    "difficulty": current_run.difficulty,
+                    "is_gap": current_topic.is_gap,
+                },
+            )
+        )
+
+    # A newly selected topic always starts with an opening question.
+    mode = selected_next_mode
+
     if current != state.get("current_topic_id"):
         mode = "opening"
 
+    # ---------------------------------------------------------
+    # PHASE G: Return updated interview state.
+    # ---------------------------------------------------------
+
     return {
+        "topics": topics,
         "topic_runs": runs,
+        "discrepancies": discrepancies,
         "current_topic_id": current,
         "next_mode": mode,
         "next_action": "ask",
         "pacing_note": reason,
         "transcript": events,
-        "last_response_type": None,
+        "last_response_type": response_type,
     }
 
 
@@ -301,8 +869,9 @@ def generate_question(state: InterviewState) -> dict:
     question = structured(
         llm,
         Question,
-        system=get_system_prompt("GENERATE_QUESTION_SYSTEM", GENERATE_QUESTION_SYSTEM).format(
-            difficulty=run.difficulty, mode_brief=mode_brief
+        system=get_system_prompt(
+            "GENERATE_QUESTION_SYSTEM", GENERATE_QUESTION_SYSTEM,
+            difficulty=run.difficulty, mode_brief=mode_brief,
         ),
         user=(
             f"ROLE: {state['jd_analysis'].seniority} "
@@ -395,131 +964,3 @@ def ask_question(state: InterviewState) -> dict:
         ],
     }
 
-def evaluate_answer(state: InterviewState) -> dict:
-    question = state["pending_question"]
-    answer_event = next(
-        e for e in reversed(state["transcript"]) if e.kind == "answer"
-    )
-    answer = answer_event.text
-    timed_out = bool(answer_event.meta.get("timed_out"))
-    topic = next(t for t in state["topics"] if t.id == question.topic_id)
-    runs = {tid: r.model_copy() for tid, r in state["topic_runs"].items()}
-    run = runs[topic.id]
-
-    if not answer.strip():
-        ev = Evaluation(
-            relevance=1, depth=1, specificity=1, correctness=1, communication=1,
-            verdict="No answer given within the time limit.",
-            gap_note=f"No response on {topic.name}.",
-            needs_validation=True,
-        )
-        ev.question_id = question.id
-        ev.topic_id = topic.id
-        return {
-            "topic_runs": runs,
-            "evaluations": [ev],
-            "next_mode": "opening",
-            "last_response_type": "answer",
-            "transcript": [_event("evaluation", state, topic_id=topic.id, question_id=question.id,
-                                   text=ev.verdict, meta={"overall": ev.overall, "next_mode": "opening"})],
-        }
-
-    llm = chat_model(temperature=0.1)
-
-    classification = structured(
-        llm,
-        ResponseClassification,
-        system=get_system_prompt("CLASSIFY_RESPONSE_SYSTEM", CLASSIFY_RESPONSE_SYSTEM),
-        user=f"QUESTION: {question.text}\nANSWER: {answer}",
-    )
-
-    if classification.classification == "doubt":
-        return {
-            "last_response_type": "doubt",
-            "transcript": [
-                _event("evaluation", state, topic_id=topic.id, question_id=question.id,
-                       text=f"Candidate raised a doubt: {classification.reasoning}",
-                       meta={"classification": "doubt"})
-            ],
-        }
-
-    try:
-        ev = structured(
-            llm,
-            Evaluation,
-            system=get_system_prompt("EVALUATE_ANSWER_SYSTEM", EVALUATE_ANSWER_SYSTEM),
-            user=(
-                f"TOPIC: {topic.name}\n"
-                f"RESUME CLAIM ON THIS TOPIC: {topic.resume_evidence or 'none'}\n"
-                f"QUESTION (difficulty {question.difficulty}/5, "
-                f"mode {question.mode}): {question.text}\n"
-                f"STRONG ANSWER CONTAINS: {question.looking_for}\n"
-                f"ANSWER: {answer}\n"
-                f"TIME: used {answer_event.meta.get('answer_s')}s of "
-                f"{question.time_limit_s}s"
-                f"{'; ran out of time, may be cut off' if timed_out else ''}"
-            ),
-        )
-    except ValueError:
-        ev = Evaluation(
-            relevance=3, depth=3, specificity=3, correctness=3, communication=3,
-            verdict="Answer could not be scored automatically; needs human review.",
-            gap_note=f"Scoring failed on {topic.name}; see transcript.",
-            needs_validation=True,
-        )
-    ev.question_id = question.id
-    ev.topic_id = topic.id
-
-    score = ev.overall
-    run.scores.append(score)
-    run.depth_reached = min(
-        5, run.depth_reached + depth_credit(score, question.difficulty, timed_out)
-    )
-    previous = run.difficulty
-    run.difficulty = adjust_difficulty(
-        previous, score, baseline_difficulty(
-            state["jd_analysis"].seniority, state["jd_analysis"].years_required
-        )
-    )
-
-    mode = next_mode(
-        answer_score=score,
-        specificity=ev.specificity,
-        relevance=ev.relevance,
-        is_empty=not answer.strip(),
-        timed_out=timed_out,
-        clarifications_used=run.clarifications_used,
-        followups_used=run.followups_used,
-    )
-
-    events = [
-        _event("evaluation", state, topic_id=topic.id, question_id=question.id,
-               text=ev.verdict,
-               meta={"overall": score, "depth_reached": run.depth_reached,
-                     "next_mode": mode})
-    ]
-    if run.difficulty != previous:
-        direction = "up" if run.difficulty > previous else "down"
-        events.append(
-            _event("difficulty_change", state, topic_id=topic.id,
-                   text=f"Difficulty {direction}: {previous} -> {run.difficulty}",
-                   meta={"from": previous, "to": run.difficulty})
-        )
-
-    out: dict = {
-        "topic_runs": runs,
-        "evaluations": [ev],
-        "next_mode": mode,
-        "last_response_type": "answer",
-        "transcript": events,
-    }
-    if ev.contradicts_resume:
-        out["discrepancies"] = [
-            Discrepancy(
-                topic_id=topic.id,
-                resume_claim="; ".join(topic.resume_evidence)[:300],
-                answer_signal=ev.verdict,
-                note=ev.discrepancy_note,
-            )
-        ]
-    return out

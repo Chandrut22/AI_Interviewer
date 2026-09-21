@@ -170,3 +170,37 @@ def next_mode(
 
 def coverage_ratio(covered: int, planned: int) -> float:
     return round(covered / planned, 2) if planned else 0.0
+
+def balance_topic_budgets(
+    current_topic_id: str,
+    extension_s: int,
+    topics: list, 
+    min_seconds: int = 100,
+) -> tuple[list, int]:
+
+    current_topic = next((t for t in topics if t.id == current_topic_id), None)
+    if not current_topic:
+        return topics, 0
+
+ 
+
+    donors = [t for t in topics if t.id != current_topic_id]
+    donors.sort(key=lambda t: t.priority)
+
+    recovered_s = 0
+    remaining_to_recover = extension_s
+
+    for donor in donors:
+        if remaining_to_recover <= 0:
+            break
+
+        reducible = donor.allocated_seconds - min_seconds
+        if reducible > 0:
+            take = min(reducible, remaining_to_recover)
+            donor.allocated_seconds -= take
+            recovered_s += take
+            remaining_to_recover -= take
+
+    current_topic.allocated_seconds += recovered_s
+
+    return topics, recovered_s

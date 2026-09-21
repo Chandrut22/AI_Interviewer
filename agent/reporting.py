@@ -1,6 +1,7 @@
 
 from agent.state import InterviewState
-from agent.llm import chat_model
+from agent.llm import chat_model, get_system_prompt
+from langchain.messages import SystemMessage, HumanMessage
 from agent.prompt import REPORT_NARRATIVE_SYSTEM
 from agent.utils import coverage_ratio
 
@@ -44,15 +45,17 @@ def build_report(state: InterviewState) -> dict:
     )[:8000]
 
     llm = chat_model(temperature=0.3)
-    narrative = llm.invoke(
-        REPORT_NARRATIVE_SYSTEM
-        + f"Role: {jd.seniority} {jd.role_title}\n"
-        f"Candidate: {resume.name} ({resume.years_experience:g} yrs claimed)\n"
-        f"Coverage: {len(covered)}/{len(topics)} topics, "
-        f"{len(at_depth)} reached target depth\n"
-        f"Interview ended: {status}\n\n"
-        f"EVALUATIONS:\n{evidence}"
-    ).content
+    narrative = llm.invoke([
+        SystemMessage(content=get_system_prompt("REPORT_NARRATIVE_SYSTEM", REPORT_NARRATIVE_SYSTEM)),
+        HumanMessage(content=(
+            f"Role: {jd.seniority} {jd.role_title}\n"
+            f"Candidate: {resume.name} ({resume.years_experience:g} yrs claimed)\n"
+            f"Coverage: {len(covered)}/{len(topics)} topics, "
+            f"{len(at_depth)} reached target depth\n"
+            f"Interview ended: {status}\n\n"
+            f"EVALUATIONS:\n{evidence}"
+        )),
+    ]).content
 
     lines: list[str] = [
         f"# Interview summary - {resume.name}",
