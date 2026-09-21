@@ -3,7 +3,7 @@ from typing import Annotated, Literal, Optional, TypedDict
 from pydantic import BaseModel, Field
 
 TopicSource = Literal["jd_required", "jd_preferred", "resume_claim", "gap", "domain"]
-EventKind = Literal["interview_start", "topic_start", "question", "answer", "evaluation", "difficulty_change", "topic_end", "interview_end"]
+EventKind = Literal["interview_start", "topic_start", "question", "answer", "evaluation", "difficulty_change", "time_adjustment", "topic_end", "interview_end"]
 Mode = Literal["opening", "followup", "clarification"]
 Completion = Literal["completed", "time_expired", "abandoned", "in_progress"]
 

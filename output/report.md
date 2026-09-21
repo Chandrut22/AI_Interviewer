@@ -1,37 +1,34 @@
 # Interview summary - CHANDRU T
 
 - **Role:** Python Web Developer Intern (intern)
-- **Date:** 2026-09-21 12:25
-- **Time budget:** 10:00 | **used:** 3:31
+- **Date:** 2026-09-21 16:13
+- **Time budget:** 30:00 | **used:** 8:17
 - **Completion status:** `time_expired`
-- **Topic coverage:** 3/3 (100%), 2 at target depth
-- **Questions asked:** 9
+- **Topic coverage:** 4/5 (80%), 4 at target depth
+- **Questions asked:** 16
 - **Average answer score:** 0.0/5
 
-### Recommendation
+### Recommendation  
 Do not advance  
-The interview lacked sufficient evaluation data to demonstrate the candidate meeting required competencies.
 
-### Strengths
-- No strengths identified due to lack of evaluation details.
+No evaluation data provided. Unable to assess candidate's suitability.  
 
-### Gaps and concerns
-- No evidence of depth in any topic.
-- Interview did not reach target depth on all topics.
-- Time expired before comprehensive assessment.
+### Strengths  
 
-### Overall observations
-The candidate's performance could not be fully assessed as the interview ended due to time constraints, limiting insight into their ability to handle pressure, structure responses, or navigate unfamiliar topics.
+### Gaps and concerns  
+
+### Overall observations  
+No evaluation data available, so cannot comment on candidate's performance. Unable to assess handling of pressure, structure, or unfamiliar ground.
 
 ### Topic coverage and depth
 
 | Topic | Priority | Allocated | Used | Qs | Depth | Target | Mean | Status |
 |---|---|---|---|---|---|---|---|---|
-| JWT | 3 | 3:00 | 2:06 | 4 | 3 | 3 | 2.75 | covered |
-| Oauth | 3 | 3:00 | 0:54 | 3 | 3 | 3 | 3.13 | covered |
-| MiddleWare | 2 | 3:00 | 0:31 | 2 | 0 | 2 | 1.2 | covered |
-
-Topics dropped at planning time because the budget could not cover them: tanstack-router, tanstack-query.
+| JWT | 3 | 1:39 | 1:39 | 3 | 3 | 3 | 3.33 | covered |
+| OAuth | 3 | 1:07 | 1:08 | 3 | 3 | 3 | 3.33 | covered |
+| MiddleWare | 2 | 1:44 | 1:44 | 3 | 2 | 2 | 2.53 | covered |
+| TanStack Router | 2 | 2:03 | 2:03 | 4 | 2 | 2 | 3.3 | covered |
+| TanStack Query | 2 | 20:59 | 1:42 | 3 | 0 | 2 | 1.0 | skipped |
 
 ### Resume-vs-answer discrepancies
 
@@ -40,6 +37,10 @@ Topics dropped at planning time because the budget could not cover them: tanstac
 ### Areas requiring further validation
 
 - None flagged.
+
+### Not assessed
+
+- **TanStack Query** (priority 2) - ran out of time
 
 ---
 

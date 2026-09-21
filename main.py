@@ -62,7 +62,6 @@ def _render_question(payload: dict) -> None:
             subtitle=(
                 f"answer in {payload['time_limit_s']}s  ·  "
                 f"{left // 60}m {left % 60}s left in the interview  ·  "
-                f"Qs left: {payload.get('questions_remaining', 'N/A')}  ·  "
                 f"Doubts left: {payload.get('doubts_remaining', 'N/A')}"
             ),
             border_style="cyan" if payload["mode"] == "opening" else "magenta",

@@ -14,6 +14,7 @@ load_dotenv()
 
 DEFAULT_MODEL = os.getenv("MODEL_NAME", "openai/gpt-oss-20b")
 MODEL_PROVIDER = os.getenv("MODEL_PROVIDER", "openrouter")
+MAX_OUTPUT_TOKENS = int(os.getenv("MAX_OUTPUT_TOKENS", 16000))
 _UNFILLED = re.compile(r"\{\{\s*(\w+)\s*\}\}")
 
 def chat_model(model: str | None = None, temperature: float = 0.4):
@@ -85,6 +86,11 @@ def structured(llm, schema, system: str, user: str, retries: int = 5):
                 break
             continue
 
+        meta = getattr(response, "response_metadata", {}) or {}
+        truncated = meta.get("finish_reason") in ("length", "max_tokens") or (
+            meta.get("stop_reason") == "max_tokens"
+        )
+
         if isinstance(raw, list):  # some providers return content blocks
             raw = "".join(b.get("text", "") for b in raw if isinstance(b, dict))
         if not isinstance(raw, str):
@@ -97,6 +103,17 @@ def structured(llm, schema, system: str, user: str, retries: int = 5):
                 last_error = str(exc)[:800]
         else:
             last_error = "model returned an empty response"
+
+        if truncated:
+            logging.warning(
+                "%s reply hit the output token limit (MAX_OUTPUT_TOKENS=%s)",
+                schema.__name__, MAX_OUTPUT_TOKENS,
+            )
+            last_error = (
+                "your reply was cut off because it ran out of output tokens. "
+                "Reason briefly, keep every free-text field to one short "
+                "sentence, and return the complete JSON object"
+            )
 
         if attempt == retries:
             break

@@ -1,229 +1,186 @@
-(AI_Interviewer) > uv run python main.py --resume CV_Developer.pdf --jd jd.txt --minutes 10
+(AI_Interviewer) > uv run python main.py --resume CV_Developer.pdf --jd jd.txt --minutes 30 
 analysing job description and resume...
-           Proposed time allocation (LLM)            
-┏━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━┓
-┃ Topic                 ┃ Priority ┃ Seconds ┃ M:S  ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━┩
-│ JWT Authentication    │ 3        │ 276     │ 4:36 │
-│ OAuth 2.0 Integration │ 3        │ 276     │ 4:36 │
-└───────────────────────┴──────────┴─────────┴──────┘
-Dropped for time by the planner: middleware, tanstack-router, tanstack-query
-Total budget: 10m 0s
-Approve this time allocation? [y/n] (y):  
-                              Interview plan                               
-┏━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
-┃ Topic                 ┃ Priority ┃ Budget ┃ Target depth ┃ Source       ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
-│ JWT Authentication    │ 3        │ 4:36   │ 3            │ resume_claim │
-│ OAuth 2.0 Integration │ 3        │ 4:36   │ 3            │ resume_claim │
-└───────────────────────┴──────────┴────────┴──────────────┴──────────────┘
-Dropped for time: middleware, tanstack-router, tanstack-query (raise --minutes to include them)
+        Proposed time allocation (LLM)         
+┏━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━┓
+┃ Topic           ┃ Priority ┃ Seconds ┃ M:S  ┃
+┡━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━┩
+│ JWT             │ 3        │ 528     │ 8:48 │
+│ OAuth           │ 3        │ 528     │ 8:48 │
+│ MiddleWare      │ 2        │ 200     │ 3:20 │
+│ TanStack Router │ 2        │ 200     │ 3:20 │
+│ TanStack Query  │ 2        │ 200     │ 3:20 │
+└─────────────────┴──────────┴─────────┴──────┘
+Total budget: 30m 0s
+Approve this time allocation? [y/n] (y): y
+                           Interview plan                            
+┏━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ Topic           ┃ Priority ┃ Budget ┃ Target depth ┃ Source       ┃
+┡━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│ JWT             │ 3        │ 8:48   │ 3            │ resume_claim │
+│ OAuth           │ 3        │ 8:48   │ 3            │ resume_claim │
+│ MiddleWare      │ 2        │ 3:20   │ 2            │ gap (gap)    │
+│ TanStack Router │ 2        │ 3:20   │ 2            │ gap (gap)    │
+│ TanStack Query  │ 2        │ 3:20   │ 2            │ gap (gap)    │
+└─────────────────┴──────────┴────────┴──────────────┴──────────────┘
 
-╭───────────────────────────────────────────── Topic 1/2: JWT Authentication  |  new question  |  difficulty 2/5 ──────────────────────────────────────────────╮
-│ In your SEO Optimizer platform you stored the JWT in an HttpOnly cookie instead of localStorage. Walk me through the security trade-offs that drove that     │
-│ decision and how you handled the CSRF risk that cookies introduce.                                                                                           │
-╰────────────────────────────────────── answer in 55s  ·  10m 0s left in the interview  ·  Qs left: 4  ·  Doubts left: 2 ──────────────────────────────────────╯
-answer > if we store in local storage if we cloase the website it it can be visible
+╭───────────────────────────────────────────────────────────── Topic 1/5: JWT  |  new question  |  difficulty 2/5 ──────────────────────────────────────────────────────────────╮
+│ How would you implement a token expiration strategy using JWT in a Python web application, and what considerations would you take into account to balance security and user   │
+│ experience?                                                                                                                                                                   │
+╰───────────────────────────────────────────────────── answer in 176s  ·  30m 0s left in the interview  ·  Doubts left: 2 ──────────────────────────────────────────────────────╯
+answer > Set short-lived access tokens, secure refresh tokens, rotate them, and balance expiry with usability.
 evaluating...
 
-╭─────────────────────────────────────────────────────────────────────── Clarification ────────────────────────────────────────────────────────────────────────╮
-│ LocalStorage persists after the browser closes; the key difference is that HttpOnly cookies are inaccessible to JavaScript, which blocks XSS token theft.    │
-│ However, cookies are sent automatically with every request, exposing you to CSRF — so I'm asking which CSRF defense you used (e.g., SameSite=Lax/Strict,     │
-│ double-submit cookie, or a custom header).                                                                                                                   │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-
-╭───────────────────────────────────────────── Topic 1/2: JWT Authentication  |  clarification  |  difficulty 1/5 ─────────────────────────────────────────────╮
-│ Let me rephrase: what specific attack does an HttpOnly cookie protect against that localStorage does not, and what mechanism did you put in place to stop a  │
-│ malicious site from forcing a victim's browser to send that cookie automatically?                                                                            │
-╰────────────────────────────────────── answer in 56s  ·  9m 8s left in the interview  ·  Qs left: 3  ·  Doubts left: 2 ───────────────────────────────────────╯
-answer >
-Time is up - submitting what you had.
+╭─────────────────────────────────────────────────────────────── Topic 1/5: JWT  |  follow-up  |  difficulty 2/5 ───────────────────────────────────────────────────────────────╮
+│ What specific expiration durations would you set for access and refresh tokens in a typical web application, and what factors influence those choices?                        │
+╰───────────────────────────────────────────────────── answer in 176s  ·  29m 21s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
+answer > Access tokens: 15 minutes; refresh tokens: 7–30 days, based on risk, sensitivity, and usability.
+ 
 evaluating...
 
-╭───────────────────────────────────────────── Topic 1/2: JWT Authentication  |  new question  |  difficulty 1/5 ──────────────────────────────────────────────╮
-│ Your project uses JWT for authentication. Can you describe the three parts of a JWT and explain what the signature portion protects against?                 │
-╰────────────────────────────────────── answer in 56s  ·  8m 12s left in the interview  ·  Qs left: 2  ·  Doubts left: 2 ──────────────────────────────────────╯
-answer > the three part is header, payload, signature
-Time is up - submitting what you had.
+╭───────────────────────────────────────────────────────────── Topic 1/5: JWT  |  new question  |  difficulty 2/5 ──────────────────────────────────────────────────────────────╮
+│ Describe how you would implement JWT revocation in a stateless authentication system, for example when a user logs out or changes their password, and discuss the trade‑offs  │
+│ of your chosen approach.                                                                                                                                                      │
+╰───────────────────────────────────────────────────── answer in 176s  ·  28m 55s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
+answer > Use Redis blocklists keyed by JWT `jti`; revoke on logout/password change, trading statelessness for security.
+ 
 evaluating...
 
-╭───────────────────────────────────────────── Topic 1/2: JWT Authentication  |  new question  |  difficulty 1/5 ──────────────────────────────────────────────╮
-│ You mentioned the signature is the third part. What specific threat does that signature defend against, and how does the server verify it without storing    │
-│ any session state?                                                                                                                                           │
-╰────────────────────────────────────── answer in 56s  ·  7m 16s left in the interview  ·  Qs left: 1  ·  Doubts left: 2 ──────────────────────────────────────╯
-answer > signature is used for the token verification
+╭──────────────────────────────────────────────────────────── Topic 2/5: OAuth  |  new question  |  difficulty 2/5 ─────────────────────────────────────────────────────────────╮
+│ Explain how you would implement Google OAuth2 in a Flask application, including how you would store the access token securely and handle token refresh.                       │
+╰───────────────────────────────────────────────────── answer in 176s  ·  28m 21s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
+answer > Use Authlib, exchange codes, encrypt tokens server-side, refresh expired access tokens securely.
+ 
 evaluating...
 
-╭─────────────────────────────────────────────── Topic 1/2: JWT Authentication  |  follow-up  |  difficulty 1/5 ───────────────────────────────────────────────╮
-│ What specific threat does the signature defend against — for example, if an attacker modifies the payload — and walk me through the exact steps the server   │
-│ takes to verify that signature without keeping any session record?                                                                                           │
-╰────────────────────────────────────── answer in 61s  ·  6m 26s left in the interview  ·  Qs left: 0  ·  Doubts left: 2 ──────────────────────────────────────╯
-answer > do u mean how the signature is used for and what is contains that ?
-Time is up - submitting what you had.
+╭────────────────────────────────────────────────────────────── Topic 2/5: OAuth  |  follow-up  |  difficulty 2/5 ──────────────────────────────────────────────────────────────╮
+│ When persisting a Google OAuth2 access token in your Flask app’s database, which encryption algorithm would you choose, how would you manage the encryption key lifecycle,    │
+│ and how would you ensure the key never leaks to the application runtime environment?                                                                                          │
+╰───────────────────────────────────────────────────── answer in 176s  ·  27m 56s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
+answer > Use AES-256-GCM, manage keys via KMS with rotation, granting runtime least-privilege access.
+ 
 evaluating...
 
-╭─────────────────────────────────────────────────────────────────────── Clarification ────────────────────────────────────────────────────────────────────────╮
-│ Yes — I'm asking (1) what attack the signature prevents (payload tampering) and (2) the concrete verification algorithm: the server recomputes the signature │
-│ over the header and payload using the shared secret (HS256) or public key (RS256) and checks it matches the signature segment in the token.                  │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭────────────────────────────────────────────────────────────── Topic 2/5: OAuth  |  follow-up  |  difficulty 3/5 ──────────────────────────────────────────────────────────────╮
+│ If your KMS service is temporarily unavailable, how would you ensure your application can still decrypt existing tokens and continue to operate, and what steps would you     │
+│ take to mitigate the risk of exposing the key during this outage?                                                                                                             │
+╰───────────────────────────────────────────────────── answer in 176s  ·  27m 38s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
+answer > Use cached data keys securely, restrict access, monitor outages, and avoid plaintext key persistence.
+ 
+evaluating...
 
-╭───────────────────────────────────────────── Topic 1/2: JWT Authentication  |  clarification  |  difficulty 1/5 ─────────────────────────────────────────────╮
-│ If an attacker changes the payload — say, the user ID or expiration — what stops the server from accepting that tampered token? Then, describe the exact     │
-│ verification steps the server runs using only the token and its secret (or public key), without looking up any session store.                                │
-╰────────────────────────────────────── answer in 45s  ·  5m 25s left in the interview  ·  Qs left: 0  ·  Doubts left: 1 ──────────────────────────────────────╯
+╭────────────────────────────────────────────────────────── Topic 3/5: MiddleWare  |  new question  |  difficulty 1/5 ──────────────────────────────────────────────────────────╮
+│ Describe how you would implement a custom middleware in a Flask application to log request details and measure response time, and discuss any trade‑offs or potential         │
+│ performance impacts.                                                                                                                                                          │
+╰───────────────────────────────────────────────────── answer in 100s  ·  27m 13s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
+answer > Use global variables, log all request data, skip timing, and ignore performance overhead.
+ 
+evaluating...
+
+╭──────────────────────────────────────────────────────────────────────────────── Clarification ────────────────────────────────────────────────────────────────────────────────╮
+│ Middleware should be implemented using Flask's before_request/after_request hooks or a WSGI middleware, avoiding global mutable state that can cause race conditions. Logging │
+│ all request data can be heavy, so you should consider filtering or sampling. Timing should be measured with a high-resolution timer and added to the response headers or      │
+│ logs. Also, be mindful of the impact on request throughput and latency.                                                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+╭───────────────────────────────────────────────────────── Topic 3/5: MiddleWare  |  clarification  |  difficulty 1/5 ──────────────────────────────────────────────────────────╮
+│ Explain how you would design a Flask middleware that logs request details and measures response time, ensuring it does not introduce significant latency or race conditions   │
+│ in a multi-threaded environment. What considerations would you make regarding logging verbosity and timing precision?                                                         │
+╰───────────────────────────────────────────────────── answer in 100s  ·  26m 26s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
+answer > Use `before_request` and `after_request`, thread-safe logging, `perf_counter()`, and configurable verbosity.
+ 
+evaluating...
+
+╭────────────────────────────────────────────────────────── Topic 3/5: MiddleWare  |  new question  |  difficulty 1/5 ──────────────────────────────────────────────────────────╮
+│ You need to add a custom header to every response and log the size of the response body in a Flask middleware. How would you implement this so that it works correctly with   │
+│ streaming responses and does not interfere with the response generation? What trade‑offs would you consider regarding memory usage and performance?                           │
+╰───────────────────────────────────────────────────── answer in 100s  ·  25m 57s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
+answer > Use `after_request` to add headers and log `Content-Length`; avoid buffering streams to minimize memory overhead.
+ 
+evaluating...
+
+╭─────────────────────────────────────────────────────── Topic 4/5: TanStack Router  |  new question  |  difficulty 1/5 ────────────────────────────────────────────────────────╮
+│ In TanStack Router, how would you configure a nested route structure for a dashboard that contains a 'profile', 'settings', and 'reports' subpage, and what are the key       │
+│ considerations for optimizing route loading and data fetching in this setup?                                                                                                  │
+╰───────────────────────────────────────────────────── answer in 100s  ·  25m 29s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
+answer > Are you using TanStack Router with file-based routing or code-based routing?
+ 
+evaluating...
+
+╭──────────────────────────────────────────────────────────────────────────────── Clarification ────────────────────────────────────────────────────────────────────────────────╮
+│ TanStack Router primarily uses code-based routing, though file-based routing can be achieved via createFileRoutes. In this interview we are assuming code-based routing.      │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+╭─────────────────────────────────────────────────────── Topic 4/5: TanStack Router  |  clarification  |  difficulty 1/5 ───────────────────────────────────────────────────────╮
+│ Using code-based routing in TanStack Router, how would you set up a nested route hierarchy for a dashboard that includes 'profile', 'settings', and 'reports' subpages, and   │
+│ what key considerations should you keep in mind for optimizing route loading and data fetching in this setup?                                                                 │
+╰───────────────────────────────────────────────────── answer in 100s  ·  24m 47s left in the interview  ·  Doubts left: 1 ─────────────────────────────────────────────────────╯
+answer > Use `createRoute` with a dashboard parent, nested child routes, lazy loading, and route-level data loaders.
+evaluating...
+
+╭───────────────────────────────────────────────────────── Topic 4/5: TanStack Router  |  follow-up  |  difficulty 1/5 ─────────────────────────────────────────────────────────╮
+│ What are the trade‑offs between lazy loading the 'reports' component versus prefetching it when the dashboard is first loaded, and how would you decide which approach to     │
+│ use?                                                                                                                                                                          │
+╰───────────────────────────────────────────────────── answer in 100s  ·  24m 25s left in the interview  ·  Doubts left: 1 ─────────────────────────────────────────────────────╯
+answer > Do you want a code-based implementation or a conceptual explanation?
+evaluating...
+
+╭──────────────────────────────────────────────────────────────────────────────── Clarification ────────────────────────────────────────────────────────────────────────────────╮
+│ I’m looking for a conceptual explanation rather than a code snippet.                                                                                                          │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+╭─────────────────────────────────────────────────────── Topic 4/5: TanStack Router  |  clarification  |  difficulty 1/5 ───────────────────────────────────────────────────────╮
+│ Explain how you would configure a nested route hierarchy for a dashboard that includes 'profile', 'settings', and 'reports' subpages using TanStack Router, and discuss the   │
+│ trade‑offs between lazy loading the 'reports' component versus prefetching it when the dashboard is first loaded, including key considerations for route loading and data     │
+│ fetching.                                                                                                                                                                     │
+╰───────────────────────────────────────────────────── answer in 100s  ·  24m 2s left in the interview  ·  Doubts left: 0 ──────────────────────────────────────────────────────╯
+answer > Using TanStack Router, I would create a parent dashboard route with nested profile, settings, and reports routes. Lazy-load reports to reduce initial bundle size, or p
+         refetch it for faster navigation. Use route loaders, caching, and parallel fetching to optimize performance.
+ 
+ 
+evaluating...
+
+╭──────────────────────────────────────────────────────── Topic 5/5: TanStack Query  |  new question  |  difficulty 1/5 ────────────────────────────────────────────────────────╮
+│ When using TanStack Query in a React application, how would you handle a scenario where you need to fetch data from two related endpoints that depend on each other's         │
+│ responses, and you want to avoid unnecessary refetches when the data changes? Describe the approach and any relevant hooks or options you would use.                          │
+╰───────────────────────────────────────────────────── answer in 100s  ·  23m 25s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
+answer > Do the two endpoints have a strict dependency, or can they be fetched in parallel?
+evaluating...
+
+╭──────────────────────────────────────────────────────────────────────────────── Clarification ────────────────────────────────────────────────────────────────────────────────╮
+│ If the second endpoint’s request URL or parameters depend on the data returned by the first, they are strictly dependent; otherwise they can be fetched in parallel.          │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+╭──────────────────────────────────────────────────────── Topic 5/5: TanStack Query  |  new question  |  difficulty 1/5 ────────────────────────────────────────────────────────╮
+│ Assuming the second endpoint requires data from the first, how would you use TanStack Query hooks and options to fetch both endpoints efficiently, ensuring that the second   │
+│ query only runs after the first succeeds and that unnecessary refetches are avoided when the data changes?                                                                    │
+╰───────────────────────────────────────────────────── answer in 100s  ·  22m 32s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
+answer > i don'tknow
+evaluating...
+
+╭─────────────────────────────────────────────────────── Topic 5/5: TanStack Query  |  clarification  |  difficulty 1/5 ────────────────────────────────────────────────────────╮
+│ Explain how you would implement optimistic updates for a mutation that modifies data fetched by a TanStack Query, and how you would keep the cache in sync with the server    │
+│ while handling potential errors.                                                                                                                                              │
+╰───────────────────────────────────────────────────── answer in 100s  ·  21m 53s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
 answer > i don't know
-Time is up - submitting what you had.
 evaluating...
 
-╭──────────────────────────────────────────── Topic 2/2: OAuth 2.0 Integration  |  new question  |  difficulty 2/5 ────────────────────────────────────────────╮
-│ In your SEO Optimizer platform, you used Google OAuth2 with a React frontend and FastAPI backend. Walk me through which OAuth 2.0 flow you implemented and   │
-│ why you chose that flow for this architecture.                                                                                                               │
-╰────────────────────────────────────── answer in 55s  ·  4m 40s left in the interview  ·  Qs left: 4  ·  Doubts left: 1 ──────────────────────────────────────╯
-answer > i click the continue with google it redicrect to the google au
-Time is up - submitting what you had.
-evaluating...
+                         Topic coverage                          
+┏━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━┳━━━━━━━┳━━━━━━┳━━━━━━━━━┓
+┃ Topic           ┃ Used / budget ┃ Qs ┃ Depth ┃ Mean ┃ Status  ┃
+┡━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━╇━━━━━━━╇━━━━━━╇━━━━━━━━━┩
+│ JWT             │ 1:39 / 1:39   │ 3  │ 3/3   │ 3.33 │ covered │
+│ OAuth           │ 1:07 / 1:07   │ 3  │ 3/3   │ 3.33 │ covered │
+│ MiddleWare      │ 1:44 / 1:44   │ 3  │ 2/2   │ 2.53 │ covered │
+│ TanStack Router │ 2:03 / 2:03   │ 4  │ 2/2   │ 3.3  │ covered │
+│ TanStack Query  │ 1:42 / 20:59  │ 3  │ 0/2   │ 1.0  │ skipped │
+└─────────────────┴───────────────┴────┴───────┴──────┴─────────┘
+Status: time_expired
 
-╭──────────────────────────────────────────── Topic 2/2: OAuth 2.0 Integration  |  new question  |  difficulty 1/5 ────────────────────────────────────────────╮
-│ After Google redirects back to your React app with an authorization code, what does your FastAPI backend do with that code to complete the flow?             │
-╰────────────────────────────────────── answer in 55s  ·  3m 45s left in the interview  ·  Qs left: 3  ·  Doubts left: 1 ──────────────────────────────────────╯
-answer > i don't know this topic can u go next topic
-evaluating...
+Summary: output\report.md
+Transcript: output\report.transcript.md
+Structured: output\report.transcript.json
+Thread id: iv-e397990a (pass to `resume-interview`)
 
-╭─────────────────────────────────────────────────────────────────────── Clarification ────────────────────────────────────────────────────────────────────────╮
-│ The authorization code is a one-time token proving the user consented. Your backend trades it for the actual access token by POSTing to Google's token       │
-│ endpoint (https://oauth2.googleapis.com/token) with the code, client ID, client secret, and redirect URI.                                                    │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-
-╭─────────────────────────────────────────── Topic 2/2: OAuth 2.0 Integration  |  clarification  |  difficulty 1/5 ────────────────────────────────────────────╮
-│ No problem. In the Authorization Code flow, after Google redirects back to your React app with a short-lived authorization code, your frontend sends that    │
-│ code to your FastAPI backend. The backend then exchanges that code with Google's token endpoint for an access token (and optionally a refresh token). What   │
-│ HTTP method and endpoint does your FastAPI backend call on Google's side to make that exchange?                                                              │
-╰────────────────────────────────────── answer in 57s  ·  2m 56s left in the interview  ·  Qs left: 2  ·  Doubts left: 0 ──────────────────────────────────────╯
-answer > get method
-evaluating...
-
-╭─────────────────────────────────────────────────────────────────────── Clarification ────────────────────────────────────────────────────────────────────────╮
-│ Google's token endpoint expects a POST (not GET) with parameters like grant_type=authorization_code, code=<the_code>, redirect_uri, client_id, and           │
-│ client_secret sent as application/x-www-form-urlencoded.                                                                                                     │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-
-╭───────────────────────────────────────────── Topic 2/2: OAuth 2.0 Integration  |  follow-up  |  difficulty 1/5 ──────────────────────────────────────────────╮
-│ The token endpoint actually requires a POST request with the authorization code in the request body. What parameters does your FastAPI backend include in    │
-│ that POST body when calling Google's token endpoint?                                                                                                         │
-╰────────────────────────────────────── answer in 68s  ·  2m 20s left in the interview  ·  Qs left: 1  ·  Doubts left: 0 ──────────────────────────────────────╯
-answer >
-Time is up - submitting what you had.
-evaluating...
-
-╭──────────────────────────────────────────── Topic 2/2: OAuth 2.0 Integration  |  new question  |  difficulty 1/5 ────────────────────────────────────────────╮
-│ What is the primary purpose of an access token versus a refresh token in OAuth 2.0, and how long does each typically live?                                   │
-╰────────────────────────────────────── answer in 68s  ·  1m 12s left in the interview  ·  Qs left: 0  ·  Doubts left: 0 ──────────────────────────────────────╯
-answer >
-Time is up - submitting what you had.
-evaluating...
-╭───────────────────────────────────────────────────────────── Traceback (most recent call last) ──────────────────────────────────────────────────────────────╮
-│ C:\Genworx\AI_Interviewer\main.py:250 in run                                                                                                                 │
-│                                                                                                                                                              │
-│   247 │   │   │   config=config,                                                                                                                             │
-│   248 │   │   )                                                                                                                                              │
-│   249 │   │                                                                                                                                                  │
-│ ❱ 250 │   │   result = _loop(graph, config, result)                                                                                                          │
-│   251 │   │   _finish(result, out, thread_id)                                                                                                                │
-│   252                                                                                                                                                        │
-│   253                                                                                                                                                        │
-│                                                                                                                                                              │
-│ C:\Genworx\AI_Interviewer\main.py:155 in _loop                                                                                                               │
-│                                                                                                                                                              │
-│   152 │   │   │   if answer.timed_out:                                                                                                                       │
-│   153 │   │   │   │   console.print("[yellow]Time is up - submitting what you had.[/yellow]")                                                                │
-│   154 │   │   │   console.print("[dim]evaluating...[/dim]")                                                                                                  │
-│ ❱ 155 │   │   │   result = graph.invoke(                                                                                                                     │
-│   156 │   │   │   │   Command(                                                                                                                               │
-│   157 │   │   │   │   │   resume={                                                                                                                           │
-│   158 │   │   │   │   │   │   "answer": answer.text,                                                                                                         │
-│                                                                                                                                                              │
-│ C:\Genworx\AI_Interviewer\.venv\Lib\site-packages\langgraph\pregel\main.py:3913 in invoke                                                                    │
-│                                                                                                                                                              │
-│   3910 │   │   │   │   │   chunks.append(chunk)                                                                                                              │
-│   3911 │   │   else:                                                                                                                                         │
-│   3912 │   │   │   # v1: collect interrupts from updates stream                                                                                              │
-│ ❱ 3913 │   │   │   for chunk in self.stream(                                                                                                                 │
-│   3914 │   │   │   │   input,                                                                                                                                │
-│   3915 │   │   │   │   config,                                                                                                                               │
-│   3916 │   │   │   │   context=context,                                                                                                                      │
-│                                                                                                                                                              │
-│ C:\Genworx\AI_Interviewer\.venv\Lib\site-packages\langgraph\pregel\main.py:2967 in stream                                                                    │
-│                                                                                                                                                              │
-│   2964 │   │   │   │   while loop.tick():                                                                                                                    │
-│   2965 │   │   │   │   │   for task in loop.match_cached_writes():                                                                                           │
-│   2966 │   │   │   │   │   │   loop.output_writes(task.id, task.writes, cached=True)                                                                         │
-│ ❱ 2967 │   │   │   │   │   for _ in runner.tick(                                                                                                             │
-│   2968 │   │   │   │   │   │   [t for t in loop.tasks.values() if not t.writes],                                                                             │
-│   2969 │   │   │   │   │   │   timeout=self.step_timeout,                                                                                                    │
-│   2970 │   │   │   │   │   │   get_waiter=get_waiter,                                                                                                        │
-│                                                                                                                                                              │
-│ C:\Genworx\AI_Interviewer\.venv\Lib\site-packages\langgraph\pregel\_runner.py:207 in tick                                                                    │
-│                                                                                                                                                              │
-│   204 │   │   │   t = tasks[0]                                                                                                                               │
-│   205 │   │   │   scheduled_error_handler = False                                                                                                            │
-│   206 │   │   │   try:                                                                                                                                       │
-│ ❱ 207 │   │   │   │   run_with_retry(                                                                                                                        │
-│   208 │   │   │   │   │   t,                                                                                                                                 │
-│   209 │   │   │   │   │   retry_policy,                                                                                                                      │
-│   210 │   │   │   │   │   configurable={                                                                                                                     │
-│                                                                                                                                                              │
-│ C:\Genworx\AI_Interviewer\.venv\Lib\site-packages\langgraph\pregel\_retry.py:617 in run_with_retry                                                           │
-│                                                                                                                                                              │
-│   614 │   │   │   # clear any writes from previous attempts                                                                                                  │
-│   615 │   │   │   task.writes.clear()                                                                                                                        │
-│   616 │   │   │   # run the task                                                                                                                             │
-│ ❱ 617 │   │   │   return task.proc.invoke(task.input, config)                                                                                                │
-│   618 │   │   except ParentCommand as exc:                                                                                                                   │
-│   619 │   │   │   ns: str = config[CONF][CONFIG_KEY_CHECKPOINT_NS]                                                                                           │
-│   620 │   │   │   cmd = exc.args[0]                                                                                                                          │
-│                                                                                                                                                              │
-│ C:\Genworx\AI_Interviewer\.venv\Lib\site-packages\langgraph\_internal\_runnable.py:707 in invoke                                                             │
-│                                                                                                                                                              │
-│   704 │   │   │   │   │   │   run = None                                                                                                                     │
-│   705 │   │   │   │   │   # run in context                                                                                                                   │
-│   706 │   │   │   │   │   with set_config_context(config, run) as context:                                                                                   │
-│ ❱ 707 │   │   │   │   │   │   input = context.run(step.invoke, input, config, **kwargs)                                                                      │
-│   708 │   │   │   │   else:                                                                                                                                  │
-│   709 │   │   │   │   │   input = step.invoke(input, config)                                                                                                 │
-│   710 │   │   # finish the root run                                                                                                                          │
-│                                                                                                                                                              │
-│ C:\Genworx\AI_Interviewer\.venv\Lib\site-packages\langgraph\_internal\_runnable.py:447 in invoke                                                             │
-│                                                                                                                                                              │
-│   444 │   │   │   else:                                                                                                                                      │
-│   445 │   │   │   │   run_manager.on_chain_end(ret)                                                                                                          │
-│   446 │   │   else:                                                                                                                                          │
-│ ❱ 447 │   │   │   ret = self.func(*args, **kwargs)                                                                                                           │
-│   448 │   │   if self.recurse and isinstance(ret, Runnable):                                                                                                 │
-│   449 │   │   │   return ret.invoke(input, config)                                                                                                           │
-│   450 │   │   return ret                                                                                                                                     │
-│                                                                                                                                                              │
-│ C:\Genworx\AI_Interviewer\agent\node.py:193 in decide_next                                                                                                   │
-│                                                                                                                                                              │
-│   190 │                                                                                                                                                      │
-│   191 │   # LLM-driven Pacing Decision                                                                                                                       │
-│   192 │   llm = chat_model(temperature=0.1)                                                                                                                  │
-│ ❱ 193 │   decision = structured(                                                                                                                             │
-│   194 │   │   llm,                                                                                                                                           │
-│   195 │   │   NextActionDecision,                                                                                                                            │
-│   196 │   │   system=DECIDE_NEXT_SYSTEM,                                                                                                                     │
-│                                                                                                                                                              │
-│ C:\Genworx\AI_Interviewer\agent\llm.py:107 in structured                                                                                                     │
-│                                                                                                                                                              │
-│   104 │   │   messages.append(                                                                                                                               │
-│   105 │   │   │   HumanMessage(content=json_retry_instruction(last_error))                                                                                   │
-│   106 │   │   )                                                                                                                                              │
-│ ❱ 107 │   raise ValueError(f"Model did not return valid {schema.__name__}: {last_error}")                                                                    │
-│   108                                                                                                                                                        │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-ValueError: Model did not return valid NextActionDecision: API Error: Rate limit exceeded: free-models-per-day. Add 10 credits to unlock 1000 free model 
-requests per day
-[NOTE] During task with name 'decide_next' and id '7db1d24e-9c49-4453-b03a-84e5aea5706f'
-
-[02:27:28 PM] (main)
+[04:13:23 PM] (main)
 PS: C:\Genworx\AI_Interviewer
 (AI_Interviewer) > 

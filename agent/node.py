@@ -2,13 +2,14 @@ from agent.llm import chat_model, structured, get_system_prompt
 from agent.prompt import JD_ANALYSIS_SYSTEM, PLAN_TOPICS_SYSTEM, RESUME_ANALYSIS_SYSTEM, QUESTION_MODE_BRIEF, GENERATE_QUESTION_SYSTEM, EVALUATE_ANSWER_SYSTEM, CLASSIFY_RESPONSE_SYSTEM, DECIDE_NEXT_SYSTEM
 from datetime import datetime
 from agent.state import InterviewState, JDAnalysis, ResumeAnalysis, TopicPlan, TopicRun, Event, Question, Evaluation, Discrepancy, ResponseClassification, NextActionDecision
-from agent.utils import wrap_up_reserve, baseline_difficulty, topic_difficulty, question_time_limit, depth_credit, adjust_difficulty, next_mode, balance_topic_budgets
+from agent.utils import wrap_up_reserve, baseline_difficulty, topic_difficulty, depth_credit, adjust_difficulty, next_mode, balance_topic_budgets
 from dotenv import load_dotenv
 from langgraph.types import interrupt
 import os
 
 load_dotenv()
-MAX_QUESTIONS_IN_TOPIC = int(os.getenv("MAX_QUESTIONS_IN_TOPIC", 4))
+DEFAULT_QUESTION_SECONDS = int(os.getenv("DEFAULT_QUESTION_SECONDS", 120))
+MIN_QUESTION_SECONDS = 45
 DOUBT_THRESHOLD = int(os.getenv("DOUBT_THRESHOLD", 2))
 MIN_TOPIC_SECONDS = int(os.getenv("MIN_TOPIC_SECONDS", 150))
 PLAN_FIX_ATTEMPTS = int(os.getenv("PLAN_FIX_ATTEMPTS", 2))
@@ -845,8 +846,9 @@ def generate_question(state: InterviewState) -> dict:
     mode = state.get("next_mode", "opening")
     counter = state.get("question_counter", 0) + 1
 
-    topic_remaining = max(30.0, topic.allocated_seconds - run.elapsed_s)
-    limit = question_time_limit(topic_remaining,max(0, MAX_QUESTIONS_IN_TOPIC - run.questions_asked))
+    per_question = topic.seconds_per_question or DEFAULT_QUESTION_SECONDS
+    topic_remaining = topic.allocated_seconds - run.elapsed_s
+    limit = int(max(MIN_QUESTION_SECONDS, min(per_question, topic_remaining)))
 
     history = "\n".join(
         f"{e.kind.upper()}: {e.text}"
@@ -922,7 +924,6 @@ def ask_question(state: InterviewState) -> dict:
             "topic_index": state["topic_order"].index(topic.id) + 1,
             "topic_total": len(state["topic_order"]),
             "questions_asked": run.questions_asked + 1,
-            "questions_remaining": max(0, MAX_QUESTIONS_IN_TOPIC - (run.questions_asked + 1)),
             "clarifications_used": run.clarifications_used,
             "doubt_count": state.get("doubt_count", 0),
             "doubts_remaining": max(0, DOUBT_THRESHOLD - state.get("doubt_count", 0)),

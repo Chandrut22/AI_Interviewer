@@ -1,4 +1,3 @@
-
 from agent.state import InterviewState
 from agent.llm import chat_model, get_system_prompt
 from langchain.messages import SystemMessage, HumanMessage
@@ -177,6 +176,8 @@ def transcript_markdown(state: InterviewState) -> str:
             ]
         elif event.kind == "difficulty_change":
             out += [f"> _{event.text}_", ""]
+        elif event.kind == "time_adjustment":
+            out += [f"> _[{stamp}] Time adjustment: {event.text}_", ""]
         elif event.kind == "topic_end":
             topic = topics.get(event.topic_id)
             out += [
