@@ -1,4 +1,3 @@
-
 import os
 import uuid
 from pathlib import Path
@@ -11,6 +10,7 @@ from langgraph.types import Command
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
+from rich.prompt import Confirm, IntPrompt
 
 from agent.graph import build_graph
 from agent.loader import load_text
@@ -70,27 +70,100 @@ def _render_question(payload: dict) -> None:
     )
 
 
+def _render_plan_table(result: dict) -> None:
+    plan_table = Table(title="Interview plan", header_style="bold")
+    for column in ("Topic", "Priority", "Budget", "Target depth", "Source"):
+        plan_table.add_column(column, overflow="fold")
+    for topic in result.get("topics", []):
+        plan_table.add_row(
+            topic.name,
+            str(topic.priority),
+            f"{topic.allocated_seconds // 60}:"
+            f"{topic.allocated_seconds % 60:02d}",
+            str(topic.target_depth),
+            topic.source + (" (gap)" if topic.is_gap else ""),
+        )
+    console.print(plan_table)
+    if result.get("dropped_topics"):
+        console.print(
+            "[yellow]Dropped for time:[/yellow] "
+            f"{', '.join(result['dropped_topics'])} "
+            "(raise --minutes to include them)"
+        )
+
+
+def _render_time_allocation_approval(payload: dict) -> None:
+    total = payload["total_seconds"]
+    table = Table(title="Proposed time allocation (LLM)", header_style="bold")
+    for column in ("Topic", "Priority", "Seconds", "M:S"):
+        table.add_column(column, overflow="fold")
+    for t in payload["topics"]:
+        secs = t["allocated_seconds"]
+        table.add_row(t["name"], str(t["priority"]), str(secs), f"{secs // 60}:{secs % 60:02d}")
+    console.print(table)
+    if payload.get("dropped_for_time"):
+        console.print(
+            f"[yellow]Dropped for time by the planner:[/yellow] "
+            f"{', '.join(payload['dropped_for_time'])}"
+        )
+    console.print(f"Total budget: {total // 60}m {total % 60}s")
+
+
+def _render_time_allocation_input(payload: dict) -> None:
+    console.print(
+        f"\n[cyan]{payload['topic_name']}[/cyan] (priority {payload['priority']}) - "
+        f"suggested {payload['suggested_seconds']}s "
+        f"(total budget {payload['total_seconds']}s, "
+        f"{payload['allocated_so_far']}s assigned so far)"
+    )
+
+
 def _loop(graph, config, result: dict) -> dict:
+    plan_shown = False
+
+    def _maybe_show_plan(res: dict) -> None:
+        nonlocal plan_shown
+        if not plan_shown and res.get("topics"):
+            _render_plan_table(res)
+            plan_shown = True
+
     while True:
         pending = result.get("__interrupt__")
         if not pending:
             return result
         payload = pending[0].value
-        _render_question(payload)
-        answer = ask_timed("answer >", payload["time_limit_s"])
-        if answer.timed_out:
-            console.print("[yellow]Time is up - submitting what you had.[/yellow]")
-        console.print("[dim]evaluating...[/dim]")
-        result = graph.invoke(
-            Command(
-                resume={
-                    "answer": answer.text,
-                    "elapsed_s": answer.elapsed_s,
-                    "timed_out": answer.timed_out,
-                }
-            ),
-            config=config,
-        )
+        itype = payload.get("type", "question")
+
+        if itype == "time_allocation_approval":
+            _render_time_allocation_approval(payload)
+            approved = Confirm.ask("Approve this time allocation?", default=True)
+            result = graph.invoke(Command(resume={"approved": approved}), config=config)
+
+        elif itype == "time_allocation_input":
+            _render_time_allocation_input(payload)
+            seconds = IntPrompt.ask(
+                "Seconds for this topic", default=payload["suggested_seconds"]
+            )
+            result = graph.invoke(Command(resume={"seconds": seconds}), config=config)
+
+        else:
+            _render_question(payload)
+            answer = ask_timed("answer >", payload["time_limit_s"])
+            if answer.timed_out:
+                console.print("[yellow]Time is up - submitting what you had.[/yellow]")
+            console.print("[dim]evaluating...[/dim]")
+            result = graph.invoke(
+                Command(
+                    resume={
+                        "answer": answer.text,
+                        "elapsed_s": answer.elapsed_s,
+                        "timed_out": answer.timed_out,
+                    }
+                ),
+                config=config,
+            )
+
+        _maybe_show_plan(result)
 
 
 def _finish(result: dict, out: Path, thread_id: str) -> None:
@@ -173,26 +246,6 @@ def run(
             },
             config=config,
         )
-
-        plan_table = Table(title="Interview plan", header_style="bold")
-        for column in ("Topic", "Priority", "Budget", "Target depth", "Source"):
-            plan_table.add_column(column, overflow="fold")
-        for topic in result.get("topics", []):
-            plan_table.add_row(
-                topic.name,
-                str(topic.priority),
-                f"{topic.allocated_seconds // 60}:"
-                f"{topic.allocated_seconds % 60:02d}",
-                str(topic.target_depth),
-                topic.source + (" (gap)" if topic.is_gap else ""),
-            )
-        console.print(plan_table)
-        if result.get("dropped_topics"):
-            console.print(
-                "[yellow]Dropped for time:[/yellow] "
-                f"{', '.join(result['dropped_topics'])} "
-                "(raise --minutes to include them)"
-            )
 
         result = _loop(graph, config, result)
         _finish(result, out, thread_id)

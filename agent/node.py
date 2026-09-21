@@ -1,26 +1,24 @@
-
-
-
-from agent.llm import chat_model, structured
-from agent.prompt import JD_ANALYSIS_SYSTEM, PLAN_TOPICS_SYSTEM, RESUME_ANALYSIS_SYSTEM, QUESTION_MODE_BRIEF, GENERATE_QUESTION_SYSTEM, EVALUATE_ANSWER_SYSTEM, CLASSIFY_RESPONSE_SYSTEM
+from agent.llm import chat_model, structured, get_system_prompt
+from agent.prompt import JD_ANALYSIS_SYSTEM, PLAN_TOPICS_SYSTEM, RESUME_ANALYSIS_SYSTEM, QUESTION_MODE_BRIEF, GENERATE_QUESTION_SYSTEM, EVALUATE_ANSWER_SYSTEM, CLASSIFY_RESPONSE_SYSTEM, DECIDE_NEXT_SYSTEM
 from datetime import datetime
-from agent.state import InterviewState, JDAnalysis, ResumeAnalysis, TopicPlan, TopicRun, Event, Question, Evaluation, Discrepancy, ResponseClassification
-from agent.utils import baseline_difficulty, allocate_time, topic_difficulty, pace, question_time_limit, depth_credit, adjust_difficulty, next_mode
+from agent.state import InterviewState, JDAnalysis, ResumeAnalysis, TopicPlan, TopicRun, Event, Question, Evaluation, Discrepancy, ResponseClassification, NextActionDecision
+from agent.utils import baseline_difficulty, topic_difficulty, question_time_limit, depth_credit, adjust_difficulty, next_mode
 from dotenv import load_dotenv
 from langgraph.types import interrupt
 import os
-
+from langchain.messages import HumanMessage, AIMessage, SystemMessage
 
 load_dotenv()
 MAX_QUESTIONS_IN_TOPIC = int(os.getenv("MAX_QUESTIONS_IN_TOPIC", 4))
 DOUBT_THRESHOLD = int(os.getenv("DOUBT_THRESHOLD", 2))
+MIN_TOPIC_SECONDS = int(os.getenv("MIN_TOPIC_SECONDS", 150))
 
 def analyze_jd(state: InterviewState) -> dict:
     llm = chat_model(temperature=0.1)
     jd = structured(
         llm,
         JDAnalysis,
-        system=JD_ANALYSIS_SYSTEM,
+        system=get_system_prompt("JD_ANALYSIS_SYSTEM", JD_ANALYSIS_SYSTEM),
         user=state["jd_text"],
     )
     return {"jd_analysis": jd}
@@ -30,23 +28,26 @@ def analyze_resume(state: InterviewState) -> dict:
     resume = structured(
         llm,
         ResumeAnalysis,
-        system=RESUME_ANALYSIS_SYSTEM,
+        system=get_system_prompt("RESUME_ANALYSIS_SYSTEM", RESUME_ANALYSIS_SYSTEM),
         user=state["resume_text"],
     )
     return {"resume_analysis": resume}
 
 
 def plan_topics(state: InterviewState) -> dict:
+    """Single LLM call - selects topics AND allocates time in one shot. Runs once, checkpointed."""
     llm = chat_model(temperature=0.5)
     jd, resume = state["jd_analysis"], state["resume_analysis"]
     total_seconds = state["total_seconds"]
-    suggested = os.getenv("TOPICS_COVER_SUGGESTION","all")
+    suggested = os.getenv("TOPICS_COVER_SUGGESTION","")
 
     plan = structured(
         llm,
         TopicPlan,
-        system=PLAN_TOPICS_SYSTEM.format(
-            suggested=suggested, seniority=jd.seniority, role_title=jd.role_title
+        system=get_system_prompt("PLAN_TOPICS_SYSTEM", PLAN_TOPICS_SYSTEM).format(
+            suggested=suggested, seniority=jd.seniority, role_title=jd.role_title,
+            total_seconds=total_seconds, total_minutes=total_seconds // 60,
+            min_topic_seconds=MIN_TOPIC_SECONDS,
         ),
         user=(
             f"JOB REQUIREMENTS:\n{jd.model_dump_json(indent=2)}\n\n"
@@ -58,11 +59,55 @@ def plan_topics(state: InterviewState) -> dict:
     if not topics:
         raise ValueError("Topic planner returned no usable topics")
 
-    allocation, dropped = allocate_time(
-            [(t.id, t.priority) for t in topics], total_seconds
-    )
+    kept = [t for t in topics if t.allocated_seconds > 0]
+    dropped = [t.id for t in topics if t.allocated_seconds <= 0]
+    if not kept:
+        raise ValueError("Topic planner did not allocate time to any topic")
 
-    kept = [t for t in topics if t.id in allocation]
+    return {"topics": kept, "dropped_topics": dropped}
+
+
+def approve_time_allocation(state: InterviewState) -> dict:
+    """Pure Python, no LLM calls - safe to replay across interrupts/resumes."""
+    jd = state["jd_analysis"]
+    total_seconds = state["total_seconds"]
+    kept = state["topics"]
+    dropped = state.get("dropped_topics", [])
+    llm_allocation = {t.id: t.allocated_seconds for t in kept}
+
+    approval = interrupt({
+        "type": "time_allocation_approval",
+        "topics": [
+            {"id": t.id, "name": t.name, "priority": t.priority,
+             "allocated_seconds": llm_allocation[t.id]} for t in kept
+        ],
+        "dropped_for_time": dropped,
+        "total_seconds": total_seconds,
+    })
+
+    if isinstance(approval, dict):
+        is_approved = approval.get("approved", False)
+    elif isinstance(approval, str):
+        is_approved = approval.strip().lower() in ["yes", "true", "approve", "approved", "y"]
+    else:
+        is_approved = False
+
+    if is_approved:
+        allocation = llm_allocation
+    else:
+        allocation = {}
+        for topic in kept:
+            resp = interrupt({
+                "type": "time_allocation_input",
+                "topic_id": topic.id,
+                "topic_name": topic.name,
+                "priority": topic.priority,
+                "suggested_seconds": llm_allocation[topic.id],
+                "total_seconds": total_seconds,
+                "allocated_so_far": sum(allocation.values()),
+            })
+            allocation[topic.id] = int(resp.get("seconds", llm_allocation[topic.id]))
+
     base = baseline_difficulty(jd.seniority, jd.years_required)
 
     runs: dict[str, TopicRun] = {}
@@ -150,37 +195,44 @@ def decide_next(state: InterviewState) -> dict:
     ]
     run, topic = runs[current], topics[current]
 
-    decision = pace(
-        elapsed_total_s=state.get("elapsed_s", 0.0),
-        total_seconds=state["total_seconds"],
-        topic_elapsed_s=run.elapsed_s,
-        topic_allocated_s=topic.allocated_seconds,
-        questions_in_topic=run.questions_asked,
-        depth_reached=run.depth_reached,
-        target_depth=topic.target_depth,
-        topics_remaining=len(remaining_after_current),
+    # LLM-driven Pacing Decision
+    llm = chat_model(temperature=0.1)
+    decision = structured(
+        llm,
+        NextActionDecision,
+        system=get_system_prompt("DECIDE_NEXT_SYSTEM", DECIDE_NEXT_SYSTEM),
+        user=(
+            f"GLOBAL BUDGET: {state.get('elapsed_s', 0.0)}s / {state['total_seconds']}s\n"
+            f"TOPIC METRICS: {topic.name} | Budget: {topic.allocated_seconds}s | "
+            f"Elapsed: {run.elapsed_s}s | Questions: {run.questions_asked} | "
+            f"Depth: {run.depth_reached}/{topic.target_depth}\n"
+            f"PERFORMANCE: Mean Score: {run.mean_score}\n"
+            f"PROGRESS: Topics remaining: {len(remaining_after_current)}"
+        )
     )
+    action = decision.action
+    reason = decision.reasoning
 
-    if decision.action == "wrap_up":
+    if action == "wrap_up":
         if run.status == "active":
             run.status = "covered" if run.questions_asked else "skipped"
             events.append(
-                _event("topic_end", state, topic_id=current, text=decision.reason)
+                _event("topic_end", state, topic_id=current, text=reason)
             )
         for tid in remaining_after_current:
             runs[tid].status = "skipped"
         return {
             "topic_runs": runs,
             "next_action": "wrap_up",
-            "pacing_note": decision.reason,
+            "pacing_note": reason,
             "transcript": events,
             "last_response_type": None, # Always clear on wrap up
         }
 
-    if decision.action == "next_topic":
+    if action == "next_topic":
         run.status = "covered" if run.questions_asked else "skipped"
         events.append(
-            _event("topic_end", state, topic_id=current, text=decision.reason,
+            _event("topic_end", state, topic_id=current, text=reason,
                    meta={"depth_reached": run.depth_reached,
                          "mean_score": run.mean_score})
         )
@@ -208,9 +260,9 @@ def decide_next(state: InterviewState) -> dict:
         "current_topic_id": current,
         "next_mode": mode,
         "next_action": "ask",
-        "pacing_note": decision.reason,
+        "pacing_note": reason,
         "transcript": events,
-        "last_response_type": None, 
+        "last_response_type": None,
     }
 
 
@@ -249,7 +301,7 @@ def generate_question(state: InterviewState) -> dict:
     question = structured(
         llm,
         Question,
-        system=GENERATE_QUESTION_SYSTEM.format(
+        system=get_system_prompt("GENERATE_QUESTION_SYSTEM", GENERATE_QUESTION_SYSTEM).format(
             difficulty=run.difficulty, mode_brief=mode_brief
         ),
         user=(
@@ -289,6 +341,7 @@ def ask_question(state: InterviewState) -> dict:
 
     reply = interrupt(
         {
+            "type": "question",
             "question_id": question.id,
             "text": question.text,
             "clarification": question.clarification,
@@ -376,7 +429,7 @@ def evaluate_answer(state: InterviewState) -> dict:
     classification = structured(
         llm,
         ResponseClassification,
-        system=CLASSIFY_RESPONSE_SYSTEM,
+        system=get_system_prompt("CLASSIFY_RESPONSE_SYSTEM", CLASSIFY_RESPONSE_SYSTEM),
         user=f"QUESTION: {question.text}\nANSWER: {answer}",
     )
 
@@ -394,7 +447,7 @@ def evaluate_answer(state: InterviewState) -> dict:
         ev = structured(
             llm,
             Evaluation,
-            system=EVALUATE_ANSWER_SYSTEM,
+            system=get_system_prompt("EVALUATE_ANSWER_SYSTEM", EVALUATE_ANSWER_SYSTEM),
             user=(
                 f"TOPIC: {topic.name}\n"
                 f"RESUME CLAIM ON THIS TOPIC: {topic.resume_evidence or 'none'}\n"

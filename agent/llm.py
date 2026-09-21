@@ -5,43 +5,46 @@ from pydantic import ValidationError
 import re
 import json
 from dotenv import load_dotenv
+import logging
 
-from agent.prompt import JSON_REPLY_CONTRACT, json_retry_instruction
+from agent.prompt import JSON_REPLY_CONTRACT, json_retry_instruction, PROMPT_MAPPING
+from agent.langfuse import get_prompt
 
 load_dotenv()
 
-
-DEFAULT_MODEL = os.getenv("OPENROUTER_MODEL", "openai/gpt-oss-20b")
-
+DEFAULT_MODEL = os.getenv("MODEL_NAME", "openai/gpt-oss-20b")
+MODEL_PROVIDER = os.getenv("MODEL_PROVIDER", "openrouter")
 
 def chat_model(model: str | None = None, temperature: float = 0.4):
-
-    api_key = os.getenv("OPENROUTER_KEY")
+    api_key = os.getenv("API_KEY")
     if not api_key:
         raise ValueError(
-            "OPENROUTER_API_KEY is not set. On Windows PowerShell:\n"
-            '  $env:OPENROUTER_API_KEY = "sk-or-..."\n'
-            "or put it in a .env file next to the project."
+            "API_KEY is not set. Put it in a .env file next to the project."
         )
-    name = model or DEFAULT_MODEL
-    if "gpt-oss" in name:
-        extra_params = {
-            "frequency_penalty": 0.3,
-            "repetition_penalty": 1.15,
-            "extra_body": {
-                "reasoning_effort": "low"  # Restricts the depth of the reasoning tokens
-            }
-        }
+
+    model_name = model or DEFAULT_MODEL
+    provider = MODEL_PROVIDER
+
 
     return init_chat_model(
-        model=name,
-        model_provider="openrouter",
+        model=model_name,
+        model_provider=provider,
         api_key=api_key,
         temperature=temperature,
         max_retries=6,
-
+        # model_kwargs={
+        #     "frequency_penalty": 0.8,
+        #     "presence_penalty": 0.5,
+        # },
     )
 
+def get_system_prompt(key: str, fallback: str) -> str:
+    slug = PROMPT_MAPPING.get(key)
+    if slug:
+        remote_prompt = get_prompt(slug)
+        if remote_prompt:
+            return remote_prompt
+    return fallback
 
 def _extract_json(text: str) -> str:
     text = text.strip()
@@ -53,22 +56,7 @@ def _extract_json(text: str) -> str:
         return text[start : end + 1]
     return text
 
-# def structured(llm, schema, system: str, user: str, retries: int = 3):
-#     structured_llm = llm.with_structured_output(schema)
-#     messages = [SystemMessage(content=system), HumanMessage(content=user)]
-
-#     last_error = ""
-#     for attempt in range(retries + 1):
-#         try:
-#             return structured_llm.invoke(messages)
-#         except Exception as exc:
-#             last_error = str(exc)[:800]
-#             if attempt == retries:
-#                 break
-#     raise ValueError(f"Model did not return valid {schema.__name__}: {last_error}")
-
-def structured(llm, schema , system: str, user: str, retries: int = 5):
-
+def structured(llm, schema, system: str, user: str, retries: int = 5):
     contract = JSON_REPLY_CONTRACT.format(
         schema=json.dumps(schema.model_json_schema(), indent=2)
     )
@@ -80,7 +68,15 @@ def structured(llm, schema , system: str, user: str, retries: int = 5):
 
     last_error = ""
     for attempt in range(retries + 1):
-        raw = llm.invoke(messages).content
+        try:
+            response = llm.invoke(messages)
+            raw = response.content
+        except Exception as exc:
+            last_error = f"API Error: {str(exc)}"[:800]
+            if attempt == retries:
+                break
+            continue
+
         if isinstance(raw, list):  # some providers return content blocks
             raw = "".join(b.get("text", "") for b in raw if isinstance(b, dict))
         if not isinstance(raw, str):
@@ -92,8 +88,6 @@ def structured(llm, schema , system: str, user: str, retries: int = 5):
             except (ValidationError, ValueError) as exc:
                 last_error = str(exc)[:800]
         else:
-            # gpt-oss on OpenRouter intermittently returns empty content;
-            # retrying on the original prompt recovers, a poisoned one does not.
             last_error = "model returned an empty response"
 
         if attempt == retries:

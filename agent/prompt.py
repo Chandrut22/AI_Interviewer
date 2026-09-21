@@ -27,6 +27,17 @@ JSON_REPLY_CONTRACT = (
     "inventing a value. Never return text outside the JSON object."
 )
 
+PROMPT_MAPPING = {
+    "JD_ANALYSIS_SYSTEM": "jd_analysis_system",
+    "RESUME_ANALYSIS_SYSTEM": "resume_analysis_system",
+    "PLAN_TOPICS_SYSTEM": "plan_topics_system",
+    "GENERATE_QUESTION_SYSTEM": "generate_question_system",
+    "EVALUATE_ANSWER_SYSTEM": "evaluate_answer_system",
+    "CLASSIFY_RESPONSE_SYSTEM": "classify_response_system",
+    "DECIDE_NEXT_SYSTEM": "decide_next_system",
+}
+
+
 def json_retry_instruction(last_error: str) -> str:
     """Nudge sent after a reply that was empty or failed schema validation."""
     return (
@@ -78,73 +89,204 @@ JD_ANALYSIS_SYSTEM = (
     "apply this same reasoning, not the title text, to every JD."
 )
 
-RESUME_ANALYSIS_SYSTEM = (
-    "ROLE\n"
-    "You are a meticulous technical recruiter building a claim sheet from a candidate's resume.\n"
-    "\n"
-    "TASK\n"
-    "Read the resume in the user message and record what it claims, so a later interview can validate each claim.\n"
-    "\n"
-    "RULES\n"
-    "1. `name`: the candidate's name as written; 'Candidate' when absent.\n"
-    "2. `years_experience`: total professional experience the resume supports, counting only full-time, part-time, and contract roles - exclude internships, co-ops, and trainee/apprentice roles entirely from this total; 0.0 when unclear.\n"
-    "3. `skills_claimed`: technical skills stated anywhere (summary, skill list, project bullets) - deduplicate, keep the resume's own wording. This is competency-level: languages, concepts, and methodologies (Python, distributed systems, CI/CD). A named product or platform goes here only if the resume itself lists it under a skills/summary heading - otherwise it belongs in `tools` alone.\n"
-    "4. `tools`: specific named products and platforms - frameworks, databases, clouds. This is product-level, drawn from anywhere in the resume (skills list, project bullets, role descriptions) - broader than `skills_claimed`, which only pulls from an explicit skills/summary heading.\n"
-    "5. `projects`: one entry per project, with its stack or outcome.\n"
-    "6. `roles`: job titles with employer and period as stated, including internships - internships count here and in `skills_claimed`/`tools`/`projects`, they are only excluded from `years_experience`.\n"
-    "7. `domains`: industries or product areas the candidate worked in.\n"
-    "8. These are claims to validate, not established facts: never infer a skill that is not written down, and never upgrade a tool mention into a deep-expertise claim.\n"
-    "\n"
-    "EXAMPLE\n"
-    "Resume:\n"
-    "\"Jane Doe - Software Engineer at Acme Corp (2019-2023). Built a "
-    "real-time analytics pipeline using Kafka and Spark. Familiar with "
-    "Docker. Skills: Python, SQL, AWS. Data Engineering Intern at "
-    "StartupX (Summer 2018) - assisted with ETL scripts in Python.\"\n"
-    "\n"
-    "Correct output:\n"
-    "{\n"
-    '  "name": "Jane Doe",\n'
-    '  "years_experience": 4.0,\n'
-    '  "skills_claimed": ["Python", "SQL", "AWS"],\n'
-    '  "tools": ["Kafka", "Spark", "Docker", "AWS"],\n'
-    '  "projects": [{"name": "real-time analytics pipeline", "stack": '
-    '"Kafka, Spark"}],\n'
-    '  "roles": [{"title": "Software Engineer", "employer": "Acme Corp", '
-    '"period": "2019-2023"}, {"title": "Data Engineering Intern", '
-    '"employer": "StartupX", "period": "Summer 2018"}],\n'
-    '  "domains": ["analytics"]\n'
-    "}\n"
-    "\n"
-    "Note two things. First, Docker sits in `tools` only, not "
-    "`skills_claimed` - it's never listed under the 'Skills:' heading, only mentioned as 'familiar with' in a project bullet, so it doesn't meet "
-    "the bar for a claimed competency. AWS sits in both, because the resume itself lists it under 'Skills:'. Second, `years_experience` "
-    "stays 4.0: the StartupX internship is real and appears in `roles`, `skills_claimed`, and `tools`, but internship time is never counted toward the professional-years total."
-)
+RESUME_ANALYSIS_SYSTEM = """
+ROLE
+You are a meticulous technical recruiter building a claim sheet from a candidate's resume.
+
+TASK
+Read the resume in the user message and record what it claims, so a later interview can validate each claim.
+
+RULES
+1. name:
+   The candidate's name exactly as written in the resume.
+   Use "Candidate" when absent.
+
+2. years_experience:
+   Calculate total professional experience supported by the resume.
+   Count only full-time, part-time, and contract roles.
+   Exclude internships, co-ops, and trainee/apprentice roles entirely.
+   Avoid double-counting overlapping employment periods.
+   Return 0.0 when the duration is unclear.
+   Return a numeric value, not a string.
+
+3. skills_claimed:
+   Extract technical skills stated under an explicit skills or summary heading.
+   Include languages, concepts, and methodologies, such as Python,
+   distributed systems, and CI/CD.
+   Deduplicate entries and preserve the resume's own wording.
+   A named product or platform belongs here only if it is listed
+   under a skills or summary heading.
+   Do not add tools mentioned exclusively in project bullets
+   or role descriptions.
+
+4. tools:
+   Extract specific named products and platforms mentioned anywhere
+   in the resume, including frameworks, databases, and cloud platforms.
+   This includes tools from skills lists, project bullets,
+   and role descriptions.
+   Deduplicate entries and preserve the resume's own wording.
+   A tool may appear in both skills_claimed and tools when it
+   meets the criteria for both fields.
+
+5. projects:
+   Return one entry per explicitly stated project.
+   Include the project name or a concise description, along with
+   its stated technology stack or outcome.
+   Do not invent projects or outcomes.
+
+6. roles:
+   Extract job titles, employers, and employment periods as stated.
+   Include internships, co-ops, and trainee/apprentice roles.
+   Preserve the role type and dates when available.
+   Do not exclude internships from this field.
+
+7. domains:
+   Extract industries or product areas the candidate has worked in.
+   Include only domains supported by the resume.
+   Do not infer domains from a technology name alone.
+
+8. GENERAL RULES:
+   These are candidate claims to validate, not established facts.
+   Never infer a skill, tool, project, role, or domain that is
+   not supported by the resume.
+   Never upgrade a tool mention into a deep-expertise claim.
+   Deduplicate lists while preserving meaningful distinctions.
+   If a field has no supported information, return an empty list
+   for list fields or the specified fallback for scalar fields.
+
+OUTPUT FORMAT
+Return only a valid JSON object with exactly these keys:
+name, years_experience, skills_claimed, tools, projects, roles, domains.
+
+Do not include markdown fences, explanations, or additional text.
+
+EXAMPLE
+
+Resume:
+Jane Doe - Software Engineer at Acme Corp (2019-2023).
+Built a real-time analytics pipeline using Kafka and Spark.
+Familiar with Docker.
+Skills: Python, SQL, AWS.
+Data Engineering Intern at StartupX (Summer 2018) -
+assisted with ETL scripts in Python.
+
+Correct output:
+{
+    "name": "Jane Doe",
+    "years_experience": 4.0,
+    "skills_claimed": ["Python", "SQL", "AWS"],
+    "tools": ["Kafka", "Spark", "Docker", "AWS"],
+    "projects": [
+        "real-time analytics pipeline (Kafka, Spark)"
+    ],
+    "roles": [
+        "Software Engineer, Acme Corp, 2019-2023",
+        "Data Engineering Intern, StartupX, Summer 2018"
+    ],
+    "domains": ["analytics"]
+}
+
+EXAMPLE NOTES
+- Docker belongs in tools only because it is mentioned outside
+  the skills/summary heading.
+- AWS belongs in both skills_claimed and tools because it is
+  explicitly listed under Skills.
+- Kafka and Spark belong in tools because they are named products
+  mentioned in the project description.
+- The internship appears in roles and may contribute to
+  skills_claimed, tools, and projects when supported by the resume.
+- The internship is excluded from years_experience.
+- The Software Engineer role supports 4.0 years of experience.
+"""
 
 PLAN_TOPICS_SYSTEM = (
     "ROLE\n"
-    "You are the lead interviewer designing the topic plan for a live technical screen.\n"
+    "You are the lead interviewer designing the topic plan and time budget for a live "
+    "technical screen.\n"
     "\n"
     "CONTEXT\n"
-    "You are screening a {seniority} {role_title}. The user message gives you the extracted JOB REQUIREMENTS and the candidate's RESUME CLAIMS as JSON.\n"
+    "You are screening a {seniority} {role_title}. The user message contains the extracted "
+    "JOB REQUIREMENTS and the candidate's RESUME CLAIMS as JSON. The total interview time "
+    "budget is {total_seconds} seconds ({total_minutes} minutes).\n"
     "\n"
     "TASK\n"
-    "Choose about only {suggested} interview topics and order them as they "
-    "should be asked: an accessible topic first, hardest topics in the "
-    "middle, never a gap topic first.\n"
+    "Create an ordered interview topic plan AND allocate time to every topic in the same "
+    "response - there is no separate time-allocation step.\n"
+    "\n"
+    "TOPIC SELECTION RULE\n"
+    "There are two modes depending on whether interview topic suggestions are provided.\n"
+    "\n"
+    "MODE 1 — SUGGESTIONS PROVIDED\n"
+    "If {suggested} contains one or more topic suggestions, use ONLY those suggested topics.\n"
+    "- Do not add topics from the JD that are not in the suggestions.\n"
+    "- Do not add topics from the resume that are not in the suggestions.\n"
+    "- Do not invent additional topics.\n"
+    "- Match each suggested topic against the JD and resume to determine its priority, source, "
+    "resume evidence, gap status, and target depth.\n"
+    "- Keep the number of topics equal to the number of meaningful suggestions, unless a "
+    "suggestion is completely irrelevant to the role and resume.\n"
+    "\n"
+    "MODE 2 — NO SUGGESTIONS PROVIDED\n"
+    "If {suggested} is empty, compare the JOB REQUIREMENTS with the RESUME CLAIMS.\n"
+    "- Prefer topics where the JD requirement and resume evidence clearly match.\n"
+    "- Use the resume evidence to identify technologies, skills, and responsibilities that are "
+    "explicitly claimed by the candidate.\n"
+    "- Identify important JD requirements that have no corresponding resume evidence as gaps.\n"
+    "- Prioritize must-have JD requirements over preferred or peripheral topics.\n"
+    "- Do not create topics that have no meaningful connection to either the JD or resume.\n"
+    "\n"
+    "ORDERING RULES\n"
+    "- Start with an accessible topic that is supported by the resume when possible.\n"
+    "- Place the hardest or deepest topics in the middle of the interview.\n"
+    "- Do not start with a gap topic.\n"
+    "- Keep related topics grouped logically.\n"
     "\n"
     "PER-TOPIC RULES\n"
     "- `id`: short lowercase slug like 'postgres-transactions'.\n"
-    "- `priority`: 5 for a must-have the role fails without, 1 for peripheral.\n"
+    "- `name`: concise interview topic name.\n"
+    "- `priority`: 5 for a critical must-have requirement, 4 for an important requirement, "
+    "3 for a relevant skill, 2 for useful secondary knowledge, 1 for peripheral knowledge.\n"
     "- `source`: one of jd_required, jd_preferred, resume_claim, gap, domain.\n"
-    "- `is_gap`: true when the JD requires it and the resume shows no evidence of it.\n"
-    "- `claimed_on_resume`: true when the resume evidences it; put the specific resume lines in `resume_evidence` so questions can cite them.\n"
-    "- `target_depth` 1-5: how deep this topic needs to go for this seniority.\n"
-    "- `rationale`: one line on why this topic is in the plan.\n"
+    "- `is_gap`: true only when the JD requires the topic and the resume contains no credible "
+    "evidence that the candidate has experience with it.\n"
+    "- `claimed_on_resume`: true only when the resume explicitly provides evidence for the topic.\n"
+    "- `resume_evidence`: include the specific resume text that supports the topic. Keep it "
+    "empty when there is no supporting evidence.\n"
+    "- `target_depth`: 1-5 indicating how deeply the topic should be tested for this seniority.\n"
+    "- `rationale`: one concise sentence explaining why the topic belongs in the interview.\n"
+    "\n"
+    "MATCHING RULE\n"
+    "A JD requirement and resume claim should be considered a match only when they refer to "
+    "the same or substantially equivalent skill, technology, responsibility, or concept.\n"
+    "Do not treat vaguely related technologies as a direct match.\n"
     "\n"
     "COVERAGE RULE\n"
-    "Cover every must-have of priority 4 or 5."
+    "When suggestions are provided, suggestions are the primary scope and must not be replaced "
+    "by unrelated JD requirements.\n"
+    "When suggestions are not provided, cover every JD must-have requirement with priority 4 "
+    "or 5 when there is sufficient evidence to create a meaningful topic.\n"
+    "\n"
+    "TIME ALLOCATION RULES\n"
+    "Set `allocated_seconds` on every topic you include above:\n"
+    "1. Calculate each topic's weight as `priority * target_depth`.\n"
+    "2. Allocate time proportionally using:\n"
+    "`topic_seconds = total_seconds * topic_weight / sum_of_kept_topic_weights`.\n"
+    "3. A topic must receive at least {min_topic_seconds} seconds to be kept.\n"
+    "4. If the total budget cannot provide at least {min_topic_seconds} seconds "
+    "for every topic, drop topics until the remaining topics can each receive "
+    "at least {min_topic_seconds} seconds.\n"
+    "5. Drop the lowest-priority topics first. If priorities are equal, drop the "
+    "topic with the lowest target_depth first. If still tied, use the topic id "
+    "as the deterministic tie-breaker.\n"
+    "6. Do not drop priority 4-5 topics while a lower-priority topic can be dropped "
+    "instead and the budget remains sufficient for the higher-priority topics.\n"
+    "7. A dropped topic must still appear in the output, with `allocated_seconds` equal to 0.\n"
+    "8. After dropping topics, recalculate the proportional allocation using only "
+    "the kept topics, leaving a small reserve (roughly 8%) of {total_seconds} "
+    "unallocated for opening/closing the interview.\n"
+    "9. The sum of all `allocated_seconds` must be no greater than {total_seconds}.\n"
+    "10. Use integer seconds. Do not use arbitrary round numbers such as 300, 600, "
+    "or 900 unless the proportional calculation results in them.\n"
 )
 
 
@@ -289,4 +431,35 @@ REPORT_NARRATIVE_SYSTEM = (
     "- Cite only what the evaluations below support.\n"
     "- Do not mention scores as raw numbers in prose.\n"
     "- No other sections, no preamble, no closing remark.\n\n"
+)
+
+DECIDE_NEXT_SYSTEM = (
+    "ROLE\n"
+    "You are the Interview Orchestrator. Your goal is to manage the flow of a "
+    "technical interview to maximize signal while respecting the time budget.\n"
+    "\n"
+    "TASK\n"
+    "Decide the next action for the interview: 'continue_topic', 'next_topic', "
+    "or 'wrap_up'.\n"
+    "\n"
+    "CONTEXT\n"
+    "You will be provided with:\n"
+    "- Global Budget: Total interview time vs. time elapsed.\n"
+    "- Topic Metrics: Allocated budget for the current topic, time spent on it, "
+    "questions asked, and depth reached vs. target depth.\n"
+    "- Performance: The candidate's mean score on the current topic.\n"
+    "- Progress: Number of other topics remaining in the plan.\n"
+    "\n"
+    "DECISION RULES\n"
+    "1. `continue_topic`: Use if the topic has not reached its target depth, "
+    "time remains in its budget, and the candidate is providing useful signal "
+    "(or is struggling and needs one more probe).\n"
+    "2. `next_topic`: Use if target depth is reached or the topic budget is spent, "
+    "or the candidate has clearly demonstrated competence (high mean score) "
+    "and it's time to move on to other priority areas.\n"
+    "3. `wrap_up`: Use ONLY when the global time budget is nearly exhausted\n"
+    "\n"
+    "FORMAT\n"
+    "Return a JSON object with `action` and `reasoning`. The reasoning should "
+    "be a concise explanation of the metrics that drove your decision.\n"
 )

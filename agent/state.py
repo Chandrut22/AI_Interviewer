@@ -115,6 +115,11 @@ class Discrepancy(BaseModel):
     answer_signal: str = ""
     note: str = ""
 
+class NextActionDecision(BaseModel):
+    """LLM decision on whether to continue the topic, move to next, or wrap up."""
+    action: Literal["continue_topic", "next_topic", "wrap_up"]
+    reasoning: str
+
 class InterviewState(TypedDict, total=False):
     # inputs
     resume_text: str
