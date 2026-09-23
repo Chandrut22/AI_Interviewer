@@ -5,39 +5,41 @@
     "years_required": 0.0,
     "must_have": [
       "Python 3",
-      "FastAPI",
-      "React.js",
-      "JavaScript",
-      "REST APIs",
-      "SQL",
-      "Git"
+      "FastAPI or any Python web framework",
+      "React.js and JavaScript",
+      "REST APIs and HTTP methods",
+      "SQL and relational databases",
+      "Git and GitHub",
+      "software development and testing concepts",
+      "problem-solving and analytical skills",
+      "willingness to learn and work with new technologies"
     ],
     "nice_to_have": [
       "Node.js",
-      "PostgreSQL",
+      "PostgreSQL or other relational databases",
       "Docker",
       "asynchronous programming in Python",
-      "pytest",
+      "pytest or other testing frameworks",
       "application performance and debugging",
-      "ClickHouse",
-      "personal/academic/open-source projects using Python and React"
+      "ClickHouse or other analytical databases",
+      "personal, academic, or open-source projects using Python and React"
     ],
     "domain": "web development",
     "responsibilities": [
-      "develop and test web applications using Python and FastAPI",
+      "assist in developing and testing web applications using Python and FastAPI",
       "develop and maintain frontend components using React.js",
-      "integrate frontend with backend via REST APIs",
-      "write clean, readable, maintainable Python and JavaScript code",
-      "design database models and write queries",
-      "write unit and integration tests",
-      "generate and manage test data",
-      "debug application issues and fix bugs",
-      "participate in code reviews and follow best practices",
-      "understand requirements and implement features",
-      "contribute to performance improvements and optimization",
-      "participate in Agile activities (stand-ups, sprint planning, retrospectives)",
-      "document technical solutions and processes",
-      "explore and learn new technologies"
+      "work with REST APIs and integrate frontend applications with backend services",
+      "write clean, readable, and maintainable Python and JavaScript code",
+      "assist in designing database models and writing database queries",
+      "write unit tests and integration tests for application features",
+      "generate and manage test data for development and testing",
+      "debug application issues and assist in identifying and fixing bugs",
+      "participate in code reviews and follow software development best practices",
+      "work with the development team to understand requirements and implement features",
+      "learn and contribute to performance improvements and application optimization",
+      "participate in Agile development activities such as daily stand-ups, sprint planning, and retrospectives",
+      "document technical solutions and development processes",
+      "explore and learn technologies used in the project based on business requirements"
     ]
   },
   "candidate": {
@@ -57,8 +59,8 @@
       "Lang-graph"
     ],
     "projects": [
-      "Full Stack AIOCR Web Application (Django, PydanticAI, Google Translate API, TextBlob, HTML, CSS, JavaScript)",
-      "Microservices SEO Optimizer Platform (Spring Boot, FastAPI, React, Vite, Tailwind CSS, JWT, Google OAuth2)"
+      "Full Stack AIOCR Web Application (Django, PydanticAI, Google Translate API, JavaScript)",
+      "Microservices SEO Optimizer Platform (Spring Boot, FastAPI, React, Tailwind CSS)"
     ],
     "roles": [
       "Data Scientist Intern, Punchbiz, 01/2024 \u2013 03/2025",
@@ -74,192 +76,124 @@
       "PydanticAI",
       "Google Translate API",
       "TextBlob",
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "React",
-      "Vite",
+      "React (Vite)",
       "Tailwind CSS",
       "JWT",
       "Google OAuth2",
+      "Vite",
       "Lang-graph"
     ],
     "domains": [
-      "Data Science",
-      "Software Development",
-      "AI/ML",
-      "Computer Vision",
-      "Web Development",
-      "SEO"
+      "attendance system",
+      "production planning",
+      "manufacturing",
+      "AI/ML"
     ]
   },
-  "total_seconds": 1800,
-  "elapsed_s": 496.9,
-  "completion_status": "time_expired",
+  "total_seconds": 600,
+  "elapsed_s": 380.2,
+  "completion_status": "completed",
   "topics": [
+    {
+      "id": "middleware",
+      "name": "MiddleWare",
+      "priority": 4,
+      "source": "resume_claim",
+      "rationale": "Middleware is essential for request handling in FastAPI, a core skill for the role.",
+      "target_depth": 3,
+      "resume_evidence": [
+        "FastAPI",
+        "Microservices SEO Optimizer Platform (Spring Boot, FastAPI, React, Tailwind CSS)"
+      ],
+      "claimed_on_resume": true,
+      "is_gap": false,
+      "allocated_seconds": 210,
+      "planned_questions": 3,
+      "seconds_per_question": 70,
+      "calculation": "3 x 70 = 210",
+      "time_rationale": "Depth 3 requires detailed design and debugging discussion."
+    },
     {
       "id": "jwt",
       "name": "JWT",
       "priority": 3,
       "source": "resume_claim",
-      "rationale": "JWT is used for authentication in the candidate's projects.",
-      "target_depth": 3,
+      "rationale": "JWT is a common authentication mechanism used in full-stack projects.",
+      "target_depth": 2,
       "resume_evidence": [
         "JWT"
       ],
       "claimed_on_resume": true,
       "is_gap": false,
-      "allocated_seconds": 99,
+      "allocated_seconds": 20,
       "planned_questions": 3,
-      "seconds_per_question": 176,
-      "calculation": "3 x 176 = 528",
-      "time_rationale": "Assess understanding of token-based auth and implementation depth."
+      "seconds_per_question": 55,
+      "calculation": "3 x 55 = 165",
+      "time_rationale": "Depth 2 covers implementation and token handling."
     },
     {
       "id": "oauth",
-      "name": "OAuth",
+      "name": "Oauth",
       "priority": 3,
       "source": "resume_claim",
-      "rationale": "OAuth integration is key for secure third-party auth.",
-      "target_depth": 3,
+      "rationale": "OAuth integration is important for secure authentication flows.",
+      "target_depth": 2,
       "resume_evidence": [
         "Google OAuth2"
       ],
       "claimed_on_resume": true,
       "is_gap": false,
-      "allocated_seconds": 67,
+      "allocated_seconds": 309,
       "planned_questions": 3,
-      "seconds_per_question": 176,
-      "calculation": "3 x 176 = 528",
-      "time_rationale": "Evaluate knowledge of OAuth flows and integration."
-    },
-    {
-      "id": "middleware",
-      "name": "MiddleWare",
-      "priority": 2,
-      "source": "gap",
-      "rationale": "Middleware is essential for request processing in web frameworks.",
-      "target_depth": 2,
-      "resume_evidence": [],
-      "claimed_on_resume": false,
-      "is_gap": true,
-      "allocated_seconds": 104,
-      "planned_questions": 2,
-      "seconds_per_question": 100,
-      "calculation": "2 x 100 = 200",
-      "time_rationale": "Check basic understanding of request/response pipeline."
-    },
-    {
-      "id": "tanstack-router",
-      "name": "TanStack Router",
-      "priority": 2,
-      "source": "gap",
-      "rationale": "TanStack Router is a modern routing library for React.",
-      "target_depth": 2,
-      "resume_evidence": [],
-      "claimed_on_resume": false,
-      "is_gap": true,
-      "allocated_seconds": 123,
-      "planned_questions": 2,
-      "seconds_per_question": 100,
-      "calculation": "2 x 100 = 200",
-      "time_rationale": "Assess familiarity with client-side routing patterns."
-    },
-    {
-      "id": "tanstack-query",
-      "name": "TanStack Query",
-      "priority": 2,
-      "source": "gap",
-      "rationale": "TanStack Query handles data fetching and caching in React.",
-      "target_depth": 2,
-      "resume_evidence": [],
-      "claimed_on_resume": false,
-      "is_gap": true,
-      "allocated_seconds": 1259,
-      "planned_questions": 2,
-      "seconds_per_question": 100,
-      "calculation": "2 x 100 = 200",
-      "time_rationale": "Evaluate knowledge of data fetching strategies."
+      "seconds_per_question": 55,
+      "calculation": "3 x 55 = 165",
+      "time_rationale": "Depth 2 covers flow and token exchange."
     }
   ],
   "topic_runs": {
-    "jwt": {
-      "status": "covered",
-      "elapsed_s": 99.1,
-      "questions_asked": 3,
-      "followups_used": 1,
-      "clarifications_used": 0,
-      "depth_reached": 3,
+    "middleware": {
+      "status": "skipped",
+      "elapsed_s": 226.20000000000002,
+      "questions_asked": 7,
+      "followups_used": 0,
+      "clarifications_used": 2,
+      "depth_reached": 0,
       "difficulty": 2,
-      "scores": [
-        2.6,
-        3.8,
-        3.6
-      ],
+      "scores": [],
       "consecutive_low_depth_answers": 0,
-      "mean_score": 3.33
+      "extended_s": 0,
+      "mean_score": 0.0
+    },
+    "jwt": {
+      "status": "skipped",
+      "elapsed_s": 20.7,
+      "questions_asked": 1,
+      "followups_used": 0,
+      "clarifications_used": 0,
+      "depth_reached": 0,
+      "difficulty": 2,
+      "scores": [],
+      "consecutive_low_depth_answers": 0,
+      "extended_s": 0,
+      "mean_score": 0.0
     },
     "oauth": {
       "status": "covered",
-      "elapsed_s": 67.9,
-      "questions_asked": 3,
+      "elapsed_s": 133.3,
+      "questions_asked": 5,
       "followups_used": 2,
       "clarifications_used": 0,
       "depth_reached": 3,
       "difficulty": 3,
       "scores": [
-        3.0,
-        4.2,
-        2.8
-      ],
-      "consecutive_low_depth_answers": 0,
-      "mean_score": 3.33
-    },
-    "middleware": {
-      "status": "covered",
-      "elapsed_s": 104.3,
-      "questions_asked": 3,
-      "followups_used": 0,
-      "clarifications_used": 1,
-      "depth_reached": 2,
-      "difficulty": 1,
-      "scores": [
         1.0,
-        3.8,
-        2.8
+        2.8,
+        3.4,
+        2.6
       ],
       "consecutive_low_depth_answers": 0,
-      "mean_score": 2.53
-    },
-    "tanstack-router": {
-      "status": "covered",
-      "elapsed_s": 123.19999999999999,
-      "questions_asked": 4,
-      "followups_used": 1,
-      "clarifications_used": 2,
-      "depth_reached": 2,
-      "difficulty": 1,
-      "scores": [
-        3.0,
-        3.6
-      ],
-      "consecutive_low_depth_answers": 0,
-      "mean_score": 3.3
-    },
-    "tanstack-query": {
-      "status": "skipped",
-      "elapsed_s": 102.39999999999999,
-      "questions_asked": 3,
-      "followups_used": 0,
-      "clarifications_used": 1,
-      "depth_reached": 0,
-      "difficulty": 1,
-      "scores": [
-        1.0,
-        1.0
-      ],
-      "consecutive_low_depth_answers": 2,
-      "mean_score": 1.0
+      "extended_s": 0,
+      "mean_score": 2.45
     }
   },
   "dropped_topics": [],
@@ -267,17 +201,15 @@
     {
       "kind": "interview_start",
       "t_offset_s": 0.0,
-      "timestamp": "2026-09-21T16:03:42",
+      "timestamp": "2026-09-23T10:07:50",
       "topic_id": "",
       "question_id": "",
-      "text": "Python Web Developer Intern (intern) - 30 minute budget",
+      "text": "Python Web Developer Intern (intern) - 10 minute budget",
       "meta": {
         "topics": {
-          "jwt": 528,
-          "oauth": 528,
-          "middleware": 200,
-          "tanstack-router": 200,
-          "tanstack-query": 200
+          "middleware": 210,
+          "jwt": 165,
+          "oauth": 165
         },
         "dropped_for_time": [],
         "baseline_difficulty": 1
@@ -286,13 +218,13 @@
     {
       "kind": "topic_start",
       "t_offset_s": 0.0,
-      "timestamp": "2026-09-21T16:04:02",
-      "topic_id": "jwt",
+      "timestamp": "2026-09-23T10:07:50",
+      "topic_id": "middleware",
       "question_id": "",
-      "text": "JWT",
+      "text": "MiddleWare",
       "meta": {
-        "priority": 3,
-        "allocated_s": 528,
+        "priority": 4,
+        "allocated_s": 210,
         "target_depth": 3,
         "difficulty": 2,
         "is_gap": false
@@ -301,692 +233,87 @@
     {
       "kind": "question",
       "t_offset_s": 0.0,
-      "timestamp": "2026-09-21T16:04:09",
-      "topic_id": "jwt",
+      "timestamp": "2026-09-23T10:07:59",
+      "topic_id": "middleware",
       "question_id": "q1",
-      "text": "How would you implement a token expiration strategy using JWT in a Python web application, and what considerations would you take into account to balance security and user experience?",
+      "text": "In FastAPI, describe how you would implement a custom middleware that logs the request path and processing time for every endpoint, and explain how you would ensure it does not interfere with the framework's built\u2011in exception handling.",
       "meta": {
         "mode": "opening",
         "difficulty": 2,
-        "time_limit_s": 176,
-        "looking_for": "A clear explanation of token lifetime choices, how to set exp claims, the use of refresh tokens or short-lived access tokens, and a discussion of trade\u2011offs between security (e.g., preventing replay, reducing window of compromise) and usability (e.g., login friction)."
+        "time_limit_s": 70,
+        "looking_for": "Explanation of middleware implementation, logging, timing, and exception safety"
       }
     },
     {
       "kind": "answer",
-      "t_offset_s": 39.4,
-      "timestamp": "2026-09-21T16:04:48",
-      "topic_id": "jwt",
+      "t_offset_s": 14.0,
+      "timestamp": "2026-09-23T10:08:13",
+      "topic_id": "middleware",
       "question_id": "q1",
-      "text": "Set short-lived access tokens, secure refresh tokens, rotate them, and balance expiry with usability.",
+      "text": "In FastAPI, describe how you would implement a custom middleware that logs the request path and processing time for every endpoint, and explain how you would ensure it does  \u2502\n\u2502 not interfere with the framework's built\u2011in exception handling. ?",
       "meta": {
-        "answer_s": 39.4,
+        "answer_s": 14.0,
         "timed_out": false
       }
     },
     {
-      "kind": "evaluation",
-      "t_offset_s": 39.4,
-      "timestamp": "2026-09-21T16:04:51",
-      "topic_id": "jwt",
-      "question_id": "q1",
-      "text": "Answer is relevant but lacks depth and specificity; needs more detail.",
-      "meta": {
-        "overall": 2.6,
-        "depth_reached": 1,
-        "next_mode": "followup"
-      }
-    },
-    {
       "kind": "question",
-      "t_offset_s": 39.4,
-      "timestamp": "2026-09-21T16:04:52",
-      "topic_id": "jwt",
+      "t_offset_s": 14.0,
+      "timestamp": "2026-09-23T10:08:34",
+      "topic_id": "middleware",
       "question_id": "q2",
-      "text": "What specific expiration durations would you set for access and refresh tokens in a typical web application, and what factors influence those choices?",
-      "meta": {
-        "mode": "followup",
-        "difficulty": 2,
-        "time_limit_s": 176,
-        "looking_for": "Concrete expiration times and rationale for choosing them."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 65.3,
-      "timestamp": "2026-09-21T16:05:18",
-      "topic_id": "jwt",
-      "question_id": "q2",
-      "text": "Access tokens: 15 minutes; refresh tokens: 7\u201330 days, based on risk, sensitivity, and usability.",
-      "meta": {
-        "answer_s": 25.9,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 65.3,
-      "timestamp": "2026-09-21T16:05:19",
-      "topic_id": "jwt",
-      "question_id": "q2",
-      "text": "The answer correctly identifies typical expiration windows and mentions influencing factors, but lacks depth and detailed rationale.",
-      "meta": {
-        "overall": 3.8,
-        "depth_reached": 2,
-        "next_mode": "opening"
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 65.3,
-      "timestamp": "2026-09-21T16:05:23",
-      "topic_id": "jwt",
-      "question_id": "q3",
-      "text": "Describe how you would implement JWT revocation in a stateless authentication system, for example when a user logs out or changes their password, and discuss the trade\u2011offs of your chosen approach.",
-      "meta": {
-        "mode": "opening",
-        "difficulty": 2,
-        "time_limit_s": 176,
-        "looking_for": "Explanation of revocation strategies (e.g., short\u2011lived tokens, token blacklist, rotating secrets), their implementation details, and a balanced discussion of security versus performance trade\u2011offs."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 99.1,
-      "timestamp": "2026-09-21T16:05:57",
-      "topic_id": "jwt",
-      "question_id": "q3",
-      "text": "Use Redis blocklists keyed by JWT `jti`; revoke on logout/password change, trading statelessness for security.",
-      "meta": {
-        "answer_s": 33.8,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 99.1,
-      "timestamp": "2026-09-21T16:05:59",
-      "topic_id": "jwt",
-      "question_id": "q3",
-      "text": "Answer is relevant but lacks depth and detail.",
-      "meta": {
-        "overall": 3.6,
-        "depth_reached": 3,
-        "next_mode": "opening"
-      }
-    },
-    {
-      "kind": "time_adjustment",
-      "t_offset_s": 99.1,
-      "timestamp": "2026-09-21T16:05:59",
-      "topic_id": "oauth",
-      "question_id": "",
-      "text": "Transferred 428s of unused time from JWT to OAuth.",
-      "meta": {
-        "transfer_s": 428,
-        "from_topic_id": "jwt",
-        "to_topic_id": "oauth"
-      }
-    },
-    {
-      "kind": "topic_end",
-      "t_offset_s": 99.1,
-      "timestamp": "2026-09-21T16:05:59",
-      "topic_id": "jwt",
-      "question_id": "",
-      "text": "Target depth reached for JWT (3/3).",
-      "meta": {
-        "depth_reached": 3,
-        "mean_score": 3.33,
-        "outcome": "topic_completed"
-      }
-    },
-    {
-      "kind": "topic_start",
-      "t_offset_s": 99.1,
-      "timestamp": "2026-09-21T16:05:59",
-      "topic_id": "oauth",
-      "question_id": "",
-      "text": "OAuth",
-      "meta": {
-        "priority": 3,
-        "allocated_s": 956,
-        "target_depth": 3,
-        "difficulty": 2,
-        "is_gap": false
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 99.1,
-      "timestamp": "2026-09-21T16:06:00",
-      "topic_id": "oauth",
-      "question_id": "q4",
-      "text": "Explain how you would implement Google OAuth2 in a Flask application, including how you would store the access token securely and handle token refresh.",
-      "meta": {
-        "mode": "opening",
-        "difficulty": 2,
-        "time_limit_s": 176,
-        "looking_for": "Describe the OAuth flow, token storage strategy, and refresh token handling."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 124.5,
-      "timestamp": "2026-09-21T16:06:26",
-      "topic_id": "oauth",
-      "question_id": "q4",
-      "text": "Use Authlib, exchange codes, encrypt tokens server-side, refresh expired access tokens securely.",
-      "meta": {
-        "answer_s": 25.4,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 124.5,
-      "timestamp": "2026-09-21T16:06:27",
-      "topic_id": "oauth",
-      "question_id": "q4",
-      "text": "Answer covers the basics but lacks concrete implementation details and depth.",
-      "meta": {
-        "overall": 3.0,
-        "depth_reached": 1,
-        "next_mode": "followup"
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 124.5,
-      "timestamp": "2026-09-21T16:06:29",
-      "topic_id": "oauth",
-      "question_id": "q5",
-      "text": "When persisting a Google OAuth2 access token in your Flask app\u2019s database, which encryption algorithm would you choose, how would you manage the encryption key lifecycle, and how would you ensure the key never leaks to the application runtime environment?",
-      "meta": {
-        "mode": "followup",
-        "difficulty": 2,
-        "time_limit_s": 176,
-        "looking_for": "Explanation of encryption algorithm choice, key management strategy, and runtime key protection."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 142.4,
-      "timestamp": "2026-09-21T16:06:47",
-      "topic_id": "oauth",
-      "question_id": "q5",
-      "text": "Use AES-256-GCM, manage keys via KMS with rotation, granting runtime least-privilege access.",
-      "meta": {
-        "answer_s": 17.9,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 142.4,
-      "timestamp": "2026-09-21T16:06:48",
-      "topic_id": "oauth",
-      "question_id": "q5",
-      "text": "The answer correctly identifies AES-256-GCM, KMS key rotation, and least\u2011privilege access, but lacks depth on implementation details.",
-      "meta": {
-        "overall": 4.2,
-        "depth_reached": 2,
-        "next_mode": "followup"
-      }
-    },
-    {
-      "kind": "difficulty_change",
-      "t_offset_s": 142.4,
-      "timestamp": "2026-09-21T16:06:48",
-      "topic_id": "oauth",
-      "question_id": "",
-      "text": "Difficulty up: 2 -> 3",
-      "meta": {
-        "from": 2,
-        "to": 3
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 142.4,
-      "timestamp": "2026-09-21T16:06:53",
-      "topic_id": "oauth",
-      "question_id": "q6",
-      "text": "If your KMS service is temporarily unavailable, how would you ensure your application can still decrypt existing tokens and continue to operate, and what steps would you take to mitigate the risk of exposing the key during this outage?",
-      "meta": {
-        "mode": "followup",
-        "difficulty": 3,
-        "time_limit_s": 176,
-        "looking_for": "A clear fallback strategy for key decryption, details on local key caching or secondary key store, and mitigation steps to avoid key leakage during outages."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 167.0,
-      "timestamp": "2026-09-21T16:07:17",
-      "topic_id": "oauth",
-      "question_id": "q6",
-      "text": "Use cached data keys securely, restrict access, monitor outages, and avoid plaintext key persistence.",
-      "meta": {
-        "answer_s": 24.6,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 167.0,
-      "timestamp": "2026-09-21T16:07:19",
-      "topic_id": "oauth",
-      "question_id": "q6",
-      "text": "Answer is relevant but lacks depth and specificity; it provides generic mitigation steps but no concrete fallback strategy.",
-      "meta": {
-        "overall": 2.8,
-        "depth_reached": 3,
-        "next_mode": "opening"
-      }
-    },
-    {
-      "kind": "time_adjustment",
-      "t_offset_s": 167.0,
-      "timestamp": "2026-09-21T16:07:19",
-      "topic_id": "middleware",
-      "question_id": "",
-      "text": "Transferred 888s of unused time from OAuth to MiddleWare.",
-      "meta": {
-        "transfer_s": 888,
-        "from_topic_id": "oauth",
-        "to_topic_id": "middleware"
-      }
-    },
-    {
-      "kind": "topic_end",
-      "t_offset_s": 167.0,
-      "timestamp": "2026-09-21T16:07:19",
-      "topic_id": "oauth",
-      "question_id": "",
-      "text": "Target depth reached for OAuth (3/3).",
-      "meta": {
-        "depth_reached": 3,
-        "mean_score": 3.33,
-        "outcome": "topic_completed"
-      }
-    },
-    {
-      "kind": "topic_start",
-      "t_offset_s": 167.0,
-      "timestamp": "2026-09-21T16:07:19",
-      "topic_id": "middleware",
-      "question_id": "",
-      "text": "MiddleWare",
-      "meta": {
-        "priority": 2,
-        "allocated_s": 1088,
-        "target_depth": 2,
-        "difficulty": 1,
-        "is_gap": true
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 167.0,
-      "timestamp": "2026-09-21T16:07:20",
-      "topic_id": "middleware",
-      "question_id": "q7",
-      "text": "Describe how you would implement a custom middleware in a Flask application to log request details and measure response time, and discuss any trade\u2011offs or potential performance impacts.",
-      "meta": {
-        "mode": "opening",
-        "difficulty": 1,
-        "time_limit_s": 100,
-        "looking_for": "Explanation of Flask middleware hooks, timing logic, logging strategy, and discussion of overhead, thread safety, and scalability trade\u2011offs."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 214.2,
-      "timestamp": "2026-09-21T16:08:07",
-      "topic_id": "middleware",
-      "question_id": "q7",
-      "text": "Use global variables, log all request data, skip timing, and ignore performance overhead.",
-      "meta": {
-        "answer_s": 47.2,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 214.2,
-      "timestamp": "2026-09-21T16:08:09",
-      "topic_id": "middleware",
-      "question_id": "q7",
-      "text": "Answer fails to address the question and lacks necessary details.",
-      "meta": {
-        "overall": 1.0,
-        "depth_reached": 0,
-        "next_mode": "clarification"
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 214.2,
-      "timestamp": "2026-09-21T16:08:11",
-      "topic_id": "middleware",
-      "question_id": "q8",
-      "text": "Explain how you would design a Flask middleware that logs request details and measures response time, ensuring it does not introduce significant latency or race conditions in a multi-threaded environment. What considerations would you make regarding logging verbosity and timing precision?",
+      "text": "How would you write a FastAPI middleware that logs every request's path and its processing time, and what would you do to ensure this middleware does not interfere with FastAPI's built\u2011in exception handling?",
       "meta": {
         "mode": "clarification",
-        "difficulty": 1,
-        "time_limit_s": 100,
-        "looking_for": "Use Flask hooks or WSGI middleware, thread-safe logging, minimal overhead, accurate timing, and discuss trade-offs."
+        "difficulty": 2,
+        "time_limit_s": 70,
+        "looking_for": "Clear steps for middleware implementation and explanation of preserving exception handling."
       }
     },
     {
       "kind": "answer",
-      "t_offset_s": 242.6,
-      "timestamp": "2026-09-21T16:08:39",
+      "t_offset_s": 58.7,
+      "timestamp": "2026-09-23T10:09:18",
       "topic_id": "middleware",
-      "question_id": "q8",
-      "text": "Use `before_request` and `after_request`, thread-safe logging, `perf_counter()`, and configurable verbosity.",
+      "question_id": "q2",
+      "text": "do u ask about the is there any build in exception in fastapi ?",
       "meta": {
-        "answer_s": 28.4,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 242.6,
-      "timestamp": "2026-09-21T16:08:41",
-      "topic_id": "middleware",
-      "question_id": "q8",
-      "text": "Answer is relevant and correct but lacks depth and detail.",
-      "meta": {
-        "overall": 3.8,
-        "depth_reached": 1,
-        "next_mode": "opening"
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 242.6,
-      "timestamp": "2026-09-21T16:08:46",
-      "topic_id": "middleware",
-      "question_id": "q9",
-      "text": "You need to add a custom header to every response and log the size of the response body in a Flask middleware. How would you implement this so that it works correctly with streaming responses and does not interfere with the response generation? What trade\u2011offs would you consider regarding memory usage and performance?",
-      "meta": {
-        "mode": "opening",
-        "difficulty": 1,
-        "time_limit_s": 100,
-        "looking_for": "Explanation of using before_request/after_request or WSGI middleware, handling generators, avoiding reading entire body into memory, using response.iter_content or streaming, and discussing latency, memory overhead, and thread safety."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 271.3,
-      "timestamp": "2026-09-21T16:09:15",
-      "topic_id": "middleware",
-      "question_id": "q9",
-      "text": "Use `after_request` to add headers and log `Content-Length`; avoid buffering streams to minimize memory overhead.",
-      "meta": {
-        "answer_s": 28.7,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 271.3,
-      "timestamp": "2026-09-21T16:09:16",
-      "topic_id": "middleware",
-      "question_id": "q9",
-      "text": "Answer is partially correct but lacks depth and specificity for streaming responses.",
-      "meta": {
-        "overall": 2.8,
-        "depth_reached": 2,
-        "next_mode": "followup"
-      }
-    },
-    {
-      "kind": "time_adjustment",
-      "t_offset_s": 271.3,
-      "timestamp": "2026-09-21T16:09:16",
-      "topic_id": "tanstack-router",
-      "question_id": "",
-      "text": "Transferred 983s of unused time from MiddleWare to TanStack Router.",
-      "meta": {
-        "transfer_s": 983,
-        "from_topic_id": "middleware",
-        "to_topic_id": "tanstack-router"
-      }
-    },
-    {
-      "kind": "topic_end",
-      "t_offset_s": 271.3,
-      "timestamp": "2026-09-21T16:09:16",
-      "topic_id": "middleware",
-      "question_id": "",
-      "text": "Target depth reached for MiddleWare (2/2).",
-      "meta": {
-        "depth_reached": 2,
-        "mean_score": 2.53,
-        "outcome": "topic_completed"
-      }
-    },
-    {
-      "kind": "topic_start",
-      "t_offset_s": 271.3,
-      "timestamp": "2026-09-21T16:09:16",
-      "topic_id": "tanstack-router",
-      "question_id": "",
-      "text": "TanStack Router",
-      "meta": {
-        "priority": 2,
-        "allocated_s": 1183,
-        "target_depth": 2,
-        "difficulty": 1,
-        "is_gap": true
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 271.3,
-      "timestamp": "2026-09-21T16:09:17",
-      "topic_id": "tanstack-router",
-      "question_id": "q10",
-      "text": "In TanStack Router, how would you configure a nested route structure for a dashboard that contains a 'profile', 'settings', and 'reports' subpage, and what are the key considerations for optimizing route loading and data fetching in this setup?",
-      "meta": {
-        "mode": "opening",
-        "difficulty": 1,
-        "time_limit_s": 100,
-        "looking_for": "Explanation of nested route configuration, lazy loading, route guards, and data fetching strategies."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 313.4,
-      "timestamp": "2026-09-21T16:09:59",
-      "topic_id": "tanstack-router",
-      "question_id": "q10",
-      "text": "Are you using TanStack Router with file-based routing or code-based routing?",
-      "meta": {
-        "answer_s": 42.1,
+        "answer_s": 44.7,
         "timed_out": false
       }
     },
     {
       "kind": "question",
-      "t_offset_s": 313.4,
-      "timestamp": "2026-09-21T16:10:01",
-      "topic_id": "tanstack-router",
-      "question_id": "q11",
-      "text": "Using code-based routing in TanStack Router, how would you set up a nested route hierarchy for a dashboard that includes 'profile', 'settings', and 'reports' subpages, and what key considerations should you keep in mind for optimizing route loading and data fetching in this setup?",
+      "t_offset_s": 58.7,
+      "timestamp": "2026-09-23T10:09:28",
+      "topic_id": "middleware",
+      "question_id": "q3",
+      "text": "Design a FastAPI middleware that logs each request's path and its processing time. How would you implement it and ensure it does not interfere with FastAPI's built\u2011in exception handling?",
       "meta": {
         "mode": "clarification",
-        "difficulty": 1,
-        "time_limit_s": 100,
-        "looking_for": "A clear description of nested route definitions, lazy loading, route data fetching strategies, and performance considerations."
+        "difficulty": 2,
+        "time_limit_s": 70,
+        "looking_for": "A clear description of the middleware implementation, timing logic, and how to preserve FastAPI\u2019s exception handling."
       }
     },
     {
       "kind": "answer",
-      "t_offset_s": 335.4,
-      "timestamp": "2026-09-21T16:10:23",
-      "topic_id": "tanstack-router",
-      "question_id": "q11",
-      "text": "Use `createRoute` with a dashboard parent, nested child routes, lazy loading, and route-level data loaders.",
+      "t_offset_s": 80.5,
+      "timestamp": "2026-09-23T10:09:50",
+      "topic_id": "middleware",
+      "question_id": "q3",
+      "text": "In FastAPI, describe how you would implement a custom middleware that logs the request path and processing time for every endpoint, and explain how you would ensure it does  \u2502\n\u2502 not interfere with the framework's built\u2011in exception handling.",
       "meta": {
-        "answer_s": 22.0,
+        "answer_s": 21.8,
         "timed_out": false
       }
     },
     {
       "kind": "evaluation",
-      "t_offset_s": 335.4,
-      "timestamp": "2026-09-21T16:10:25",
-      "topic_id": "tanstack-router",
-      "question_id": "q11",
-      "text": "Answer is brief but touches on key concepts; however, it lacks detail and concrete examples.",
-      "meta": {
-        "overall": 3.0,
-        "depth_reached": 1,
-        "next_mode": "followup"
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 335.4,
-      "timestamp": "2026-09-21T16:10:27",
-      "topic_id": "tanstack-router",
-      "question_id": "q12",
-      "text": "What are the trade\u2011offs between lazy loading the 'reports' component versus prefetching it when the dashboard is first loaded, and how would you decide which approach to use?",
-      "meta": {
-        "mode": "followup",
-        "difficulty": 1,
-        "time_limit_s": 100,
-        "looking_for": "Explanation of lazy loading vs prefetching trade\u2011offs and decision criteria"
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 358.2,
-      "timestamp": "2026-09-21T16:10:50",
-      "topic_id": "tanstack-router",
-      "question_id": "q12",
-      "text": "Do you want a code-based implementation or a conceptual explanation?",
-      "meta": {
-        "answer_s": 22.8,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 358.2,
-      "timestamp": "2026-09-21T16:10:52",
-      "topic_id": "tanstack-router",
-      "question_id": "q13",
-      "text": "Explain how you would configure a nested route hierarchy for a dashboard that includes 'profile', 'settings', and 'reports' subpages using TanStack Router, and discuss the trade\u2011offs between lazy loading the 'reports' component versus prefetching it when the dashboard is first loaded, including key considerations for route loading and data fetching.",
-      "meta": {
-        "mode": "clarification",
-        "difficulty": 1,
-        "time_limit_s": 100,
-        "looking_for": "A clear description of nested route setup, lazy loading vs prefetching trade\u2011offs, and considerations for optimizing route loading and data fetching."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 394.5,
-      "timestamp": "2026-09-21T16:11:28",
-      "topic_id": "tanstack-router",
-      "question_id": "q13",
-      "text": "Using TanStack Router, I would create a parent dashboard route with nested profile, settings, and reports routes. Lazy-load reports to reduce initial bundle size, or prefetch it for faster navigation. Use route loaders, caching, and parallel fetching to optimize performance.",
-      "meta": {
-        "answer_s": 36.3,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 394.5,
-      "timestamp": "2026-09-21T16:11:30",
-      "topic_id": "tanstack-router",
-      "question_id": "q13",
-      "text": "Answer covers the basics but lacks depth and concrete details.",
-      "meta": {
-        "overall": 3.6,
-        "depth_reached": 2,
-        "next_mode": "followup"
-      }
-    },
-    {
-      "kind": "time_adjustment",
-      "t_offset_s": 394.5,
-      "timestamp": "2026-09-21T16:11:30",
-      "topic_id": "tanstack-query",
-      "question_id": "",
-      "text": "Transferred 1059s of unused time from TanStack Router to TanStack Query.",
-      "meta": {
-        "transfer_s": 1059,
-        "from_topic_id": "tanstack-router",
-        "to_topic_id": "tanstack-query"
-      }
-    },
-    {
-      "kind": "topic_end",
-      "t_offset_s": 394.5,
-      "timestamp": "2026-09-21T16:11:30",
-      "topic_id": "tanstack-router",
-      "question_id": "",
-      "text": "Target depth reached for TanStack Router (2/2).",
-      "meta": {
-        "depth_reached": 2,
-        "mean_score": 3.3,
-        "outcome": "topic_completed"
-      }
-    },
-    {
-      "kind": "topic_start",
-      "t_offset_s": 394.5,
-      "timestamp": "2026-09-21T16:11:30",
-      "topic_id": "tanstack-query",
-      "question_id": "",
-      "text": "TanStack Query",
-      "meta": {
-        "priority": 2,
-        "allocated_s": 1259,
-        "target_depth": 2,
-        "difficulty": 1,
-        "is_gap": true
-      }
-    },
-    {
-      "kind": "question",
-      "t_offset_s": 394.5,
-      "timestamp": "2026-09-21T16:11:31",
-      "topic_id": "tanstack-query",
-      "question_id": "q14",
-      "text": "When using TanStack Query in a React application, how would you handle a scenario where you need to fetch data from two related endpoints that depend on each other's responses, and you want to avoid unnecessary refetches when the data changes? Describe the approach and any relevant hooks or options you would use.",
-      "meta": {
-        "mode": "opening",
-        "difficulty": 1,
-        "time_limit_s": 100,
-        "looking_for": "Explanation of using dependent queries, query keys, useQuery, useQueries, or useQueryClient with invalidateQueries, and strategies to prevent redundant refetches."
-      }
-    },
-    {
-      "kind": "answer",
-      "t_offset_s": 448.4,
-      "timestamp": "2026-09-21T16:12:25",
-      "topic_id": "tanstack-query",
-      "question_id": "q14",
-      "text": "Do the two endpoints have a strict dependency, or can they be fetched in parallel?",
-      "meta": {
-        "answer_s": 53.9,
-        "timed_out": false
-      }
-    },
-    {
-      "kind": "evaluation",
-      "t_offset_s": 448.4,
-      "timestamp": "2026-09-21T16:12:25",
-      "topic_id": "tanstack-query",
-      "question_id": "q14",
+      "t_offset_s": 80.5,
+      "timestamp": "2026-09-23T10:09:54",
+      "topic_id": "middleware",
+      "question_id": "q3",
       "text": "Doubt threshold reached; moving to a new question.",
       "meta": {
         "outcome": "doubt_threshold_exceeded"
@@ -994,96 +321,568 @@
     },
     {
       "kind": "question",
-      "t_offset_s": 448.4,
-      "timestamp": "2026-09-21T16:12:27",
-      "topic_id": "tanstack-query",
-      "question_id": "q15",
-      "text": "Assuming the second endpoint requires data from the first, how would you use TanStack Query hooks and options to fetch both endpoints efficiently, ensuring that the second query only runs after the first succeeds and that unnecessary refetches are avoided when the data changes?",
+      "t_offset_s": 80.5,
+      "timestamp": "2026-09-23T10:09:59",
+      "topic_id": "middleware",
+      "question_id": "q4",
+      "text": "Explain how you would use FastAPI\u2019s middleware system to add a custom header, such as X\u2011Request\u2011ID, to every response, and describe how you would test that this header is present on multiple endpoints without affecting the normal flow of requests.",
       "meta": {
         "mode": "opening",
-        "difficulty": 1,
-        "time_limit_s": 100,
-        "looking_for": "Use of useQuery, query keys, conditional fetching, staleTime, refetchOnWindowFocus, and possibly useQueries or useQueryClient to coordinate dependent queries and prevent redundant refetches."
+        "difficulty": 2,
+        "time_limit_s": 70,
+        "looking_for": "A description of adding a middleware with @app.middleware(\"http\"), injecting the header into the response, and verifying its presence through unit tests or integration tests across different routes."
       }
     },
     {
       "kind": "answer",
-      "t_offset_s": 487.1,
-      "timestamp": "2026-09-21T16:13:06",
-      "topic_id": "tanstack-query",
-      "question_id": "q15",
-      "text": "i don'tknow",
+      "t_offset_s": 113.4,
+      "timestamp": "2026-09-23T10:10:32",
+      "topic_id": "middleware",
+      "question_id": "q4",
+      "text": "do u ask about the iddleware of system ?",
       "meta": {
-        "answer_s": 38.7,
+        "answer_s": 32.9,
         "timed_out": false
       }
     },
     {
       "kind": "evaluation",
-      "t_offset_s": 487.1,
-      "timestamp": "2026-09-21T16:13:07",
-      "topic_id": "tanstack-query",
-      "question_id": "q15",
-      "text": "Answer does not address the question.",
+      "t_offset_s": 113.4,
+      "timestamp": "2026-09-23T10:10:36",
+      "topic_id": "middleware",
+      "question_id": "q4",
+      "text": "Doubt threshold reached; moving to a new question.",
       "meta": {
-        "overall": 1.0,
-        "depth_reached": 0,
-        "next_mode": "clarification"
+        "outcome": "doubt_threshold_exceeded"
       }
     },
     {
       "kind": "question",
-      "t_offset_s": 487.1,
-      "timestamp": "2026-09-21T16:13:09",
-      "topic_id": "tanstack-query",
-      "question_id": "q16",
-      "text": "Explain how you would implement optimistic updates for a mutation that modifies data fetched by a TanStack Query, and how you would keep the cache in sync with the server while handling potential errors.",
+      "t_offset_s": 113.4,
+      "timestamp": "2026-09-23T10:10:42",
+      "topic_id": "middleware",
+      "question_id": "q5",
+      "text": "Describe how you would implement a FastAPI middleware that checks for a custom header (e.g., X-Feature-Flag) and, if present, stores its value in the request state for downstream handlers. How would you ensure the middleware does not block or alter requests that do not contain this header?",
       "meta": {
-        "mode": "clarification",
-        "difficulty": 1,
-        "time_limit_s": 100,
-        "looking_for": "Candidate explains optimistic update strategy, use of useMutation, onMutate, onError, onSettled, cache update, rollback, and error handling."
+        "mode": "opening",
+        "difficulty": 2,
+        "time_limit_s": 70,
+        "looking_for": "An explanation of adding a header check, setting request.state, and gracefully handling missing headers without affecting normal request flow."
       }
     },
     {
       "kind": "answer",
-      "t_offset_s": 496.9,
-      "timestamp": "2026-09-21T16:13:19",
-      "topic_id": "tanstack-query",
-      "question_id": "q16",
-      "text": "i don't know",
+      "t_offset_s": 157.8,
+      "timestamp": "2026-09-23T10:11:27",
+      "topic_id": "middleware",
+      "question_id": "q5",
+      "text": "do u ask about how to implement the middleware in fastapi",
       "meta": {
-        "answer_s": 9.8,
+        "answer_s": 44.4,
         "timed_out": false
       }
     },
     {
       "kind": "evaluation",
-      "t_offset_s": 496.9,
-      "timestamp": "2026-09-21T16:13:20",
-      "topic_id": "tanstack-query",
-      "question_id": "q16",
-      "text": "Answer does not address the question.",
+      "t_offset_s": 157.8,
+      "timestamp": "2026-09-23T10:11:31",
+      "topic_id": "middleware",
+      "question_id": "q5",
+      "text": "Doubt threshold reached; moving to a new question.",
       "meta": {
-        "overall": 1.0,
-        "depth_reached": 0,
-        "next_mode": "followup"
+        "outcome": "doubt_threshold_exceeded"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 157.8,
+      "timestamp": "2026-09-23T10:11:36",
+      "topic_id": "middleware",
+      "question_id": "q6",
+      "text": "Write a FastAPI middleware that checks for an API key in the `Authorization` header on every request, returns a `401 Unauthorized` response if the key is missing or invalid, and otherwise lets the request proceed\u2014how would you implement this and ensure it does not interfere with other middleware or exception handling?",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 2,
+        "time_limit_s": 52,
+        "looking_for": "Explanation of header extraction, key validation, early response, and middleware flow control."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 197.6,
+      "timestamp": "2026-09-23T10:12:16",
+      "topic_id": "middleware",
+      "question_id": "q6",
+      "text": "do u ask about the how u handle the auth header ?",
+      "meta": {
+        "answer_s": 39.8,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 197.6,
+      "timestamp": "2026-09-23T10:12:20",
+      "topic_id": "middleware",
+      "question_id": "q6",
+      "text": "Doubt threshold reached; moving to a new question.",
+      "meta": {
+        "outcome": "doubt_threshold_exceeded"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 197.6,
+      "timestamp": "2026-09-23T10:12:30",
+      "topic_id": "middleware",
+      "question_id": "q7",
+      "text": "FastAPI allows adding middleware via the `@app.middleware('http')` decorator or by calling `app.add_middleware`. If you need a middleware that reads the request body and modifies it before passing to the route, which method would you choose and why? What are the implications for async vs sync route handlers?",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 2,
+        "time_limit_s": 45,
+        "looking_for": "Explain the choice between decorator and add_middleware, how to read/modify the body, and considerations for async and sync route handlers."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 226.2,
+      "timestamp": "2026-09-23T10:12:58",
+      "topic_id": "middleware",
+      "question_id": "q7",
+      "text": "i don't know about this topic",
+      "meta": {
+        "answer_s": 28.6,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 226.2,
+      "timestamp": "2026-09-23T10:13:03",
+      "topic_id": "middleware",
+      "question_id": "q7",
+      "text": "Candidate requested to skip the current topic.",
+      "meta": {
+        "outcome": "topic_skipped",
+        "reasoning": "Candidate indicates lack of knowledge and will not answer"
       }
     },
     {
       "kind": "topic_end",
-      "t_offset_s": 496.9,
-      "timestamp": "2026-09-21T16:13:20",
-      "topic_id": "tanstack-query",
+      "t_offset_s": 226.2,
+      "timestamp": "2026-09-23T10:13:03",
+      "topic_id": "middleware",
       "question_id": "",
-      "text": "Moving on from TanStack Query: candidate received depth 1 on two consecutive answers.",
+      "text": "Candidate cannot answer, topic not covered",
       "meta": {
         "depth_reached": 0,
-        "mean_score": 1.0,
-        "outcome": "low_depth_skip"
+        "mean_score": 0.0,
+        "outcome": "skipped"
+      }
+    },
+    {
+      "kind": "topic_start",
+      "t_offset_s": 226.2,
+      "timestamp": "2026-09-23T10:13:03",
+      "topic_id": "jwt",
+      "question_id": "",
+      "text": "JWT",
+      "meta": {
+        "priority": 3,
+        "allocated_s": 165,
+        "target_depth": 2,
+        "difficulty": 2,
+        "is_gap": false
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 226.2,
+      "timestamp": "2026-09-23T10:13:07",
+      "topic_id": "jwt",
+      "question_id": "q8",
+      "text": "Explain how you would generate a JWT for a user login flow in a Flask application, including choosing a signing algorithm, setting claims like expiration, and ensuring the token is securely transmitted.",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 2,
+        "time_limit_s": 55,
+        "looking_for": "Description of signing algorithm choice, claim selection (e.g., exp, sub), and secure transport considerations (HTTPS, HttpOnly cookies or Authorization header)."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 246.9,
+      "timestamp": "2026-09-23T10:13:28",
+      "topic_id": "jwt",
+      "question_id": "q8",
+      "text": "i don't kown about this topic",
+      "meta": {
+        "answer_s": 20.7,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 246.9,
+      "timestamp": "2026-09-23T10:13:35",
+      "topic_id": "jwt",
+      "question_id": "q8",
+      "text": "Candidate requested to skip the current topic.",
+      "meta": {
+        "outcome": "topic_skipped",
+        "reasoning": "Candidate indicates no knowledge and will not attempt the topic"
+      }
+    },
+    {
+      "kind": "time_adjustment",
+      "t_offset_s": 246.9,
+      "timestamp": "2026-09-23T10:13:35",
+      "topic_id": "oauth",
+      "question_id": "",
+      "text": "Transferred 144s of unused time from JWT to Oauth.",
+      "meta": {
+        "transfer_s": 144,
+        "from_topic_id": "jwt",
+        "to_topic_id": "oauth"
+      }
+    },
+    {
+      "kind": "topic_end",
+      "t_offset_s": 246.9,
+      "timestamp": "2026-09-23T10:13:35",
+      "topic_id": "jwt",
+      "question_id": "",
+      "text": "Candidate cannot engage with JWT topic, so skip.",
+      "meta": {
+        "depth_reached": 0,
+        "mean_score": 0.0,
+        "outcome": "skipped"
+      }
+    },
+    {
+      "kind": "topic_start",
+      "t_offset_s": 246.9,
+      "timestamp": "2026-09-23T10:13:35",
+      "topic_id": "oauth",
+      "question_id": "",
+      "text": "Oauth",
+      "meta": {
+        "priority": 3,
+        "allocated_s": 309,
+        "target_depth": 2,
+        "difficulty": 2,
+        "is_gap": false
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 246.9,
+      "timestamp": "2026-09-23T10:13:40",
+      "topic_id": "oauth",
+      "question_id": "q9",
+      "text": "What are the main components of OAuth2 and how does the authorization code flow work when integrating Google OAuth2 into a Python web application?",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 2,
+        "time_limit_s": 55,
+        "looking_for": "Clear explanation of OAuth2 components (client, resource owner, authorization server, resource server) and a step\u2011by\u2011step description of the authorization code flow, including redirect URIs, state handling, and token exchange."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 272.6,
+      "timestamp": "2026-09-23T10:14:05",
+      "topic_id": "oauth",
+      "question_id": "q9",
+      "text": "i dont't know about this topic",
+      "meta": {
+        "answer_s": 25.7,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 272.6,
+      "timestamp": "2026-09-23T10:14:13",
+      "topic_id": "oauth",
+      "question_id": "q9",
+      "text": "Candidate does not demonstrate knowledge of OAuth2.",
+      "meta": {
+        "overall": 1.0,
+        "depth_reached": 0,
+        "classification_reasoning": "Candidate admits lack of knowledge"
+      }
+    },
+    {
+      "kind": "difficulty_change",
+      "t_offset_s": 272.6,
+      "timestamp": "2026-09-23T10:14:13",
+      "topic_id": "oauth",
+      "question_id": "",
+      "text": "Difficulty down: 2 -> 1. Weak answer, lower difficulty for next question.",
+      "meta": {
+        "from": 2,
+        "to": 1
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 272.6,
+      "timestamp": "2026-09-23T10:14:17",
+      "topic_id": "oauth",
+      "question_id": "q10",
+      "text": "When implementing Google OAuth2 in a Flask application, how would you securely store and refresh the access token, and what steps would you take to handle token expiration and revocation?",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 1,
+        "time_limit_s": 55,
+        "looking_for": "Explanation of secure token storage (e.g., encrypted session or database), use of refresh token flow, handling expired tokens, revocation API calls, and error handling."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 304.6,
+      "timestamp": "2026-09-23T10:14:49",
+      "topic_id": "oauth",
+      "question_id": "q10",
+      "text": "When implementing Google OAuth2 in a Flask application, how would you securely store and refresh the access token, and what steps would you take to handle token expiration   \u2502\n\u2502 and revocation?",
+      "meta": {
+        "answer_s": 32.0,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 304.6,
+      "timestamp": "2026-09-23T10:14:54",
+      "topic_id": "oauth",
+      "question_id": "q10",
+      "text": "Doubt threshold reached; moving to a new question.",
+      "meta": {
+        "outcome": "doubt_threshold_exceeded"
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 304.6,
+      "timestamp": "2026-09-23T10:15:00",
+      "topic_id": "oauth",
+      "question_id": "q11",
+      "text": "In a Flask application that uses Google OAuth2, explain how you would store the access and refresh tokens securely, implement automatic token refresh, and handle token revocation, ensuring that sensitive data is not exposed to the client and that the application remains responsive to token expiration.",
+      "meta": {
+        "mode": "opening",
+        "difficulty": 1,
+        "time_limit_s": 55,
+        "looking_for": "A secure storage strategy (e.g., encrypted database or server\u2011side session), clear logic for refreshing tokens before they expire, and a revocation handling flow that cleans up stored tokens and updates the user session."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 328.3,
+      "timestamp": "2026-09-23T10:15:23",
+      "topic_id": "oauth",
+      "question_id": "q11",
+      "text": "Encrypt tokens server-side, refresh automatically before expiry, revoke when needed, and reauthenticate on failure.",
+      "meta": {
+        "answer_s": 23.7,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 328.3,
+      "timestamp": "2026-09-23T10:15:32",
+      "topic_id": "oauth",
+      "question_id": "q11",
+      "text": "Answer covers key concepts but lacks detail.",
+      "meta": {
+        "overall": 2.8,
+        "depth_reached": 1,
+        "classification_reasoning": "Candidate provided a concise answer to the question."
+      }
+    },
+    {
+      "kind": "difficulty_change",
+      "t_offset_s": 328.3,
+      "timestamp": "2026-09-23T10:15:32",
+      "topic_id": "oauth",
+      "question_id": "",
+      "text": "Difficulty up: 1 -> 2. Answer was shallow; increase difficulty slightly.",
+      "meta": {
+        "from": 1,
+        "to": 2
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 328.3,
+      "timestamp": "2026-09-23T10:15:39",
+      "topic_id": "oauth",
+      "question_id": "q12",
+      "text": "What table structure would you use to store encrypted tokens, how would you secure the encryption keys, and how would you programmatically refresh a token before it expires while handling revocation errors in a Flask view?",
+      "meta": {
+        "mode": "followup",
+        "difficulty": 2,
+        "time_limit_s": 55,
+        "looking_for": "A concrete database schema, key management strategy, and code logic for pre\u2011emptive token refresh and revocation error handling."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 347.4,
+      "timestamp": "2026-09-23T10:15:59",
+      "topic_id": "oauth",
+      "question_id": "q12",
+      "text": "Use a token table with encrypted credentials, KMS-managed keys, expiry timestamps, automatic refresh, and revocation-triggered reauthentication.",
+      "meta": {
+        "answer_s": 19.1,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 347.4,
+      "timestamp": "2026-09-23T10:16:06",
+      "topic_id": "oauth",
+      "question_id": "q12",
+      "text": "Candidate gave a concise but incomplete answer, covering key concepts but lacking concrete details.",
+      "meta": {
+        "overall": 3.4,
+        "depth_reached": 2,
+        "classification_reasoning": "Candidate provided a concise answer addressing key concepts."
+      }
+    },
+    {
+      "kind": "question",
+      "t_offset_s": 347.4,
+      "timestamp": "2026-09-23T10:16:16",
+      "topic_id": "oauth",
+      "question_id": "q13",
+      "text": "Provide the full SQL CREATE TABLE statement you would use to store encrypted OAuth tokens, including columns for user_id, access_token, refresh_token, expiry, and any necessary constraints or indices. Then give a concise Flask view snippet that checks if the stored access token is expired, refreshes it using Google\u2019s token endpoint, updates the database record, and gracefully handles revocation errors by prompting re\u2011authentication.",
+      "meta": {
+        "mode": "followup",
+        "difficulty": 2,
+        "time_limit_s": 55,
+        "looking_for": "A detailed CREATE TABLE statement with appropriate column types, constraints, and indices, plus a Flask code snippet that checks expiration, refreshes the token via Google\u2019s API, updates the DB, and handles revocation errors."
+      }
+    },
+    {
+      "kind": "answer",
+      "t_offset_s": 380.2,
+      "timestamp": "2026-09-23T10:16:48",
+      "topic_id": "oauth",
+      "question_id": "q13",
+      "text": "The table should store encrypted tokens, track expiration, and associate each token record with a user. The Flask view should refresh expired access tokens server-side and require re-authentication if Google reports that the refresh token has been revoked or invalidated.",
+      "meta": {
+        "answer_s": 32.8,
+        "timed_out": false
+      }
+    },
+    {
+      "kind": "evaluation",
+      "t_offset_s": 380.2,
+      "timestamp": "2026-09-23T10:17:19",
+      "topic_id": "oauth",
+      "question_id": "q13",
+      "text": "Answer is incomplete; lacks concrete SQL and code.",
+      "meta": {
+        "overall": 2.6,
+        "depth_reached": 3,
+        "classification_reasoning": "Partial answer, no SQL or code provided"
+      }
+    },
+    {
+      "kind": "difficulty_change",
+      "t_offset_s": 380.2,
+      "timestamp": "2026-09-23T10:17:19",
+      "topic_id": "oauth",
+      "question_id": "",
+      "text": "Difficulty up: 2 -> 3.",
+      "meta": {
+        "from": 2,
+        "to": 3
+      }
+    },
+    {
+      "kind": "topic_end",
+      "t_offset_s": 380.2,
+      "timestamp": "2026-09-23T10:17:19",
+      "topic_id": "oauth",
+      "question_id": "",
+      "text": "Depth target reached and follow-ups exhausted; move to next topic",
+      "meta": {
+        "depth_reached": 3,
+        "mean_score": 2.45,
+        "outcome": "topic_completed"
       }
     }
   ],
-  "evaluations": [],
+  "evaluations": [
+    {
+      "question_id": "q9",
+      "topic_id": "oauth",
+      "relevance": 1,
+      "depth": 1,
+      "specificity": 1,
+      "correctness": 1,
+      "communication": 1,
+      "verdict": "Candidate does not demonstrate knowledge of OAuth2.",
+      "strength_note": "",
+      "gap_note": "No answer provided.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 1.0
+    },
+    {
+      "question_id": "q11",
+      "topic_id": "oauth",
+      "relevance": 3,
+      "depth": 2,
+      "specificity": 2,
+      "correctness": 4,
+      "communication": 3,
+      "verdict": "Answer covers key concepts but lacks detail.",
+      "strength_note": "Mentions encryption and automatic refresh.",
+      "gap_note": "Missing specifics on storage mechanism and revocation flow.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": false,
+      "overall": 2.8
+    },
+    {
+      "question_id": "q12",
+      "topic_id": "oauth",
+      "relevance": 3,
+      "depth": 3,
+      "specificity": 3,
+      "correctness": 4,
+      "communication": 4,
+      "verdict": "Candidate gave a concise but incomplete answer, covering key concepts but lacking concrete details.",
+      "strength_note": "Clear mention of KMS-managed keys and revocation handling.",
+      "gap_note": "Missing concrete schema and code logic.",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": true,
+      "overall": 3.4
+    },
+    {
+      "question_id": "q13",
+      "topic_id": "oauth",
+      "relevance": 3,
+      "depth": 2,
+      "specificity": 2,
+      "correctness": 3,
+      "communication": 3,
+      "verdict": "Answer is incomplete; lacks concrete SQL and code.",
+      "strength_note": "Clear high-level understanding of token storage and refresh logic",
+      "gap_note": "Missing actual CREATE TABLE and Flask code",
+      "contradicts_resume": false,
+      "discrepancy_note": "",
+      "needs_validation": true,
+      "overall": 2.6
+    }
+  ],
   "discrepancies": []
 }

@@ -16,9 +16,6 @@ class JDAnalysis(BaseModel):
     domain: str = ""
     responsibilities: list[str] = Field(default_factory=list)
 
-class ResponseClassification(BaseModel):
-    classification: Literal["answer", "doubt", "skip_topic"]
-    reasoning: str
 
 class ResumeAnalysis(BaseModel):
     name: str = "Candidate"
@@ -71,6 +68,7 @@ class TopicRun(BaseModel):
     difficulty: int = 3
     scores: list[float] = Field(default_factory=list)
     consecutive_low_depth_answers: int = 0
+    extended_s: int = 0  # extra seconds the orchestrator borrowed for this topic
 
     @property
     def mean_score(self) -> float:
@@ -130,10 +128,74 @@ class Discrepancy(BaseModel):
     answer_signal: str = ""
     note: str = ""
 
-class NextActionDecision(BaseModel):
-    """LLM decision on whether to continue the topic, move to next, or wrap up."""
-    action: Literal["continue_topic", "next_topic", "wrap_up"]
-    reasoning: str
+OrchestratorAction = Literal["continue_topic", "next_topic", "skip_topic", "wrap_up"]
+
+
+class OrchestratorDecision(BaseModel):
+    """Everything decide_next needs from its single LLM call per candidate turn."""
+
+    # 1. Classify the reply.
+    response_type: Literal["answer", "doubt", "skip_topic"]
+    classification_reasoning: str = ""
+    # 2. Evaluate it (only meaningful when response_type == "answer").
+    relevance: int = Field(default=3, ge=1, le=5)
+    depth: int = Field(default=3, ge=1, le=5)
+    specificity: int = Field(default=3, ge=1, le=5)
+    correctness: int = Field(default=3, ge=1, le=5)
+    communication: int = Field(default=3, ge=1, le=5)
+    verdict: str = ""
+    strength_note: str = ""
+    gap_note: str = ""
+    contradicts_resume: bool = False
+    discrepancy_note: str = ""
+    needs_validation: bool = False
+    # 3. What to do next.
+    action: OrchestratorAction = "continue_topic"
+    action_reasoning: str = ""
+    # 4. Shape of the next question (used by generate_question).
+    next_difficulty: int = Field(default=3, ge=1, le=5)
+    difficulty_reasoning: str = ""
+    next_mode: Mode = "opening"
+    next_question_focus: str = ""
+    # 5. Dynamic time: extra seconds for the current topic, taken from the last topics.
+    extend_topic_seconds: int = Field(default=0, ge=0, le=300)
+    extension_reasoning: str = ""
+
+    def to_evaluation(self) -> "Evaluation":
+        return Evaluation(**self.model_dump(include={
+            "relevance", "depth", "specificity", "correctness", "communication",
+            "verdict", "strength_note", "gap_note", "contradicts_resume",
+            "discrepancy_note", "needs_validation",
+        }))
+
+Signal = Literal["strong", "mixed", "weak", "insufficient"]
+
+
+class ReportPoint(BaseModel):
+    topic_id: str = ""
+    point: str
+
+
+class TopicNote(BaseModel):
+    topic_id: str
+    signal: Signal = "insufficient"
+    assessment: str = ""
+
+
+class ReportNarrative(BaseModel):
+    """The judgement half of the report, written by the LLM from the evidence."""
+
+    recommendation: Literal["advance", "borderline", "do_not_advance"]
+    confidence: Literal["low", "medium", "high"] = "medium"
+    headline: str = ""
+    recommendation_reasoning: str = ""
+    summary: str = ""
+    strengths: list[ReportPoint] = Field(default_factory=list)
+    concerns: list[ReportPoint] = Field(default_factory=list)
+    topic_notes: list[TopicNote] = Field(default_factory=list)
+    follow_ups: list[str] = Field(default_factory=list)
+    risk_note: str = ""
+
 
 class InterviewState(TypedDict, total=False):
     # inputs
@@ -152,7 +214,8 @@ class InterviewState(TypedDict, total=False):
     pending_question: Optional[Question]
     next_mode: Mode
     next_action: Literal["ask", "wrap_up"]
-    last_response_type: Literal["answer", "doubt", None] = None
+    last_response_type: Literal["answer", "doubt", "skip_topic", None]
+    question_focus: str  
     pacing_note: str
     elapsed_s: float
     question_counter: int

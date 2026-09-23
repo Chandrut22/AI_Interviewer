@@ -14,7 +14,8 @@ load_dotenv()
 
 DEFAULT_MODEL = os.getenv("MODEL_NAME", "openai/gpt-oss-20b")
 MODEL_PROVIDER = os.getenv("MODEL_PROVIDER", "openrouter")
-MAX_OUTPUT_TOKENS = int(os.getenv("MAX_OUTPUT_TOKENS", 16000))
+BASE_URL = os.getenv("BASE_URL","")
+
 _UNFILLED = re.compile(r"\{\{\s*(\w+)\s*\}\}")
 
 def chat_model(model: str | None = None, temperature: float = 0.4):
@@ -24,20 +25,17 @@ def chat_model(model: str | None = None, temperature: float = 0.4):
             "API_KEY is not set. Put it in a .env file next to the project."
         )
 
-    model_name = model or DEFAULT_MODEL
+
     provider = MODEL_PROVIDER
 
 
     return init_chat_model(
-        model=model_name,
-        model_provider=provider,
+        model=model or DEFAULT_MODEL,
+        model_provider="openai",
         api_key=api_key,
+        base_url="https://ollama.com/v1",
         temperature=temperature,
-        max_retries=6,
-        # model_kwargs={
-        #     "frequency_penalty": 0.8,
-        #     "presence_penalty": 0.5,
-        # },
+        max_retries=2,
     )
 
 def get_system_prompt(key: str, fallback: str, **vars) -> str:
@@ -65,13 +63,14 @@ def _extract_json(text: str) -> str:
         return text[start : end + 1]
     return text
 
-def structured(llm, schema, system: str, user: str, retries: int = 5):
+def structured(llm, schema, system: str, user: "str | list", retries: int = 5):
     contract = JSON_REPLY_CONTRACT.format(
         schema=json.dumps(schema.model_json_schema(), indent=2)
     )
+    conversation = [HumanMessage(content=user)] if isinstance(user, str) else list(user)
     base = [
         SystemMessage(content=f"{system}\n\n{contract}"),
-        HumanMessage(content=user),
+        *conversation,
     ]
     messages = list(base)
 
@@ -103,17 +102,6 @@ def structured(llm, schema, system: str, user: str, retries: int = 5):
                 last_error = str(exc)[:800]
         else:
             last_error = "model returned an empty response"
-
-        if truncated:
-            logging.warning(
-                "%s reply hit the output token limit (MAX_OUTPUT_TOKENS=%s)",
-                schema.__name__, MAX_OUTPUT_TOKENS,
-            )
-            last_error = (
-                "your reply was cut off because it ran out of output tokens. "
-                "Reason briefly, keep every free-text field to one short "
-                "sentence, and return the complete JSON object"
-            )
 
         if attempt == retries:
             break

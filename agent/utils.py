@@ -11,11 +11,6 @@ SENIORITY_BASELINE = json.loads(os.getenv("SENIORITY_BASELINE", "{}"))
 
 Action = Literal["continue_topic", "next_topic", "wrap_up"]
 
-@dataclass(frozen=True)
-class Pacing:
-    action: Action
-    reason: str
-
 def baseline_difficulty(seniority: str | None, years_required: float = 0.0) -> int:
     """Starting difficulty for a topic, from the JD's seniority signal."""
     if seniority:
@@ -48,72 +43,48 @@ def depth_credit(answer_score: float, difficulty: int, timed_out: bool) -> int:
         return 2 if difficulty >= 3 else 1
     return 1
 
-def adjust_difficulty(current: int, answer_score: float, baseline: int) -> int:
-    if answer_score >= 4.2:
-        nxt = current + 1
-    elif answer_score <= 2.2:
-        nxt = current - 1
-    else:
-        nxt = current
-    low, high = max(1, baseline - 2), min(5, baseline + 2)
-    return max(low, min(high, nxt))
 
-def next_mode(
-    *,
-    answer_score: float,
-    specificity: int,
-    relevance: int,
-    is_empty: bool,
-    timed_out: bool,
-    clarifications_used: int,
-    followups_used: int,
-    max_clarifications: int = 1,
-    max_followups: int = 2,
-) -> Mode:
-    """Pick the shape of the next question within the current topic."""
-    if is_empty or timed_out:
-        return "opening"
-    if relevance <= 2 and clarifications_used < max_clarifications:
-        return "clarification"
-    if specificity <= 2 and followups_used < max_followups:
-        return "followup"
-    if answer_score >= 4.0 and followups_used < max_followups:
-        return "followup"
-    return "opening"
+
 
 def coverage_ratio(covered: int, planned: int) -> float:
     return round(covered / planned, 2) if planned else 0.0
 
-def balance_topic_budgets(
+def borrow_from_last_topics(
     current_topic_id: str,
-    extension_s: int,
-    topics: list, 
+    seconds: int,
+    topics: list,
+    order: list[str],
+    topic_runs: dict,
     min_seconds: int = 100,
-) -> tuple[list, int]:
+) -> tuple[list, int, dict[str, int]]:
+    """Give the current topic up to `seconds` extra, taken from the LAST pending
+    topics in plan order, never leaving a donor below `min_seconds`.
 
-    current_topic = next((t for t in topics if t.id == current_topic_id), None)
-    if not current_topic:
-        return topics, 0
+    Returns (topics, seconds_granted, {donor_id: seconds_taken}).
+    Total interview time is unchanged.
+    """
+    by_id = {t.id: t for t in topics}
+    current = by_id.get(current_topic_id)
+    if current is None or seconds <= 0:
+        return topics, 0, {}
 
- 
-
-    donors = [t for t in topics if t.id != current_topic_id]
-    donors.sort(key=lambda t: t.priority)
-
-    recovered_s = 0
-    remaining_to_recover = extension_s
-
-    for donor in donors:
-        if remaining_to_recover <= 0:
+    donors: dict[str, int] = {}
+    needed = seconds
+    for tid in reversed(order):
+        if needed <= 0:
             break
-
-        reducible = donor.allocated_seconds - min_seconds
-        if reducible > 0:
-            take = min(reducible, remaining_to_recover)
+        if tid == current_topic_id or tid not in by_id:
+            continue
+        run = topic_runs.get(tid)
+        if run is None or run.status != "pending":
+            continue
+        donor = by_id[tid]
+        take = min(needed, max(0, donor.allocated_seconds - min_seconds))
+        if take > 0:
             donor.allocated_seconds -= take
-            recovered_s += take
-            remaining_to_recover -= take
+            donors[tid] = take
+            needed -= take
 
-    current_topic.allocated_seconds += recovered_s
-
-    return topics, recovered_s
+    granted = seconds - needed
+    current.allocated_seconds += granted
+    return topics, granted, donors

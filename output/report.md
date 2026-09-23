@@ -1,46 +1,63 @@
-# Interview summary - CHANDRU T
+# Interview report - CHANDRU T
 
-- **Role:** Python Web Developer Intern (intern)
-- **Date:** 2026-09-21 16:13
-- **Time budget:** 30:00 | **used:** 8:17
-- **Completion status:** `time_expired`
-- **Topic coverage:** 4/5 (80%), 4 at target depth
-- **Questions asked:** 16
-- **Average answer score:** 0.0/5
+**Python Web Developer Intern (intern)** - 2026-09-23 10:17
 
-### Recommendation  
-Do not advance  
+## Recommendation: Do not advance (low confidence)
 
-No evaluation data provided. Unable to assess candidate's suitability.  
+**Candidate lacks foundational knowledge in key web development topics**
 
-### Strengths  
+The candidate demonstrated insufficient knowledge of core topics such as middleware, JWT, and OAuth, with many unanswered or incomplete responses. The limited depth and lack of concrete examples indicate they are not ready for the role.
 
-### Gaps and concerns  
+## At a glance
 
-### Overall observations  
-No evaluation data available, so cannot comment on candidate's performance. Unable to assess handling of pressure, structure, or unfamiliar ground.
+| | |
+|---|---|
+| Time used | 6:20 of 10:00 |
+| Completion | `completed` |
+| Topics covered | 1/3 (33%), 1 at target depth |
+| Questions asked | 13 |
+| Average answer score | 2.45/5 |
 
-### Topic coverage and depth
+| Relevance | Depth | Specificity | Correctness | Communication |
+|---|---|---|---|---|
+| 2.5/5 | 2.0/5 | 2.0/5 | 3.0/5 | 2.8/5 |
 
-| Topic | Priority | Allocated | Used | Qs | Depth | Target | Mean | Status |
-|---|---|---|---|---|---|---|---|---|
-| JWT | 3 | 1:39 | 1:39 | 3 | 3 | 3 | 3.33 | covered |
-| OAuth | 3 | 1:07 | 1:08 | 3 | 3 | 3 | 3.33 | covered |
-| MiddleWare | 2 | 1:44 | 1:44 | 3 | 2 | 2 | 2.53 | covered |
-| TanStack Router | 2 | 2:03 | 2:03 | 4 | 2 | 2 | 3.3 | covered |
-| TanStack Query | 2 | 20:59 | 1:42 | 3 | 0 | 2 | 1.0 | skipped |
+## How the candidate performed
 
-### Resume-vs-answer discrepancies
+The candidate struggled to answer basic questions, showing gaps in understanding of middleware and authentication flows. Their responses lacked detail and concrete implementation steps.
+
+### Strengths
+
+- **Oauth** - Mentioned encryption of tokens and automatic refresh logic
+- **Oauth** - Referenced use of KMS‑managed keys for secure storage
+- **Oauth** - Acknowledged revocation handling and re‑authentication flow
+
+### Concerns
+
+- **MiddleWare** - No answer provided for middleware implementation
+- **JWT** - No answer provided for JWT generation
+- **Oauth** - OAuth answers lacked concrete implementation details and database schema
+
+## Topic by topic
+
+| Topic | Priority | Signal | Used / budget | Qs | Depth | Mean | Status |
+|---|---|---|---|---|---|---|---|
+| MiddleWare | 4 | Insufficient signal | 3:46 / 3:30 | 7 | 0/3 | - | skipped |
+| JWT | 3 | Insufficient signal | 0:21 / 0:20 | 1 | 0/2 | - | skipped |
+| Oauth | 3 | Mixed | 2:13 / 5:09 | 5 | 3/2 | 2.45 | covered |
+
+- **MiddleWare** (Insufficient signal) - Candidate did not answer or provided incomplete answers.
+- **JWT** (Insufficient signal) - Candidate did not answer or provided incomplete answers.
+- **Oauth** (Mixed) - Candidate provided some correct high‑level concepts but lacked concrete implementation details.
+
+## Resume-vs-answer discrepancies
 
 - None flagged.
 
-### Areas requiring further validation
+## Follow up in the next round
 
-- None flagged.
-
-### Not assessed
-
-- **TanStack Query** (priority 2) - ran out of time
+- **Oauth** - Missing concrete schema and code logic.
+- **Oauth** - Missing actual CREATE TABLE and Flask code
 
 ---
 
