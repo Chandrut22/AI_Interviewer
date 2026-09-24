@@ -1,14 +1,13 @@
-(AI_Interviewer) > uv run python main.py --resume CV_Developer.pdf --jd jd.txt --minutes 30 
 analysing job description and resume...
         Proposed time allocation (LLM)         
 ┏━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━┓
 ┃ Topic           ┃ Priority ┃ Seconds ┃ M:S  ┃
 ┡━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━┩
-│ JWT             │ 3        │ 528     │ 8:48 │
-│ OAuth           │ 3        │ 528     │ 8:48 │
-│ MiddleWare      │ 2        │ 200     │ 3:20 │
-│ TanStack Router │ 2        │ 200     │ 3:20 │
-│ TanStack Query  │ 2        │ 200     │ 3:20 │
+│ JWT             │ 3        │ 456     │ 7:36 │
+│ OAuth           │ 3        │ 456     │ 7:36 │
+│ Middleware      │ 2        │ 248     │ 4:08 │
+│ TanStack Router │ 2        │ 248     │ 4:08 │
+│ TanStack Query  │ 2        │ 248     │ 4:08 │
 └─────────────────┴──────────┴─────────┴──────┘
 Total budget: 30m 0s
 Approve this time allocation? [y/n] (y): y
@@ -16,171 +15,220 @@ Approve this time allocation? [y/n] (y): y
 ┏━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
 ┃ Topic           ┃ Priority ┃ Budget ┃ Target depth ┃ Source       ┃
 ┡━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
-│ JWT             │ 3        │ 8:48   │ 3            │ resume_claim │
-│ OAuth           │ 3        │ 8:48   │ 3            │ resume_claim │
-│ MiddleWare      │ 2        │ 3:20   │ 2            │ gap (gap)    │
-│ TanStack Router │ 2        │ 3:20   │ 2            │ gap (gap)    │
-│ TanStack Query  │ 2        │ 3:20   │ 2            │ gap (gap)    │
+│ JWT             │ 3        │ 7:36   │ 3            │ resume_claim │
+│ OAuth           │ 3        │ 7:36   │ 3            │ resume_claim │
+│ Middleware      │ 2        │ 4:08   │ 2            │ gap (gap)    │
+│ TanStack Router │ 2        │ 4:08   │ 2            │ gap (gap)    │
+│ TanStack Query  │ 2        │ 4:08   │ 2            │ gap (gap)    │
 └─────────────────┴──────────┴────────┴──────────────┴──────────────┘
 
 ╭───────────────────────────────────────────────────────────── Topic 1/5: JWT  |  new question  |  difficulty 2/5 ──────────────────────────────────────────────────────────────╮
-│ How would you implement a token expiration strategy using JWT in a Python web application, and what considerations would you take into account to balance security and user   │
-│ experience?                                                                                                                                                                   │
-╰───────────────────────────────────────────────────── answer in 176s  ·  30m 0s left in the interview  ·  Doubts left: 2 ──────────────────────────────────────────────────────╯
-answer > Set short-lived access tokens, secure refresh tokens, rotate them, and balance expiry with usability.
-evaluating...
-
-╭─────────────────────────────────────────────────────────────── Topic 1/5: JWT  |  follow-up  |  difficulty 2/5 ───────────────────────────────────────────────────────────────╮
-│ What specific expiration durations would you set for access and refresh tokens in a typical web application, and what factors influence those choices?                        │
-╰───────────────────────────────────────────────────── answer in 176s  ·  29m 21s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
-answer > Access tokens: 15 minutes; refresh tokens: 7–30 days, based on risk, sensitivity, and usability.
+│ What are the three parts of a JWT token, and what role does each part play in authentication?                                                                                 │
+╰───────────────────────────────────────────────────── answer in 152s  ·  30m 0s left in the interview  ·  Doubts left: 2 ──────────────────────────────────────────────────────╯
+answer > Header identifies algorithm, payload contains claims, and signature verifies token integrity and authenticity.
  
 evaluating...
 
-╭───────────────────────────────────────────────────────────── Topic 1/5: JWT  |  new question  |  difficulty 2/5 ──────────────────────────────────────────────────────────────╮
-│ Describe how you would implement JWT revocation in a stateless authentication system, for example when a user logs out or changes their password, and discuss the trade‑offs  │
-│ of your chosen approach.                                                                                                                                                      │
-╰───────────────────────────────────────────────────── answer in 176s  ·  28m 55s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
-answer > Use Redis blocklists keyed by JWT `jti`; revoke on logout/password change, trading statelessness for security.
+╭─────────────────────────────────────────────────────────────── Topic 1/5: JWT  |  follow-up  |  difficulty 3/5 ───────────────────────────────────────────────────────────────╮
+│ Walk me through the exact steps you would take to compute a JWT signature using a common algorithm like HS256, and explain why you might choose HS256 over RS256 in a         │
+│ high‑traffic API, including any security or performance trade‑offs.                                                                                                           │
+╰───────────────────────────────────────────────────── answer in 152s  ·  29m 26s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
+answer > Do you want the explanation focused on implementation details or HS256 versus RS256 trade-offs?
+ 
+evaluating...
+
+╭──────────────────────────────────────────────────────────────────────────────── Clarification ────────────────────────────────────────────────────────────────────────────────╮
+│ I’d like you to focus on the implementation steps for HS256 and then discuss trade‑offs versus RS256.                                                                         │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+╭───────────────────────────────────────────────────────────── Topic 1/5: JWT  |  clarification  |  difficulty 3/5 ─────────────────────────────────────────────────────────────╮
+│ Walk me through the exact steps you would take to compute a JWT signature using a common algorithm like HS256, and explain why you might choose HS256 over RS256 in a         │
+│ high‑traffic API, including any security or performance trade‑offs.                                                                                                           │
+╰───────────────────────────────────────────────────── answer in 152s  ·  28m 55s left in the interview  ·  Doubts left: 1 ─────────────────────────────────────────────────────╯
+answer > HS256 signs Base64URL-encoded header and payload using HMAC-SHA256 and a secret. It’s faster than RS256, but requires securely sharing the secret across services. RS25
+         6 uses public-private keys, simplifying verification key distribution but adding computational overhead.
+ 
+evaluating...
+
+╭─────────────────────────────────────────────────────────────── Topic 1/5: JWT  |  follow-up  |  difficulty 3/5 ───────────────────────────────────────────────────────────────╮
+│ Describe how you would implement a key rotation mechanism for HS256 secrets in a microservices architecture, including how you would manage token validation for tokens       │
+│ signed with old keys and prevent replay attacks during the rotation window.                                                                                                   │
+╰───────────────────────────────────────────────────── answer in 152s  ·  28m 21s left in the interview  ·  Doubts left: 1 ─────────────────────────────────────────────────────╯
+answer >  Describe how you would implement a key rotation mechanism for HS256 secrets in a microservices architecture, including how you would manage token validation for token
+         s       │
+         │ signed with old keys and prevent replay attacks during the rotation window.
+evaluating...
+
+╭──────────────────────────────────────────────────────────────────────────────── Clarification ────────────────────────────────────────────────────────────────────────────────╮
+│ Take the question as written and answer it with the approach you would actually use.                                                                                          │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+╭───────────────────────────────────────────────────────────── Topic 1/5: JWT  |  clarification  |  difficulty 3/5 ─────────────────────────────────────────────────────────────╮
+│ Describe how you would implement a key rotation mechanism for HS256 secrets in a microservices architecture, including how you would manage token validation for tokens       │
+│ signed with old keys and prevent replay attacks during the rotation window.                                                                                                   │
+╰───────────────────────────────────────────────────── answer in 152s  ·  28m 8s left in the interview  ·  Doubts left: 0 ──────────────────────────────────────────────────────╯
+answer >  Describe how you would implement a key rotation mechanism for HS256 secrets in a microservices architecture, including how you would manage token validation for token
+         s       │
+         │ signed with old keys and prevent replay attacks during the rotation window.
+evaluating...
+
+╭───────────────────────────────────────────────────────────── Topic 1/5: JWT  |  new question  |  difficulty 3/5 ──────────────────────────────────────────────────────────────╮
+│ How would you design a key rotation strategy for HS256 tokens in a stateless API environment, ensuring that tokens issued before rotation remain valid for a limited time     │
+│ while preventing replay attacks, and what changes would you make to the token validation pipeline to support this?                                                            │
+╰───────────────────────────────────────────────────── answer in 152s  ·  27m 51s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
+answer > Use a `kid` header to select the signing key. Keep old keys valid during a short grace period, then retire them. Validate signature, expiry, and `kid`; use `jti` with
+         a shared denylist to prevent replay or revoke tokens.
  
 evaluating...
 
 ╭──────────────────────────────────────────────────────────── Topic 2/5: OAuth  |  new question  |  difficulty 2/5 ─────────────────────────────────────────────────────────────╮
-│ Explain how you would implement Google OAuth2 in a Flask application, including how you would store the access token securely and handle token refresh.                       │
-╰───────────────────────────────────────────────────── answer in 176s  ·  28m 21s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
-answer > Use Authlib, exchange codes, encrypt tokens server-side, refresh expired access tokens securely.
- 
+│ Explain the difference between the authorization code grant and the implicit grant in OAuth2, and describe a scenario where you would choose one over the other.              │
+╰───────────────────────────────────────────────────── answer in 152s  ·  27m 26s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
+answer > Explain the difference between the authorization code grant and the implicit grant in OAuth2, and describe a scenario where you would choose one over the other.
 evaluating...
 
-╭────────────────────────────────────────────────────────────── Topic 2/5: OAuth  |  follow-up  |  difficulty 2/5 ──────────────────────────────────────────────────────────────╮
-│ When persisting a Google OAuth2 access token in your Flask app’s database, which encryption algorithm would you choose, how would you manage the encryption key lifecycle,    │
-│ and how would you ensure the key never leaks to the application runtime environment?                                                                                          │
-╰───────────────────────────────────────────────────── answer in 176s  ·  27m 56s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
-answer > Use AES-256-GCM, manage keys via KMS with rotation, granting runtime least-privilege access.
+╭──────────────────────────────────────────────────────────────────────────────── Clarification ────────────────────────────────────────────────────────────────────────────────╮
+│ Your doubt limit is reached (2/2), so I can't explain further. Answer the question as you understand it.                                                                      │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+╭──────────────────────────────────────────────────────────── Topic 2/5: OAuth  |  clarification  |  difficulty 2/5 ────────────────────────────────────────────────────────────╮
+│ Explain the difference between the authorization code grant and the implicit grant in OAuth2, and describe a scenario where you would choose one over the other.              │
+╰───────────────────────────────────────────────────── answer in 152s  ·  27m 13s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
+answer > Authorization code exchanges a code server-side for tokens; implicit returns tokens directly. Prefer authorization code with PKCE for modern apps; implicit is deprecat
+         ed due to token exposure risks.
  
 evaluating...
 
 ╭────────────────────────────────────────────────────────────── Topic 2/5: OAuth  |  follow-up  |  difficulty 3/5 ──────────────────────────────────────────────────────────────╮
-│ If your KMS service is temporarily unavailable, how would you ensure your application can still decrypt existing tokens and continue to operate, and what steps would you     │
-│ take to mitigate the risk of exposing the key during this outage?                                                                                                             │
-╰───────────────────────────────────────────────────── answer in 176s  ·  27m 38s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
-answer > Use cached data keys securely, restrict access, monitor outages, and avoid plaintext key persistence.
+│ In a Django application implementing the OAuth2 authorization code grant with PKCE, how would you securely store the access and refresh tokens, and what HTTP-only, Secure,   │
+│ SameSite cookie attributes would you apply to mitigate XSS and CSRF risks?                                                                                                    │
+╰───────────────────────────────────────────────────── answer in 152s  ·  26m 36s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
+answer > Store tokens encrypted server-side, not in browser storage. Use `HttpOnly`, `Secure`, and `SameSite=Lax` session cookies, plus CSRF protection and short-lived access t
+         okens with refresh-token rotation.
  
 evaluating...
 
-╭────────────────────────────────────────────────────────── Topic 3/5: MiddleWare  |  new question  |  difficulty 1/5 ──────────────────────────────────────────────────────────╮
-│ Describe how you would implement a custom middleware in a Flask application to log request details and measure response time, and discuss any trade‑offs or potential         │
-│ performance impacts.                                                                                                                                                          │
-╰───────────────────────────────────────────────────── answer in 100s  ·  27m 13s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
-answer > Use global variables, log all request data, skip timing, and ignore performance overhead.
- 
+╭────────────────────────────────────────────────────────────── Topic 2/5: OAuth  |  follow-up  |  difficulty 3/5 ──────────────────────────────────────────────────────────────╮
+│ In your Django implementation, how would you design the database schema to support refresh‑token rotation, including token hashing, expiration, and revocation logic, and     │
+│ what trade‑offs do you consider between security and performance?                                                                                                             │
+╰───────────────────────────────────────────────────── answer in 152s  ·  26m 12s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
+answer > In your Django implementation, how would you design the database schema to support refresh‑token rotation, including token hashing, expiration, and revocation logic, a
+         nd     │
+         │ what trade‑offs do you consider between security and performance?
 evaluating...
 
 ╭──────────────────────────────────────────────────────────────────────────────── Clarification ────────────────────────────────────────────────────────────────────────────────╮
-│ Middleware should be implemented using Flask's before_request/after_request hooks or a WSGI middleware, avoiding global mutable state that can cause race conditions. Logging │
-│ all request data can be heavy, so you should consider filtering or sampling. Timing should be measured with a high-resolution timer and added to the response headers or      │
-│ logs. Also, be mindful of the impact on request throughput and latency.                                                                                                       │
+│ Your doubt limit is reached (2/2), so I can't explain further. Answer the question as you understand it.                                                                      │
 ╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
-╭───────────────────────────────────────────────────────── Topic 3/5: MiddleWare  |  clarification  |  difficulty 1/5 ──────────────────────────────────────────────────────────╮
-│ Explain how you would design a Flask middleware that logs request details and measures response time, ensuring it does not introduce significant latency or race conditions   │
-│ in a multi-threaded environment. What considerations would you make regarding logging verbosity and timing precision?                                                         │
-╰───────────────────────────────────────────────────── answer in 100s  ·  26m 26s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
-answer > Use `before_request` and `after_request`, thread-safe logging, `perf_counter()`, and configurable verbosity.
+╭──────────────────────────────────────────────────────────── Topic 2/5: OAuth  |  clarification  |  difficulty 3/5 ────────────────────────────────────────────────────────────╮
+│ In your Django implementation, how would you design the database schema to support refresh‑token rotation, including token hashing, expiration, and revocation logic, and     │
+│ what trade‑offs do you consider between security and performance?                                                                                                             │
+╰───────────────────────────────────────────────────── answer in 152s  ·  25m 48s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
+answer > Create a refresh-token table storing token hashes, user, session, expiry, and revocation timestamps. Rotate tokens atomically, revoke previous tokens, detect reuse, an
+         d index hashes for fast lookup. Hashing improves security; database checks add latency but ensure reliable revocation.
  
 evaluating...
 
-╭────────────────────────────────────────────────────────── Topic 3/5: MiddleWare  |  new question  |  difficulty 1/5 ──────────────────────────────────────────────────────────╮
-│ You need to add a custom header to every response and log the size of the response body in a Flask middleware. How would you implement this so that it works correctly with   │
-│ streaming responses and does not interfere with the response generation? What trade‑offs would you consider regarding memory usage and performance?                           │
-╰───────────────────────────────────────────────────── answer in 100s  ·  25m 57s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
-answer > Use `after_request` to add headers and log `Content-Length`; avoid buffering streams to minimize memory overhead.
+╭────────────────────────────────────────────────────────── Topic 3/5: Middleware  |  new question  |  difficulty 1/5 ──────────────────────────────────────────────────────────╮
+│ How would you implement a custom middleware in FastAPI to log the request and response times, and how would you register that middleware with the application?                │
+╰───────────────────────────────────────────────────── answer in 124s  ·  25m 17s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
+answer > Use `@app.middleware("http")`, record `time.perf_counter()`, await `call_next(request)`, and log elapsed time in `finally`. Register it directly on the FastAPI app.
+ 
+evaluating...
+
+╭─────────────────────────────────────────────────────────── Topic 3/5: Middleware  |  follow-up  |  difficulty 2/5 ────────────────────────────────────────────────────────────╮
+│ When your middleware logs elapsed time, how would you ensure that it still captures the duration even if the downstream endpoint raises an exception, and what steps would    │
+│ you take to include the exception status code in the log?                                                                                                                     │
+╰───────────────────────────────────────────────────── answer in 124s  ·  24m 57s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
+answer > When your middleware logs elapsed time, how would you ensure that it still captures the duration even if the downstream endpoint raises an exception, and what steps wo
+         uld    │
+         │ you take to include the exception status code in the log?
+evaluating...
+
+╭──────────────────────────────────────────────────────────────────────────────── Clarification ────────────────────────────────────────────────────────────────────────────────╮
+│ Your doubt limit is reached (2/2), so I can't explain further. Answer the question as you understand it.                                                                      │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+╭───────────────────────────────────────────────────────── Topic 3/5: Middleware  |  clarification  |  difficulty 2/5 ──────────────────────────────────────────────────────────╮
+│ When your middleware logs elapsed time, how would you ensure that it still captures the duration even if the downstream endpoint raises an exception, and what steps would    │
+│ you take to include the exception status code in the log?                                                                                                                     │
+╰───────────────────────────────────────────────────── answer in 124s  ·  24m 48s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
+answer > Wrap `call_next(request)` in `try/except/finally`. Capture exceptions, log elapsed time in `finally`, and record the exception’s status code—or 500 for unexpected erro
+         rs. Re-raise the exception for FastAPI’s handlers.
+ 
+evaluating...
+
+╭─────────────────────────────────────────────────────────── Topic 3/5: Middleware  |  follow-up  |  difficulty 3/5 ────────────────────────────────────────────────────────────╮
+│ When catching an exception in your middleware, how would you extract the HTTP status code from a FastAPI HTTPException versus a generic exception, and how would you ensure   │
+│ that the log still records the correct status code even if the exception does not carry one?                                                                                  │
+╰───────────────────────────────────────────────────── answer in 124s  ·  24m 5s left in the interview  ·  Doubts left: 0 ──────────────────────────────────────────────────────╯
+answer > Catch `HTTPException` and use `exc.status_code`; for generic exceptions, default to 500. Log the status and latency in `finally`, then re-raise the exception.
  
 evaluating...
 
 ╭─────────────────────────────────────────────────────── Topic 4/5: TanStack Router  |  new question  |  difficulty 1/5 ────────────────────────────────────────────────────────╮
-│ In TanStack Router, how would you configure a nested route structure for a dashboard that contains a 'profile', 'settings', and 'reports' subpage, and what are the key       │
-│ considerations for optimizing route loading and data fetching in this setup?                                                                                                  │
-╰───────────────────────────────────────────────────── answer in 100s  ·  25m 29s left in the interview  ·  Doubts left: 2 ─────────────────────────────────────────────────────╯
-answer > Are you using TanStack Router with file-based routing or code-based routing?
+│ How would you set up a nested route structure in TanStack Router to handle a dashboard with separate sections for user settings, analytics, and notifications, ensuring that  │
+│ each section has its own layout and can be lazy‑loaded? Describe the steps and key configuration options you would use.                                                       │
+╰───────────────────────────────────────────────────── answer in 124s  ·  23m 41s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
+answer > Create a parent dashboard route with nested settings, analytics, and notifications routes. Use `createLazyFileRoute` for lazy-loaded sections, separate layout componen
+         ts, and `Outlet` to render child routes.
  
-evaluating...
-
-╭──────────────────────────────────────────────────────────────────────────────── Clarification ────────────────────────────────────────────────────────────────────────────────╮
-│ TanStack Router primarily uses code-based routing, though file-based routing can be achieved via createFileRoutes. In this interview we are assuming code-based routing.      │
-╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-
-╭─────────────────────────────────────────────────────── Topic 4/5: TanStack Router  |  clarification  |  difficulty 1/5 ───────────────────────────────────────────────────────╮
-│ Using code-based routing in TanStack Router, how would you set up a nested route hierarchy for a dashboard that includes 'profile', 'settings', and 'reports' subpages, and   │
-│ what key considerations should you keep in mind for optimizing route loading and data fetching in this setup?                                                                 │
-╰───────────────────────────────────────────────────── answer in 100s  ·  24m 47s left in the interview  ·  Doubts left: 1 ─────────────────────────────────────────────────────╯
-answer > Use `createRoute` with a dashboard parent, nested child routes, lazy loading, and route-level data loaders.
 evaluating...
 
 ╭───────────────────────────────────────────────────────── Topic 4/5: TanStack Router  |  follow-up  |  difficulty 1/5 ─────────────────────────────────────────────────────────╮
-│ What are the trade‑offs between lazy loading the 'reports' component versus prefetching it when the dashboard is first loaded, and how would you decide which approach to     │
-│ use?                                                                                                                                                                          │
-╰───────────────────────────────────────────────────── answer in 100s  ·  24m 25s left in the interview  ·  Doubts left: 1 ─────────────────────────────────────────────────────╯
-answer > Do you want a code-based implementation or a conceptual explanation?
+│ In TanStack Router, how would you construct the route configuration objects for a dashboard parent route and its child routes to support separate layouts, lazy loading, and  │
+│ prefetching data for the analytics section, and what specific router options would you set to handle errors and data fetching for these nested routes?                        │
+╰───────────────────────────────────────────────────── answer in 124s  ·  23m 15s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
+answer > Use a dashboard parent route with `Outlet`, lazy-loaded child routes, and `loader` for analytics data. Configure `pendingComponent`, `errorComponent`, `staleTime`, and
+          `defaultPreload: 'intent'` for loading, errors, and prefetching.
+ 
 evaluating...
 
-╭──────────────────────────────────────────────────────────────────────────────── Clarification ────────────────────────────────────────────────────────────────────────────────╮
-│ I’m looking for a conceptual explanation rather than a code snippet.                                                                                                          │
-╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭───────────────────────────────────────────────────────── Topic 4/5: TanStack Router  |  follow-up  |  difficulty 2/5 ─────────────────────────────────────────────────────────╮
+│ Show a concrete code snippet for the TanStack Router configuration objects for a dashboard parent route and its nested settings, analytics, and notifications routes,         │
+│ explicitly illustrating how you set the loader for analytics, the errorComponent, the pendingComponent, and enable lazy loading for each child.                               │
+╰───────────────────────────────────────────────────── answer in 124s  ·  22m 46s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
+answer > For actual lazy loading, split each child’s component into a separate file and use createLazyFileRoute (file-based routing) or lazy() with code-based routing.
+evaluating...
 
-╭─────────────────────────────────────────────────────── Topic 4/5: TanStack Router  |  clarification  |  difficulty 1/5 ───────────────────────────────────────────────────────╮
-│ Explain how you would configure a nested route hierarchy for a dashboard that includes 'profile', 'settings', and 'reports' subpages using TanStack Router, and discuss the   │
-│ trade‑offs between lazy loading the 'reports' component versus prefetching it when the dashboard is first loaded, including key considerations for route loading and data     │
-│ fetching.                                                                                                                                                                     │
-╰───────────────────────────────────────────────────── answer in 100s  ·  24m 2s left in the interview  ·  Doubts left: 0 ──────────────────────────────────────────────────────╯
-answer > Using TanStack Router, I would create a parent dashboard route with nested profile, settings, and reports routes. Lazy-load reports to reduce initial bundle size, or p
-         refetch it for faster navigation. Use route loaders, caching, and parallel fetching to optimize performance.
+╭──────────────────────────────────────────────────────── Topic 5/5: TanStack Query  |  new question  |  difficulty 1/5 ────────────────────────────────────────────────────────╮
+│ When using TanStack Query to fetch a list of items, how would you handle pagination and caching to ensure optimal performance and minimal redundant network calls?            │
+╰───────────────────────────────────────────────────── answer in 124s  ·  22m 12s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
+answer > Use `useQuery` with page-based query keys, cache results using `staleTime`, and preserve previous data with `placeholderData: keepPreviousData` to reduce redundant cal
+         ls and UI flickering.
  
  
 evaluating...
 
-╭──────────────────────────────────────────────────────── Topic 5/5: TanStack Query  |  new question  |  difficulty 1/5 ────────────────────────────────────────────────────────╮
-│ When using TanStack Query in a React application, how would you handle a scenario where you need to fetch data from two related endpoints that depend on each other's         │
-│ responses, and you want to avoid unnecessary refetches when the data changes? Describe the approach and any relevant hooks or options you would use.                          │
-╰───────────────────────────────────────────────────── answer in 100s  ·  23m 25s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
-answer > Do the two endpoints have a strict dependency, or can they be fetched in parallel?
+╭───────────────────────────────────────────────────────── Topic 5/5: TanStack Query  |  follow-up  |  difficulty 2/5 ──────────────────────────────────────────────────────────╮
+│ When using `useInfiniteQuery` for infinite scrolling, how do you determine when to fetch the next page, and what strategy would you use to invalidate or refetch the cache    │
+│ when a user changes a filter or the data source updates?                                                                                                                      │
+╰───────────────────────────────────────────────────── answer in 124s  ·  21m 46s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
+answer > Use `getNextPageParam` to detect available pages and trigger `fetchNextPage` near scroll end. Include filters in the query key; invalidate it when data changes.
+ 
 evaluating...
 
-╭──────────────────────────────────────────────────────────────────────────────── Clarification ────────────────────────────────────────────────────────────────────────────────╮
-│ If the second endpoint’s request URL or parameters depend on the data returned by the first, they are strictly dependent; otherwise they can be fetched in parallel.          │
-╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-
-╭──────────────────────────────────────────────────────── Topic 5/5: TanStack Query  |  new question  |  difficulty 1/5 ────────────────────────────────────────────────────────╮
-│ Assuming the second endpoint requires data from the first, how would you use TanStack Query hooks and options to fetch both endpoints efficiently, ensuring that the second   │
-│ query only runs after the first succeeds and that unnecessary refetches are avoided when the data changes?                                                                    │
-╰───────────────────────────────────────────────────── answer in 100s  ·  22m 32s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
-answer > i don'tknow
-evaluating...
-
-╭─────────────────────────────────────────────────────── Topic 5/5: TanStack Query  |  clarification  |  difficulty 1/5 ────────────────────────────────────────────────────────╮
-│ Explain how you would implement optimistic updates for a mutation that modifies data fetched by a TanStack Query, and how you would keep the cache in sync with the server    │
-│ while handling potential errors.                                                                                                                                              │
-╰───────────────────────────────────────────────────── answer in 100s  ·  21m 53s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
-answer > i don't know
+╭───────────────────────────────────────────────────────── Topic 5/5: TanStack Query  |  follow-up  |  difficulty 3/5 ──────────────────────────────────────────────────────────╮
+│ In an infinite scroll component that uses useInfiniteQuery with a pageParam, how would you programmatically reset the pagination when a filter changes so the UI starts from  │
+│ the first page, and what are the trade‑offs between resetting the pageParam manually versus invalidating the query key to trigger a full refetch?                             │
+╰───────────────────────────────────────────────────── answer in 124s  ·  20m 53s left in the interview  ·  Doubts left: 0 ─────────────────────────────────────────────────────╯
+answer > sorry i don't know
 evaluating...
 
                          Topic coverage                          
 ┏━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━┳━━━━━━━┳━━━━━━┳━━━━━━━━━┓
 ┃ Topic           ┃ Used / budget ┃ Qs ┃ Depth ┃ Mean ┃ Status  ┃
 ┡━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━╇━━━━━━━╇━━━━━━╇━━━━━━━━━┩
-│ JWT             │ 1:39 / 1:39   │ 3  │ 3/3   │ 3.33 │ covered │
-│ OAuth           │ 1:07 / 1:07   │ 3  │ 3/3   │ 3.33 │ covered │
-│ MiddleWare      │ 1:44 / 1:44   │ 3  │ 2/2   │ 2.53 │ covered │
-│ TanStack Router │ 2:03 / 2:03   │ 4  │ 2/2   │ 3.3  │ covered │
-│ TanStack Query  │ 1:42 / 20:59  │ 3  │ 0/2   │ 1.0  │ skipped │
+│ JWT             │ 2:34 / 2:34   │ 6  │ 4/3   │ 3.2  │ covered │
+│ OAuth           │ 2:08 / 2:08   │ 5  │ 5/3   │ 4.33 │ covered │
+│ Middleware      │ 1:36 / 1:36   │ 4  │ 4/2   │ 4.53 │ covered │
+│ TanStack Router │ 1:29 / 1:29   │ 3  │ 3/2   │ 3.2  │ covered │
+│ TanStack Query  │ 1:27 / 19:46  │ 3  │ 2/2   │ 3.13 │ covered │
 └─────────────────┴───────────────┴────┴───────┴──────┴─────────┘
-Status: time_expired
+Status: completed
 
 Summary: output\report.md
 Transcript: output\report.transcript.md
 Structured: output\report.transcript.json
-Thread id: iv-e397990a (pass to `resume-interview`)
-
-[04:13:23 PM] (main)
-PS: C:\Genworx\AI_Interviewer
-(AI_Interviewer) > 
+Thread id: iv-25acbdf9 (pass to `resume-interview`)

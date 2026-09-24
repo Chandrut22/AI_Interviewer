@@ -3,16 +3,8 @@ from agent.prompt import JD_ANALYSIS_SYSTEM, PLAN_TOPICS_SYSTEM, RESUME_ANALYSIS
 from datetime import datetime
 from agent.state import InterviewState, JDAnalysis, ResumeAnalysis, TopicPlan, TopicRun, Event, Question
 from agent.utils import wrap_up_reserve, baseline_difficulty, topic_difficulty
-from dotenv import load_dotenv
 from langgraph.types import interrupt
-import os
-
-load_dotenv()
-DEFAULT_QUESTION_SECONDS = int(os.getenv("DEFAULT_QUESTION_SECONDS", 120))
-MIN_QUESTION_SECONDS = 45
-DOUBT_THRESHOLD = int(os.getenv("DOUBT_THRESHOLD", 2))
-MIN_TOPIC_SECONDS = int(os.getenv("MIN_TOPIC_SECONDS", 150))
-PLAN_FIX_ATTEMPTS = int(os.getenv("PLAN_FIX_ATTEMPTS", 2))
+from agent.config import settings
 
 def analyze_jd(state: InterviewState) -> dict:
     llm = chat_model(temperature=0.1)
@@ -36,7 +28,7 @@ def analyze_resume(state: InterviewState) -> dict:
 
 
 def _suggested_topics() -> str:
-    raw = os.getenv("TOPICS_COVER_SUGGESTION", "").strip()
+    raw = settings.TOPICS_COVER_SUGGESTION
     return "none" if raw.lower() in ("", "all", "none") else raw
 
 
@@ -61,8 +53,8 @@ def _plan_errors(plan: TopicPlan, allocatable: int) -> list[str]:
         errors.append(f"`total_allocated_seconds` is {plan.total_allocated_seconds}, but the topics sum to {total}.")
 
     for t in topics:
-        if t.allocated_seconds < MIN_TOPIC_SECONDS:
-            errors.append(f"'{t.id}' has {t.allocated_seconds}s, below the {MIN_TOPIC_SECONDS}s minimum; raise it or move it to `dropped`.")
+        if t.allocated_seconds < settings.MIN_TOPIC_SECONDS:
+            errors.append(f"'{t.id}' has {t.allocated_seconds}s, below the {settings.MIN_TOPIC_SECONDS}s minimum; raise it or move it to `dropped`.")
 
     for hi in topics:
         for lo in topics:
@@ -78,14 +70,14 @@ def plan_topics(state: InterviewState) -> dict:
     total_seconds = state["total_seconds"]
     reserve = wrap_up_reserve(total_seconds)
     allocatable = total_seconds - reserve
-    max_topics = max(1, allocatable // MIN_TOPIC_SECONDS)
+    max_topics = max(1, allocatable // settings.MIN_TOPIC_SECONDS)
 
     system = get_system_prompt(
         "PLAN_TOPICS_SYSTEM", PLAN_TOPICS_SYSTEM,
         seniority=jd.seniority, role_title=jd.role_title,
         total_seconds=total_seconds, total_minutes=total_seconds // 60,
         reserve_seconds=reserve, allocatable_seconds=allocatable,
-        min_topic_seconds=MIN_TOPIC_SECONDS, max_topics=max_topics,
+        min_topic_seconds=settings.MIN_TOPIC_SECONDS, max_topics=max_topics,
     )
     user = (
         f"SUGGESTED TOPICS: {_suggested_topics()}\n\n"
@@ -95,7 +87,7 @@ def plan_topics(state: InterviewState) -> dict:
 
     plan = structured(llm, TopicPlan, system=system, user=user)
     errors = _plan_errors(plan, allocatable)
-    for _ in range(PLAN_FIX_ATTEMPTS):
+    for _ in range(settings.PLAN_FIX_ATTEMPTS):
         if not errors:
             break
         plan = structured(
@@ -218,9 +210,9 @@ def generate_question(state: InterviewState) -> dict:
     mode = state.get("next_mode", "opening")
     counter = state.get("question_counter", 0) + 1
 
-    per_question = topic.seconds_per_question or DEFAULT_QUESTION_SECONDS
+    per_question = topic.seconds_per_question or settings.DEFAULT_QUESTION_SECONDS
     topic_remaining = topic.allocated_seconds - run.elapsed_s
-    limit = int(max(MIN_QUESTION_SECONDS, min(per_question, topic_remaining)))
+    limit = int(max(settings.MIN_QUESTION_SECONDS, min(per_question, topic_remaining)))
 
     history = "\n".join(
         f"{e.kind.upper()}: {e.text}"
@@ -236,6 +228,34 @@ def generate_question(state: InterviewState) -> dict:
     #     )
     #     if doubt_event:
     #         doubt_context = f"\n\nCANDIDATE'S DOUBT:\n{doubt_event.text}\n"
+
+    # A doubt the orchestrator answered: put the SAME question back to the
+    # candidate with that reply attached, instead of writing a new question.
+    clarification_reply = (state.get("clarification_reply") or "").strip()
+    previous = state.get("pending_question")
+    if mode == "clarification" and clarification_reply and previous is not None:
+        repeated = previous.model_copy(update={
+            "id": f"q{counter}",
+            "topic_id": topic.id,
+            "mode": "clarification",
+            "clarification": clarification_reply,
+            "time_limit_s": limit,
+        })
+        return {
+            "pending_question": repeated,
+            "question_counter": counter,
+            "clarification_reply": "",
+            "question_focus": "",
+            "last_response_type": None,
+            "transcript": [
+                _event("question", state, topic_id=topic.id, question_id=repeated.id,
+                       text=repeated.text,
+                       meta={"mode": "clarification", "difficulty": repeated.difficulty,
+                             "time_limit_s": limit, "looking_for": repeated.looking_for,
+                             "clarification": clarification_reply,
+                             "repeat_of": previous.id})
+            ],
+        }
 
     mode_brief = QUESTION_MODE_BRIEF[mode]
 
@@ -270,7 +290,9 @@ def generate_question(state: InterviewState) -> dict:
     return {
         "pending_question": question,
         "question_counter": counter,
-        "last_response_type": None, 
+        "clarification_reply": "",
+        "question_focus": "",
+        "last_response_type": None,
         "transcript": [
             _event("question", state, topic_id=topic.id, question_id=question.id,
                    text=question.text,
@@ -301,7 +323,7 @@ def ask_question(state: InterviewState) -> dict:
             "questions_asked": run.questions_asked + 1,
             "clarifications_used": run.clarifications_used,
             "doubt_count": state.get("doubt_count", 0),
-            "doubts_remaining": max(0, DOUBT_THRESHOLD - state.get("doubt_count", 0)),
+            "doubts_remaining": max(0, settings.DOUBT_THRESHOLD - state.get("doubt_count", 0)),
             "elapsed_s": round(state.get("elapsed_s", 0.0)),
             "total_seconds": state["total_seconds"],
             "pacing_note": state.get("pacing_note", ""),

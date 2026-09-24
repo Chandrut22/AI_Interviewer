@@ -157,6 +157,8 @@ class OrchestratorDecision(BaseModel):
     difficulty_reasoning: str = ""
     next_mode: Mode = "opening"
     next_question_focus: str = ""
+    # Reply sent back to the candidate when they ask a doubt.
+    doubt_reply: str = ""
     # 5. Dynamic time: extra seconds for the current topic, taken from the last topics.
     extend_topic_seconds: int = Field(default=0, ge=0, le=300)
     extension_reasoning: str = ""
@@ -215,7 +217,8 @@ class InterviewState(TypedDict, total=False):
     next_mode: Mode
     next_action: Literal["ask", "wrap_up"]
     last_response_type: Literal["answer", "doubt", "skip_topic", None]
-    question_focus: str  
+    question_focus: str
+    clarification_reply: str  # orchestrator's answer to a candidate doubt
     pacing_note: str
     elapsed_s: float
     question_counter: int

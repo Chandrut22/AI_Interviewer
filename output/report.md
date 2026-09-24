@@ -1,54 +1,58 @@
 # Interview report - CHANDRU T
 
-**Python Web Developer Intern (intern)** - 2026-09-23 10:17
+**Python Web Developer Intern (intern)** - 2026-09-24 11:20
 
-## Recommendation: Do not advance (low confidence)
+## Recommendation: Borderline (low confidence)
 
-**Candidate lacks foundational knowledge in key web development topics**
+**Limited evidence of core skills; strong on middleware but gaps in JWT, OAuth, and other key areas.**
 
-The candidate demonstrated insufficient knowledge of core topics such as middleware, JWT, and OAuth, with many unanswered or incomplete responses. The limited depth and lack of concrete examples indicate they are not ready for the role.
+Candidate demonstrated solid knowledge of FastAPI middleware but refused to answer JWT and OAuth questions, and no evidence was gathered for other must‑haves such as React, REST APIs, SQL, Git, or testing concepts.
 
 ## At a glance
 
 | | |
 |---|---|
-| Time used | 6:20 of 10:00 |
+| Time used | 5:20 of 10:00 |
 | Completion | `completed` |
-| Topics covered | 1/3 (33%), 1 at target depth |
-| Questions asked | 13 |
-| Average answer score | 2.45/5 |
+| Topics covered | 1/3 (33%), 0 at target depth |
+| Questions asked | 9 |
+| Average answer score | 2.9/5 |
+| Timing | 1 answer(s) cut off by the timer, 1 left unanswered |
 
 | Relevance | Depth | Specificity | Correctness | Communication |
 |---|---|---|---|---|
-| 2.5/5 | 2.0/5 | 2.0/5 | 3.0/5 | 2.8/5 |
+| 3.0/5 | 2.5/5 | 3.0/5 | 3.0/5 | 3.0/5 |
 
 ## How the candidate performed
 
-The candidate struggled to answer basic questions, showing gaps in understanding of middleware and authentication flows. Their responses lacked detail and concrete implementation steps.
+The interview showed the candidate can articulate middleware implementation steps but struggled with authentication topics and did not provide any responses for several core areas.
 
 ### Strengths
 
-- **Oauth** - Mentioned encryption of tokens and automatic refresh logic
-- **Oauth** - Referenced use of KMS‑managed keys for secure storage
-- **Oauth** - Acknowledged revocation handling and re‑authentication flow
+- **Middleware** - Clear step‑by‑step implementation of FastAPI middleware with correct components.
 
 ### Concerns
 
-- **MiddleWare** - No answer provided for middleware implementation
-- **JWT** - No answer provided for JWT generation
-- **Oauth** - OAuth answers lacked concrete implementation details and database schema
+- **JWT** - Refused to answer JWT question, provided irrelevant answer.
+- **OAuth** - Refused to answer OAuth question, no knowledge demonstrated.
+- **Middleware** - Only partial depth achieved (1/2), no discussion of error handling or async behavior.
+- **overall** - No evidence of React, REST API design, SQL, Git, or testing concepts.
+
+### Main risk
+
+Candidate may lack foundational authentication knowledge and may not meet core requirements for the role.
 
 ## Topic by topic
 
 | Topic | Priority | Signal | Used / budget | Qs | Depth | Mean | Status |
 |---|---|---|---|---|---|---|---|
-| MiddleWare | 4 | Insufficient signal | 3:46 / 3:30 | 7 | 0/3 | - | skipped |
-| JWT | 3 | Insufficient signal | 0:21 / 0:20 | 1 | 0/2 | - | skipped |
-| Oauth | 3 | Mixed | 2:13 / 5:09 | 5 | 3/2 | 2.45 | covered |
+| JWT | 3 | Weak | 1:42 / 1:41 | 3 | 0/2 | - | skipped |
+| OAuth | 3 | Weak | 0:33 / 0:33 | 1 | 0/2 | - | skipped |
+| Middleware | 2 | Strong | 3:05 / 6:45 | 5 | 1/2 | 2.9 | covered |
 
-- **MiddleWare** (Insufficient signal) - Candidate did not answer or provided incomplete answers.
-- **JWT** (Insufficient signal) - Candidate did not answer or provided incomplete answers.
-- **Oauth** (Mixed) - Candidate provided some correct high‑level concepts but lacked concrete implementation details.
+- **JWT** (Weak) - Candidate gave irrelevant answers and refused to answer; no evidence of knowledge.
+- **OAuth** (Weak) - Candidate refused to answer; no evidence of knowledge.
+- **Middleware** (Strong) - Candidate provided detailed, correct implementation steps for FastAPI middleware; strong answer.
 
 ## Resume-vs-answer discrepancies
 
@@ -56,8 +60,16 @@ The candidate struggled to answer basic questions, showing gaps in understanding
 
 ## Follow up in the next round
 
-- **Oauth** - Missing concrete schema and code logic.
-- **Oauth** - Missing actual CREATE TABLE and Flask code
+1. Explain JWT creation and validation in FastAPI, including secret key storage.
+2. Describe integrating Google OAuth2 into a Flask app, covering client registration and callback handling.
+3. Provide a simple React component that fetches data from a REST API and handles loading state.
+4. Write a SQL query to retrieve user data and explain indexing strategy.
+
+Answers the interviewer marked as needing validation:
+
+- **Middleware** - No response on Middleware.
+
+Dropped at planning time because the budget could not cover them: tanstack-router, tanstack-query.
 
 ---
 
