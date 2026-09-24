@@ -39,6 +39,17 @@ def _render_question(payload: dict) -> None:
     left = max(0, payload["total_seconds"] - payload["elapsed_s"])
     console.print()
 
+    # Conduct warning, shown before anything else.
+    if payload.get("warning"):
+        console.print(
+            Panel(
+                payload["warning"],
+                title="Warning",
+                border_style="red",
+            )
+        )
+        console.print()
+
     # Render Clarification if present
     if payload.get("clarification"):
         console.print(
@@ -62,7 +73,8 @@ def _render_question(payload: dict) -> None:
             subtitle=(
                 f"answer in {payload['time_limit_s']}s  ·  "
                 f"{left // 60}m {left % 60}s left in the interview  ·  "
-                f"Doubts left: {payload.get('doubts_remaining', 'N/A')}"
+                f"Doubts left: {payload.get('doubts_remaining', 'N/A')}  ·  "
+                f"Warnings left: {payload.get('warnings_remaining', 'N/A')}"
             ),
             border_style="cyan" if payload["mode"] == "opening" else "magenta",
         )
@@ -191,6 +203,21 @@ def _finish(result: dict, out: Path, thread_id: str) -> None:
     console.print()
     console.print(table)
     console.print(f"Status: [bold]{result.get('completion_status')}[/bold]")
+    violations = result.get("violations", [])
+    if violations:
+        console.print(
+            f"[red]Conduct warnings: {len(violations)}[/red] - "
+            + ", ".join(v.reason for v in violations)
+        )
+    if result.get("completion_status") == "terminated":
+        console.print(
+            Panel(
+                "The interview ended early because the conduct warning limit was "
+                "reached. Every incident is recorded in the report.",
+                title="Interview terminated",
+                border_style="red",
+            )
+        )
     console.print(
         f"\nSummary: [green]{out}[/green]"
         f"\nTranscript: [green]{transcript_md}[/green]"

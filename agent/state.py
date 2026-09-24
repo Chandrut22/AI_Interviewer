@@ -3,9 +3,9 @@ from typing import Annotated, Literal, Optional, TypedDict
 from pydantic import BaseModel, Field
 
 TopicSource = Literal["jd_required", "jd_preferred", "resume_claim", "gap", "domain"]
-EventKind = Literal["interview_start", "topic_start", "question", "answer", "evaluation", "difficulty_change", "time_adjustment", "topic_end", "interview_end"]
+EventKind = Literal["interview_start", "topic_start", "question", "answer", "evaluation", "difficulty_change", "time_adjustment", "violation", "topic_end", "interview_end"]
 Mode = Literal["opening", "followup", "clarification"]
-Completion = Literal["completed", "time_expired", "abandoned", "in_progress"]
+Completion = Literal["completed", "time_expired", "terminated", "abandoned", "in_progress"]
 
 class JDAnalysis(BaseModel):
     role_title: str = "the role"
@@ -122,6 +122,17 @@ class Evaluation(BaseModel):
         return round(sum(parts) / len(parts), 2)
 
 
+class Violation(BaseModel):
+    """A candidate reply that broke the interview's rules of engagement."""
+
+    topic_id: str = ""
+    question_id: str = ""
+    reason: str = ""          # e.g. "prompt extraction", "abusive language"
+    detected_by: Literal["pattern", "model"] = "model"
+    text: str = ""            # what the candidate sent, trimmed
+    count: int = 0            # the running warning number
+
+
 class Discrepancy(BaseModel):
     topic_id: str = ""
     resume_claim: str = ""
@@ -135,8 +146,10 @@ class OrchestratorDecision(BaseModel):
     """Everything decide_next needs from its single LLM call per candidate turn."""
 
     # 1. Classify the reply.
-    response_type: Literal["answer", "doubt", "skip_topic"]
+    response_type: Literal["answer", "doubt", "skip_topic", "violation"]
     classification_reasoning: str = ""
+    # Why the reply was a violation - for the record only, never shown to the candidate.
+    violation_reason: str = ""
     # 2. Evaluate it (only meaningful when response_type == "answer").
     relevance: int = Field(default=3, ge=1, le=5)
     depth: int = Field(default=3, ge=1, le=5)
@@ -216,9 +229,11 @@ class InterviewState(TypedDict, total=False):
     pending_question: Optional[Question]
     next_mode: Mode
     next_action: Literal["ask", "wrap_up"]
-    last_response_type: Literal["answer", "doubt", "skip_topic", None]
+    last_response_type: Literal["answer", "doubt", "skip_topic", "violation", None]
     question_focus: str
     clarification_reply: str  # orchestrator's answer to a candidate doubt
+    warning_text: str         # conduct warning shown before the question is re-asked
+    violation_count: int
     pacing_note: str
     elapsed_s: float
     question_counter: int
@@ -227,6 +242,7 @@ class InterviewState(TypedDict, total=False):
     transcript: Annotated[list[Event], operator.add]
     evaluations: Annotated[list[Evaluation], operator.add]
     discrepancies: Annotated[list[Discrepancy], operator.add]
+    violations: Annotated[list[Violation], operator.add]
     # outputs
     completion_status: Completion
     report: str

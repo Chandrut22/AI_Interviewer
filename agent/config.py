@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     )
 
     DOUBT_THRESHOLD: int = 4
+    MAX_VIOLATIONS: int = 3
     MIN_TOPIC_SECONDS: int = 150
     MAX_EXTENSION_SECONDS: int = 60
     MAX_TOPIC_EXTENSION_SECONDS: int = 120

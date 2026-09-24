@@ -73,7 +73,7 @@ def transcribe_prerecorded():
         )
 
         transcriber = aai.Transcriber()
-        transcript = transcriber.transcribe(str(audio_path), config=config)
+        transcript = transcriber.transcribe(str("./recordings/audio.mp3"), config=config)
 
         if transcript.status == aai.TranscriptStatus.error:
             print(f"Transcription failed: {transcript.error}")
@@ -200,3 +200,27 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# import assemblyai as aai
+# from dotenv import load_dotenv
+# import os
+
+# load_dotenv()
+
+# aai.settings.base_url = "https://api.assemblyai.com"
+# aai.settings.api_key = os.getenv("ASSEMBLYAI_API_KEY")
+
+# audio_file = "./recordings/audio.mp3"
+
+# config = aai.TranscriptionConfig(
+#     speech_models=["universal-3-5-pro", "universal-2"],
+#     language_detection=True,
+#     speaker_labels=True,
+# )
+
+# transcript = aai.Transcriber().transcribe(audio_file, config=config)
+
+# if transcript.status == aai.TranscriptStatus.error:
+#     raise RuntimeError(f"Transcription failed: {transcript.error}")
+# print(f"\nFull Transcript:\n\n{transcript.text}")

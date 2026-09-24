@@ -232,13 +232,14 @@ def generate_question(state: InterviewState) -> dict:
     # A doubt the orchestrator answered: put the SAME question back to the
     # candidate with that reply attached, instead of writing a new question.
     clarification_reply = (state.get("clarification_reply") or "").strip()
+    warning_text = (state.get("warning_text") or "").strip()
     previous = state.get("pending_question")
-    if mode == "clarification" and clarification_reply and previous is not None:
+    if mode == "clarification" and (clarification_reply or warning_text) and previous is not None:
         repeated = previous.model_copy(update={
             "id": f"q{counter}",
             "topic_id": topic.id,
             "mode": "clarification",
-            "clarification": clarification_reply,
+            "clarification": clarification_reply or None,
             "time_limit_s": limit,
         })
         return {
@@ -253,6 +254,7 @@ def generate_question(state: InterviewState) -> dict:
                        meta={"mode": "clarification", "difficulty": repeated.difficulty,
                              "time_limit_s": limit, "looking_for": repeated.looking_for,
                              "clarification": clarification_reply,
+                             "warning": warning_text,
                              "repeat_of": previous.id})
             ],
         }
@@ -313,6 +315,11 @@ def ask_question(state: InterviewState) -> dict:
             "question_id": question.id,
             "text": question.text,
             "clarification": question.clarification,
+            "warning": state.get("warning_text", ""),
+            "violation_count": state.get("violation_count", 0),
+            "warnings_remaining": max(
+                0, settings.MAX_VIOLATIONS - state.get("violation_count", 0)
+            ),
             "mode": question.mode,
             "difficulty": question.difficulty,
             "time_limit_s": question.time_limit_s,
@@ -345,6 +352,7 @@ def ask_question(state: InterviewState) -> dict:
 
     return {
         "topic_runs": runs,
+        "warning_text": "",
         "elapsed_s": elapsed,
         "transcript": [
             Event(

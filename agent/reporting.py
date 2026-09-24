@@ -30,6 +30,8 @@ def _mmss(seconds: float) -> str:
 
 def _completion_status(state: InterviewState, topics, runs, unassessed) -> str:
     """How the interview actually ended, independent of planning-time drops."""
+    if state.get("completion_status") == "terminated":
+        return "terminated"
     if not state.get("question_counter"):
         return "abandoned"
     total = state["total_seconds"]
@@ -125,6 +127,18 @@ def _narrative(state: InterviewState, topics, runs, turns, status, covered, at_d
             "DROPPED AT PLANNING TIME (never in scope): "
             f"{', '.join(state['dropped_topics'])}\n"
         )
+    violations = state.get("violations", [])
+    if violations:
+        context += (
+            f"CONDUCT LOG - {len(violations)} warning(s) issued"
+            + (", interview terminated early" if status == "terminated" else "")
+            + ":\n"
+            + "\n".join(
+                f"- [{v.topic_id}] warning {v.count}: {v.reason}" for v in violations
+            )
+            + "\nThese replies were not answers. Treat them as conduct evidence, "
+            "not as topic knowledge.\n"
+        )
     if discrepancies:
         context += "RESUME CONFLICTS FLAGGED DURING THE INTERVIEW:\n" + "\n".join(
             f"- [{d.topic_id}] {d.note} (claim: {d.resume_claim[:200]})"
@@ -179,7 +193,20 @@ def build_report(state: InterviewState) -> dict:
         "",
     ]
 
-    if narrative:
+    violations = state.get("violations", [])
+    terminated = status == "terminated"
+
+    if terminated:
+        lines += [
+            "## Recommendation: Do not advance (conduct)",
+            "",
+            "**The interview was ended early after "
+            f"{len(violations)} conduct warnings.** This recommendation is set by "
+            "the interview rules, not by the assessment of technical answers. "
+            "See Conduct and integrity below.",
+            "",
+        ]
+    elif narrative:
         lines += [
             f"## Recommendation: {RECOMMENDATION_LABEL[narrative.recommendation]} "
             f"({narrative.confidence} confidence)",
@@ -267,6 +294,20 @@ def build_report(state: InterviewState) -> dict:
         note = signals.get(topic.id)
         if note and note.assessment:
             lines.append(f"- **{topic.name}** ({SIGNAL_LABEL[note.signal]}) - {note.assessment}")
+    lines.append("")
+
+    lines += ["## Conduct and integrity", ""]
+    if violations:
+        lines += [
+            f"{v.count}. **{v.reason}** ({_topic_name(topics, v.topic_id)}, "
+            f"detected by {v.detected_by}) - candidate wrote: "
+            f"\"{v.text[:200]}{'...' if len(v.text) > 200 else ''}\""
+            for v in violations
+        ]
+        if terminated:
+            lines += ["", "The warning limit was reached and the interview was ended."]
+    else:
+        lines.append("- No conduct issues recorded.")
     lines.append("")
 
     lines += ["## Resume-vs-answer discrepancies", ""]
@@ -363,8 +404,17 @@ def transcript_markdown(state: InterviewState) -> str:
                 "",
             ]
         elif event.kind == "evaluation":
+            overall = event.meta.get("overall")
+            if overall is None:
+                outcome = (event.meta.get("outcome") or "note").replace("_", " ")
+                out += [f"> _Interviewer ({outcome}): {event.text}_", ""]
+            else:
+                out += [f"> _Evaluation: {overall}/5 - {event.text}_", ""]
+        elif event.kind == "violation":
             out += [
-                f"> _Evaluation: {event.meta.get('overall')}/5 - {event.text}_",
+                f"> **[{stamp}] Conduct warning "
+                f"{event.meta.get('count')}/{event.meta.get('limit')}** - "
+                f"{event.text} (detected by {event.meta.get('detected_by')})",
                 "",
             ]
         elif event.kind == "difficulty_change":

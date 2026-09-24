@@ -1,58 +1,40 @@
 # Interview report - CHANDRU T
 
-**Python Web Developer Intern (intern)** - 2026-09-24 11:20
+**Python Web Developer Intern (intern)** - 2026-09-24 15:35
 
-## Recommendation: Borderline (low confidence)
+## Recommendation: Do not advance (conduct)
 
-**Limited evidence of core skills; strong on middleware but gaps in JWT, OAuth, and other key areas.**
-
-Candidate demonstrated solid knowledge of FastAPI middleware but refused to answer JWT and OAuth questions, and no evidence was gathered for other must‑haves such as React, REST APIs, SQL, Git, or testing concepts.
+**The interview was ended early after 3 conduct warnings.** This recommendation is set by the interview rules, not by the assessment of technical answers. See Conduct and integrity below.
 
 ## At a glance
 
 | | |
 |---|---|
-| Time used | 5:20 of 10:00 |
-| Completion | `completed` |
-| Topics covered | 1/3 (33%), 0 at target depth |
-| Questions asked | 9 |
-| Average answer score | 2.9/5 |
-| Timing | 1 answer(s) cut off by the timer, 1 left unanswered |
-
-| Relevance | Depth | Specificity | Correctness | Communication |
-|---|---|---|---|---|
-| 3.0/5 | 2.5/5 | 3.0/5 | 3.0/5 | 3.0/5 |
-
-## How the candidate performed
-
-The interview showed the candidate can articulate middleware implementation steps but struggled with authentication topics and did not provide any responses for several core areas.
-
-### Strengths
-
-- **Middleware** - Clear step‑by‑step implementation of FastAPI middleware with correct components.
-
-### Concerns
-
-- **JWT** - Refused to answer JWT question, provided irrelevant answer.
-- **OAuth** - Refused to answer OAuth question, no knowledge demonstrated.
-- **Middleware** - Only partial depth achieved (1/2), no discussion of error handling or async behavior.
-- **overall** - No evidence of React, REST API design, SQL, Git, or testing concepts.
-
-### Main risk
-
-Candidate may lack foundational authentication knowledge and may not meet core requirements for the role.
+| Time used | 2:27 of 30:00 |
+| Completion | `terminated` |
+| Topics covered | 1/5 (20%), 0 at target depth |
+| Questions asked | 4 |
+| Average answer score | 0.0/5 |
 
 ## Topic by topic
 
 | Topic | Priority | Signal | Used / budget | Qs | Depth | Mean | Status |
 |---|---|---|---|---|---|---|---|
-| JWT | 3 | Weak | 1:42 / 1:41 | 3 | 0/2 | - | skipped |
-| OAuth | 3 | Weak | 0:33 / 0:33 | 1 | 0/2 | - | skipped |
-| Middleware | 2 | Strong | 3:05 / 6:45 | 5 | 1/2 | 2.9 | covered |
+| JWT Authentication | 3 | - | 2:27 / 6:18 | 4 | 0/2 | - | covered |
+| OAuth 2.0 | 3 | - | 0:00 / 6:18 | 0 | 0/2 | - | skipped |
+| FastAPI Middleware | 2 | - | 0:00 / 5:00 | 0 | 0/2 | - | skipped |
+| TanStack Router | 2 | - | 0:00 / 5:00 | 0 | 0/2 | - | skipped |
+| TanStack Query | 2 | - | 0:00 / 5:00 | 0 | 0/2 | - | skipped |
 
-- **JWT** (Weak) - Candidate gave irrelevant answers and refused to answer; no evidence of knowledge.
-- **OAuth** (Weak) - Candidate refused to answer; no evidence of knowledge.
-- **Middleware** (Strong) - Candidate provided detailed, correct implementation steps for FastAPI middleware; strong answer.
+
+## Conduct and integrity
+
+1. **off-topic question** (JWT Authentication, detected by model) - candidate wrote: "what is python ?"
+2. **abusive language** (JWT Authentication, detected by model) - candidate wrote: "This interview is stupid, your questions are garbage, and you are a worthless piece of junk AI. Shut up."
+3. **off-topic content** (JWT Authentication, detected by model) - candidate wrote: "A replay attack is when an attacker reuses a valid token to gain unauthorized access. Typical mitigations include short token lifetimes, nonce usage, and token revocation    │
+│ lists."
+
+The warning limit was reached and the interview was ended.
 
 ## Resume-vs-answer discrepancies
 
@@ -60,16 +42,14 @@ Candidate may lack foundational authentication knowledge and may not meet core r
 
 ## Follow up in the next round
 
-1. Explain JWT creation and validation in FastAPI, including secret key storage.
-2. Describe integrating Google OAuth2 into a Flask app, covering client registration and callback handling.
-3. Provide a simple React component that fetches data from a REST API and handles loading state.
-4. Write a SQL query to retrieve user data and explain indexing strategy.
+- Nothing flagged for re-testing.
 
-Answers the interviewer marked as needing validation:
+## Not assessed
 
-- **Middleware** - No response on Middleware.
-
-Dropped at planning time because the budget could not cover them: tanstack-router, tanstack-query.
+- **OAuth 2.0** (priority 3) - planned but never reached
+- **FastAPI Middleware** (priority 2) - planned but never reached
+- **TanStack Router** (priority 2) - planned but never reached
+- **TanStack Query** (priority 2) - planned but never reached
 
 ---
 
